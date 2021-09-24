@@ -1,7 +1,5 @@
 package poseidon.command;
 
-import java.io.IOException;
-
 import poseidon.storage.Storage;
 import poseidon.tasklist.TaskList;
 import poseidon.ui.Ui;
@@ -37,7 +35,7 @@ public class Fail extends Command {
     }
 
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) {
         return ui.showCommandFail();
     }
 }

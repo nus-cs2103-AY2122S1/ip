@@ -15,6 +15,8 @@ import poseidon.ui.Ui;
  */
 public class List extends Command {
 
+    public static final String CMD_USER_FORMAT = "list";
+
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)list\\s*";
 

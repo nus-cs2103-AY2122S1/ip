@@ -1,6 +1,5 @@
 package poseidon.command;
 
-import java.io.IOException;
 import java.util.regex.Pattern;
 
 import poseidon.storage.Storage;
@@ -15,6 +14,8 @@ import poseidon.ui.Ui;
  * @version CS2103T AY21/22 Sem 1 iP
  */
 public class Sort extends Command {
+
+    public static final String CMD_USER_FORMAT = "list -s";
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)list\\s*-s\\s*";
@@ -40,7 +41,7 @@ public class Sort extends Command {
     }
 
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) {
         return ui.getListMessage(taskList.sortTasks());
     }
 }

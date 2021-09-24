@@ -1,10 +1,10 @@
 package poseidon.command;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 import poseidon.exception.PoseidonException;
+import poseidon.exception.PoseidonIncorrectCommandFormatException;
 import poseidon.parser.Parser;
 import poseidon.storage.Storage;
 import poseidon.task.Event;
@@ -19,6 +19,8 @@ import poseidon.ui.Ui;
  * @version CS2103T AY21/22 Sem 1 iP
  */
 public class AddEvent extends Command {
+
+    public static final String CMD_USER_FORMAT = "event 'description' /from 'yyyy mm dd hhmm' to 'yyyy mm dd hhmm'";
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)event.*";
@@ -46,12 +48,9 @@ public class AddEvent extends Command {
     }
 
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws PoseidonException {
         if (!Pattern.compile(CMD_VALID_FORMAT).matcher(cmdContent).matches()) {
-            throw new PoseidonException("There appears to be a typo in your EVENT command.\n"
-                    + "The command should be of the form:\n"
-                    + "  event 'description' /from 'yyyy mm dd hhmm' to 'yyyy mm dd hhmm'\n"
-                    + "Please try again.");
+            throw new PoseidonIncorrectCommandFormatException("EVENT", CMD_USER_FORMAT);
         }
 
         String[] strArr = cmdContent.substring(5).split(" /from ", 2);
@@ -61,10 +60,10 @@ public class AddEvent extends Command {
         LocalDateTime toDateTime = Parser.parseDateTime(dateTimeArr[1]);
 
         if (fromDateTime.isAfter(toDateTime)) {
-            throw new PoseidonException("There appears to be a typo in your EVENT command.\n"
-                    + "The event's from/start time is before its to/end time\n"
-                    + "Based on our current knowledge of the Arrow of Time, this is impossible.\n"
-                    + "Please try again.");
+            throw new PoseidonIncorrectCommandFormatException("EVENT",
+                    "event 'description' /from 'yyyy mm dd hhmm' to 'yyyy mm dd hhmm'\n"
+                    + "The event's from/start time is after its to/end time. "
+                    + "Based on our current knowledge of the Arrow of Time, this is impossible.");
         }
 
         Event newEvent = new Event(strArr[0].trim(), fromDateTime, toDateTime);

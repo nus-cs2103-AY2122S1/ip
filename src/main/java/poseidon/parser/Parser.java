@@ -16,7 +16,7 @@ import poseidon.command.Find;
 import poseidon.command.Help;
 import poseidon.command.List;
 import poseidon.command.Sort;
-import poseidon.exception.PoseidonException;
+import poseidon.exception.PoseidonDateTimeParseException;
 
 /**
  * Represents a {@code Parser} object for all parsing related operations.
@@ -64,7 +64,7 @@ public class Parser {
      * @param dateTime {@code String} version of date and time.
      * @return {@code LocalDateTime} object.
      */
-    public static LocalDateTime parseDateTime(String dateTime) {
+    public static LocalDateTime parseDateTime(String dateTime) throws PoseidonDateTimeParseException {
         final String dateFormat = "yyyy MM dd HHmm";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         LocalDateTime deadlineDT;
@@ -73,8 +73,7 @@ public class Parser {
             deadlineDT = LocalDateTime.parse(dateTime, formatter);
             return deadlineDT;
         } catch (DateTimeException ex) {
-            throw new PoseidonException(ex.getMessage() + "\n"
-                    + "Please try again.");
+            throw new PoseidonDateTimeParseException(ex.getMessage());
         }
     }
 

@@ -1,7 +1,6 @@
 package poseidon.command;
 
-import java.io.IOException;
-
+import poseidon.exception.PoseidonException;
 import poseidon.storage.Storage;
 import poseidon.tasklist.TaskList;
 import poseidon.ui.Ui;
@@ -41,7 +40,7 @@ public abstract class Command {
      * @param taskList {@code TaskList} object to be used for task list related operations (if any).
      * @param ui {@code Ui} object to be used for crafting messages from the Bot to the User.
      * @return {@code String} reponse message.
-     * @throws IOException Errors related to IO operations (reading/writing to a file) involving {@code Storage} object.
+     * @throws PoseidonException Errors related operations on execution of the command within a Poseidon object.
      */
-    public abstract String execute(Storage storage, TaskList taskList, Ui ui) throws IOException;
+    public abstract String execute(Storage storage, TaskList taskList, Ui ui) throws PoseidonException;
 }

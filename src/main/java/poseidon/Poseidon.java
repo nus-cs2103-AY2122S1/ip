@@ -1,9 +1,9 @@
 package poseidon;
 
-import java.io.IOException;
-
 import poseidon.command.Command;
 import poseidon.exception.PoseidonException;
+import poseidon.exception.PoseidonStorageException;
+import poseidon.exception.PoseidonStorageReadWriteException;
 import poseidon.parser.Parser;
 import poseidon.storage.Storage;
 import poseidon.tasklist.TaskList;
@@ -20,6 +20,7 @@ public class Poseidon {
 
     /** {@code Storage} object that reads from and writes onto the hard disk  */
     private Storage storage;
+    private String storageLoadErrorMsg = "";
 
     /** {@code TaskList} object that maintains and updates the list of tasks */
     private TaskList taskList;
@@ -35,8 +36,9 @@ public class Poseidon {
         try {
             storage = new Storage();
             taskList = new TaskList(storage.load());
-        } catch (PoseidonException ex) {
-            ui.showStorageError();
+        } catch (PoseidonStorageException | PoseidonStorageReadWriteException ex) {
+            storageLoadErrorMsg = ex.getMessage();
+            System.out.println(storageLoadErrorMsg);
             storage = null;
             taskList = new TaskList();
         }
@@ -58,11 +60,15 @@ public class Poseidon {
      * @return {@code String} response.
      */
     public String run(String newCommand) {
+        if (storage == null) {
+            return ui.showError(storageLoadErrorMsg);
+        }
+
         String errorMessage = "";
         try {
             Command command = Parser.parse(newCommand);
             return command.execute(storage, taskList, ui);
-        } catch (PoseidonException | IOException ex) {
+        } catch (PoseidonException ex) {
             errorMessage = ui.showError(ex.getMessage());
         }
         assert errorMessage.length() != 0 : "Error message supposed to contain readable text";

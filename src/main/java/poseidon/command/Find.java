@@ -1,9 +1,8 @@
 package poseidon.command;
 
-import java.io.IOException;
 import java.util.regex.Pattern;
 
-import poseidon.exception.PoseidonException;
+import poseidon.exception.PoseidonIncorrectCommandFormatException;
 import poseidon.storage.Storage;
 import poseidon.tasklist.TaskList;
 import poseidon.ui.Ui;
@@ -16,6 +15,8 @@ import poseidon.ui.Ui;
  * @version CS2103T AY21/22 Sem 1 iP
  */
 public class Find extends Command {
+
+    public static final String CMD_USER_FORMAT = "find 'content'";
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)find.*";
@@ -42,12 +43,9 @@ public class Find extends Command {
     }
 
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws PoseidonIncorrectCommandFormatException {
         if (!Pattern.compile(CMD_VALID_FORMAT).matcher(cmdContent).matches()) {
-            throw new PoseidonException("There appears to be a typo in your FIND command.\n"
-                    + "The command should be of the form:\n"
-                    + "  find 'content'\n"
-                    + "Please try again.");
+            throw new PoseidonIncorrectCommandFormatException("FIND", CMD_USER_FORMAT);
         }
 
         String findContent = cmdContent.substring(4).trim();

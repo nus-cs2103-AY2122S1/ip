@@ -1,10 +1,10 @@
 package poseidon.command;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 import poseidon.exception.PoseidonException;
+import poseidon.exception.PoseidonIncorrectCommandFormatException;
 import poseidon.parser.Parser;
 import poseidon.storage.Storage;
 import poseidon.task.Deadline;
@@ -19,6 +19,8 @@ import poseidon.ui.Ui;
  * @version CS2103T AY21/22 Sem 1 iP
  */
 public class AddDeadline extends Command {
+
+    public static final String CMD_USER_FORMAT = "deadline 'description' /by 'yyyy mm dd hhmm'";
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)deadline.*";
@@ -45,12 +47,9 @@ public class AddDeadline extends Command {
     }
 
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws PoseidonException {
         if (!Pattern.compile(CMD_VALID_FORMAT).matcher(cmdContent).matches()) {
-            throw new PoseidonException("There appears to be a typo in your DEADLINE command.\n"
-                    + "The command should be of the form:\n"
-                    + "  deadline 'description' /by 'yyyy mm dd hhmm'\n"
-                    + "Please try again.");
+            throw new PoseidonIncorrectCommandFormatException("DEADLINE", CMD_USER_FORMAT);
         }
 
         String[] strArr = cmdContent.substring(8).split(" /by ", 2);

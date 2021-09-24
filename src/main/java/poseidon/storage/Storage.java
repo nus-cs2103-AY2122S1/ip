@@ -7,10 +7,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import poseidon.exception.PoseidonException;
+import poseidon.exception.PoseidonStorageException;
+import poseidon.exception.PoseidonStorageReadWriteException;
 import poseidon.task.Deadline;
 import poseidon.task.Event;
 import poseidon.task.Task;
@@ -30,7 +32,7 @@ public class Storage {
     /**
      * Constructs a {@code Storage} object and initializes the {@code taskDataFile} {@code File} object.
      */
-    public Storage() {
+    public Storage() throws PoseidonStorageException {
         try {
             File taskDataDir = new File(Paths.get("data").toString());
             if (!taskDataDir.exists()) {
@@ -42,9 +44,8 @@ public class Storage {
             }
             this.taskDataFile = taskDataFile;
         } catch (IOException ex) {
-            throw new PoseidonException(ex.getMessage() + "\n"
-                    + "Couldn't access/create necessary file to store tasks."
-                    + "Please exit the bot if you don't want to lose new tasks.");
+            throw new PoseidonStorageException("Couldn't access/create necessary file to store tasks."
+                    + ex.getMessage());
         }
         assert taskDataFile.exists() : "File for storage is supposed to exist";
     }
@@ -55,11 +56,21 @@ public class Storage {
      *
      * @return {@code ArrayList} containing all the saved {@code Task}s.
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws PoseidonStorageException, PoseidonStorageReadWriteException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner loadScan;
+        StringBuilder parseErrorMsg = new StringBuilder();
+
         try {
-            ArrayList<Task> tasks = new ArrayList<>();
-            Scanner loadScan = new Scanner(taskDataFile);
-            while (loadScan.hasNextLine()) {
+            loadScan = new Scanner(taskDataFile);
+        } catch (IOException ex) {
+            throw new PoseidonStorageException("Couldn't access storage file.\n"
+                    + ex.getMessage());
+        }
+
+        int lineNo = 1;
+        while (loadScan.hasNextLine()) {
+            try {
                 String[] nextLineArr = loadScan.nextLine().split("%");
                 switch (nextLineArr[0]) {
                 case "T":
@@ -76,14 +87,19 @@ public class Storage {
                 default:
                     break;
                 }
+                lineNo++;
+            } catch (DateTimeParseException ex) {
+                parseErrorMsg.append(ex.getMessage() + " at line " + lineNo + ".\n");
             }
-            loadScan.close();
-            return tasks;
-        } catch (IOException ex) {
-            throw new PoseidonException(ex.getMessage() + "\n"
-                    + "Couldn't load data from stored file."
-                    + "Please exit the bot if you don't want to lose new tasks.");
         }
+
+        if (parseErrorMsg.length() > 0) {
+            throw new PoseidonStorageReadWriteException("Following errors found during loading:\n\n"
+                    + parseErrorMsg);
+        }
+
+        loadScan.close();
+        return tasks;
     }
 
     /**
@@ -92,10 +108,15 @@ public class Storage {
      * @param taskStorage Storage {@code String} version of the new {@code Task}.
      * @throws IOException If file access or modification is obstructed.
      */
-    public void storeAdd(String taskStorage) throws IOException {
-        FileWriter taskDataWriter = new FileWriter(taskDataFile, true);
-        taskDataWriter.write(taskStorage);
-        taskDataWriter.close();
+    public void storeAdd(String taskStorage) throws PoseidonStorageReadWriteException {
+        try {
+            FileWriter taskDataWriter = new FileWriter(taskDataFile, true);
+            taskDataWriter.write(taskStorage);
+            taskDataWriter.close();
+        } catch (IOException ex) {
+            throw new PoseidonStorageReadWriteException(ex.getMessage());
+        }
+
     }
 
     /**
@@ -105,30 +126,34 @@ public class Storage {
      * @param taskStorage Storage {@code String} version of the modified {@code Task}.
      * @throws IOException If file access or modification is obstructed.
      */
-    public void storeDone(int index, String taskStorage) throws IOException {
-        BufferedReader taskDataReader = new BufferedReader(new FileReader(taskDataFile));
-        StringBuilder newTaskData = new StringBuilder();
+    public void storeDone(int index, String taskStorage) throws PoseidonStorageReadWriteException {
+        try {
+            BufferedReader taskDataReader = new BufferedReader(new FileReader(taskDataFile));
+            StringBuilder newTaskData = new StringBuilder();
 
-        for (int i = 0; i < index - 1; i++) {
-            newTaskData.append(taskDataReader.readLine() + "\n");
-        }
-
-        taskDataReader.readLine();
-        newTaskData.append(taskStorage);
-
-        while (true) {
-            String nextLine = taskDataReader.readLine();
-            if (nextLine == null) {
-                break;
-            } else {
-                newTaskData.append(nextLine + "\n");
+            for (int i = 0; i < index - 1; i++) {
+                newTaskData.append(taskDataReader.readLine() + "\n");
             }
-        }
 
-        FileWriter taskDataWriter = new FileWriter(taskDataFile);
-        taskDataWriter.write(newTaskData.toString());
-        taskDataWriter.close();
-        taskDataReader.close();
+            taskDataReader.readLine();
+            newTaskData.append(taskStorage);
+
+            while (true) {
+                String nextLine = taskDataReader.readLine();
+                if (nextLine == null) {
+                    break;
+                } else {
+                    newTaskData.append(nextLine + "\n");
+                }
+            }
+
+            FileWriter taskDataWriter = new FileWriter(taskDataFile);
+            taskDataWriter.write(newTaskData.toString());
+            taskDataWriter.close();
+            taskDataReader.close();
+        } catch (IOException ex) {
+            throw new PoseidonStorageReadWriteException(ex.getMessage());
+        }
     }
 
     /**
@@ -137,28 +162,32 @@ public class Storage {
      * @param index Index of the deleted {@code Task}.
      * @throws IOException If file access or modification is obstructed.
      */
-    public void storeDelete(int index) throws IOException {
-        BufferedReader taskDataReader = new BufferedReader(new FileReader(taskDataFile));
-        StringBuilder newTaskData = new StringBuilder();
+    public void storeDelete(int index) throws PoseidonStorageReadWriteException {
+        try {
+            BufferedReader taskDataReader = new BufferedReader(new FileReader(taskDataFile));
+            StringBuilder newTaskData = new StringBuilder();
 
-        for (int i = 0; i < index - 1; i++) {
-            newTaskData.append(taskDataReader.readLine() + "\n");
-        }
-
-        taskDataReader.readLine();
-
-        while (true) {
-            String nextLine = taskDataReader.readLine();
-            if (nextLine == null) {
-                break;
-            } else {
-                newTaskData.append(nextLine + "\n");
+            for (int i = 0; i < index - 1; i++) {
+                newTaskData.append(taskDataReader.readLine() + "\n");
             }
-        }
 
-        FileWriter taskDataWriter = new FileWriter(taskDataFile);
-        taskDataWriter.write(newTaskData.toString());
-        taskDataWriter.close();
-        taskDataReader.close();
+            taskDataReader.readLine();
+
+            while (true) {
+                String nextLine = taskDataReader.readLine();
+                if (nextLine == null) {
+                    break;
+                } else {
+                    newTaskData.append(nextLine + "\n");
+                }
+            }
+
+            FileWriter taskDataWriter = new FileWriter(taskDataFile);
+            taskDataWriter.write(newTaskData.toString());
+            taskDataWriter.close();
+            taskDataReader.close();
+        } catch (IOException ex) {
+            throw new PoseidonStorageReadWriteException(ex.getMessage());
+        }
     }
 }

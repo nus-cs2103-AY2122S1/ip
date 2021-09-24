@@ -2,6 +2,16 @@ package poseidon.ui;
 
 import java.util.ArrayList;
 
+import poseidon.command.AddDeadline;
+import poseidon.command.AddEvent;
+import poseidon.command.AddTodo;
+import poseidon.command.Bye;
+import poseidon.command.Delete;
+import poseidon.command.Done;
+import poseidon.command.Find;
+import poseidon.command.Help;
+import poseidon.command.List;
+import poseidon.command.Sort;
 import poseidon.task.Task;
 
 /**
@@ -11,8 +21,6 @@ import poseidon.task.Task;
  * @version CS2103T AY21/22 Sem 1 iP
  */
 public class Ui {
-
-    public static final String NON_EXISTENT_TASK_MSG = "That task doesn't exist.\nPlease Try again.";
 
     private static final String LOGO = "                   /\\                   \n"
             + "           ||\\    /||\\    /||           \n"
@@ -30,26 +38,25 @@ public class Ui {
             + "                   ||                   \n\n";
     private static final String HELLO_MSG = "Hello! I'm POSEIDON\n"
             + "What can I do for you?\n"
-            + "Try 'help'.";
+            + "Try " + Help.CMD_USER_FORMAT + ".";
     private static final String LIST_TASKS_INTRO_MSG = "Here are the tasks in your list:\n";
     private static final String LIST_TASKS_EMPTY_MSG = "There are no tasks in your list.";
     private static final String LIST_TASKS_FIND_INTRO_MSG = "Here are the matching tasks in your list:\n";
     private static final String LIST_TASKS_FIND_EMPTY_MSG = "There are no matching tasks in your list.";
     private static final String COMMAND_FAIL_MSG = "I didn't get that. Please try again.";
     private static final String ERROR_INTRO_MSG = "Oops... Something's wrong.\n";
-    private static final String STORAGE_ERROR_MSG = "File for storage of tasks could not be accessed or written.";
     private static final String GOODBYE_MSG = "Bye. Hope to see you again soon!";
     private static final String HELP_MSG = "Here's a list of all the commands I can understand:\n\n"
-            + "FOR HELP - help\n\n"
-            + "ADD TODO - todo 'description'\n\n"
-            + "ADD DEADLINE - deadline 'description' /by 'yyyy MM dd HHmm'\n\n"
-            + "ADD EVENT - event 'description' /from 'yyyy MM dd HHmm' to 'yyyy MM dd HHmm'\n\n"
-            + "MARK TASK DONE - done 'int'\n\n"
-            + "DELETE TASK - delete 'int'\n\n"
-            + "LIST TASKS - list\n\n"
-            + "SORT TASKS - list -s\n\n"
-            + "FIND CONTENT - find 'content'\n\n"
-            + "EXIT - bye";
+            + "FOR HELP - " + Help.CMD_USER_FORMAT + "\n\n"
+            + "ADD TODO - " + AddTodo.CMD_USER_FORMAT + "\n\n"
+            + "ADD DEADLINE - " + AddDeadline.CMD_USER_FORMAT + "\n\n"
+            + "ADD EVENT - " + AddEvent.CMD_USER_FORMAT + "\n\n"
+            + "MARK TASK DONE - " + Done.CMD_USER_FORMAT + "\n\n"
+            + "DELETE TASK - " + Delete.CMD_USER_FORMAT + "\n\n"
+            + "LIST TASKS - " + List.CMD_USER_FORMAT + "\n\n"
+            + "SORT TASKS - " + Sort.CMD_USER_FORMAT + "\n\n"
+            + "FIND CONTENT - " + Find.CMD_USER_FORMAT + "\n\n"
+            + "EXIT - " + Bye.CMD_USER_FORMAT;
 
     /**
      * Constructs a Ui object.
@@ -132,15 +139,6 @@ public class Ui {
      */
     public String showMessage(String message) {
         return message;
-    }
-
-    /**
-     * Returns a {@code String} that conveys that a storage error has been encountered.
-     *
-     * @return {@code String} error message.
-     */
-    public String showStorageError() {
-        return showError(STORAGE_ERROR_MSG);
     }
 
     /**

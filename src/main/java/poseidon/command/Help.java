@@ -14,6 +14,8 @@ import poseidon.ui.Ui;
  */
 public class Help extends Command {
 
+    public static final String CMD_USER_FORMAT = "help";
+
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)help\\s*";
 

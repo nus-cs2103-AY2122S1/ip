@@ -1,9 +1,9 @@
 package poseidon.command;
 
-import java.io.IOException;
 import java.util.regex.Pattern;
 
 import poseidon.exception.PoseidonException;
+import poseidon.exception.PoseidonIncorrectCommandFormatException;
 import poseidon.storage.Storage;
 import poseidon.task.Todo;
 import poseidon.tasklist.TaskList;
@@ -17,6 +17,8 @@ import poseidon.ui.Ui;
  * @version CS2103T AY21/22 Sem 1 iP
  */
 public class AddTodo extends Command {
+
+    public static final String CMD_USER_FORMAT = "todo 'description'";
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)todo.*";
@@ -43,12 +45,9 @@ public class AddTodo extends Command {
     }
 
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws PoseidonException {
         if (!Pattern.compile(CMD_VALID_FORMAT).matcher(cmdContent).matches()) {
-            throw new PoseidonException("There appears to be a typo in your TODO command.\n"
-                    + "The command should be of the form:\n"
-                    + "  todo 'description'\n"
-                    + "Please try again.");
+            throw new PoseidonIncorrectCommandFormatException("TODO", CMD_USER_FORMAT);
         }
 
         String todoDescription = cmdContent.substring(4).trim();
