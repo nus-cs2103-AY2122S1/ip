@@ -179,7 +179,7 @@ public class Parser {
         String details = input.split(REGEX_FOR_INPUT, 2)[1];
 
         final String REGEX_TO_SPLIT_DATE = "/by";
-        String splittedByDate[] = details.split(REGEX_TO_SPLIT_DATE);
+        String splittedByDate[] = details.split(REGEX_TO_SPLIT_DATE, 2);
 
         return new DeadlineCommand(splittedByDate[0].trim(), splittedByDate[1].trim());
     }
@@ -189,7 +189,7 @@ public class Parser {
         String details = input.split(REGEX_FOR_INPUT, 2)[1];
 
         final String REGEX_TO_SPLIT_DATE = "/at";
-        String splittedByDate[] = details.split(REGEX_TO_SPLIT_DATE);
+        String splittedByDate[] = details.split(REGEX_TO_SPLIT_DATE, 2);
 
         return new EventCommand(splittedByDate[0].trim(), splittedByDate[1].trim());
     }
