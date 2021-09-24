@@ -17,7 +17,6 @@ public class List extends Command {
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)list\\s*";
-    private static final String CMD_VALID_FORMAT = "(?i)list\\s*";
 
     /**
      * Constructs a new {@code List} object with the given {@code String}.

@@ -57,9 +57,17 @@ public class AddEvent extends Command {
         String[] strArr = cmdContent.substring(5).split(" /from ", 2);
         String[] dateTimeArr = strArr[1].split(" to ", 2);
 
-        LocalDateTime from = Parser.parseDateTime(dateTimeArr[0]);
-        LocalDateTime to = Parser.parseDateTime(dateTimeArr[1]);
-        Event newEvent = new Event(strArr[0].trim(), from, to);
+        LocalDateTime fromDateTime = Parser.parseDateTime(dateTimeArr[0]);
+        LocalDateTime toDateTime = Parser.parseDateTime(dateTimeArr[1]);
+
+        if (fromDateTime.isAfter(toDateTime)) {
+            throw new PoseidonException("There appears to be a typo in your EVENT command.\n"
+                    + "The event's from/start time is before its to/end time\n"
+                    + "Based on our current knowledge of the Arrow of Time, this is impossible.\n"
+                    + "Please try again.");
+        }
+
+        Event newEvent = new Event(strArr[0].trim(), fromDateTime, toDateTime);
 
         storage.storeAdd(newEvent.toStorage());
         String message = taskList.addTask(newEvent);

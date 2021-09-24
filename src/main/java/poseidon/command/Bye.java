@@ -16,7 +16,6 @@ public class Bye extends Command {
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)bye\\s*";
-    private static final String CMD_VALID_FORMAT = "(?i)bye\\s*";
 
     /**
      * Constructs a new {@code Bye} object with the given {@code String}.

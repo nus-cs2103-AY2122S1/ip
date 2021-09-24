@@ -20,7 +20,7 @@ public class AddTodo extends Command {
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)todo.*";
-    private static final String CMD_VALID_FORMAT = "(?i)todo\\s+";
+    private static final String CMD_VALID_FORMAT = "(?i)todo\\s+\\S+.*";
 
     /**
      * Constructs a new {@code AddTodo} object with the given {@code String}.
@@ -44,20 +44,15 @@ public class AddTodo extends Command {
 
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
-        String[] strArr = Pattern.compile(CMD_VALID_FORMAT).split(cmdContent, 2);
-
-        if (strArr.length == 1 && strArr[0].length() > 4) {
+        if (!Pattern.compile(CMD_VALID_FORMAT).matcher(cmdContent).matches()) {
             throw new PoseidonException("There appears to be a typo in your TODO command.\n"
                     + "The command should be of the form:\n"
                     + "  todo 'description'\n"
                     + "Please try again.");
         }
 
-        if (strArr.length == 1 || strArr[1].length() == 0) {
-            throw new PoseidonException("The description of a TODO task cannot be empty.\nPlease try again.");
-        }
-
-        Todo newTodo = new Todo(strArr[1].trim());
+        String todoDescription = cmdContent.substring(4).trim();
+        Todo newTodo = new Todo(todoDescription);
 
         storage.storeAdd(newTodo.toStorage());
         String message = taskList.addTask(newTodo);

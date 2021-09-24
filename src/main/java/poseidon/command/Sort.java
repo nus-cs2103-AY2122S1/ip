@@ -18,7 +18,6 @@ public class Sort extends Command {
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)list\\s*-s\\s*";
-    private static final String CMD_VALID_FORMAT = "(?i)list\\s*-s\\s*";
 
     /**
      * Constructs a new {@code Sort} object with the given {@code String}.

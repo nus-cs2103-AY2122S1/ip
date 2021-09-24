@@ -19,7 +19,7 @@ import poseidon.ui.Ui;
 public class Done extends Command {
 
     // Private constants dictating format of the command represented by this class.
-    private static final String CMD_FORMAT = "(?i)done\\s+\\d+\\s*";
+    private static final String CMD_FORMAT = "(?i)done.*";
     private static final String CMD_VALID_FORMAT = "(?i)done\\s+\\d+\\s*";
 
     /**
@@ -44,6 +44,13 @@ public class Done extends Command {
 
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+        if (!Pattern.compile(CMD_VALID_FORMAT).matcher(cmdContent).matches()) {
+            throw new PoseidonException("There appears to be a typo in your DONE command.\n"
+                    + "The command should be of the form:\n"
+                    + "  done 'index'\n"
+                    + "Please try again.");
+        }
+
         String indexString = cmdContent.substring(4).trim();
         int indexInt = Parser.parseIndex(indexString);
 

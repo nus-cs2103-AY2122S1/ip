@@ -16,7 +16,6 @@ public class Help extends Command {
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)help\\s*";
-    private static final String CMD_VALID_FORMAT = "(?i)help\\s*";
 
     /**
      * Constructs a new {@code Help} object with the given {@code String}.

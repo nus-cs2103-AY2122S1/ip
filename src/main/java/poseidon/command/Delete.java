@@ -19,7 +19,7 @@ import poseidon.ui.Ui;
 public class Delete extends Command {
 
     // Private constants dictating format of the command represented by this class.
-    private static final String CMD_FORMAT = "(?i)delete\\s+\\d+\\s*";
+    private static final String CMD_FORMAT = "(?i)delete.*";
     private static final String CMD_VALID_FORMAT = "(?i)delete\\s+\\d+\\s*";
 
     /**
@@ -44,6 +44,13 @@ public class Delete extends Command {
 
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+        if (!Pattern.compile(CMD_VALID_FORMAT).matcher(cmdContent).matches()) {
+            throw new PoseidonException("There appears to be a typo in your DELETE command.\n"
+                    + "The command should be of the form:\n"
+                    + "  delete 'index'\n"
+                    + "Please try again.");
+        }
+
         String indexString = cmdContent.substring(6).trim();
         int indexInt = Parser.parseIndex(indexString);
 

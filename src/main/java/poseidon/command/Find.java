@@ -19,7 +19,7 @@ public class Find extends Command {
 
     // Private constants dictating format of the command represented by this class.
     private static final String CMD_FORMAT = "(?i)find.*";
-    private static final String CMD_VALID_FORMAT = "(?i)find\\s+";
+    private static final String CMD_VALID_FORMAT = "(?i)find\\s+\\S+.*";
 
     /**
      * Constructs a new {@code Find} object with the given {@code String}.
@@ -43,19 +43,14 @@ public class Find extends Command {
 
     @Override
     public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
-        String[] strArr = Pattern.compile(CMD_VALID_FORMAT).split(cmdContent, 2);
-
-        if (strArr.length == 1 && strArr[0].length() > 4) {
+        if (!Pattern.compile(CMD_VALID_FORMAT).matcher(cmdContent).matches()) {
             throw new PoseidonException("There appears to be a typo in your FIND command.\n"
                     + "The command should be of the form:\n"
                     + "  find 'content'\n"
                     + "Please try again.");
         }
 
-        if (strArr.length == 1 || strArr[1].length() == 0) {
-            throw new PoseidonException("The contents of a FIND command cannot be empty.\nPlease try again.");
-        }
-
-        return ui.showFindList(taskList.findTasks(strArr[1].trim()));
+        String findContent = cmdContent.substring(4).trim();
+        return ui.showFindList(taskList.findTasks(findContent));
     }
 }

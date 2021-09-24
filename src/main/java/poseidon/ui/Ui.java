@@ -29,7 +29,8 @@ public class Ui {
             + "                   ||                   \n"
             + "                   ||                   \n\n";
     private static final String HELLO_MSG = "Hello! I'm POSEIDON\n"
-            + "What can I do for you?";
+            + "What can I do for you?\n"
+            + "Try 'help'.";
     private static final String LIST_TASKS_INTRO_MSG = "Here are the tasks in your list:\n";
     private static final String LIST_TASKS_EMPTY_MSG = "There are no tasks in your list.";
     private static final String LIST_TASKS_FIND_INTRO_MSG = "Here are the matching tasks in your list:\n";
@@ -48,7 +49,7 @@ public class Ui {
             + "LIST TASKS - list\n\n"
             + "SORT TASKS - list -s\n\n"
             + "FIND CONTENT - find 'content'\n\n"
-            + "EXIT - bye\n";
+            + "EXIT - bye";
 
     /**
      * Constructs a Ui object.
