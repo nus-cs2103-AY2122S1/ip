@@ -25,7 +25,7 @@ Add a deadline into your list of tasks.
 
 Add an event into list of tasks.
 
-### [List](#-ls-or-list---prints-out-the-full-tasks-list)
+### [List](#ls-or-list---prints-out-the-full-tasks-list)
 
 Lists out all tasks in the tasks list.
 
@@ -37,7 +37,7 @@ Marks a task at specified index as done.
 
 Deletes a tasks at specified index.
 
-### [Find](#f-or-find---finds-the-task(s)-that-contains-the-keywords-provided)
+### [Find](#f-or-find---finds-the-tasks-that-contains-the-keywords-provided)
 
 Finds a task based on keywords provided
 
