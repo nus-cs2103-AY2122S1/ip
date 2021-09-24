@@ -12,6 +12,8 @@ import poseidon.task.Task;
  */
 public class Ui {
 
+    public static final String NON_EXISTENT_TASK_MSG = "That task doesn't exist.\nPlease Try again.";
+
     private static final String LOGO = "                   /\\                   \n"
             + "           ||\\    /||\\    /||           \n"
             + "           \\\\_\\  ''||''  /_//           \n"
