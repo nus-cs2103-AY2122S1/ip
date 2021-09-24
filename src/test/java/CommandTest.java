@@ -1,4 +1,3 @@
-
 import Wonderland.DukeException;
 import org.junit.Test;
 

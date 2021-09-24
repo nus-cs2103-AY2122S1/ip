@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "Wonderland.Launcher"
+    mainClassName = 'Wonderland.Launcher'
 }
 
 shadowJar {
@@ -55,11 +55,6 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.29'
-}
-
-javafx {
-    version = "16"
-    modules = [ 'javafx.controls', 'javafx.base', 'javafx.fxml' ]
 }
 
 run {
