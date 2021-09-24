@@ -55,20 +55,15 @@ public class Storage {
 
                 //Compute and generate TaskList based on scanned data
                 if (parser.isDone()) {
-                    taskList.done(parser.getSecondPartInInt());
+                    loadForDone(parser, taskList);
                 } else if (parser.isToDo()) {
-                    ToDo task = new ToDo(parser.getSecondPart());
-                    taskList.add(task);
+                    loadForToDo(parser, taskList);
                 } else if (parser.isDeadline()) {
-                    Deadline task = new Deadline(parser.splitSecondPartForDeadline()[DESCRIPTION],
-                            parser.splitSecondPartForDeadline()[DATE_TIME]);
-                    taskList.add(task);
+                    loadForDeadline(parser, taskList);
                 } else if (parser.isEvent()) {
-                    Event task = new Event(parser.splitSecondPartForEvent()[DESCRIPTION],
-                            parser.splitSecondPartForEvent()[DATE_TIME]);
-                    taskList.add(task);
+                    loadForEvent(parser, taskList);
                 } else if (parser.isDelete()) {
-                    taskList.delete(parser.getSecondPartInInt());
+                    loadForDelete(parser, taskList);
                 }
             }
 
@@ -77,6 +72,54 @@ public class Storage {
             throw new DukeException("we could not find your file.");
         }
     }
+
+    private void loadForDone(Parser parser, TaskList taskList) {
+        try {
+            taskList.done(parser.getSecondPartInInt());
+        } catch (DukeException e) {
+            //Should not have an exception as it works fine previously when the code is run on Duke.
+        }
+    }
+
+    private void loadForToDo(Parser parser, TaskList taskList) {
+        ToDo task = null;
+        try {
+            task = new ToDo(parser.getSecondPart());
+        } catch (DukeException e) {
+            //Should not have an exception as it works fine previously when the code is run on Duke.
+        }
+        taskList.add(task);
+    }
+
+    private void loadForDeadline(Parser parser, TaskList taskList) {
+        Deadline task = null;
+        try {
+            task = new Deadline(parser.splitSecondPartForDeadline()[DESCRIPTION],
+                    parser.splitSecondPartForDeadline()[DATE_TIME]);
+        } catch (DukeException e) {
+            //Should not have an exception as it works fine previously when the code is run on Duke.
+        }
+        taskList.add(task);
+    }
+
+    private void loadForEvent(Parser parser, TaskList taskList) {
+        Event task = null;
+        try {
+            task = new Event(parser.splitSecondPartForEvent()[DESCRIPTION],
+                    parser.splitSecondPartForEvent()[DATE_TIME]);
+        } catch (DukeException e) {
+            //Should not have an exception as it works fine previously when the code is run on Duke.
+        }
+        taskList.add(task);
+    }
+    private void loadForDelete(Parser parser, TaskList taskList) {
+        try {
+            taskList.delete(parser.getSecondPartInInt());
+        } catch (DukeException e) {
+            //Should not have an exception as it works fine previously when the code is run on Duke.
+        }
+    }
+
 
     private void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(this.fileName, true); // create a FileWriter in append mode

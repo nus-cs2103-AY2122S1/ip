@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Represents a Duke chatbot. It helps to collate tasks for the user.
  */
