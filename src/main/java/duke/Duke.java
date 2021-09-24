@@ -33,7 +33,6 @@ public class Duke {
 
     public String getResponse(String input) {
         InputStream stream = new ByteArrayInputStream(input.getBytes());
-
         Scanner scannerObj = new Scanner(stream);
         String out;
         String nextIn;

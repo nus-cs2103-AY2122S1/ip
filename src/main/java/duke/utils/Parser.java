@@ -24,7 +24,7 @@ public class Parser {
      *
      * Default integer returned is 8.
      *
-     * @param userInput X coordinate of position.
+     * @param userInput provided user command string
      * @return integer representation of user command
      */
     public static int decoder(String userInput) {
@@ -61,6 +61,12 @@ public class Parser {
         return res;
     }
 
+    /**
+     * Returns corrected input string by removing unnecessary blank string tokens
+     *
+     * @param input input string to be corrected
+     * @return corrected string
+     */
     public static String removeSpace(String input) {
         String[] arr = input.split(" ");
         String out = "";
@@ -77,6 +83,15 @@ public class Parser {
         return out;
     }
 
+    /**
+     * Returns Validity of the command input
+     *
+     * if valid return true
+     * Else return false
+     * @param input input string to be corrected
+     * @param t Type of task to check validity for
+     * @return true or false depending on validity
+     */
     public static boolean isNotValid(String input, TASKTYPE t) {
         String[] arr = input.split(" ");
         if (arr.length == 1) {
@@ -127,6 +142,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns array of strings that represent a deadline input
+     *
+     * @param input input string to be parsed
+     * @return array of string tokens for the deadline object constructor
+     */
     public static String[] dSplitter(String input) {
         String[] arr = input.split(" ");
         String[] res = new String[2];
@@ -148,6 +169,12 @@ public class Parser {
         return res;
     }
 
+    /**
+     * Returns array of strings that represent an event input
+     *
+     * @param input input string to be parsed
+     * @return array of string tokens for the Event object constructor
+     */
     public static String[] eSplitter(String input) {
         String[] arr = input.split(" ");
         String[] res = new String[3];
