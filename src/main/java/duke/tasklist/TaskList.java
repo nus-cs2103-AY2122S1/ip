@@ -57,9 +57,12 @@ public class TaskList{
      */
     public String returnAllTasks() {
         String output = "";
+        int taskNumber = 1;
         for (Task t : tasks) {
+            output += taskNumber + ". ";
             output += t.toString();
             output += "\n";
+            taskNumber++;
         }
         return output;
     }

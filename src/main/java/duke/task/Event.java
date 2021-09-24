@@ -19,8 +19,15 @@ public class Event extends Task implements Comparable<Event>{
         //fixed date
         super(description, isDone);
         this.date = date;
-        this.startTime = startTime;
-        this.endTime =  endTime;
+
+        //ensure startTime is before endTime
+        if(startTime.compareTo(endTime) > 0){
+            this.startTime = endTime;
+            this.endTime = startTime;
+        } else {
+            this.startTime = startTime;
+            this.endTime = endTime;
+        }
 
     }
 

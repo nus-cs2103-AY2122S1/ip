@@ -212,7 +212,7 @@ public class Parser{
                     +"There are now " + tasks.getSize() + " tasks.";
         } catch (Exception e) {
             return "Oops! Please follow the format:\n event (description) yyyy-mm-dd hh:ss hh:ss\n"
-                    + "Check if the date/time is valid and if there is any missing spaces/characters";
+                    + "Check if the date & times are valid and if there are any missing spaces/characters";
         }
     }
 
