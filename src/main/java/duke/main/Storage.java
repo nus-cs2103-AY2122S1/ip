@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Task;
-import duke.task.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Todo;
+import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.TaskTag;
+import duke.task.Todo;
 
 /**
  * Represents a file to store data, operations to write on the file.
@@ -20,11 +20,11 @@ import duke.task.TaskTag;
  * @version CS2103T, Semester 2
  */
 public class Storage {
+    private static final String DIVIDER = " | ";
     private String filePath;
     private String fileName;
     private File file;
     private FileWriter fileWriter;
-    private final String DIVIDER = " | ";
 
     /**
      * Class constructor.

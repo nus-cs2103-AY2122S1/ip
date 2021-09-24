@@ -45,8 +45,8 @@ public class Duke {
     /**
      * Executes the duke chat bot.
      */
-    public void run() {
-        ui.showWelcome();
+    public String run() {
+        return ui.showWelcome();
 //        boolean isExit = false;
 //        while (!isExit) {
 //            try {
@@ -61,5 +61,14 @@ public class Duke {
 //                ui.showLine();
 //            }
 //        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
