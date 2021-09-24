@@ -21,7 +21,7 @@ public class Storage {
     private static final int N_SEGMENTS_IN_DEADLINE = 4;
     private static final int N_SEGMENTS_IN_EVENT = 4;
     private static final int N_SEGMENTS_IN_TODO = 3;
-
+    protected static final String REGEX_FOR_STORAGE = "_/_,_/_";
     /**
      * Constructs a Storage object.
      *
@@ -84,8 +84,7 @@ public class Storage {
     }
 
     private void addTodoToList(String line, List<Task> listOfTasks, int lineNumber) {
-        final String REGEX = "/";
-        String[] splittedLine = line.split(REGEX);
+        String[] splittedLine = line.split(REGEX_FOR_STORAGE);
         try {
             checkStoredTodoValidity(splittedLine, lineNumber);
             Todo todo = new Todo(splittedLine[2]);
@@ -99,8 +98,7 @@ public class Storage {
     }
 
     private void addEventToList(String line, List<Task> listOfTasks, int lineNumber) {
-        final String REGEX = "/";
-        String[] splittedLine = line.split(REGEX);
+        String[] splittedLine = line.split(REGEX_FOR_STORAGE);
         try {
             checkStoredEventValidity(splittedLine, lineNumber);
             Event event = new Event(splittedLine[2], splittedLine[3]);
@@ -114,8 +112,7 @@ public class Storage {
     }
 
     private void addDeadlineToList(String line, List<Task> listOfTasks, int lineNumber) {
-        final String REGEX = "/";
-        String[] splittedLine = line.split(REGEX);
+        String[] splittedLine = line.split(REGEX_FOR_STORAGE);
         try {
             checkStoredDeadlineValidity(splittedLine, lineNumber);
             Deadline deadline = new Deadline(splittedLine[2], splittedLine[3]);

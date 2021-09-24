@@ -23,6 +23,6 @@ public class Todo extends Task {
 
     @Override
     public String toStorageFormat() {
-        return String.format("%s/%s/%s", taskSymbol, isCompleted(), taskName);
+        return String.format("%s%s%s%s%s", taskSymbol, REGEX_FOR_STORAGE, isCompleted(), REGEX_FOR_STORAGE, taskName);
     }
 }
