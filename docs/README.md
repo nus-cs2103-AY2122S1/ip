@@ -15,6 +15,7 @@
   - [List Sorted - `list -s`](#trident-list-sorted)
   - [Find - `find`](#trident-find)
   - [Bye - `bye`](#trident-bye)
+  - [Case Sensitivity](#trident-case-sensitivity)
 - [Command Summary](#ocean-command-summary)
 
 ## :ocean: Introduction
