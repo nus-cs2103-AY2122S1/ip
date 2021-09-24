@@ -40,7 +40,7 @@ public class Duke {
         try {
             nextIn = scannerObj.next();
         } catch (NoSuchElementException e) {
-            return "Buffer is Fucked";
+            return "Buffer Does not work";
         }
 
         int selector = Parser.decoder(nextIn);
