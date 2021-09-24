@@ -13,49 +13,49 @@ FullOfBugs is a desktop app for you to manage tasks using a Command Line Interfa
 
 ## Features 
 
-### Todo
+### [Todo](#t-or-todo---adds-a-todo-into-tasks-list)
 
 Add a todo task into your list of tasks.
 
-### Deadline
+### [Deadline](#d-or-deadline---adds-a-deadline-into-tasks-list)
 
 Add a deadline into your list of tasks.
 
-### Event
+### [Event](#e-or-event---adds-an-event-into-tasks-list)
 
 Add an event into list of tasks.
 
-### List
+### [List](#ls-or-list---prints-out-the-full-tasks-list)
 
 Lists out all tasks in the tasks list.
 
-### Done
+### [Done](#dn-or-done---marks-a-task-at-specific-index-as-done)
 
 Marks a task at specified index as done.
 
-### Delete
+### [Delete](#dlt-or-delete---deletes-a-task-at-specific-index-from-tasks-list)
 
 Deletes a tasks at specified index.
 
-### Find
+### [Find](#f-or-find---finds-the-tasks-that-contains-the-keywords-provided)
 
 Finds a task based on keywords provided
 
-### Sort
+### [Sort](#sort---sorts-the-task-list-chronologically)
 
 Sorts all tasks in chronological order with the earliest at the top and latest at the bottom.
 
 (Tasks without date and time associated will be automatically allocated at the bottom, sorted lexicographically)
 
 
-### Bye
+### [Bye](#bb-or-bye---exits-the-program)
 
 Exits the program
 
 
 ## Usage
 
-### `t`  or  `todo` - Adds a Todo into tasks list 
+### `t` or `todo` - Adds a Todo into tasks list 
 
 Example of usage: 
 
@@ -135,7 +135,7 @@ Your current tasks are:
 ```
 
 
-### `dn` or `done` - Marks a task at specific index as done.
+### `dn` or `done` - Marks a task at specific index as done
 
 Example usage:
 
@@ -154,7 +154,7 @@ Nice! I've marked this task as done:
 [D][X] Submit assignment (by: Aug 21 2021 11:59PM)
 ```
 
-### `dlt` or `delete` - Deletes a task at specific index from tasks list.
+### `dlt` or `delete` - Deletes a task at specific index from tasks list
 
 Example usage:
 
@@ -217,7 +217,7 @@ Your current tasks are:
 2. [T][ ] Go jogging
 ```
 
-### `bb` or `bye` - Exits the program.
+### `bb` or `bye` - Exits the program
 
 This shuts down the application.
 
