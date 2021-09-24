@@ -1,6 +1,8 @@
 package duke;
 
-import duke.Storage;
+import duke.parser.Parser;
+import duke.storage.Storage;
+
 import java.io.IOException;
 import java.util.Scanner;
 

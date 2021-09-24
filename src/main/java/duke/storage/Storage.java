@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import duke.tasks.TaskList;
 
@@ -41,7 +41,7 @@ public class Storage {
             System.out.println(e.getMessage());
         }
 
-        this.dataStoragePath = dataStoragePath;
+        Storage.dataStoragePath = dataStoragePath;
     }
 
     /**

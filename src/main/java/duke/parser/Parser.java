@@ -1,7 +1,9 @@
-package duke;
+package duke.parser;
 
 import java.io.IOException;
 
+import duke.DukeException;
+import duke.storage.Storage;
 import duke.tasks.TaskList;
 import javafx.application.Platform;
 
