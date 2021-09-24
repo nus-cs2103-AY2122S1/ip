@@ -1,0 +1,9 @@
+todo run
+deadline return book /by 11/04/2020 2000
+done 2
+deadline return book /by 04/11/2020 2000
+todo run
+event project meeting /at 25/09/2021 2200
+todo tell Tom to wash the dishes
+event meet Tommy at his house /at 02/11/2021 1000
+done 2
