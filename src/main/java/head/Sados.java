@@ -201,6 +201,7 @@ public class Sados extends Application {
         borders.setBottom(bottomPanel);
 
         Scene home = new Scene(borders, 500, 250);
+        home.getRoot().setStyle("-fx-font-family: 'Helvetica'");
         stage.setScene(home);
         stage.show();
     }
@@ -279,5 +280,6 @@ public class Sados extends Application {
             filterString = nameString + " + " + dateString;
         }
         Popup.filterPopup(list, filterString);
+
     }
 }
