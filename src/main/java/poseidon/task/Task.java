@@ -32,7 +32,7 @@ public abstract class Task implements Comparable<Task> {
     }
 
     /**
-     * Return a {@code Boolean} to convey the presence of the given content in the description
+     * Returns a {@code Boolean} to convey the presence of the given content in the description
      * of the current {@code Task} object.
      *
      * @param content Content whose presence is to be checked for.
