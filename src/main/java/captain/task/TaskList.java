@@ -55,5 +55,4 @@ public class TaskList {
     public void clearTaskList() {
         taskList.clear();
     }
-
 }
