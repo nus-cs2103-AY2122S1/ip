@@ -1,5 +1,8 @@
 package captain.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import captain.DukeException.MissingDescriptionException;
 
 /**
@@ -8,19 +11,19 @@ import captain.DukeException.MissingDescriptionException;
  * @author Adam Ho
  */
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Creates a task with the specified deadline.
      * @param description The task description.
      * @param by The deadline of the task.
      */
-    public Deadline(String description, String by) throws MissingDescriptionException {
+    public Deadline(String description, LocalDate by) throws MissingDescriptionException {
         super(description);
         this.by = by;
     }
 
-    public String getBy() {
+    public LocalDate getByDate() {
         return by;
     }
 
@@ -30,6 +33,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

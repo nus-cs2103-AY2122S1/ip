@@ -10,17 +10,12 @@ import javafx.scene.image.Image;
  * @author Adam Ho
  */
 public class Captain {
-    private static final String FILEPATH = "./data/taskdata.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
+    private static final String FILEPATH = "./data/taskdata.txt";
     private Image user = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/samoyed.png"));
-
-    public Captain() {
-        this(FILEPATH);
-    }
 
     /**
      * Creates a Duke chatbot object with the specified
@@ -36,25 +31,6 @@ public class Captain {
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Runs the Duke chatbot object and accepts input from users to
-     * manage a to-do task list. The chatbot stops running when the
-     * user inputs the exit command.
-     */
-    public void run() {
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
         }
     }
 
@@ -76,9 +52,5 @@ public class Captain {
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        new Captain(FILEPATH).run();
     }
 }
