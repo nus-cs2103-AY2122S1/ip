@@ -132,6 +132,7 @@ public class Popup {
         pain.setBottom(exit);
 
         Scene scene = new Scene(pain, 450, 150);
+        scene.getRoot().setStyle("-fx-font-family: 'Helvetica'");
         filterStage.setScene(scene);
         filterStage.show();
     }
