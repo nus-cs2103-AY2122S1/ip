@@ -27,9 +27,10 @@ public class Parser {
      */
     public static Command parse(String input, TaskList taskList) {
         try {
+            // Check if storage regex is present in input
+            checkPresenceOfStorageRegex(input);
             // Check if the input is in a valid format, and throw a DukeException if it is not
             checkValiditiy(input, taskList);
-
             // Return a Command based on the input type (determined by first word of input)
             final String REGEX = " ";
             String[] splittedInput = input.split(REGEX);
@@ -66,13 +67,21 @@ public class Parser {
         }
     }
 
+    private static void checkPresenceOfStorageRegex(String input) throws DukeException {
+        if (input.contains(Storage.REGEX_FOR_STORAGE)) {
+            throw new DukeException(
+                    String.format("HA! Caught you trying to mess with storage. Please do not use %s in your input",
+                            Storage.REGEX_FOR_STORAGE));
+        }
+    }
+
     private static boolean checkValiditiy(String input, TaskList taskList) throws DukeException {
         final String REGEX = " ";
         String[] splittedInput = input.split(REGEX);
-        String commandType = splittedInput[0];
-        if (input.length() == 0) {
+        if (input.strip().length() == 0) {
             throw new DukeException(":( OOPS!!! The input cannot be empty.");
         }
+        String commandType = splittedInput[0];
 
         switch (commandType) {
         case "t":

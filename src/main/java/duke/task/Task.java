@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public abstract class Task {
     private boolean completed;
+    protected final String REGEX_FOR_STORAGE = "_/_,_/_";
 
     public Task() {
         completed = false;

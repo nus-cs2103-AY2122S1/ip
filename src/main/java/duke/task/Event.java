@@ -26,7 +26,8 @@ public class Event extends Task {
 
     @Override
     public String toStorageFormat() {
-        return String.format("%s/%s/%s/%s", taskSymbol, isCompleted(), taskName, time);
+        return String.format("%s%s%s%s%s%s%s", taskSymbol, REGEX_FOR_STORAGE, isCompleted(), REGEX_FOR_STORAGE,
+                taskName, REGEX_FOR_STORAGE, time);
     }
 }
 
