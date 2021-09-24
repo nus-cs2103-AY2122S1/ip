@@ -127,16 +127,3 @@ Exits the program
 
 Format:
 ```exit```
-
-## Command summary
-
-Action | Format, Examples
---- | ---
-**Add Todo** | ```todo TASK```<br/>e.g., ```todo math homework```
-**Add Deadline** | ```deadline TASK /by DATE```<br/>e.g., ```deadline proposal submision /by this sun```
-**Add Event** | ```event TASK /at DATE```<br/>e.g., ```event night cycling /at marina bay```
-**Delete** | ```delete INDEX```<br/>e.g., ```delete 1```
-**List** | `list`
-**Done** | ```done INDEX```<br>e.g., ```done 1
-**Find** | ```find KEYWORD [MORE KEYWORDS]```<br/>e.g.,```find homework, night```
-**Exit** | `exit`
