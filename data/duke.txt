@@ -1,0 +1,3 @@
+[D][X] sleep (by: 2011-09-02)
+[E][ ] meeting (at: sunday 10pm)
+[E][X] meeting (at: tmr 3pm)
