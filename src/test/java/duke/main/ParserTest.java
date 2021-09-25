@@ -47,10 +47,10 @@ public class ParserTest {
                     .contains("Here is a comprehensive list of commands you can use:"));
 
         assertTrue(Parser.parse("help", new TaskList()).reply()
-                .contains("8. 'bye': Exit the program"));
+                .contains("'bye': Exit the program"));
         TaskList taskList = new TaskList();
         File testFile = new File("taskFile/testFile1.txt");
-        Storage.loadData(testFile, taskList);
+        Storage.loadData("taskFile/testFile1.txt", taskList);
         assertEquals(Parser.parse("done 1", taskList).reply(),
                 "Nice! I've marked this task as done: \n" + taskList.get(1));
         assertTrue(taskList.get(1).isCompleted());

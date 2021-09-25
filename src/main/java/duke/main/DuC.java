@@ -15,7 +15,7 @@ public class DuC {
     public DuC(String fileName) {
         this.taskList = new TaskList();
         this.file = new File(fileName);
-        Storage.loadData(file, taskList);
+        Storage.loadData(fileName, taskList);
     }
 
     /**

@@ -23,7 +23,7 @@ public class TaskListTest {
     @BeforeEach
     public void setup() {
         this.taskList = new TaskList();
-        Storage.loadData(new File("taskFile/testFile1.txt"), taskList);
+        Storage.loadData("taskFile/testFile1.txt", taskList);
         taskList.addTask("play the piano", Task.Type.TODO);
         taskList.addTask("CS2103T IP submission /by 2021-09-17", Task.Type.DEADLINE);
         taskList.addTask("CS2103T Lecture /at 2021-09-17", Task.Type.EVENT);

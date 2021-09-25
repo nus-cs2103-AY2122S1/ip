@@ -37,9 +37,9 @@ public class Storage {
      * @param file a file that contains previously entered tasks and dates
      * @param taskList task list
      */
-    public static void loadData(File file, TaskList taskList) {
+    public static void loadData(String file, TaskList taskList) {
         try {
-            FileReader reader = new FileReader(file);
+            FileReader reader = new FileReader(new File(file));
             Scanner sc = new Scanner(reader);
             while (sc.hasNextLine()) {
                 String taskString = sc.nextLine();
@@ -54,7 +54,14 @@ public class Storage {
                 taskList.addTask(curr);
             }
         } catch (IOException e) {
-            System.out.println("Cannot find file specified");
+            File directory = new File(file.split("/")[0]);
+            boolean created1 = directory.mkdir();
+            File taskFile = new File(file);
+            try {
+                boolean created2 = taskFile.createNewFile();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
         }
     }
 
