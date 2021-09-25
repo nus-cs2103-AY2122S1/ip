@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+import poseidon.storage.Storage;
+
 /**
  * Represents a {@code Deadline} object that extends from {@code Task} and contains
  * the description of the deadline task and
@@ -49,7 +51,10 @@ public class Deadline extends Task {
 
     @Override
     public String toStorage() {
-        return ("D%" + isDone + "%" + description + "%" + byDateTime + "\n");
+        return ("D" + Storage.STORAGE_SEPARATOR
+                + isDone + Storage.STORAGE_SEPARATOR
+                + description + Storage.STORAGE_SEPARATOR
+                + byDateTime + "\n");
     }
 
     @Override

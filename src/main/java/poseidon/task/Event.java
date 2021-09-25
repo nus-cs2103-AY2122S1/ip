@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+import poseidon.storage.Storage;
+
 /**
  * Represents an {@code Event} object that contains the description of the event task,
  * a date and time to mark the beginning of the event and
@@ -57,7 +59,11 @@ public class Event extends Task {
 
     @Override
     public String toStorage() {
-        return ("E%" + isDone + "%" + description + "%" + fromDateTime + "%" + toDateTime + "\n");
+        return ("E" + Storage.STORAGE_SEPARATOR
+                + isDone + Storage.STORAGE_SEPARATOR
+                + description + Storage.STORAGE_SEPARATOR
+                + fromDateTime + Storage.STORAGE_SEPARATOR
+                + toDateTime + "\n");
     }
 
     @Override

@@ -27,6 +27,8 @@ import poseidon.task.Todo;
  */
 public class Storage {
 
+    /** Separator value to be used for storage to a local text file on the hard disk */
+    public static final String STORAGE_SEPARATOR = "\t";
     private File taskDataFile;
 
     /**
@@ -71,7 +73,7 @@ public class Storage {
         int lineNo = 1;
         while (loadScan.hasNextLine()) {
             try {
-                String[] nextLineArr = loadScan.nextLine().split("%");
+                String[] nextLineArr = loadScan.nextLine().split(STORAGE_SEPARATOR);
                 switch (nextLineArr[0]) {
                 case "T":
                     tasks.add(new Todo(nextLineArr[2], Boolean.parseBoolean(nextLineArr[1])));

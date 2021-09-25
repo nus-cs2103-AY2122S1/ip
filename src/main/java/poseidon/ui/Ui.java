@@ -38,7 +38,7 @@ public class Ui {
             + "                   ||                   \n\n";
     private static final String HELLO_MSG = "Hello! I'm POSEIDON\n"
             + "What can I do for you?\n"
-            + "Try " + Help.CMD_USER_FORMAT + ".";
+            + "Try '" + Help.CMD_USER_FORMAT + "'.";
     private static final String LIST_TASKS_INTRO_MSG = "Here are the tasks in your list:\n";
     private static final String LIST_TASKS_EMPTY_MSG = "There are no tasks in your list.";
     private static final String LIST_TASKS_FIND_INTRO_MSG = "Here are the matching tasks in your list:\n";

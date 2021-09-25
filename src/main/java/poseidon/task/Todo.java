@@ -2,6 +2,8 @@ package poseidon.task;
 
 import java.time.LocalDateTime;
 
+import poseidon.storage.Storage;
+
 /**
  * Represents an {@code Todo} object that contains the description of the task.
  *
@@ -37,7 +39,9 @@ public class Todo extends Task {
 
     @Override
     public String toStorage() {
-        return "T%" + isDone + "%" + description + "\n";
+        return "T" + Storage.STORAGE_SEPARATOR
+                + isDone + Storage.STORAGE_SEPARATOR
+                + description + "\n";
     }
 
     @Override
