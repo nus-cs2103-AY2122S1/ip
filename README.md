@@ -30,8 +30,7 @@ public class Main {
 ```
 
 <div>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/enter_file_demo.gif?
-raw=true" style="width:33%">
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/enter_file_demo.gif?raw=true" style="width:33%">
     <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/alice_0.03_2_demo.gif?raw=true" style="width:33%"/>
 </div>
 
