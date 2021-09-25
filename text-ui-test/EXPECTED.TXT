@@ -1,7 +1,68 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+       Hello! I'm Viper :)
+       How can I help you today?
+
+ ------------------------------------------- 
+
+
+ ------------------------------------------- 
+
+       Ok! I have added this task to your list: 
+       [T][ ] read a book
+       Now you have a total of 1 task(s)!
+
+ ------------------------------------------- 
+
+
+ ------------------------------------------- 
+
+       Oh no! A new deadline?! It's okay, you got this!
+       I have added this deadline to your list: 
+       [D][ ] homework (by: 4pm)
+       Now you have a total of 2 task(s)!
+
+ ------------------------------------------- 
+
+
+ ------------------------------------------- 
+
+       Good job on completing your task!
+       I've marked this task as done:
+       [T][X] read a book
+
+ ------------------------------------------- 
+
+
+ ------------------------------------------- 
+
+       Ok! I have added this event to your list: 
+       [E][ ] group meeting (at: 2-4pm)
+       Now you have a total of 3 task(s)!
+
+ ------------------------------------------- 
+
+
+ ------------------------------------------- 
+
+       Good job on completing your task!
+       I've marked this task as done:
+       [E][X] group meeting (at: 2-4pm)
+
+ ------------------------------------------- 
+
+
+ ------------------------------------------- 
+
+       Here are the tasks in your list:
+       1.[T][X] read a book
+       2.[D][ ] homework (by: 4pm)
+       3.[E][X] group meeting (at: 2-4pm)
+
+ ------------------------------------------- 
+
+
+ ------------------------------------------- 
+
+       Bye! See you again~
+
+ ------------------------------------------- 
 
