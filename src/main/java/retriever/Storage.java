@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.*;
 
 import retriever.task.Deadline;
 import retriever.task.Event;
@@ -21,6 +22,8 @@ import retriever.task.Todo;
  * tasks from the file it is being stored in.
  */
 public class Storage {
+    private static final Logger LOGR = Logger.getLogger("Storage");
+
     private String filePath;
     private Ui ui;
 
@@ -33,6 +36,32 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         this.ui = new Ui();
+        setupLogger();
+    }
+
+    /**
+     * Sets up the logger. The method is kept private, so that no
+     * one outside the class can trigger it.
+     */
+    private void setupLogger() {
+        // Setting up logger
+        LogManager.getLogManager().reset();
+        LOGR.setLevel(Level.ALL);
+
+        // Setting up console logging
+        ConsoleHandler ch = new ConsoleHandler();
+        ch.setLevel(Level.WARNING);
+        LOGR.addHandler(ch);
+
+        // Setting up file logging
+        try {
+            FileHandler fh = new FileHandler("storageLog.log", true);
+            fh.setLevel(Level.INFO);
+            fh.setFormatter(new SimpleFormatter());
+            LOGR.addHandler(fh);
+        } catch (IOException e) {
+            LOGR.log(Level.SEVERE, "Error in Logging to File. Logging would now only Log to Console.");
+        }
     }
 
     /**
@@ -43,12 +72,12 @@ public class Storage {
             File myFile = new File(filePath);
 
             if (myFile.createNewFile()) {
-                ui.printMessage("Woof! File is Created!");
+                LOGR.log(Level.INFO, "File to store tasks is created!");
             } else {
-                ui.printMessage("File Already Exists Master.");
+                LOGR.log(Level.INFO, "File Already Exists!");
             }
         } catch (IOException e) {
-            ui.printErrorMessage("Master, Your Computer Has Issues!");
+            LOGR.log(Level.SEVERE, "File to store tasks could not be created.");
         }
     }
 
@@ -109,8 +138,7 @@ public class Storage {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            ui.printErrorMessage("Master, File Does Not Exist, Give Me A Treat, And\n"
-                    + "I Shall Create One For You! :)");
+            LOGR.log(Level.WARNING, "File to read from does not exist. Trying to create one.");
             // In case the file doesn't exist, one is created.
             createNewFile();
         }
@@ -151,7 +179,7 @@ public class Storage {
             fw.write(taskAsText);
             fw.close();
         } catch (IOException e) {
-            ui.printErrorMessage("Master, Sorry! I Ate The File!");
+            LOGR.log(Level.SEVERE, "Error while writing to file.");
         }
     }
 
@@ -183,7 +211,7 @@ public class Storage {
 
             tempFile.renameTo(inputFile);
         } catch (IOException e) {
-            ui.printErrorMessage("Master! Error Reading File. Gimme Treats, And I Help You!");
+            LOGR.log(Level.SEVERE, "Error while deleting from file.");
         }
     }
 
@@ -225,7 +253,7 @@ public class Storage {
 
             tempFile.renameTo(inputFile);
         } catch (IOException e) {
-            ui.printErrorMessage("Master! Error Reading File. Gimme Treats, And I Help You!");
+            LOGR.log(Level.SEVERE, "Error while updating task status in file.");
         }
     }
 }
