@@ -39,6 +39,7 @@ shadowJar {
     archiveBaseName = "Alice"
     archiveClassifier = null
 }
+
 test {
     useJUnitPlatform()
 

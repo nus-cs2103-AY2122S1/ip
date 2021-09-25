@@ -15,7 +15,7 @@ Alice is a virtual assistant started off as Duke task manager before evolving in
 - [X] Fetch certain deadlines, events and other tasks using "keywords"
 - [X] Customize your Alice by teaching her your own vocabulary
 - [X] GUI (now enhanced!)
-- [x] Create, Save, Delete save files
+- [X] Create, Save, Delete save files
 
 > Let's make a slight change to create big difference
 
@@ -30,8 +30,9 @@ public class Main {
 ```
 
 <div>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/enter_file_demo.gif?raw=true" style="width:33%">
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_2_demo.gif?raw=true" style="width:33%"/>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/enter_file_demo.gif?
+raw=true" style="width:33%">
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/alice_0.03_2_demo.gif?raw=true" style="width:33%"/>
 </div>
 
 ## Acknowledgement

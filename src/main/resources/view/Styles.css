@@ -1,3 +1,23 @@
+/* import fonts */
+
+@font-face {
+    font-family: "Roboto Regular";
+    font-weight: 400;
+    src: url("/fonts/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica";
+    font-weight: 400;
+    src: url("/fonts/Helvetica-Font/Helvetica.ttf");
+}
+
+/* set fonts */
+
+.root {
+    -fx-font-family: "Helvetica";
+}
+
 .mainBackground{
       -fx-background-color: linear-gradient(#5f6c99, #5f2c61),
       radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033);;
@@ -33,7 +53,7 @@
       -fx-background-insets: 5px;
       -fx-border-radius: 15;
       -fx-background-color: linear-gradient(#5f6c99, #5f2c61),
-            repeating-image-pattern('https://edencoding.com/resources/wp-content/uploads/2021/02/Stars_128.png'),
+            repeating-image-pattern('images/stars.png'),
             radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033);
 }
 

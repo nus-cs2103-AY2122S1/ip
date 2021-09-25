@@ -10,9 +10,9 @@
     <children>
         <VBox alignment="CENTER" styleClass="centerBox">
             <Label fx:id="logo" style="-fx-label-padding: 5;" text="Label" wrapText="true" styleClass="centerTextLogo"
-                textAlignment="CENTER"/>
+                   textAlignment="CENTER"/>
             <Label fx:id="dialog" style="-fx-label-padding: 5;" text="Label" wrapText="true" styleClass="centerDialog"
-                textAlignment="CENTER"/>
+                   textAlignment="CENTER"/>
         </VBox>
     </children>
     <padding>

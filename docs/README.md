@@ -4,9 +4,9 @@
 
 ### Screenshots:
 <div>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_1.png?raw=true" style="width:32%">
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_2.png?raw=true" style="width:32%"/>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_3.png?raw=true" style="width:32%"/>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/alice_0.03_1.png?raw=true" style="width:32%">
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/alice_0.03_2.png?raw=true" style="width:32%"/>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/alice_0.03_3.png?raw=true" style="width:32%"/>
 
 </div>
 <br>
@@ -70,9 +70,9 @@ To organize the task into different save file location so that the user can visu
 [GO BACK TO THE TOP](#this-user-guide-contains)
 
 <div>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/create_file_demo.gif?raw=true" style="width:32%">
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/enter_file_demo.gif?raw=true" style="width:32%"/>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/delete_file_demo.gif?raw=true" style="width:32%"/>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/create_file_demo.gif?raw=true" style="width:32%">
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/enter_file_demo.gif?raw=true" style="width:32%"/>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/delete_file_demo.gif?raw=true" style="width:32%"/>
 </div>
 
 
@@ -105,8 +105,8 @@ To allow user to continue editing different save files without having to close t
 <br>
 
 <div>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/enter_file_demo.gif?raw=true" style="width:49.5%">
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/bye_demo.gif?raw=true" style="width:49.5%"/>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/enter_file_demo.gif?raw=true" style="width:49.5%">
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/bye_demo.gif?raw=true" style="width:49.5%"/>
 </div>
 
 ---
@@ -143,7 +143,7 @@ Therefore, user may consider to use this command to input task in which they hav
 
 <br>
 
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/todo_demo2.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/todo_demo2.gif?raw=true)
 
 
 ---
@@ -173,7 +173,7 @@ will add an event to the list with description **'Interview with Stephanie'** an
 [GO BACK TO THE TOP](#this-user-guide-contains)
 
 <br>
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/event_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/event_demo.gif?raw=true)
 ---
 
 ### Add **deadline** task
@@ -201,7 +201,7 @@ will add a deadline to the list with description **'finish reading NO RULES RULE
 [GO BACK TO THE TOP](#this-user-guide-contains)
 
 <br>
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/deadline_demo2.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/deadline_demo2.gif?raw=true)
 ---
 
 ### **Mark task as done**
@@ -243,7 +243,7 @@ will mark task 2 as done
 
 <br>
 
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/done_demo2.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/done_demo2.gif?raw=true)
 ---
 
 ### **Delete** task
@@ -277,7 +277,7 @@ will delete the second task and shift the third task to index 2
 
 <br>
 
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/delete_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/delete_demo.gif?raw=true)
 ---
 
 ### Ask Alice to **list out current tasks**
@@ -296,7 +296,7 @@ To check the current status of the task list
 
 will list out all the task that the user have in this current save file
 <br>
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/todo_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/todo_demo.gif?raw=true)
 ---
 
 ### **Search** certain tasks using **date** to find upcoming task till that date
@@ -331,7 +331,7 @@ will filter out the event and deadline happening **after** Nov 11 2021
 
 <br>
 
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/date_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/date_demo.gif?raw=true)
 ---
 
 ### Search certain tasks using **keywords**
@@ -366,7 +366,7 @@ will filter out other tasks that do not have matching keyword
 
 <br>
 
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/find_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/find_demo.gif?raw=true)
 ---
 
 ### Teach Alice to **learn** **how to respond to certain vocabulary** or sentences
@@ -408,7 +408,7 @@ Alice will respond with
 [GO BACK TO THE TOP](#this-user-guide-contains)
 
 <br>
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/learn_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/learn_demo.gif?raw=true)
 ---
 
 ### Tell Alice to **unlearn certain vocabulary** or sentences
@@ -434,7 +434,7 @@ will make Alice forget how to respond to **'say hi to prof'** and will respond t
 [GO BACK TO THE TOP](#this-user-guide-contains)
 
 <br>
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/unlearn_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/unlearn_demo.gif?raw=true)
 ---
 
 ### Asking Alice to **list out all the commands**
@@ -456,7 +456,7 @@ will have Alice list out all the possible commands
 [GO BACK TO THE TOP](#this-user-guide-contains)
 
 <br>
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/commands_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/commands_demo.gif?raw=true)
 ---
 
 ### **Saving file and continue editing other save files**
@@ -482,5 +482,5 @@ will have Alice save the current task list in to the current save file and exit 
 [GO BACK TO THE TOP](#this-user-guide-contains)
 
 <br>
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/bye_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/docs/screenshots/bye_demo.gif?raw=true)
 ---

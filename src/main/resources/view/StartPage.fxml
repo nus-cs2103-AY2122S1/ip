@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="paneReference" prefHeight="800.0" prefWidth="600.0"
             style="-fx-background-color: linear-gradient(#5f6c99, #5f2c61),
-            repeating-image-pattern('https://edencoding.com/resources/wp-content/uploads/2021/02/Stars_128.png'),
+            repeating-image-pattern('images/stars.png'),
             radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033);"
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.StartPage"
             stylesheets="@Styles.css">
@@ -20,7 +20,9 @@
             onAction="#clearInputField" style="-fx-background-color: grey;" text="Clear" textFill="ghostwhite"/>
     <TextField id="inputField" fx:id="inputField" layoutX="94.0" layoutY="380.0" onAction="#handleFileNameInput"
                prefHeight="54.0" prefWidth="397.0" styleClass="textField"/>
-    <Label layoutX="97.0" layoutY="55.0" prefHeight="54.0" prefWidth="233.0" text="Welcome to" textFill="goldenrod"/>
+    <Label layoutX="97.0" layoutY="55.0" prefHeight="54.0" prefWidth="233.0" text="Welcome to" textFill="#DAA520"
+           style="-fx-font-size: 15.0">
+    </Label>
     <Label layoutX="186.0" layoutY="30.0" prefHeight="66.0"
            style="-fx-font: normal italic 72px 'verdana'; -fx-text-fill: rgba(255, 230, 130)" text="Alice"
            textAlignment="CENTER" textFill="#ebd758">
@@ -31,9 +33,10 @@
 
     <Label layoutX="97.0" layoutY="122.0" prefHeight="18.0" prefWidth="397.0"
            style="-fx-background-color: linear-gradient(#5f6c99, #5f2c61),
-           repeating-image-pattern('https://edencoding.com/resources/wp-content/uploads/2021/02/Stars_128.png'),
-           radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033);"
-           text="Make a slight change to create a big difference" textFill="gold"/>
+           repeating-image-pattern('images/stars.png'),
+           radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033); -fx-font-size: 17.0"
+           text="Make a slight change to create a big difference" textFill="#FFD700">
+    </Label>
     <ListView fx:id="listView" prefHeight="200.0" prefWidth="397.0" layoutX="94.0" layoutY="157.0"
               styleClass="listView"/>
     <Label fx:id="output" layoutX="94.0" layoutY="454.0" prefHeight="18.0" prefWidth="278.0" textFill="firebrick"/>

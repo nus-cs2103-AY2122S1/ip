@@ -48,14 +48,17 @@ public class AlertBox {
     private static void addTitle(String title, VBox vBoxLayout) {
         Label label = new Label();
         label.setText(title);
+        label.setStyle("-fx-font-family: Helvetica");
         vBoxLayout.getChildren().add(label);
     }
 
     private static void addButtons(EventHandler<ActionEvent> eventHandler, Stage stage, VBox vBoxLayout) {
         HBox horizontal = new HBox(10);
         Button yesButton = new Button("Yes");
+        yesButton.setStyle("-fx-font-family: Helvetica");
         yesButton.setDefaultButton(true);
         Button noButton = new Button("No");
+        noButton.setStyle("-fx-font-family: Helvetica");
         yesButton.setOnAction(e -> {
             eventHandler.handle(e);
             stage.close();
