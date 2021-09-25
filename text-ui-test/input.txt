@@ -1,0 +1,21 @@
+task_list
+yes
+todo read book
+deadline return book /by 2020-06-06
+event project meeting /at 2020-08-06
+event project meeting /at 2020-08-06
+deadline commit /by 2020-08-24
+todo join sports club
+todo borrow book
+list
+done 1
+done 2
+done 4
+list
+date 2020-08-06
+date 2020-06-06
+delete 0
+delete 3
+list
+bye
+

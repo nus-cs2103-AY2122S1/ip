@@ -1,24 +1,43 @@
-# Duke project template
+# Welcome to Alice!
+## _The Last Virtual Assistant You will ever need, Ever_
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
-## Setting up in Intellij
+Alice is a virtual assistant started off as Duke task manager before evolving in to her own form.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+- Choose a save file by typing the save file name in
+- See your current task
+- ✨Start editing✨
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Features
+
+- [X] Create local save files location for Alice to remember the task
+- [X] Fetch certain deadlines, events and other tasks using the yyyy-MM-dd format
+- [X] Fetch certain deadlines, events and other tasks using "keywords"
+- [X] Customize your Alice by teaching her your own vocabulary
+- [X] GUI (now enhanced!)
+- [X] Create, Save, Delete save files
+
+> Let's make a slight change to create big difference
+
+Alice is aimed to be implmeneted into a website in the future with 
+continuously improving UI, UX, and backend.
+```java
+public class Main {
+    public static void main(String[] args) {
+        Application.launch(alice.Alice.class, args);
+    }
+}
+```
+
+<div>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/enter_file_demo.gif?raw=true" style="width:33%">
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/docs/screenshots/alice_0.03_2_demo.gif?raw=true" style="width:33%"/>
+</div>
+
+## Acknowledgement
+- DialogBox model by: [se-education.org](https://se-education.org/guides/tutorials/javaFx.html)
+- CSS for DialogBox inspired by: [munharsha](https://github.com/munharsha/ip)
+- Space background using JavaFX tutorial by: [edencoding](https://edencoding.com/resources/css_properties/fx-background-color/)
+- Alice Avatar by [Catalyst Labs](https://www.shutterstock.com/image-vector/cat-robot-cartoon-vector-icon-illustration-1801648348) confirmation number: [SSTK-01B91-05A1]()
+- User Avatar by [Koby Mendez](https://unsplash.com/@kobbyfotos)
+

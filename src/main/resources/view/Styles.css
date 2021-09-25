@@ -1,0 +1,125 @@
+/* import fonts */
+
+@font-face {
+    font-family: "Roboto Regular";
+    font-weight: 400;
+    src: url("/fonts/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica";
+    font-weight: 400;
+    src: url("/fonts/Helvetica-Font/Helvetica.ttf");
+}
+
+/* set fonts */
+
+.root {
+    -fx-font-family: "Helvetica";
+}
+
+.mainBackground{
+      -fx-background-color: linear-gradient(#5f6c99, #5f2c61),
+      radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033);;
+}
+
+.centerDialog {
+      -fx-padding: 20px;
+      -fx-border-insets: 5px;
+      -fx-background-insets: 5px;
+      -fx-border-radius: 15;
+      -fx-text-fill: rgba(255, 250, 173, 1);
+      -fx-font-size: 12pt;
+      -fx-font-weight: bold;
+}
+
+.centerTextLogo {
+      -fx-padding: 20px;
+      -fx-border-insets: 5px;
+      -fx-background-insets: 5px;
+      -fx-border-radius: 15;
+      -fx-text-fill: rgba(255, 182, 0, 1);
+      -fx-font: normal italic 72px 'verdana';
+}
+
+
+/*
+    starry night background code from:
+    https://edencoding.com/resources/css_properties/fx-background-color/
+*/
+.centerBox {
+      -fx-border-width: 5.0;
+      -fx-border-color: rgba(213, 74, 62, 1);
+      -fx-background-insets: 5px;
+      -fx-border-radius: 15;
+      -fx-background-color: linear-gradient(#5f6c99, #5f2c61),
+            repeating-image-pattern('images/stars.png'),
+            radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033);
+}
+
+/*
+    Dialog Box styling inspired by
+    github: munharsha
+*/
+.messageBubble {
+      -fx-border-width: 5.0;
+      -fx-border-color: rgba(213, 74, 62, 1);
+      -fx-background-color: rgba(255, 219, 219, 1);
+      -fx-background-radius: 15;
+      -fx-padding: 8px;
+      -fx-border-insets: 8px;
+      -fx-background-insets: 8px;
+      -fx-border-radius: 13;
+      -fx-text-fill: rgba(213, 74, 62, 1);
+      -fx-font-weight: bold;
+      -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0.0, 0.0);
+}
+
+.textField {
+      -fx-border-width: 5.0;
+      -fx-border-color: rgba(213, 74, 62, 1);
+      -fx-background-color: rgba(255, 219, 219, 1);
+      -fx-background-radius: 15;
+      -fx-padding: 8px;
+      -fx-border-insets: 8px;
+      -fx-background-insets: 8px;
+      -fx-border-radius: 13;
+      -fx-text-fill: rgba(213, 74, 62, 1);
+      -fx-font-weight: bold;
+      -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0.0, 0.0);
+}
+
+.listView {
+      -fx-border-width: 5.0;
+      -fx-border-color: rgba(213, 74, 62, 1);
+      -fx-background-color: rgba(255, 219, 219, 1);
+      -fx-background-radius: 15;
+      -fx-padding: 8px;
+      -fx-border-insets: 8px;
+      -fx-background-insets: 8px;
+      -fx-border-radius: 13;
+      -fx-text-fill: rgba(213, 74, 62, 1);
+      -fx-font-weight: bold;
+      -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0.0, 0.0);
+}
+/*
+    beautiful listview customization from:
+    https://stackoverflow.com/questions/15641478/javafx-css-styling-listview
+*/
+.listView .list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+}
+
+.listView .list-cell:even {
+    -fx-background-color: rgba(255, 219, 219, 1);
+}
+
+.listView .list-cell:odd {
+    -fx-background-color: rgba(255, 219, 219, 0.2);
+}
+
+.listView .list-cell:filled:hover {
+    -fx-background-color: rgba(95, 108, 153);
+    -fx-text-fill: white;
+}
