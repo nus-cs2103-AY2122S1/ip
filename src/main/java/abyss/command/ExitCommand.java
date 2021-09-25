@@ -23,8 +23,9 @@ public class ExitCommand implements Command {
             @Override
             public void run() {
                 Platform.exit();
+                System.exit(0);
             }
-        }, 3000);
+        }, 1500);
         return EXIT_MESSAGE;
     }
 }

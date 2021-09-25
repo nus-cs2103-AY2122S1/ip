@@ -32,6 +32,7 @@ public class Abyss {
             taskManager = storage.loadTasks();
         } catch (IOException | LoadTaskException e) {
             response = Ui.formatReply(e.getMessage());
+            return response;
         }
 
         try {
