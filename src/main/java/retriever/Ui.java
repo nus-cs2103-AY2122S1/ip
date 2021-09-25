@@ -43,6 +43,9 @@ public class Ui {
     private static final String VIEW_COMMAND_MESSAGE = "Use the view command to view scheduled tasks for a day.";
     private static final String VIEW_COMMAND_EXAMPLE = "Command Example: view 23/09/2021";
     private static final String VIEW_COMMAND_FORMAT = "-> view DD/MM/YYYY";
+    private static final String TASK_STORING_AND_RETRIEVING_ISSUE = "If you have observed that your tasks are not being"
+            + " stored or retrieved well, kindly check the Console or the file \"storageLog.log\" to "
+            + "identify the error.";
 
     // Predetermined strings.
     private final String WELCOME_MESSAGE = "Hello, I am Retriever\nHow Can I Help You Today?";
@@ -83,7 +86,8 @@ public class Ui {
                 + FIND_COMMAND_MESSAGE + "\n" + FIND_COMMAND_FORMAT + "\n" + FIND_COMMAND_EXAMPLE + "\n\n"
                 + LIST_COMMAND_MESSAGE + "\n" + LIST_COMMAND_EXAMPLE + "\n\n"
                 + HELP_COMMAND_MESSAGE + "\n" + HELP_COMMAND_EXAMPLE + "\n\n"
-                + VIEW_COMMAND_MESSAGE + "\n" + VIEW_COMMAND_FORMAT + "\n" + VIEW_COMMAND_EXAMPLE + "\n\n";
+                + VIEW_COMMAND_MESSAGE + "\n" + VIEW_COMMAND_FORMAT + "\n" + VIEW_COMMAND_EXAMPLE + "\n\n"
+                + TASK_STORING_AND_RETRIEVING_ISSUE + "\n\n";
     }
 
     /**
