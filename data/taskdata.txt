@@ -1,11 +1,1 @@
-<<<<<<< HEAD
-D | 0 | iP | friday
-E | 0 | cycling | marina
-D | 0 | assignment 1 | next wed
-E | 0 | mooks | clem mall
-T | 0 | math
-T | 0 | commit
-=======
-T | 0 | a
-T | 0 | a
->>>>>>> master
+T | 0 | test

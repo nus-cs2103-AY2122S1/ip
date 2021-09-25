@@ -9,8 +9,6 @@ public class SortCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.sortByTask();
-        storage.saveTasks(tasks);
-        return ui.showSortTask(tasks);
+        return "SortCommand is in progress";
     }
 }
