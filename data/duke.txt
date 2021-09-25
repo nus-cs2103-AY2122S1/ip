@@ -1,0 +1,4 @@
+T | 1 | read book
+D | 0 | return book | 02/12/2021 1800
+E | 0 | project meeting | 04/06/2022 1200
+T | 1 | join sports club
