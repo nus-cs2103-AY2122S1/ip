@@ -1,6 +1,6 @@
-# User Guide: DuC - That time I created a Chat Bot named myself because everyone keep mispronounce and butcher it in front of me
+# User Guide: DuC
 
-Random title inserted
+That time I created a Chat Bot named myself because everyone keep mispronounce and butcher it in front of me.
 
 ## Menu
 
@@ -28,7 +28,7 @@ Random title inserted
 
 ### Add, update, track completion, and delete tasks.
 
-Great news! You can add in three types of task to the list, and let DuC handle everything for you. 
+You can add in three types of task to the list, and let DuC handle everything for you. 
 What are the tasks in mention?
 1. TODO: Task without deadline or timing, for you to do at your own pace
 2. DEADLINE: Task with an upcoming end date (deadline) for you to complete before
@@ -58,8 +58,8 @@ Want to visit the list later? We save everything for you, just reload the app ag
 
 ### `help` - Getting help
 
-Don't know how to use DuC? Like how you keep mispronouncing my name? Fear not, enter `help` in the conversation block 
-and see the shortened-version of this User Guide. At your Service!
+Don't know how to use DuC? Enter `help` in the conversation block 
+and see the shortened-version of this User Guide!
 
 Syntax: `help`
 

@@ -1,4 +1,4 @@
-# DuC (That time I create a chatbot with my name for CS2103T IP because Singaporeans keep mispronouncing it then asking me how  :joy::joy::thinking::vomiting_face:)
+# DuC (That time I create a chatbot with my name for CS2103T IP because Singaporeans keep mispronouncing it in front of me  :joy::joy::thinking::vomiting_face:)
 
 Yea you heard me right. The most generic yet difficult-to-pronounce chatbot you will have ever used. Why use me then?
 Because I am **generic**, it means that there is absolutely no risk of using me. I can be the most _useful~~~_ chat bot you will ever use without even notice. Because I'm doing my job properly and not trying to market you with distrustful stuffs.
