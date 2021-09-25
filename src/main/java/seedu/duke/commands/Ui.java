@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import seedu.duke.tasks.Task;
 
 public class Ui {
-    public static final String DATA_LOCATION = "src/main/java/seedu/data/data.txt";
+    public static final String DATA_LOCATION = "data.txt";
     public static final String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String INTRODUCTION = "Hello! I'm Ricky\n" + "What can I do for you?";

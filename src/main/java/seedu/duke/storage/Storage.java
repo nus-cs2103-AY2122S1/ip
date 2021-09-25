@@ -43,6 +43,7 @@ public class Storage {
         String storageIsDone;
 
         try {
+            this.data.createNewFile();
             Scanner sc = new Scanner(data);
             while (sc.hasNext()) {
                 currLine = sc.nextLine();
@@ -87,6 +88,7 @@ public class Storage {
             }
             sc.close();
         } catch (IOException err) {
+            System.out.println(err.toString());
             throw new DukeStorageLoadException(Ui.ERROR_MESSAGE_STORAGE_LOAD);
         } catch (ArrayIndexOutOfBoundsException err) {
             throw new DukeStorageLoadException(Ui.ERROR_MESSAGE_STORAGE_LOAD_OUT_OF_BOUND);
