@@ -1,3 +1,11 @@
+# Abyss
+
+Abyss is a *personal, lightweight chatbot* that helps you manage your daily tasks.
+
+<p align="center">
+  <img height="500" src="https://github.com/ailing35/ip/blob/master/docs/Ui.png">
+</p>
+
 # User Guide
 
 ## Features 
@@ -173,3 +181,13 @@ Expected outcome:
 ```
 Exiting the Abyss. We look forward to your return.
 ```
+
+# Credits
+
+The user interface theme is inspired by [Little Nightmares](https://en.bandainamcoent.eu/little-nightmares/little-nightmares) and the images used are taken from the sources below:
+
+* [Abyss icon](https://igoutu.cn/icon/RKGFNVsfSVzt/little-nightmares)
+* [Abyss profile image](https://www.subpng.com/png-pgi8cv/)
+* [User profile image](https://toppng.com/six-sitsleep-small-little-nightmares-main-character-PNG-free-PNG-Images_256614)
+* [Background image](https://wallpaperaccess.com/little-nightmare-4k)
+
