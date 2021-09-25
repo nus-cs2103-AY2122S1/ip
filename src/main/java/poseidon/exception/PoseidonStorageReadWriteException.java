@@ -1,7 +1,7 @@
 package poseidon.exception;
 
 /**
- * Represents a {@code PoseidonStorageReadWriteException} for errors in read and write operations that occur
+ * Represents a {@code PoseidonStorageReadWriteException} for exceptions during read and write operations that occur
  * in {@code Storage}.
  *
  * @author Yeluri Ketan
@@ -11,13 +11,13 @@ public class PoseidonStorageReadWriteException extends PoseidonException {
 
     /**
      * Constructs a new {@code PoseidonStorageReadWriteException} with the given message and some additional info
-     * about the nature of the error.
+     * about the nature of the exception.
      *
-     * @param errorMsg {@code String} containing the error message.
+     * @param exceptionMsg {@code String} containing the information about the new exception.
      */
-    public PoseidonStorageReadWriteException(String errorMsg) {
+    public PoseidonStorageReadWriteException(String exceptionMsg) {
         super("Read and/or Write operations with the file on the local hard disk failed.\n"
-                + errorMsg + "\n"
+                + exceptionMsg + "\n"
                 + "Please exit the bot and fix the issue to prevent any data loss.");
     }
 }

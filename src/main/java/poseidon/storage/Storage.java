@@ -19,7 +19,7 @@ import poseidon.task.Task;
 import poseidon.task.Todo;
 
 /**
- * Represents a {@code Storage} object for all operations related to storage such as reading and writing
+ * Represents a {@code Storage} object for all operations related to storage such as loading, reading and writing
  * to a local file on the hard disk.
  *
  * @author Yeluri Ketan
@@ -29,10 +29,14 @@ public class Storage {
 
     /** Separator value to be used for storage to a local text file on the hard disk */
     public static final String STORAGE_SEPARATOR = "\t";
+
     private File taskDataFile;
 
     /**
-     * Constructs a {@code Storage} object and initializes the {@code taskDataFile} {@code File} object.
+     * Constructs a {@code Storage} object and initializes the taskDataFile {@code File} object.
+     *
+     * @throws PoseidonStorageException For exceptions that occur when accessing/creating a file for storage
+     * on the local hard disk.
      */
     public Storage() throws PoseidonStorageException {
         try {
@@ -52,11 +56,16 @@ public class Storage {
         assert taskDataFile.exists() : "File for storage is supposed to exist";
     }
 
+
     /**
      * Returns a {@code ArrayList} containing all the {@code Task}s after reading through a text {@code File}
      * saved on the hard disk.
      *
      * @return {@code ArrayList} containing all the saved {@code Task}s.
+     * @throws PoseidonStorageException Exceptions that occur when accessing a file for storage on the local hard
+     * disk.
+     * @throws PoseidonStorageReadWriteException Exceptions that occur during reading/writing of the file for storage on
+     * the local hard disk.
      */
     public ArrayList<Task> load() throws PoseidonStorageException, PoseidonStorageReadWriteException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -108,7 +117,8 @@ public class Storage {
      * Writes a new {@code Task} to the storage document of the Bot.
      *
      * @param taskStorage Storage {@code String} version of the new {@code Task}.
-     * @throws IOException If file access or modification is obstructed.
+     * @throws PoseidonStorageReadWriteException Exceptions that occur during reading/writing of the file for storage on
+     * the local hard disk.
      */
     public void storeAdd(String taskStorage) throws PoseidonStorageReadWriteException {
         try {
@@ -126,9 +136,10 @@ public class Storage {
      *
      * @param index Index of the {@code Task} to be modified.
      * @param taskStorage Storage {@code String} version of the modified {@code Task}.
-     * @throws IOException If file access or modification is obstructed.
+     * @throws PoseidonStorageReadWriteException Exceptions that occur during reading/writing of the file for storage on
+     * the local hard disk.
      */
-    public void storeDone(int index, String taskStorage) throws PoseidonStorageReadWriteException {
+    public void storeModify(int index, String taskStorage) throws PoseidonStorageReadWriteException {
         try {
             BufferedReader taskDataReader = new BufferedReader(new FileReader(taskDataFile));
             StringBuilder newTaskData = new StringBuilder();
@@ -162,7 +173,8 @@ public class Storage {
      * Deletes a {@code Task} from the storage document of Bot.
      *
      * @param index Index of the deleted {@code Task}.
-     * @throws IOException If file access or modification is obstructed.
+     * @throws PoseidonStorageReadWriteException Exceptions that occur during reading/writing of the file for storage on
+     * the local hard disk.
      */
     public void storeDelete(int index) throws PoseidonStorageReadWriteException {
         try {

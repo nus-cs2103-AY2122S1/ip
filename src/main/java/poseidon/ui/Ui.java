@@ -44,7 +44,7 @@ public class Ui {
     private static final String LIST_TASKS_FIND_INTRO_MSG = "Here are the matching tasks in your list:\n";
     private static final String LIST_TASKS_FIND_EMPTY_MSG = "There are no matching tasks in your list.";
     private static final String COMMAND_FAIL_MSG = "I didn't get that. Please try again.";
-    private static final String ERROR_INTRO_MSG = "Oops... Something's wrong.\n";
+    private static final String EXCEPTION_INTRO_MSG = "Oops... Something's wrong.\n";
     private static final String GOODBYE_MSG = "Bye. Hope to see you again soon!";
     private static final String HELP_MSG = "Here's a list of all the commands I can understand:\n\n"
             + "FOR HELP - " + Help.CMD_USER_FORMAT + "\n\n"
@@ -115,20 +115,20 @@ public class Ui {
     /**
      * Returns a human-readable {@code String} that conveys that an unknown/non-existent command has been encountered.
      *
-     * @return {@code String} error message.
+     * @return {@code String} exception message.
      */
     public String showCommandFail() {
         return COMMAND_FAIL_MSG;
     }
 
     /**
-     * Returns a human-readable {@code String} that conveys that the given error message.
+     * Returns a human-readable {@code String} that conveys that the given exception message.
      *
-     * @param message Error message to be shown.
-     * @return {@code String} error message.
+     * @param message Exception message to be shown.
+     * @return {@code String} message with some additional info indicating that it is an exception message.
      */
-    public String showError(String message) {
-        return ERROR_INTRO_MSG + message;
+    public String showException(String message) {
+        return EXCEPTION_INTRO_MSG + message;
     }
 
     /**

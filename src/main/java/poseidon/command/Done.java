@@ -60,7 +60,7 @@ public class Done extends Command {
 
         String message = taskList.markTaskDone(indexInt);
         String taskStorage = taskList.getTaskStorage(indexInt);
-        storage.storeDone(indexInt, taskStorage);
+        storage.storeModify(indexInt, taskStorage);
         return ui.showMessage(message);
     }
 }

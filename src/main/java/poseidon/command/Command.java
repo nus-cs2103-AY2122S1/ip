@@ -40,7 +40,7 @@ public abstract class Command {
      * @param taskList {@code TaskList} object to be used for task list related operations (if any).
      * @param ui {@code Ui} object to be used for crafting messages from the Bot to the User.
      * @return {@code String} reponse message.
-     * @throws PoseidonException Errors related operations on execution of the command within a Poseidon object.
+     * @throws PoseidonException Exceptions thrown during the execution of the command.
      */
     public abstract String execute(Storage storage, TaskList taskList, Ui ui) throws PoseidonException;
 }

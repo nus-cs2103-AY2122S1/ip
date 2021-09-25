@@ -1,7 +1,7 @@
 package poseidon.exception;
 
 /**
- * Represents a {@code PoseidonDateTimeParseException} for Date and Time parsing errors.
+ * Represents a {@code PoseidonDateTimeParseException} for Date and Time parsing exceptions.
  *
  * @author Yeluri Ketan
  * @version CS2103T AY21/22 Sem 1 iP
@@ -10,13 +10,13 @@ public class PoseidonDateTimeParseException extends PoseidonException {
 
     /**
      * Constructs a new {@code PoseidonDateTimeParseException} with the given message and some additional info
-     * about the nature of the error.
+     * about the nature of the exception.
      *
-     * @param errorMsg {@code String} containing the error message.
+     * @param exceptionMsg {@code String} containing the information about the new exception.
      */
-    public PoseidonDateTimeParseException(String errorMsg) {
+    public PoseidonDateTimeParseException(String exceptionMsg) {
         super("Date and Time couldn't be parsed.\n"
-                + errorMsg + "\n"
+                + exceptionMsg + "\n"
                 + "Please try again.");
     }
 }

@@ -9,12 +9,12 @@ package poseidon.exception;
 public class PoseidonException extends Exception {
 
     /**
-     * Constructs a new {@code PoseidonException} with the given error message.
+     * Constructs a new {@code PoseidonException} with the given message.
      *
-     * @param errorMsg Error message of the new {@code Exception}.
+     * @param exceptionMsg {@code String} containing the information about the new exception.
      */
-    public PoseidonException(String errorMsg) {
-        super(errorMsg);
+    public PoseidonException(String exceptionMsg) {
+        super(exceptionMsg);
     }
 
 }

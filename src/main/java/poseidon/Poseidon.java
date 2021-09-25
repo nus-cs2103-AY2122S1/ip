@@ -20,7 +20,8 @@ public class Poseidon {
 
     /** {@code Storage} object that reads from and writes onto the hard disk  */
     private Storage storage;
-    private String storageLoadErrorMsg = "";
+
+    private String storageLoadExceptionMsg = "";
 
     /** {@code TaskList} object that maintains and updates the list of tasks */
     private TaskList taskList;
@@ -37,8 +38,8 @@ public class Poseidon {
             storage = new Storage();
             taskList = new TaskList(storage.load());
         } catch (PoseidonStorageException | PoseidonStorageReadWriteException ex) {
-            storageLoadErrorMsg = ex.getMessage();
-            System.out.println(storageLoadErrorMsg);
+            storageLoadExceptionMsg = ex.getMessage();
+            System.out.println(storageLoadExceptionMsg);
             storage = null;
             taskList = new TaskList();
         }
@@ -61,18 +62,18 @@ public class Poseidon {
      */
     public String run(String newCommand) {
         if (storage == null) {
-            return ui.showError(storageLoadErrorMsg);
+            return ui.showException(storageLoadExceptionMsg);
         }
 
-        String errorMessage = "";
+        String exceptionMsg = "";
         try {
             Command command = Parser.parse(newCommand);
             return command.execute(storage, taskList, ui);
         } catch (PoseidonException ex) {
-            errorMessage = ui.showError(ex.getMessage());
+            exceptionMsg = ui.showException(ex.getMessage());
         }
-        assert errorMessage.length() != 0 : "Error message supposed to contain readable text";
-        return errorMessage;
+        assert exceptionMsg.length() != 0 : "Exception message supposed to contain readable text";
+        return exceptionMsg;
     }
 
     /**

@@ -27,10 +27,10 @@ import poseidon.exception.PoseidonDateTimeParseException;
 public class Parser {
 
     /**
-     * Returns a {@code String} array that contains the useful and necessary parts of a command to be executed.
+     * Returns a {@code Command} that represents the user command to be executed.
      *
      * @param newCommand {@code String} version of a command.
-     * @return {@code String} array.
+     * @return {@code Command} containing the user input.
      */
     public static Command parse(String newCommand) {
         if (AddDeadline.isThisCmd(newCommand)) {
@@ -63,6 +63,7 @@ public class Parser {
      *
      * @param dateTime {@code String} version of date and time.
      * @return {@code LocalDateTime} object.
+     * @throws PoseidonDateTimeParseException Exceptions that occur during parsing of the date and time {@code String}.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws PoseidonDateTimeParseException {
         final String dateFormat = "yyyy MM dd HHmm";
