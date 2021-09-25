@@ -50,6 +50,7 @@ public class Event extends Task {
      * @return String description of the date Task will be done
      */
     public String getDate() {
+        assert date != null : "Event was created without a date";
         return date.toString();
     }
 
@@ -59,6 +60,7 @@ public class Event extends Task {
      * @return String description of the time Task will be done
      */
     public String getTime() {
+        assert time != null : "Event was created without a time";
         return time.toString();
     }
 

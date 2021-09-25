@@ -46,6 +46,7 @@ public class Task {
      * @param description Task description
      */
     public Task(String description) {
+        assert !description.isBlank() : "Task was created without a description";
         this.description = description;
     }
 

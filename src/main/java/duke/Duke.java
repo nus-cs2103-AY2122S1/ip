@@ -40,10 +40,11 @@ public class Duke {
         try {
             nextIn = scannerObj.next();
         } catch (NoSuchElementException e) {
-            return "Buffer Does not work";
+            return "Buffer does not work";
         }
 
         int selector = Parser.decoder(nextIn);
+        assert selector <= 8 : "Variable selector should be less than or equal to 8";
         Task nextTask;
         switch (selector) {
         case 0:
@@ -60,7 +61,7 @@ public class Duke {
         case 3:
             nextIn = scannerObj.nextLine();
             if (Parser.isNotValid(nextIn, TASKTYPE.T)) {
-                out = "☹ OOPS!!! The description of a todo cannot be empty.";
+                out = "The description of a todo cannot be empty.";
                 break;
             }
             nextTask = new Todo(Parser.removeSpace(nextIn));
@@ -72,7 +73,7 @@ public class Duke {
             String[] res;
             nextIn = scannerObj.nextLine();
             if (Parser.isNotValid(nextIn, TASKTYPE.D)) {
-                out = "☹ OOPS!!! Please supply a description and/or date in the format yyyy-mm-dd!";
+                out = "Please supply a description and/or date in the format yyyy-mm-dd!";
                 break;
             }
             res = Parser.dSplitter(nextIn);
@@ -85,7 +86,7 @@ public class Duke {
             String[] ins;
             nextIn = scannerObj.nextLine();
             if (Parser.isNotValid(nextIn, TASKTYPE.E)) {
-                out = "☹ OOPS!!! Please supply a description and/or a date & time in the format yyyy-mm-dd HH:MM(24 hour clock)!";
+                out = "Please supply a description and/or a date & time in the format yyyy-mm-dd HH:MM(24 hour clock)!";
                 break;
             }
             ins = Parser.eSplitter(nextIn);
@@ -109,6 +110,7 @@ public class Duke {
         default:
             out = ui.echo();
         }
+        assert !out.isBlank() : "Returned response should not be blank";
         return out;
     }
 

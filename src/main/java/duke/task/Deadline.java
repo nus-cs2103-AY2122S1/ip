@@ -44,6 +44,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getBy() {
+        assert by != null : "Deadline was created without a end date";
         return by.toString();
     }
 
