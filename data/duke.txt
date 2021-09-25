@@ -1,0 +1,7 @@
+T | 1 | run
+D | 1 | 2103T iP | 2021-08-12T23:59
+E | 1 | tutorial | 2021-09-10T08:00
+T | 1 | swim
+T | 0 | run
+T | 0 | run
+T | 0 | run
