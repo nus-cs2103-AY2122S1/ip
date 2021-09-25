@@ -13,7 +13,8 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
+    private String filePath;
+    private String fileName;
     /**
      * Class constructor.
      *
@@ -22,13 +23,22 @@ public class Duke {
      */
     public Duke(String filePath, String fileName) {
         ui = new Ui();
-        assert fileName != null : "filepath cannot be empty";
+        this.filePath = filePath;
+        this.fileName = fileName;
+    }
+
+    /**
+     * Initializes duke chat bot, loads tasks from storage into taskList.
+     */
+    public void initialize() {
+        assert filePath != null : "filepath cannot be empty";
         assert fileName != null : "filename cannot be empty";
         storage = new Storage(filePath, fileName);
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println(e.getMessage());
+            System.out.println(ui.showLoadingError());
             tasks = new TaskList();
         }
     }
@@ -39,6 +49,7 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
+        new Duke("data", "duke.txt").initialize();
         new Duke("data", "duke.txt").run();
     }
 

@@ -51,11 +51,12 @@ public class Storage {
                 fileDirectory.mkdir();
             }
             file = new File(filePath + "/" + fileName);
+            System.out.println(file.exists());
             if (!file.exists()) {
                 file.createNewFile();
             }
         } catch (IOException e) {
-            file = new File(filePath);
+            file = new File(filePath + "/" + fileName);
             throw new DukeException(DukeException.Exceptions.IOException);
         }
         return file;
@@ -90,7 +91,7 @@ public class Storage {
     }
     private Task createNewTask(String taskString) throws DukeException {
         Task task;
-        String[] taskComponents= splitIntoTaskComponents(taskString);
+        String[] taskComponents = splitIntoTaskComponents(taskString);
         String taskMarker = taskComponents[0];
         switch (taskMarker) {
         case Deadline.DEADLINE_MARKER:
@@ -116,15 +117,16 @@ public class Storage {
     }
     // checks if the taskString contains a tag and adds the tags the task if so.
     private Task checkAndMarkTask(Task task, String taskDoneStatus) {
-        String markedDone = "| 0 |";
-        if (taskDoneStatus == markedDone) {
+        String markedDone = "0";
+        if (taskDoneStatus.equals(markedDone)) {
             task.markAsDone();
         }
         return task;
     }
     private Task checkAndAddTag(Task task, String taskString, String[] taskComponents) throws DukeException {
         if (taskString.contains(TaskTag.getTagSymbol())) {
-            task.addTag(taskComponents[-1]);
+            int lastElementIndex = taskComponents.length - 1;
+            task.addTag(taskComponents[lastElementIndex]);
         }
         return task;
     }

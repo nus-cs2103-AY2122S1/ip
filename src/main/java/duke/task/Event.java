@@ -18,7 +18,6 @@ public class Event extends Task {
     private String eventDescription;
     private TaskDate eventDate;
     private String dateString;
-    private TaskTag eventTag;
     /**
      * Class constructor.
      *
@@ -35,7 +34,7 @@ public class Event extends Task {
         dateString = getDateString();
         int startOfEventTags = getStartingIndexAfter(description, TaskTag.getTagSymbol());
         String tag = getSubString(description, startOfEventTags - TaskTag.getTagSymbol().length());
-        eventTag = new TaskTag(tag);
+        this.addTag(tag);
         assert !isDone : false;
     }
     /**
@@ -65,7 +64,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[%s]%s %s (at: %s) %s", EVENT_MARKER, super.toString(), eventDescription,
-                dateString, eventTag.getTag());
+                dateString, getTag());
     }
     /**
      * Formats the task in to the storage format.
@@ -74,7 +73,7 @@ public class Event extends Task {
      */
     public String formatToStore() {
         return String.format("%s %s %s | %s %s", EVENT_MARKER, super.formatToStore(),
-            eventDescription, dateString, eventTag.getTagInStoreFormat());
+            eventDescription, dateString, getTagFormattedForStorage());
     }
     /**
      * Checks if given datetime matches the tasks date time.

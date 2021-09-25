@@ -16,13 +16,13 @@ public class Deadline extends Task {
     private String deadlineDescription;
     private TaskDate deadlineDate;
     private String dateString;
-    private TaskTag deadlineTag;
     /**
      * Class constructor.
      *
      * @param description consisting of duke.task description and deadline date.
      */
     public Deadline(String description) throws DukeException {
+        super();
         int startOfDescriptionIndex = getStartingIndexAfter(description, DEADLINE_KEYWORD);
         int startOfTimingIndex = getStartingIndexAfter(description, BY_CONNECTOR);
         deadlineDescription = getSubString(description, startOfDescriptionIndex,
@@ -32,7 +32,7 @@ public class Deadline extends Task {
         dateString = getDateString();
         int startOfDeadlineTag = getStartingIndexAfter(description, TaskTag.getTagSymbol());
         String tag = getSubString(description, startOfDeadlineTag - TaskTag.getTagSymbol().length());
-        deadlineTag = new TaskTag(tag);
+        this.addTag(tag);
         assert !isDone : false;
     }
 
@@ -62,7 +62,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[%s]%s %s (by: %s) %s", DEADLINE_MARKER, super.toString(), deadlineDescription,
-                dateString, deadlineTag.getTag());
+                dateString, getTag());
     }
 
     /**
@@ -72,7 +72,7 @@ public class Deadline extends Task {
      */
     public String formatToStore() {
         return String.format("%s %s %s | %s %s", DEADLINE_MARKER, super.formatToStore(),
-                deadlineDescription, dateString, deadlineTag.getTagInStoreFormat());
+                deadlineDescription, dateString, getTagFormattedForStorage());
     }
     /**
      * Checks if given datetime matches the tasks date time.

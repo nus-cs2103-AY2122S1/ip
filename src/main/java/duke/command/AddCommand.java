@@ -52,7 +52,7 @@ public class AddCommand extends Command {
                 task = new Event(addCommand);
                 break;
             case "todo" :
-                task = new Todo(addCommand);
+                task = Todo.of(addCommand);
                 break;
             default:
                 throw new IllegalArgumentException();

@@ -13,36 +13,38 @@ public class Todo extends Task {
     public static final String TODO_MARKER = "T";
     private static final String TODO_KEYWORD = "todo ";
     private String todoDescription;
-    private TaskTag todoTag;
 
-    /**
-     * Class constructor.
-     *
-     * @param description the todo description.
-     * @throws DukeException cause by exception handled in DukeException class.
-     */
-    public Todo(String description) throws DukeException {
-        super();
-        try {
-            int startOfDescriptionIndex = getStartingIndexAfter(description, TODO_KEYWORD);
-            int startOfTodoTagIndex = getStartingIndexAfter(description,
-                TaskTag.getTagSymbol()) - TaskTag.getTagSymbol().length();
-            assert startOfDescriptionIndex != -1 : "todo must be in the description.";
-            this.todoDescription = getSubString(description, startOfDescriptionIndex,
-                    startOfTodoTagIndex);
-            todoTag = new TaskTag(getSubString(description, startOfTodoTagIndex));
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
-        }
-    }
 
     /**
      * Class constructor for loading task from storage.
      *
      * @param todoDescription description of the todo task.
      */
-    public Todo(String ...todoDescription) {
-        this.todoDescription = todoDescription[0];
+    public Todo(String todoDescription) {
+        super();
+        this.todoDescription = todoDescription;
+    }
+    /**
+     * Class constructor.
+     *
+     * @param description the todo description.
+     * @throws DukeException cause by exception handled in DukeException class.
+     */
+    public static Todo of(String description) throws DukeException {
+        try {
+            int startOfDescriptionIndex = getStartingIndexAfter(description, TODO_KEYWORD);
+            int startOfTodoTagIndex = getStartingIndexAfter(description,
+                TaskTag.getTagSymbol()) - TaskTag.getTagSymbol().length();
+            assert startOfDescriptionIndex != -1 : "todo must be in the description.";
+            String taskDescription = getSubString(description, startOfDescriptionIndex,
+                    startOfTodoTagIndex);
+            Todo todo = new Todo(taskDescription);
+            String tag = getSubString(description, startOfTodoTagIndex);
+            todo.addTag(tag);
+            return todo;
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
+        }
     }
     /**
      * Prints out the duke.task.
@@ -53,7 +55,7 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return String.format("[%s]%s %s %s", TODO_MARKER, super.toString(), todoDescription,
-                todoTag.getTag());
+                getTag());
     }
 
     /**
@@ -63,6 +65,6 @@ public class Todo extends Task {
      */
     public String formatToStore() {
         return String.format("%s %s %s %s", TODO_MARKER, super.formatToStore(),
-            todoDescription, todoTag.getTagInStoreFormat());
+            todoDescription, getTagFormattedForStorage());
     }
 }

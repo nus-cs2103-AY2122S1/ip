@@ -52,7 +52,7 @@ public class Task {
      * @return storage format of the duke.task.
      */
     public String formatToStore() {
-        return String.format("| %s |", isDone ? "1" : "0");
+        return String.format("| %s |", isDone ? "0" : "1");
     }
 
     /**
@@ -84,11 +84,11 @@ public class Task {
         return toString().contains(searchPhrase);
     }
 
-    public int getStartingIndexAfter(String description, String wordSlicer) {
+    public static int getStartingIndexAfter(String description, String wordSlicer) {
         return description.indexOf(wordSlicer) + wordSlicer.length();
     }
 
-    public String getSubString(String taskDescription, int ... startAndEndIndex) {
+    public static String getSubString(String taskDescription, int ... startAndEndIndex) {
         if (startAndEndIndex.length == 1) {
             return taskDescription.substring(startAndEndIndex[0]);
         }
@@ -102,5 +102,23 @@ public class Task {
      */
     public void addTag(String tag) throws DukeException {
         this.tag = new TaskTag(tag);
+    }
+
+    /**
+     * Retrieves the tag encapsulated in the task tag.
+     *
+     * @return the tag in the taskTag
+     */
+    public String getTag() {
+        return this.tag.getTag();
+    }
+
+    /**
+     * Retrieves the tag encapsulated in the task tag and in correct formatted for storage.
+     *
+     * @return the tag preceded by " | " if tag is not empty else, empty string.
+     */
+    public String getTagFormattedForStorage() {
+        return this.tag.getTagInStoreFormat();
     }
 }
