@@ -1,24 +1,35 @@
-# Duke project template
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+# 🌊 dory
 
-## Setting up in Intellij
+> "just keep swimming" - dory
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+dory is a personalised chatbot that handles your queries and helps you to remember everything so that you don't have to!
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+|![Screenshot 2021-09-16 at 6 46 02 PM](https://user-images.githubusercontent.com/77200805/133599641-7b0e0844-7587-4426-b6bc-8d593725fac2.png) | ![132981292-12d9e476-0fdd-462a-9c98-e01cd71e0da2](https://user-images.githubusercontent.com/77200805/133599859-746c9371-5138-47f0-a510-4d8a21878713.png) |
+|--|--|
+
+
+
+
+
+
+
+## 🦭 what's there to sea-anemonemonee
+
+- add tasks (todo/event/deadline)
+- list tasks
+- mark tasks as done
+- find tasks
+- delete tasks
+
+## ⚓  where is it? p. sherman 42 wallaby way?
+
+1.  download it from  [_here_](https://github.com/kvihashini/ip/releases/tag/v0.2)
+2.  download the **.jar** file
+3. create an empty folder anywhere on your computer
+4. drag the **.jar** file into the folder
+5. double click the **.jar** file to open the bot
+6. have fun, refer to the user guide for more help!
+
+## ✨ user guide
+to find out more on how to use it, refer to the [*user guide*](https://kvihashini.github.io/ip/)

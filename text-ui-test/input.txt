@@ -1,0 +1,9 @@
+todo colour book
+deadline 2 pages of colouring book /by next week
+event birthday /at 15 sep
+list
+done 2
+list
+todo sleep
+bye
+done 4
