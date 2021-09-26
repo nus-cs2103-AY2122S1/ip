@@ -2,6 +2,7 @@ package duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ import duke.data.TaskList;
 public class Storage {
     /** Filename of the taskList */
     private static final String FileName = "duke.txt";
+    /** directory of taskList to be saved */
+    private static final String DirName = "./data/";
 
     /**
      * Saves current taskList into the hard disk.
@@ -38,7 +41,7 @@ public class Storage {
     public void save(TaskList taskList) {
         try {
             ArrayList<Task> arr = taskList.getEntire();
-            PrintWriter printWriter = new PrintWriter(FileName);
+            PrintWriter printWriter = new PrintWriter(DirName + FileName);
             StringBuilder sb = makeStringToWriteToFile(arr);
             printWriter.write(sb.toString());
             printWriter.close();
@@ -56,46 +59,52 @@ public class Storage {
      */
     public static ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
-        File file = new File(FileName);
-        assert !file.equals(null) : "load file should not be null";
+        File newFolder = new File(DirName);
+        newFolder.mkdir();
+        File file = new File(DirName + FileName);
         try {
-            Scanner sc = new Scanner(file);
-            System.out.println("Past tasks found. Use command \"list\" to list previous tasks.");
-            sc.useDelimiter(",");
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                List<String> splitLine = Arrays.stream(line.split(","))
-                        .map(String::trim)
-                        .collect(Collectors.toList());
-                String taskType = splitLine.get(0);
-                boolean isDone = splitLine.get(1).equals("1");
-                String description = splitLine.get(2);
+            boolean newFileCreated = file.createNewFile();
+            if (!newFileCreated) {
+                Scanner sc = new Scanner(file);
+                System.out.println("Past tasks found. Use command \"list\" to list previous tasks.");
+                sc.useDelimiter(",");
+                while (sc.hasNextLine()) {
+                    String line = sc.nextLine();
+                    List<String> splitLine = Arrays.stream(line.split(","))
+                            .map(String::trim)
+                            .collect(Collectors.toList());
+                    String taskType = splitLine.get(0);
+                    boolean isDone = splitLine.get(1).equals("1");
+                    String description = splitLine.get(2);
 
-                Task toAdd;
-                switch (taskType) {
-                case "T":
-                    toAdd = new Todo(description);
-                    break;
-                case "D":
-                    LocalDateTime by = LocalDateTime.parse(splitLine.get(3));
-                    toAdd = new Deadline(description, by);
-                    break;
-                case "E":
-                    LocalDateTime at = LocalDateTime.parse(splitLine.get(3));
-                    toAdd = new Event(description, at);
-                    break;
-                default:
-                    toAdd = new Task(description);
-                    break;
-                }
+                    Task toAdd;
+                    switch (taskType) {
+                    case "T":
+                        toAdd = new Todo(description);
+                        break;
+                    case "D":
+                        LocalDateTime by = LocalDateTime.parse(splitLine.get(3));
+                        toAdd = new Deadline(description, by);
+                        break;
+                    case "E":
+                        LocalDateTime at = LocalDateTime.parse(splitLine.get(3));
+                        toAdd = new Event(description, at);
+                        break;
+                    default:
+                        toAdd = new Task(description);
+                        break;
+                    }
 
-                if (isDone) {
-                    toAdd.markDone();
+                    if (isDone) {
+                        toAdd.markDone();
+                    }
+                    tasks.add(toAdd);
                 }
-                tasks.add(toAdd);
+            } else {
+                System.out.println("No past tasks found. Starting with a new list.");
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("No past tasks found. Starting with a new list.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return tasks;
     }

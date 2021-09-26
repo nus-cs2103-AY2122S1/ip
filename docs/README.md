@@ -85,7 +85,7 @@ Got it. I've added this task:
  [T][] pay bills
 ```
 
-### `deadline` - A todo task
+### `deadline` - A deadline task
 Adds a deadline task into your list.
 Deadline of task must be in the following format:<br />
 `yyyy-MM-dd hh:mm`
@@ -103,7 +103,7 @@ Got it. I've added this task:
  [D][] submit homework (by: Sep 17 2021 23:59)
 ```
 
-### `event` - A todo task
+### `event` - An event task
 Adds an event task into your list.
 Event of task must be in the following format:<br />
 `yyyy-MM-dd hh:mm`
