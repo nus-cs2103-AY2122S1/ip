@@ -1,7 +1,6 @@
 package duke.utils;
 
 import java.util.*;
-import java.io.*;
 
 /**
  * Works as the UI for people to interact with. Communicates with other parts of the program to effect changes.

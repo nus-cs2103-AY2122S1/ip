@@ -1,8 +1,9 @@
 package duke.utils;
 
-import java.util.*;
 
-import duke.tasks.*;
+import duke.tasks.Task;
+
+import java.util.ArrayList;
 
 /**
  * Represents the non-persistent memory of tasks.

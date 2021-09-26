@@ -1,6 +1,8 @@
 package duke.commands;
+import duke.utils.Storage;
+import duke.utils.Ui;
+import duke.utils.TaskList;
 
-import duke.utils.*;
 
 /**
  * Represent an deletion action to be executed.

@@ -1,6 +1,13 @@
 package duke.utils;
+import duke.commands.Command;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.AddCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.GetAtCommand;
 
-import duke.commands.*;
 /**
  * Helps to parse the user input and returns back a Command object which will be executed by the main Duke Program.
  */

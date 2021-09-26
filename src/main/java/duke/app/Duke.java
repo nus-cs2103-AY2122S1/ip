@@ -1,7 +1,11 @@
 package duke.app;
 
 import duke.commands.Command;
-import duke.utils.*;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+import duke.utils.DukeException;
+import duke.utils.Parser;
 
 /**
  * The main program
