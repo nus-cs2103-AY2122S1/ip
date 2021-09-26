@@ -38,4 +38,11 @@ public class TaskPackageTest {
         Assert.assertEquals(TASK_TYPE.E, t.getType());
         Assert.assertEquals("2019-10-15", t.getAt());
     }
+    @Test
+    public void EventTestII(){
+        Task t = new Event("Sample", "2019-10-14", TASK_TYPE.E);
+        Assert.assertEquals("Sample", t.getDescription());
+        Assert.assertEquals(TASK_TYPE.E, t.getType());
+        Assert.assertEquals("2019-10-14", t.getAt());
+    }
 }
