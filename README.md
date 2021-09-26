@@ -5,7 +5,7 @@ Welcome to Duke! An intelligent chatbot that helps you plan your tasks at hand! 
 - [X] Add Todo task 
 - [X] Add upcoming Event 
 - [X] Add upcoming deadline 
-- [X] Check tasks at hand 
+- [X] List tasks at hand 
 - [X] Mark tasks as completed 
 - [X] Delete tasks from list 
 - [X] Search for tasks using keywords 
