@@ -104,7 +104,7 @@ Examples:
 
 ### Saving the task list: `bye`
 
-Saves the task list to `[JAR file location]/data/tasks.txt`.
+Saves the task list to `[JAR file location]/data/tasks.txt` and closes the window.
 
 Format: `bye`
 

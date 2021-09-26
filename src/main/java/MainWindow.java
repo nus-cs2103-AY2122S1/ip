@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -31,6 +32,8 @@ public class MainWindow extends AnchorPane {
             + "\n"
             + "What can I do for you?";
 
+    private final String BYERESPONSE = "Bye. Hope to see you again soon!";
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.jpg"));
 
@@ -45,6 +48,13 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    @FXML
+    private void checkExit(String response) {
+        if (response.equals(BYERESPONSE)) {
+            Stage stage = (Stage) dialogContainer.getScene().getWindow();
+            stage.close();
+        }
+    }
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them
      * to the dialog container. Clears the user input after processing.
@@ -57,6 +67,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        checkExit(response);
         userInput.clear();
     }
 }
