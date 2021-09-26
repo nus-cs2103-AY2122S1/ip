@@ -28,7 +28,7 @@ public class TaskTest {
             assertEquals(false, Deadline.isValid(new String[] {"deadline"}));
             fail(); // the test should not reach this line
         } catch (Exception e) {
-            assertEquals(" ☹ OOPS!!! The description of a deadline cannot be empty.", e.getMessage());
+            assertEquals("OOPS!!! The description of a deadline cannot be empty.", e.getMessage());
         }
     }
 }
