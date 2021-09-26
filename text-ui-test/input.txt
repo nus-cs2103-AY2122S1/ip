@@ -1,0 +1,18 @@
+todo t1
+deadline d1 /by 2021-09-01
+event e1 /at 2021-08-28
+todo t2
+blah
+todo
+todo invalid|task description
+deadline nodate
+event nodate
+deadline d2 /by invalid date
+event e2 /at invalid date
+list
+done 3
+delete 1
+done -1
+delete 4
+list
+bye
