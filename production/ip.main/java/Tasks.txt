@@ -1,0 +1,4 @@
+D ~ Yes ~ eat food ~ 7pm
+No ~ eat food
+Yes ~ cook food
+No ~ 

@@ -1,0 +1,5 @@
+Yes ~ eat cheese
+T ~ Yes ~ shower
+D ~ Yes ~ game ~ 5pm
+No ~ cheese
+E ~ No ~ conference ~ 8pm
