@@ -1,6 +1,6 @@
 # User Guide
 
-![Ui](ui.png)
+![Ui](Ui.png)
 
 ## Features 
 
