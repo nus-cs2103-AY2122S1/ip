@@ -34,7 +34,7 @@ public class TaskDate {
         try {
             return String.format("%s-%s-%s", "2021", dayMonthYear[1], dayMonthYear[0]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(DukeException.Exceptions.ArrayIndexOutOfBoundsException);
+            throw new DukeException(DukeException.Exceptions.DateTimeParseException);
         }
     }
     /**
@@ -84,7 +84,7 @@ public class TaskDate {
             SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/YYYY");
             return new TaskDate(getFormattedDateString(dateFormat, monthDayDate));
         } catch (ParseException e) {
-            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
+            throw new DukeException(DukeException.Exceptions.DateTimeParseException);
         }
     }
     private static Date getFormattedDate(String dateFormatString, String dateString) throws ParseException {

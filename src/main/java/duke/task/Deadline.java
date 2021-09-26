@@ -24,14 +24,24 @@ public class Deadline extends Task {
     public Deadline(String description) throws DukeException {
         super();
         int startOfDescriptionIndex = getStartingIndexAfter(description, DEADLINE_KEYWORD);
-        int startOfTimingIndex = getStartingIndexAfter(description, BY_CONNECTOR);
+        if (!description.contains(BY_CONNECTOR)) {
+            throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
+        }
+        int startOfTimeIndex = getStartingIndexAfter(description, BY_CONNECTOR);
+        if (startOfTimeIndex == -1) {
+            throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
+        }
         deadlineDescription = getSubString(description, startOfDescriptionIndex,
-                startOfTimingIndex - BY_CONNECTOR.length());
-        String descriptionDate = getSubString(description, startOfTimingIndex);
+                startOfTimeIndex - BY_CONNECTOR.length());
+        String descriptionDate = getSubString(description, startOfTimeIndex);
+        String tag = "";
+        if (description.contains(TaskTag.getTagSymbol())) {
+            int startOfDeadlineTagIndex = getStartingIndexAfter(description, TaskTag.getTagSymbol());
+            descriptionDate = getSubString(description, startOfTimeIndex, startOfDeadlineTagIndex);
+            tag = getSubString(description, startOfDeadlineTagIndex - TaskTag.getTagSymbol().length());
+        }
         deadlineDate = new TaskDate(descriptionDate);
         dateString = getDateString();
-        int startOfDeadlineTag = getStartingIndexAfter(description, TaskTag.getTagSymbol());
-        String tag = getSubString(description, startOfDeadlineTag - TaskTag.getTagSymbol().length());
         this.addTag(tag);
         assert !isDone : false;
     }

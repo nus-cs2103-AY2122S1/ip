@@ -26,14 +26,21 @@ public class Event extends Task {
     public Event(String description) throws DukeException {
         super();
         int startOfDescriptionIndex = getStartingIndexAfter(description, TASK_KEYWORD);
+        if (!description.contains(AT_CONNECTOR)) {
+            throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
+        }
         int startOfTimeIndex = getStartingIndexAfter(description, AT_CONNECTOR);
         eventDescription = getSubString(description, startOfDescriptionIndex,
                 startOfTimeIndex - AT_CONNECTOR.length());
         String descriptionDate = getSubString(description, startOfTimeIndex);
+        String tag = "";
+        if (description.contains(TaskTag.getTagSymbol())) {
+            int startOfEventTagIndex = getStartingIndexAfter(description, TaskTag.getTagSymbol());
+            descriptionDate = getSubString(description, startOfTimeIndex, startOfEventTagIndex);
+            tag = getSubString(description, startOfEventTagIndex - TaskTag.getTagSymbol().length());
+        }
         eventDate = new TaskDate(descriptionDate);
         dateString = getDateString();
-        int startOfEventTags = getStartingIndexAfter(description, TaskTag.getTagSymbol());
-        String tag = getSubString(description, startOfEventTags - TaskTag.getTagSymbol().length());
         this.addTag(tag);
         assert !isDone : false;
     }

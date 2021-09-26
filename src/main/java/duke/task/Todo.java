@@ -31,15 +31,19 @@ public class Todo extends Task {
      * @throws DukeException cause by exception handled in DukeException class.
      */
     public static Todo of(String description) throws DukeException {
+        int startOfTodoTagIndex = -1;
+        String tag = "";
+        int startOfDescriptionIndex = getStartingIndexAfter(description, TODO_KEYWORD);
+        assert startOfDescriptionIndex != -1 : "todo must be in the description.";
+        String taskDescription = getSubString(description, startOfDescriptionIndex);
         try {
-            int startOfDescriptionIndex = getStartingIndexAfter(description, TODO_KEYWORD);
-            int startOfTodoTagIndex = getStartingIndexAfter(description,
-                TaskTag.getTagSymbol()) - TaskTag.getTagSymbol().length();
-            assert startOfDescriptionIndex != -1 : "todo must be in the description.";
-            String taskDescription = getSubString(description, startOfDescriptionIndex,
-                    startOfTodoTagIndex);
+            if (description.contains(TaskTag.getTagSymbol())) {
+                startOfTodoTagIndex = getStartingIndexAfter(description,
+                    TaskTag.getTagSymbol()) - TaskTag.getTagSymbol().length();
+                tag = getSubString(description, startOfTodoTagIndex);
+                taskDescription = getSubString(description, startOfDescriptionIndex, startOfTodoTagIndex);
+            }
             Todo todo = new Todo(taskDescription);
-            String tag = getSubString(description, startOfTodoTagIndex);
             todo.addTag(tag);
             return todo;
         } catch (StringIndexOutOfBoundsException e) {
