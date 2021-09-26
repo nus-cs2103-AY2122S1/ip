@@ -49,9 +49,9 @@ public class Event extends Task {
      *
      * @return String description of the date Task will be done
      */
-    public String getDate() {
+    public LocalDate getDate() {
         assert date != null : "Event was created without a date";
-        return date.toString();
+        return date;
     }
 
     /**
@@ -59,9 +59,9 @@ public class Event extends Task {
      *
      * @return String description of the time Task will be done
      */
-    public String getTime() {
+    public LocalTime getTime() {
         assert time != null : "Event was created without a time";
-        return time.toString();
+        return time;
     }
 
     /**

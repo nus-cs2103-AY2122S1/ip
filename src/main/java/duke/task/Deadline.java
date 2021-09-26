@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private final LocalDate by;
+    private final LocalDate date;
 
     /**
      * Class Constructor that takes 3 parameters
@@ -23,7 +23,7 @@ public class Deadline extends Task {
      */
     public Deadline(boolean state, String description, String by) {
         super(TASKTYPE.D, description, state);
-        this.by = LocalDate.parse(by);
+        date = LocalDate.parse(by);
     }
 
     /**
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(TASKTYPE.D, description);
-        this.by = LocalDate.parse(by);
+        date = LocalDate.parse(by);
     }
 
     /**
@@ -43,9 +43,9 @@ public class Deadline extends Task {
      * @return String description of where Task will be done
      */
     @Override
-    public String getBy() {
-        assert by != null : "Deadline was created without a end date";
-        return by.toString();
+    public LocalDate getDate() {
+        assert date != null : "Deadline was created without a end date";
+        return date;
     }
 
     /**
@@ -56,7 +56,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy");
-        String data = by.format(df);
+        String data = date.format(df);
         return super.toString().concat(" (by: ".concat(data).concat(")"));
     }
 }

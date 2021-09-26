@@ -107,6 +107,9 @@ public class Duke {
             TaskList results = tasks.find(phrase);
             out = ui.list(results);
             break;
+        case 8:
+            out = ui.sort(tasks);
+            break;
         default:
             out = ui.echo();
         }
@@ -114,4 +117,7 @@ public class Duke {
         return out;
     }
 
+    public void greet() {
+        System.out.println(ui.greet());
+    }
 }

@@ -21,8 +21,9 @@ public class Parser {
      * If "event" is the user command, 5 is returned
      * If "delete" is the user command, 6 is returned
      * If "find" is the user command, 7 is returned
+     * If "sort" is the user command, 8 is returned
      *
-     * Default integer returned is 8.
+     * Default integer returned is 9.
      *
      * @param userInput provided user command string
      * @return integer representation of user command
@@ -54,8 +55,11 @@ public class Parser {
         case "find":
             res = 7;
             break;
-        default:
+        case "sort":
             res = 8;
+            break;
+        default:
+            res = 9;
             break;
         }
         return res;

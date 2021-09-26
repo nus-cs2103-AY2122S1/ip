@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * @author Dr-Octavius
  *
@@ -109,9 +112,9 @@ public class Task {
     /**
      * Placeholder for Overriding methods
      *
-     * @return current date
+     * @return Blank String
      */
-    public String getBy() {
+    public LocalDate getDate() {
         return null;
     }
 
@@ -120,16 +123,7 @@ public class Task {
      *
      * @return Blank String
      */
-    public String getDate() {
-        return null;
-    }
-
-    /**
-     * Placeholder for Overriding methods
-     *
-     * @return Blank String
-     */
-    public String getTime() {
+    public LocalTime getTime() {
         return null;
     }
 

@@ -87,11 +87,11 @@ public class Storage {
                     .concat(t.getDescription())
             );
             if (t.getType().equals(TASKTYPE.D)) {
-                writer.write(",".concat(t.getBy()));
+                writer.write(",".concat(t.getDate().toString()));
             }
             if (t.getType().equals(TASKTYPE.E)) {
-                writer.write(",".concat(t.getDate()));
-                writer.write(",".concat(t.getTime()));
+                writer.write(",".concat(t.getDate().toString()));
+                writer.write(",".concat(t.getTime().toString()));
             }
             writer.write(",");
             writer.newLine();

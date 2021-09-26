@@ -3,6 +3,7 @@ package duke.utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -56,6 +57,10 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
+    private TaskList(List<Task> input) {
+        taskList = new ArrayList<>(input);
+    }
+
     /**
      * Adds a Task into the Task List
      */
@@ -103,5 +108,62 @@ public class TaskList {
             }
         }
         return lst;
+    }
+
+    /**
+     * Creates a copy of a sorted Task List without amending original Task List
+     *
+     * @return Copy of a Sorted Task List
+     */
+    public TaskList safeSort() {
+        TaskList copy = new TaskList(taskList);
+        copy.sort();
+        return copy;
+    }
+
+    private void sort() {
+        taskList.sort(new TaskListComparator());
+    }
+
+    private class TaskListComparator implements Comparator<Task> {
+
+        @Override
+        public int compare(Task o1, Task o2) {
+            if (o1.getType() == TASKTYPE.T) {
+                if (o2.getType() == TASKTYPE.T) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            } else if (o1.getType() == TASKTYPE.D) {
+                if (o2.getType() == TASKTYPE.T) {
+                    return 1;
+                } else if (o2.getType() == TASKTYPE.D) {
+                    return o1.getDate().compareTo(o2.getDate());
+                } else {
+                    if (o1.getDate().compareTo(o2.getDate()) == 0) {
+                        return -1;
+                    } else {
+                        return o1.getDate().compareTo(o2.getDate());
+                    }
+                }
+            } else {
+                if (o2.getType() == TASKTYPE.T) {
+                    return 1;
+                } else if (o2.getType() == TASKTYPE.D) {
+                    if (o1.getDate().compareTo(o2.getDate()) == 0) {
+                        return 1;
+                    } else {
+                        return o1.getDate().compareTo(o2.getDate());
+                    }
+                } else {
+                    if (o1.getDate().compareTo(o2.getDate()) == 0) {
+                        return o1.getTime().compareTo(o2.getTime());
+                    } else {
+                        return o1.getDate().compareTo(o2.getDate());
+                    }
+                }
+            }
+        }
     }
 }
