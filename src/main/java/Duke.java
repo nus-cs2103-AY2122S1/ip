@@ -1,9 +1,12 @@
 import gui.Gui;
 import javafx.application.Application;
 
+/**
+ * Duke is the entry class to the app
+ */
 public class Duke {
     /**
-     * Duke main function
+     * Launches application GUI
      *
      * @param args program arguments
      */
