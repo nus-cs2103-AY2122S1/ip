@@ -36,8 +36,8 @@ public class Bot {
     }
 
     /**
-     * Given an input string for a command, get the lines
-     * for the Bot's output
+     * Gets the lines for the Bot's output
+     * given an input string for a command
      *
      * @param input command string
      * @return Bot output lines

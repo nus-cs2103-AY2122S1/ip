@@ -42,7 +42,7 @@ public enum CommandType {
     }
 
     /**
-     * Get enum value name
+     * Gets enum value name
      *
      * @return enum value name
      */
@@ -51,7 +51,7 @@ public enum CommandType {
     }
 
     /**
-     * Get enum value command
+     * Gets enum value command
      *
      * @return enum value command
      */
@@ -60,7 +60,7 @@ public enum CommandType {
     }
 
     /**
-     * Get a command with the given name string
+     * Gets a command with the given name string
      *
      * @param name name string of command
      * @return command associated with name
