@@ -1,17 +1,17 @@
 package Wonderland.task;
 
 /**
- * The Wonderland.Wonderland.task.Task class encapsulates a Wonderland.Wonderland.task with a String description
- * and a boolean representing if Wonderland.Wonderland.task is done.
+ * The Task class encapsulates a task with a String description
+ * and a boolean representing if task is done.
  */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor for Wonderland.Wonderland.task and takes in Wonderland.Wonderland.task description.
+     * Constructor for task and takes in task description.
      *
-     * @param description description of Wonderland.Wonderland.task.
+     * @param description description of task.
      */
     public Task(String description) {
         this.description = description;
@@ -28,7 +28,7 @@ public abstract class Task {
     }
 
     /**
-     * Marks Wonderland.Wonderland.task as done.
+     * Marks task as done.
      */
     public void markAsDone() {
         isDone = true;
@@ -37,9 +37,9 @@ public abstract class Task {
     public abstract String toFileEntry();
 
     /**
-     * Returns string representation of Wonderland.Wonderland.task object.
+     * Returns string representation of task object.
      *
-     * @return string representation of Wonderland.Wonderland.task object.
+     * @return string representation of task object.
      */
     @Override
     public String toString() {

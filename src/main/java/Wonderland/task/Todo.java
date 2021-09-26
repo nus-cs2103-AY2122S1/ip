@@ -1,25 +1,25 @@
 package Wonderland.task;
 
 /**
- * The To-do class extends Wonderland.Wonderland.task.Task class and encapsulates a to-do Wonderland.Wonderland.task
+ * The To-do class extends Task class and encapsulates a to-do task
  * with no time attached. 
  */
 public class Todo extends Task {
     private final String symbol = "[T]";
 
     /**
-     * Constructor for an to-do Wonderland.Wonderland.task.
+     * Constructor for an to-do .
      *
-     * @param description String description of to-do Wonderland.Wonderland.task.
+     * @param description String description of to-do.
      */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * Returns string for saving to-do Wonderland.Wonderland.task to data file.
+     * Returns string for saving to-do task to data file.
      *
-     * @return string for saving to-do Wonderland.Wonderland.task to data file.
+     * @return string for saving to-do task to data file.
      */
     @Override
     public String toFileEntry() {

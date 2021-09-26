@@ -74,7 +74,7 @@ public class Storage {
     }
 
     /**
-     * Update tasks record in fixed file.
+     * Updates tasks record in fixed file.
      *
      * @param tasks Wonderland.Wonderland.task.TaskList of existing tasks.
      * @throws IOException

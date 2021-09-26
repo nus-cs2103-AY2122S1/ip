@@ -3,7 +3,8 @@ package Wonderland;
 public class Ui {
     private static final String GREET_MESSAGE = "Welcome to Wonderland! What do you want?\n\t" +
             "I'm running late so make it quick.\n\t";
-    private static final String BYE_MESSAGE = "No time to say 'hello, goodbye,' I'm late, I'm late, I'm late!\n\t";
+    private static final String BYE_MESSAGE = "No time to say 'hello, goodbye,'\n\t" +
+            "I'm late, I'm late, I'm late!\n\t";
     /**
      * Returns formatted output string for bot message.
      *
@@ -41,7 +42,7 @@ public class Ui {
     /**
      * Prints message for missing date in proper format.
      *
-     * @param keyword Wonderland.Keyword to show which message to print.
+     * @param keyword Keyword to show which message to print.
      */
     public static void missingDate(Keyword keyword) {
         if (keyword.equals(Keyword.EVENT)) {

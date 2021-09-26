@@ -1,7 +1,7 @@
 package Wonderland;
 
 /**
- * Wonderland.DukeException class represents exceptions specific to Wonderland.Wonderland and provides
+ * Wonderland.DukeException class represents exceptions specific to Wonderland and provides
  * understandable error message.
  */
 public class DukeException extends Exception {

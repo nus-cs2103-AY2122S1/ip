@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Wonderland.Wonderland.task.Deadline class extends Wonderland.Wonderland.task.Task class and encapsulate a deadline Wonderland.Wonderland.task
+ * The Deadline class extends Task class and encapsulate a deadline
  * that need to be done before a specific date/time.
  */
 public class Deadline extends Task {
@@ -23,9 +23,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns string for saving deadline Wonderland.Wonderland.task to data file.
+     * Returns string for saving deadline to data file.
      *
-     * @return string for saving deadline Wonderland.Wonderland.task to data file.
+     * @return string for saving deadline to data file.
      */
     @Override
     public String toFileEntry() {

@@ -7,14 +7,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * The Wonderland.Wonderland.Command class encapsulates all commands behaviour for a bot.
+ * The Command class encapsulates all commands behaviour for a bot.
  */
 public class Command {
+    public static final String errorMessage = "Not a valid command!!";
+
     /**
      * Returns added message for command to-do.
      *
-     * @param description description of to-do Wonderland.Wonderland.task.
-     * @param tasks Wonderland.Wonderland.task.TaskList of existing tasks.
+     * @param description description of to-do task.
+     * @param tasks task.TaskList of existing tasks.
      * @return added message for command to-do.
      * @throws DukeException if description is empty.
      */
@@ -30,9 +32,9 @@ public class Command {
     /**
      * Returns added message for command event.
      *
-     * @param description description of event Wonderland.Wonderland.task.
+     * @param description description of event task.
      * @param at string of event date/time.
-     * @param tasks Wonderland.Wonderland.task.TaskList of list of existing tasks.
+     * @param tasks task.TaskList of list of existing tasks.
      * @return added message for command event.
      * @throws DukeException if description or date/time is empty or  not YYYY-MM-DD.
      */
@@ -55,9 +57,9 @@ public class Command {
     /**
      * Returns added message for command deadline.
      *
-     * @param description description of deadline Wonderland.Wonderland.task.
+     * @param description description of deadline task.
      * @param by string of deadline date/time.
-     * @param tasks Wonderland.Wonderland.task.TaskList of list of existing tasks.
+     * @param tasks task.TaskList of list of existing tasks.
      * @return added message for command deadline.
      * @throws DukeException if description or date/time is empty or not YYYY-MM-DD.
      */
@@ -80,7 +82,7 @@ public class Command {
     /**
      * Returns message representing list of all items user added.
      *
-     * @param tasks Wonderland.Wonderland.task.TaskList of existing tasks.
+     * @param tasks task.TaskList of existing tasks.
      * @return formatted string representing elements in records array.
      */
     public String list(TaskList tasks) {
@@ -90,8 +92,8 @@ public class Command {
     /**
      * Returns delete message for bot.
      *
-     * @param index index of Wonderland.Wonderland.task to be deleted.
-     * @param tasks Wonderland.Wonderland.task.TaskList of list of existing tasks.
+     * @param index index of task to be deleted.
+     * @param tasks task.TaskList of list of existing tasks.
      * @return delete message for bot.
      */
     public String delete(int index, TaskList tasks) throws DukeException {
@@ -105,7 +107,7 @@ public class Command {
     }
 
     /**
-     * Return Wonderland.Wonderland.task mark as done message.
+     * Returns task mark as done message.
      *
      * @param index index of task that is done.
      * @param tasks TaskList of list of existing tasks.
@@ -125,10 +127,10 @@ public class Command {
 
 
     /**
-     * Return message for tasks matched with keyword.
+     * Returns message for tasks matched with keyword.
      *
      * @param keyword String of keyword to be matched.
-     * @param tasks Wonderland.Wonderland.task.TaskList of list of existing tasks.
+     * @param tasks task.TaskList of list of existing tasks.
      * @return message for all tasks matched with keyword.
      * @throws DukeException if keyword is empty.
      */
