@@ -117,3 +117,25 @@ You will see a message that the task, if found, has been deleted.
 Noted. This task has been deleted
 [T][X] My task
 ```
+
+### `find` - Find task with substring
+
+You can find all tasks containing any substring in BTDuke. 
+
+Format:
+
+`find SUBSTRING`
+
+Example of usage: 
+
+`find homework`
+
+Expected outcome:
+
+You will see a list of all tasks which name contains the substring.
+
+```
+Noted. This task has been deleted
+[T][ ] Math homework
+[T][ ] Science homework
+```
