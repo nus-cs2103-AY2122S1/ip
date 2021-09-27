@@ -58,24 +58,27 @@ Example of usage:
 You should write DUE_DATE in YYYY-MM-DD format, where YYYY is the year in four digits, MM is the month in two digits, and DD is the date in two digits.
 
 Expected outcome:
+
 You will see a message that the task has been added if it was successful.
 
 ```
 Added: [D][ ] My task with a deadline
 ```
 
-### `Keyword` - Describe action
+### `event` - Add an event
 
-Describe the action and its outcome.
+You can add an event to BTDuke. 
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`event TASK_NAME /at EVENT_DATE`
+
+You should write EVENT_DATE in YYYY-MM-DD format, where YYYY is the year in four digits, MM is the month in two digits, and DD is the date in two digits.
 
 Expected outcome:
 
-Description of the outcome.
+You will see a message that the event has been added if it was successful.
 
 ```
-expected output
+Added: [E][ ] My event
 ```
