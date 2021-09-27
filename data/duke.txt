@@ -1,5 +1,1 @@
-T; 1; read book
-D; 1; return book; June 6th
-T; 1; join sports club
-T; 1; call mom
-T; 0; get groceries
+T; 0; say hi

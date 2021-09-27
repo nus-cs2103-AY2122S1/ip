@@ -27,6 +27,13 @@ public class MemoryBuffer {
 
     public MemoryBuffer(String fp) {
         filePath = fp;
+        File f = new File(filePath);
+
+        if(f.exists() && !f.isDirectory()) {
+            System.out.println("file exists");
+        } else {
+            System.out.println("file doesn't exist");
+        }
     }
 
     /**

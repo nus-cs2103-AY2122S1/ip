@@ -8,6 +8,10 @@ package duke.datastore;
  * @version CS2103 AY21/22 Semester 1
  */
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import duke.parser.Parser;
 import duke.tasks.Task;
@@ -44,5 +48,11 @@ public class DataStore {
 
     public void remove(int i) {
         dataStore.remove(i);
+    }
+
+    public void createFile(String fileName) throws IOException {
+        Path storagePath = Paths.get(fileName);
+        Files.createDirectories(storagePath.getParent());
+        Files.createFile(storagePath);
     }
 }
