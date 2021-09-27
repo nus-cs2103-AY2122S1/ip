@@ -21,9 +21,8 @@ public class Duke {
     public DataStore dataStore;
     final public Parser parser;
 
-    private static final String FILEPATH = "./data/duke.txt";
-
     public Duke() {
+        String FILEPATH = "./data/duke.txt";
         dataStore = new DataStore();
         memBuff = new MemoryBuffer(FILEPATH);
         parser = new Parser();

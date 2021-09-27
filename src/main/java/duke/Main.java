@@ -10,25 +10,22 @@ import javafx.stage.Stage;
 import duke.ui.uiController.MainWindow;
 
 /**
- * A GUI for Duke using FXML
+ * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
     private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(
-                    this.getClass().getResource("/view/MainWindow.fxml")
-            );
-            AnchorPane pane = fxmlLoader.load();
-            Scene scene = new Scene(pane);
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
 
+            Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("JarVIS");
 
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("JarVIS");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

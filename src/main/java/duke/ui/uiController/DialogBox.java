@@ -75,7 +75,7 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.dialog.setTextFill(Color.rgb(83, 92, 104));
-        db.dialog.setFont(Font.font("Avenir Next", FontWeight.NORMAL, 14));
+        db.dialog.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
         db.dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(7), Insets.EMPTY)));
         db.setSpacing(10.0);
         return db;

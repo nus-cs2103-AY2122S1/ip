@@ -1,1 +1,1 @@
-T; 0; say hi
+T; 1; say hi
