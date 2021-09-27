@@ -29,7 +29,6 @@ You will see the list of all tasks printed.
 [D][ ] homework (by: 2021-10-02)
 [E][ ] test (at: 2021-10-05)
 
-
 ```
 
 ### `todo` - Add a to-do
@@ -48,6 +47,22 @@ You will see a message that the task has been added if it was successful.
 Added: [T][ ] My to-do
 ```
 
+### `deadline` - Add a task with a deadline
+
+You can add a task with a deadline to BTDuke.
+
+Example of usage: 
+
+`deadline TASK_NAME /by DUE_DATE`
+
+You should write DUE_DATE in YYYY-MM-DD format, where YYYY is the year in four digits, MM is the month in two digits, and DD is the date in two digits.
+
+Expected outcome:
+You will see a message that the task has been added if it was successful.
+
+```
+Added: [D][ ] My task with a deadline
+```
 
 ### `Keyword` - Describe action
 
