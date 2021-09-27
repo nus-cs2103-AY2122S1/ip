@@ -2,13 +2,13 @@
 
 ## Features 
 
-### Feature-ABC
+### Keep track of tasks
 
-Description of the feature.
+BTDuke can help you keep track of your tasks, and other information with them. You can classify your tasks into either to-dos, deadlines, or events. 
 
-### Feature-XYZ
+### Save tasks between sessions
 
-Description of the feature.
+BTDuke will help you save your tasks between each usage of the app, so you won't have to remember them. 
 
 ## Usage
 
