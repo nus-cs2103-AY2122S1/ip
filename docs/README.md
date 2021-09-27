@@ -83,6 +83,12 @@ java -jar -ea retriever-1.0.jar
 > New Users Fret not! Our App has a help feature, which guides you as to how to use 
 a particular feature.
 
+### Feature #7 - Logs Your Actions
+
+> While Retriever would automatically save your changes, if you ever encounter 
+any difficulties such as missing tasks or tasks not being saved, just have a 
+look at the "storageLog.log" file to identify the error.
+
 ---
 ## Usage
 ### To end the session with the Chatbot - `bye`
@@ -340,6 +346,10 @@ Command Example: help
 Use the view command to view scheduled tasks for a day.
 -> view DD/MM/YYYY
 Command Example: view 23/09/2021
+
+If you have observed that your tasks are not being
+stored or retrieved well, kindly check the Console or 
+the file "storageLog.log" to identify the error.
 ```
 
 The Chatbot would print the list of executable commands and their details.
