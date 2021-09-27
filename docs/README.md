@@ -12,6 +12,10 @@ BTDuke will help you save your tasks between each usage of the app, so you won't
 
 ## Usage
 
+Keywords to be substituted by your own details are written in BLOCK_LETTERS.
+
+You should write any dates in YYYY-MM-DD format, where YYYY is the year in four digits, MM is the month in two digits, and DD is the date in two digits.
+
 ### `list` - List all tasks
 
 You can list all tasks currently stored in BTDuke with the `list` command.
@@ -62,8 +66,6 @@ Format:
 Example of usage:
 `deadline My task with a deadline /by 2021-09-28`
 
-You should write DUE_DATE in YYYY-MM-DD format, where YYYY is the year in four digits, MM is the month in two digits, and DD is the date in two digits.
-
 Expected outcome:
 
 You will see a message that the task has been added if it was successful.
@@ -83,8 +85,6 @@ Format:
 Example of usage:
 
 `event My event /at 2021-09-29`
-
-You should write EVENT_DATE in YYYY-MM-DD format, where YYYY is the year in four digits, MM is the month in two digits, and DD is the date in two digits.
 
 Expected outcome:
 
