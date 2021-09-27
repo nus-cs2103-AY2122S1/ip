@@ -28,9 +28,20 @@ public class Duke {
     }
 
     /**
-     * Initializes duke chat bot, loads tasks from storage into taskList.
+     * Runs the Duke.Duke chat bot.
+     *
+     * @param args Unused.
      */
-    public void initialize() {
+    public static void main(String[] args) {
+        new Duke("data", "duke.txt").run();
+    }
+
+    /**
+     * Initializes the duke chat bot.
+     *
+     * @return welcome message to the user.
+     */
+    public String run() {
         assert filePath != null : "filepath cannot be empty";
         assert fileName != null : "filename cannot be empty";
         storage = new Storage(filePath, fileName);
@@ -41,37 +52,7 @@ public class Duke {
             System.out.println(ui.showLoadingError());
             tasks = new TaskList();
         }
-    }
-
-    /**
-     * Runs the Duke.Duke chat bot.
-     *
-     * @param args Unused.
-     */
-    public static void main(String[] args) {
-        new Duke("data", "duke.txt").initialize();
-        new Duke("data", "duke.txt").run();
-    }
-
-    /**
-     * Executes the duke chat bot.
-     */
-    public String run() {
         return ui.showWelcome();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                ui.showLine();
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.showError(e.getMessage());
-//            } finally {
-//                ui.showLine();
-//            }
-//        }
     }
 
     public String getResponse(String input) {

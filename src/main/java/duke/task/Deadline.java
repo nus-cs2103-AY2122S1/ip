@@ -28,9 +28,6 @@ public class Deadline extends Task {
             throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
         }
         int startOfTimeIndex = getStartingIndexAfter(description, BY_CONNECTOR);
-        if (startOfTimeIndex == -1) {
-            throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
-        }
         deadlineDescription = getSubString(description, startOfDescriptionIndex,
                 startOfTimeIndex - BY_CONNECTOR.length());
         String descriptionDate = getSubString(description, startOfTimeIndex);
