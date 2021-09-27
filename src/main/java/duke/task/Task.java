@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.nio.charset.Charset;
+
 import duke.main.DukeException;
 
 /**
@@ -25,7 +27,11 @@ public class Task {
      * @return "X" if duke.task is done, else returns " ".
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done duke.task with X
+        byte[] tickEmojiByteCode = new byte[]{(byte) 0xE2, (byte) 0x9C, (byte) 0x94};
+        String tickEmoji = new String(tickEmojiByteCode, Charset.forName("UTF-8"));
+        byte[] crossEmojiByteCode = new byte[]{(byte) 0xE2, (byte) 0x9C, (byte) 0x96};
+        String crossEmoji = new String(crossEmojiByteCode, Charset.forName("UTF-8"));
+        return (isDone ? tickEmoji : crossEmoji); // mark done duke.task with tick
     }
 
     /**

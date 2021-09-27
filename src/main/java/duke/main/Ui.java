@@ -12,21 +12,15 @@ import duke.task.TaskList;
  * @version CS2103T
  */
 public class Ui {
-    private static String logo = " ____        _        \n"
-        + "|  _ \\ _   _| | _____ \n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
     private static String padding = "~";
-    private static String firstLine = " Hello! I'm Duke.Duke ";
+    private static String firstLine = " Hello! I'm Duke ";
     private static String secondLine = " What do you wanna do today? ";
     private static int bufferLength = 5;
     private static int width = Integer.max(firstLine.length(), secondLine.length()) + bufferLength;
     private static final String FAREWELL = "@@ Till we meet again, my friend @@";
-    private static String buffer1 = padding.repeat((width - firstLine.length()) / 2);
-    private static String buffer2 = padding.repeat((width - secondLine.length()) / 2);
-    private static String welcomeMessage = buffer1 + firstLine + buffer1 + "\n" + buffer2 + secondLine + buffer2 + "\n";
-    private static final String GREETING = "Hello from\n" + logo + welcomeMessage;
+    private static String buffer1 = padding.repeat((width - firstLine.length()) / 3);
+    private static String buffer2 = padding.repeat((width - secondLine.length()) / 3);
+    private static final String GREETING = buffer1 + firstLine + buffer1 + "\n" + buffer2 + secondLine + buffer2 + "\n";
     private Scanner sc;
 
     /**
