@@ -99,3 +99,21 @@ You will see a message that the task, if found, has been marked as done.
 Yay :) This task is done:
 [T][X] My task
 ```
+
+
+### `delete` - Delete task
+
+You can delete a task from BTDuke
+
+Example of usage: 
+
+`delete TASK_NAME`
+
+Expected outcome:
+
+You will see a message that the task, if found, has been deleted.
+
+```
+Noted. This task has been deleted
+[T][X] My task
+```
