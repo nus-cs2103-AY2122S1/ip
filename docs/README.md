@@ -82,3 +82,20 @@ You will see a message that the event has been added if it was successful.
 ```
 Added: [E][ ] My event
 ```
+
+### `done` - Mark task as done
+
+You can mark a task as done in BTDuke.
+
+Example of usage: 
+
+`done TASK_NAME`
+
+Expected outcome:
+
+You will see a message that the task, if found, has been marked as done.
+
+```
+Yay :) This task is done:
+[T][X] My task
+```
