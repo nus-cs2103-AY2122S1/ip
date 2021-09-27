@@ -142,8 +142,11 @@ public class Storage {
                 }
             }
             scanner.close();
+
+            LOGR.log(Level.INFO, "File Read Successfully!");
         } catch (FileNotFoundException e) {
             LOGR.log(Level.WARNING, "File to read from does not exist. Trying to create one.");
+
             // In case the file doesn't exist, one is created.
             createNewFile();
         }
@@ -183,8 +186,10 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath, true);
             fw.write(taskAsText);
             fw.close();
+
+            LOGR.log(Level.INFO, "Task Written Successfully!");
         } catch (IOException e) {
-            LOGR.log(Level.SEVERE, "Error while writing to file.");
+            LOGR.log(Level.SEVERE, "Error while writing task to file.");
         }
     }
 
@@ -215,8 +220,10 @@ public class Storage {
             reader.close();
 
             tempFile.renameTo(inputFile);
+
+            LOGR.log(Level.INFO, "Task Deleted Successfully!");
         } catch (IOException e) {
-            LOGR.log(Level.SEVERE, "Error while deleting from file.");
+            LOGR.log(Level.SEVERE, "Error while deleting task from file.");
         }
     }
 
@@ -257,6 +264,8 @@ public class Storage {
             reader.close();
 
             tempFile.renameTo(inputFile);
+
+            LOGR.log(Level.INFO, "Task Updated Successfully!");
         } catch (IOException e) {
             LOGR.log(Level.SEVERE, "Error while updating task status in file.");
         }
