@@ -1,6 +1,7 @@
 package captain;
 
 import captain.command.Command;
+import captain.parser.TaskParser;
 import captain.task.TaskList;
 import javafx.scene.image.Image;
 
@@ -41,7 +42,7 @@ public class Captain {
      */
     public String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
+            Command c = TaskParser.parseCommand(input);
             String response = c.execute(tasks, ui, storage);
 
             // Ensure that there is a response to return

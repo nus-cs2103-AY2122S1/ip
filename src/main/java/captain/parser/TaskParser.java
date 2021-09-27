@@ -1,4 +1,4 @@
-package captain;
+package captain.parser;
 
 import static captain.Commands.INVALID;
 
@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import captain.Commands;
+import captain.DukeException;
 import captain.DukeException.InvalidDateException;
 import captain.DukeException.InvalidTaskIndexException;
 import captain.command.AddCommand;
@@ -20,14 +22,13 @@ import captain.command.ListCommand;
 import captain.command.SortCommand;
 import captain.task.Deadline;
 import captain.task.Event;
-import captain.task.Todo;
 
 /**
  * Represents a parser to make sense of user input.
  *
  * @author Adam Ho
  */
-public class Parser {
+public class TaskParser {
 
     public static final String NO_SPECIFIER = "";
     public static final String BY_SPECIFIER = " /by ";
@@ -40,7 +41,7 @@ public class Parser {
      * @return A Command representation of the user's input.
      * @throws DukeException Throws a DukeException if the user's input does not comply with current features.
      */
-    public static Command parse(String fullCommand) throws DukeException {
+    public static Command parseCommand(String fullCommand) throws DukeException {
         if (fullCommand.isBlank()) {
             throw new DukeException("Please input a command!");
         }
@@ -56,7 +57,7 @@ public class Parser {
             return new ListCommand();
         case TODO:
             taskDescriptions = getTaskDescriptions(userDescription, NO_SPECIFIER);
-            return new AddCommand(new Todo(taskDescriptions[0]));
+            return new AddCommandParser().parse(taskDescriptions[0]);
         case DEADLINE:
             taskDescriptions = getTaskDescriptions(userDescription, BY_SPECIFIER);
             date = formatDate(taskDescriptions[1]);
