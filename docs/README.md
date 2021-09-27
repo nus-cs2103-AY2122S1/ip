@@ -28,7 +28,26 @@ The list of all tasks is printed
 [T][X] read book
 [D][ ] homework (by: 2021-10-02)
 [E][ ] test (at: 2021-10-05)
+
+
 ```
+
+### `todo` - Add a to-do
+
+You can add a to-do to BTDuke using the `todo` command.
+
+Example of usage: 
+
+`todo TASK_NAME`
+
+Expected outcome:
+
+You will see a message that the task has been added if it was successful.
+
+```
+Added: [T][ ] My to-do
+```
+
 
 ### `Keyword` - Describe action
 
