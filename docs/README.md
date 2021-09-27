@@ -19,6 +19,15 @@
     - [`help`](#help)
     - [`save`](#save)
     - [Input History Navigation](#input-history-navigation)
+   
+  <details>
+    <summary> Auxiliary Features </summary>
+  
+    - [`help`](#help)
+    - [`save`](#save)
+    - [Input History Navigation](#input-history-navigation)
+  </details>
+  
 - [Coming your way](#coming-your-way)
 
 ## Screenshots
