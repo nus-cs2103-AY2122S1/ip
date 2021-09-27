@@ -2,11 +2,11 @@
 
 ## Features 
 
-### Keep track of tasks
+### Keep track of your tasks
 
 BTDuke can help you keep track of your tasks, and other information with them. You can classify your tasks into either to-dos, deadlines, or events. 
 
-### Save tasks between sessions
+### Save your tasks between sessions
 
 BTDuke will help you save your tasks between each usage of the app, so you won't have to remember them. 
 
