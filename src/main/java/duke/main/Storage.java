@@ -127,6 +127,9 @@ public class Storage {
         if (taskString.contains(TaskTag.getTagSymbol())) {
             int lastElementIndex = taskComponents.length - 1;
             task.addTag(taskComponents[lastElementIndex]);
+        } else {
+            String empty_tag = "";
+            task.addTag(empty_tag);
         }
         return task;
     }
