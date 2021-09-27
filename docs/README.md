@@ -1,29 +1,211 @@
 # User Guide
 
-## Features 
+## Features
 
-### Feature-ABC
+### Add task
 
-Description of the feature.
-
-### Feature-XYZ
-
-Description of the feature.
+Adds a task
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo XXXX (#tttt)` - Add a todo task
 
-Describe the action and its outcome.
+Adds a todo task with description `XXXX` and _(tag - optional)_ `tttt`
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo cook lunch (#yummy)`
 
 Expected outcome:
 
-Description of the outcome.
+todo task `cook lunch` with tag `yummy` added
 
 ```
-expected output
+Got it. I've added this task:
+~~[T][𐤕]COOK LUNCH #YUMMY~~ 
+Now you have 1 task remaining.
+```
+
+## Usage
+
+### `event XXXX at dd/mm/yyyy (#tttt)` - Add an event
+
+Adds an event with description `XXXX` at date `dd/mm/yyyy` and _(tag - optional)_ `tttt`
+
+Example of usage:
+
+`event attend seminar at 12/12/2021 (#stonks)`
+
+Expected outcome:
+
+event `attend seminar` on `12/12` with tag `stonks` added
+
+```
+Got it. I've added this task:
+~~[E][𐤕]ATTEND SEMINAR (AT DEC 12) #STONKS~~
+Now you have 2 tasks remaining.
+```
+
+## Usage
+
+### `deadline XXXX by dd/mm/yyyy (#tttt)` - Add a deadline
+
+Adds an deadline task with description `XXXX` by date `dd/mm/yyyy` and _(tag - optional)_ `tttt`
+
+Example of usage:
+
+`deadline submit lab report by 01/10/2021`
+
+Expected outcome:
+
+deadline `submit lab report` on `01/10` added
+
+```
+Got it. I've added this task:
+~~[D][𐤕]SUBMIT LAB REPORT (AT OCT 01)~~
+Now you have 3 tasks remaining.
+```
+
+### list
+
+Lists all the task in tracked by Duke.
+
+## Usage
+
+### `list`
+
+Expected outcome:
+
+a list of tasks displayed
+
+```
+Here are the tasks in your list:
+1.[E][√] attend seminar (at Jan 09) #stonks
+2.[D][√] submit proposal (by Jan 10)
+3.[T][√] go vacation #YAY
+4.[T][𐤕] fix bicycle #healthy lifestyle
+5.[T][√] cook lunch #yummy
+6.[T][𐤕] learn how to fold origami #artsy
+```
+
+### Delete task
+
+Deletes a task 
+
+## Usage
+
+### `delete n` - Deadline nth task on the list
+
+Example of usage:
+
+`delete 3`
+
+Expected outcome:
+
+The 3rd task - todo `go vacation` - deleted.
+Update number of tasks left.
+
+```
+Alrightty. I've removed this task:
+~~[T][√] go vacation #YAY~~
+Now you have 5 tasks remaining.
+```
+
+### Find search word
+
+Find all tasks with the search word
+
+## Usage
+
+### `find wwww` - find all tasks containing `wwww`
+
+Example of usage:
+
+`find fix`
+
+Expected outcome:
+
+A list of tasks containing `fix`.
+
+```
+Here are the matching tasks in your list:
+1.[T][𐤕] fix bicycle #healthy lifestyle
+```
+
+### Filter by date
+
+Find all tasks matching the given date
+
+## Usage
+
+### `filter dd/mm` - find all tasks that falls on `dd/mm`
+
+Example of usage:
+
+`filter 10/01`
+
+Expected outcome:
+
+A list of tasks on `10/01`
+
+```
+On Jan 10, you have:
+1.[D][√] submit proposal (by Jan 10)
+```
+### Exit chat
+
+Ends current chat session, save current tasks to storage file.
+
+## Usage
+
+### `bye` 
+
+Expected outcome:
+
+Farewell message
+
+```
+@@ Till we meet again, my friend @@
+```
+
+
+
+### Acknowledgements
+
+1. Solution below adapted from past student (CS2103T-W10)
+
+//@@author BILLXYR
+```
+   dialog.setStyle("-fx-background-color: #001935; -fx-text-fill: 
+   #e6fbff; -fx-label-padding:5;"+ " -fx-border-radius: 5; -fx-background-radius: 5;");
+   ```
+2. Solution below adapted from https://stackoverflow.com/questions/12341672/make-portion-of-a-text-bold-in-a-javafx-label-or-text
+
+   `-fx-font-weight:bold;`
+
+3. Solution below adapted from https://stackoverflow.com/questions/53194987/how-do-i-insert-an-emoji-in-a-java-string
+```
+private static byte[] sadEmojiByteCode = new byte[]{(byte) 0xF0, (byte) 0x9F, (byte) 0x98, (byte) 0x9E};
+private static byte[] angryEmojiByteCode = new byte[]{(byte) 0xF0, (byte) 0x9F, (byte) 0x98, (byte) 0xA0};
+private static String sadEmoji = new String(sadEmojiByteCode, Charset.forName("UTF-8"));
+private static String angryEmoji = new String(angryEmojiByteCode, Charset.forName("UTF-8"));
+        byte[] tickEmojiByteCode = new byte[]{(byte) 0xE2, (byte) 0x9C, (byte) 0x94};
+        String tickEmoji = new String(tickEmojiByteCode, Charset.forName("UTF-8"));
+        byte[] crossEmojiByteCode = new byte[]{(byte) 0xE2, (byte) 0x9C, (byte) 0x96};
+        String crossEmoji = new String(crossEmojiByteCode, Charset.forName("UTF-8"));
+```
+
+4. Solution below is adapted from current student
+
+//@@authorAllardQuek
+```
+ File fileDirectory = new File(filePath);
+            if (!fileDirectory.exists()) {
+                fileDirectory.mkdir();
+            }
+            file = new File(filePath + "/" + fileName);
+            System.out.println(file.exists());
+            if (!file.exists()) {
+                file.createNewFile();
+            }
 ```
