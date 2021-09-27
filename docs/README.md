@@ -35,9 +35,13 @@ You will see the list of all tasks printed.
 
 You can add a to-do to BTDuke using the `todo` command.
 
-Example of usage: 
+Format:
 
 `todo TASK_NAME`
+
+Example of usage: 
+
+`todo My task`
 
 Expected outcome:
 
@@ -51,9 +55,12 @@ Added: [T][ ] My to-do
 
 You can add a task with a deadline to BTDuke.
 
-Example of usage: 
+Format: 
 
 `deadline TASK_NAME /by DUE_DATE`
+
+Example of usage:
+`deadline My task with a deadline /by 2021-09-28`
 
 You should write DUE_DATE in YYYY-MM-DD format, where YYYY is the year in four digits, MM is the month in two digits, and DD is the date in two digits.
 
@@ -62,16 +69,20 @@ Expected outcome:
 You will see a message that the task has been added if it was successful.
 
 ```
-Added: [D][ ] My task with a deadline
+Added: [D][ ] My task with a deadline (by: 2021-09-28)
 ```
 
 ### `event` - Add an event
 
 You can add an event to BTDuke. 
 
-Example of usage: 
+Format: 
 
 `event TASK_NAME /at EVENT_DATE`
+
+Example of usage:
+
+`event My event /at 2021-09-29`
 
 You should write EVENT_DATE in YYYY-MM-DD format, where YYYY is the year in four digits, MM is the month in two digits, and DD is the date in two digits.
 
@@ -80,16 +91,20 @@ Expected outcome:
 You will see a message that the event has been added if it was successful.
 
 ```
-Added: [E][ ] My event
+Added: [E][ ] My event (at: 2021-09-29)
 ```
 
 ### `done` - Mark task as done
 
 You can mark a task as done in BTDuke.
 
-Example of usage: 
+Format: 
 
 `done TASK_NAME`
+
+Example of usage:
+
+`done My task`
 
 Expected outcome:
 
@@ -105,9 +120,13 @@ Yay :) This task is done:
 
 You can delete a task from BTDuke
 
-Example of usage: 
+Format: 
 
 `delete TASK_NAME`
+
+Example of usage:
+
+`delete My task`
 
 Expected outcome:
 
