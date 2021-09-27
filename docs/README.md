@@ -14,7 +14,7 @@ Description of the feature.
 
 ### `list` - List all tasks
 
-Lists all tasks currently stored in BTDuke
+You can list all tasks currently stored in BTDuke with the `list` command.
 
 Example of usage: 
 
@@ -22,7 +22,7 @@ Example of usage:
 
 Expected outcome:
 
-The list of all tasks is printed
+You will see the list of all tasks printed. 
 
 ```
 [T][X] read book
