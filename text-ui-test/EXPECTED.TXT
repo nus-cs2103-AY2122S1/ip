@@ -5,3 +5,103 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+--------------------------
+Hello! I'm Duke
+What can I do for you?
+--------------------------
+
+--------------------------
+Got it. I've added this task:
+read book
+Now you have 1 task in the list.
+--------------------------
+
+--------------------------
+Got it. I've added this task:
+team meeting
+Now you have 2 tasks in the list.
+--------------------------
+
+--------------------------
+Got it. I've added this task:
+assignment 1
+Now you have 3 tasks in the list.
+--------------------------
+
+--------------------------
+Nice! I've marked this task as done:
+[E] [X] team meeting (at: Monday 6pm)
+--------------------------
+
+--------------------------
+1. [T] [ ] read book
+2. [E] [X] team meeting (at: Monday 6pm)
+3. [D] [ ] assignment 1 (by: Tuesday 2359)
+--------------------------
+
+--------------------------
+ERROR: Invalid command detected
+--------------------------
+
+--------------------------
+ERROR: The description of a todo cannot be empty.
+--------------------------
+
+--------------------------
+ERROR: The description of an event cannot be empty.
+--------------------------
+
+--------------------------
+ERROR: Incorrect description format. Description should follow this pattern: *description* /at *time*
+--------------------------
+
+--------------------------
+ERROR: Incorrect description format. Description should follow this pattern: *description* /at *time*
+--------------------------
+
+--------------------------
+ERROR: The description of a deadline cannot be empty.
+--------------------------
+
+--------------------------
+ERROR: Incorrect description format. Description should follow this pattern: *description* /by *time*
+--------------------------
+
+--------------------------
+ERROR: Incorrect description format. Description should follow this pattern: *description* /by *time*
+--------------------------
+
+--------------------------
+ERROR: The done command expects an integer argument indicating the index of a task.
+--------------------------
+
+--------------------------
+ERROR: Invalid integer. Integer should match the index of a task. Run list to look at the list of tasks and their corresponding indices.
+--------------------------
+
+--------------------------
+ERROR: Invalid argument for done command. Argument should be an integer.
+--------------------------
+
+--------------------------
+Noted. I've removed this task:
+[T] [ ] read book
+Now you have 2 tasks in the list.
+--------------------------
+
+--------------------------
+ERROR: The delete command expects an integer argument indicating the index of a task.
+--------------------------
+
+--------------------------
+ERROR: Invalid integer. Integer should match the index of a task. Run list to look at the list of tasks and their corresponding indices.
+--------------------------
+
+--------------------------
+ERROR: Invalid argument for delete command. Argument should be an integer.
+--------------------------
+
+--------------------------
+Bye. Hope to see you again soon!
+--------------------------
+

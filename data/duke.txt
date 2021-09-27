@@ -1,0 +1,5 @@
+E | 1 | team meeting | 2021-09-21
+D | 1 | cs2103t quiz | 2021-09-21
+T | 1 | read book
+E | 1 | team meeting | 2021-10-02
+D | 1 | assignment 1 | 2021-12-01
