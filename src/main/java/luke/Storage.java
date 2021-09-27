@@ -1,9 +1,9 @@
 package luke;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Storage {
 
     private final String PROJECT_ROOT = System.getProperty("user.dir");
-    private final Path DATA_DIRECTORY_PATH = Paths.get(PROJECT_ROOT,"data");
+    private final Path DATA_DIRECTORY_PATH = Paths.get(PROJECT_ROOT, "data");
 
     private Path dataPath;
     private File lukeData;
@@ -24,7 +24,7 @@ public class Storage {
      * Constructor for Storage.
      */
     Storage() {
-        this.dataPath = DATA_DIRECTORY_PATH.resolve("duke.txt");
+        this.dataPath = DATA_DIRECTORY_PATH.resolve("luke.txt");
         this.lukeData = new File(dataPath.toString());
     }
 
@@ -64,13 +64,13 @@ public class Storage {
             return addEntriesFromFile(entries);
         } catch (FileNotFoundException e) {
             try {
-                if (!(lukeData.createNewFile())) {
-                    throw new LukeException("Uh-Oh! Your data can't be stored :/");
+                if (!(lukeData.getParentFile().mkdir()) && !(lukeData.createNewFile())) {
+                    throw new LukeException("Uh-Oh! Your data can't be stored (I can't create a directory) :/");
                 } else {
                     return new EntryList();
                 }
             } catch (IOException err) {
-                throw new LukeException("Uh-Oh! Your data can't be stored :/");
+                throw new LukeException("Uh-Oh! Your data can't be stored (IO Error) :/");
             }
         }
     }

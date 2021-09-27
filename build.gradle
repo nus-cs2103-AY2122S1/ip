@@ -46,7 +46,7 @@ test {
 }
 
 application {
-    mainClassName = "luke.Luke"
+    mainClassName = "luke.Launcher"
 }
 
 shadowJar {
