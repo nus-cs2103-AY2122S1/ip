@@ -1,21 +1,24 @@
 # User Guide
 
 ## Features
-______________________________________________________
-### ADD
+
+------------------------------------------------------  
+
+## ADD
 
 * ### **Adds a task**
 
-   - ###  DEADLINE
+   - ### DEADLINE
 
-        * ### `deadline XXXX by dd/mm/yyyy (#tttt)` 
+        * #### `deadline XXXX by dd/mm/yyyy (#tttt)` 
     
         Adds an deadline task with description `XXXX` by date `dd/mm/yyyy` and _(tag - optional)_ `tttt`
 
-        #### Example:
+        **Example of usage:**
+        
         `deadline submit lab report by 01/10/2021`
    
-        #### Expected outcome:
+        **Expected outcome:**
         
         deadline `submit lab report` on `01/10` added
 
@@ -27,15 +30,15 @@ ______________________________________________________
 
    - ### EVENT
 
-        * ###`event XXXX at dd/mm/yyyy (#tttt)` 
+        * #### `event XXXX at dd/mm/yyyy (#tttt)` 
 
         Adds an event with description `XXXX` at date `dd/mm/yyyy` and _(tag - optional)_ `tttt`
 
-        #### Example of usage:
+        **Example of usage:**
 
         `event attend seminar at 12/12/2021 (#stonks)`
 
-        #### Expected outcome:
+        **Expected outcome:**
 
         event `attend seminar` on `12/12` with tag `stonks` added
 
@@ -45,16 +48,17 @@ ______________________________________________________
         Now you have 2 tasks remaining.
         ```
      
-    - ### TODO
+   - ### TODO
        
-      * ### `todo XXXX (#tttt)`
+      * #### `todo XXXX (#tttt)`
+      
       Adds a todo task with description `XXXX` and _(tag - optional)_ `tttt`
 
-      #### Example of usage:
+      **Example of usage:**
 
       `todo cook lunch (#yummy)`
 
-      #### Expected outcome:
+      **Expected outcome:**
 
       todo task `cook lunch` with tag `yummy` added
 
@@ -63,13 +67,14 @@ ______________________________________________________
        ~~[T][𐤕]COOK LUNCH #YUMMY~~ 
        Now you have 1 task remaining.
        ```
+       
 ------------------------------------------------------  
 
 ## LIST
 
 * **Lists all the task currently tracked by Duke**
 
-### `list`
+#### `list`
 
 #### Expected outcome:
 
@@ -85,13 +90,13 @@ Here are the tasks in your list:
 6.[T][𐤕] learn how to fold origami #artsy
 ```
 
-_______________________________________________________
+------------------------------------------------------  
 
 ## DELETE
 
 * **Deletes a task**
 
-### `delete n` 
+#### `delete n` 
 
 Delete task indexed `n` on the list
 
@@ -111,13 +116,13 @@ Alrightty. I've removed this task:
 Now you have 5 tasks remaining.
 ```
 
-_______________________________________________________
+------------------------------------------------------  
 
 ## FIND
 
 * **Find all tasks with the _search word_**
 
-### `find wwww` 
+#### `find wwww` 
 
 find all tasks containing `wwww`
 
@@ -134,13 +139,13 @@ Here are the matching tasks in your list:
 1.[T][𐤕] fix bicycle #healthy lifestyle
 ```
 
-________________________________________________________
+------------------------------------------------------  
 
 ## FILTER
 
 * **Find all tasks matching the given _date_**
 
-### `filter dd/mm` 
+#### `filter dd/mm` 
 
 find all tasks that falls on`dd/mm`
 
@@ -150,22 +155,22 @@ find all tasks that falls on`dd/mm`
 
 #### Expected outcome:
 
-A list of tasks on `10/01`
+A list of tasks on `10/01` displayed
 
 ```
 On Jan 10, you have:
 1.[D][√] submit proposal (by Jan 10)
 ```
 
-__________________________________________________________
+------------------------------------------------------  
 
 ## EXIT
 
 * **Ends current chat session, save current tasks to storage file**
 
-### `bye` 
+#### `bye` 
 
-Expected outcome:
+**Expected outcome:**
 
 Farewell message displayed
 
@@ -174,12 +179,13 @@ Farewell message displayed
 ```
 
 ____________________________________________________________
-____________________________________________________________
+
 ## Acknowledgements
 
 1. Solution below adapted from past student (CS2103T-W10)
 
     @@author BILLXYR
+    
    ```java
    dialog.setStyle("-fx-background-color: #001935; -fx-text-fill: #e6fbff; -fx-label-padding:5;"+ 
    "-fx-border-radius: 5; -fx-background-radius: 5;");
@@ -205,7 +211,8 @@ ____________________________________________________________
 
 4. Solution below is adapted from current student
 
-    @@authorAllardQuek
+    @@author AllardQuek
+    
     ```java
     File fileDirectory = new File(filePath);
                 if (!fileDirectory.exists()) {
