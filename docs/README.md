@@ -14,10 +14,11 @@
     
         Adds an deadline task with description `XXXX` by date `dd/mm/yyyy` and _(tag - optional)_ `tttt`
 
-        #### Example:
+        **Example:**
+        
         `deadline submit lab report by 01/10/2021`
    
-        #### Expected outcome:
+        **Expected outcome: **
         
         deadline `submit lab report` on `01/10` added
 
@@ -33,11 +34,11 @@
 
         Adds an event with description `XXXX` at date `dd/mm/yyyy` and _(tag - optional)_ `tttt`
 
-        #### Example of usage:
+        **Example of usage:**
 
         `event attend seminar at 12/12/2021 (#stonks)`
 
-        #### Expected outcome:
+        **Expected outcome:**
 
         event `attend seminar` on `12/12` with tag `stonks` added
 
@@ -52,11 +53,11 @@
       * #### `todo XXXX (#tttt)`
       Adds a todo task with description `XXXX` and _(tag - optional)_ `tttt`
 
-      #### Example of usage:
+      **Example of usage:**
 
       `todo cook lunch (#yummy)`
 
-      #### Expected outcome:
+      **Expected outcome:**
 
       todo task `cook lunch` with tag `yummy` added
 
