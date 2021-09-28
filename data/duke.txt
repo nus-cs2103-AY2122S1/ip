@@ -1,0 +1,5 @@
+E | 0 | attend seminar  | Jan 09 | #stonks
+D | 0 | submit proposal  | Jan 10 | #CA
+T | 1 | fix bicycle  | #healthy lifestyle
+T | 0 | cook lunch  | #yummy
+T | 1 | learn how to fold origami  | #artsy

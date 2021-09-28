@@ -4,4 +4,123 @@ Hello from
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+~~~~~~~~ Hello! I'm Duke.Duke ~~~~~~~~
+~~ What do you wanna do today? ~~
 
+_________________________________
+Here are the tasks in your list:
+1.[D][X] bake chocolate cake (by: Jan 06)
+2.[T][ ] pick up parcel
+3.[E][ ] attend seminar (at: Jan 16)
+_________________________________
+_________________________________
+Got it. I've added this duke.task:
+~~[T][ ] READ BOOK~~
+Now you have 4 tasks in the list.
+_________________________________
+_________________________________
+Got it. I've added this duke.task:
+~~[D][ ] RETURN BOOK (BY: JUN 21)~~
+Now you have 5 tasks in the list.
+_________________________________
+_________________________________
+Got it. I've added this duke.task:
+~~[E][ ] PROJECT MEETING (AT: AUG 12)~~
+Now you have 6 tasks in the list.
+_________________________________
+_________________________________
+Got it. I've added this duke.task:
+~~[T][ ] JOIN SPORTS CLUB~~
+Now you have 7 tasks in the list.
+_________________________________
+_________________________________
+Here are the tasks in your list:
+1.[D][X] bake chocolate cake (by: Jan 06)
+2.[T][ ] pick up parcel
+3.[E][ ] attend seminar (at: Jan 16)
+4.[T][ ] read book
+5.[D][ ] return book (by: Jun 21)
+6.[E][ ] project meeting (at: Aug 12)
+7.[T][ ] join sports club
+_________________________________
+_________________________________
+Got it. I've added this duke.task:
+~~[T][ ] CREATE GROUP CHAT~~
+Now you have 8 tasks in the list.
+_________________________________
+_________________________________
+Got it. I've added this duke.task:
+~~[D][ ] SET UP MEETING DATE (BY: AUG 31)~~
+Now you have 9 tasks in the list.
+_________________________________
+_________________________________
+Got it. I've added this duke.task:
+~~[E][ ] PROJECT MEETING (AT: SEP 30)~~
+Now you have 10 tasks in the list.
+_________________________________
+_________________________________
+Yay, one duke.task down!
+~~[D][X] bake chocolate cake (by: Jan 06)~~
+_________________________________
+_________________________________
+Here are the tasks in your list:
+1.[D][X] bake chocolate cake (by: Jan 06)
+2.[T][ ] pick up parcel
+3.[E][ ] attend seminar (at: Jan 16)
+4.[T][ ] read book
+5.[D][ ] return book (by: Jun 21)
+6.[E][ ] project meeting (at: Aug 12)
+7.[T][ ] join sports club
+8.[T][ ] create group chat
+9.[D][ ] set up meeting date (by: Aug 31)
+10.[E][ ] project meeting (at: Sep 30)
+_________________________________
+_________________________________
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+
+_________________________________
+_________________________________
+Here are the tasks in your list:
+1.[D][X] bake chocolate cake (by: Jan 06)
+2.[T][ ] pick up parcel
+3.[E][ ] attend seminar (at: Jan 16)
+4.[T][ ] read book
+5.[D][ ] return book (by: Jun 21)
+6.[E][ ] project meeting (at: Aug 12)
+7.[T][ ] join sports club
+8.[T][ ] create group chat
+9.[D][ ] set up meeting date (by: Aug 31)
+10.[E][ ] project meeting (at: Sep 30)
+_________________________________
+_________________________________
+☹ The duke.task description or duke.command is incomplete.:$
+
+_________________________________
+_________________________________
+☹ The duke.task description or duke.command is incomplete.:$
+
+_________________________________
+_________________________________
+☹ The duke.task description or duke.command is incomplete.:$
+
+_________________________________
+_________________________________
+On Sep 30, you have: 
+1.[E][ ] project meeting (at: Sep 30)
+_________________________________
+_________________________________
+Yay, one duke.task down!
+~~[T][X] pick up parcel~~
+_________________________________
+_________________________________
+Alrighty, I've removed this duke.task:
+~~[T][X] pick up parcel~~
+Now, you have 9 tasks remaining
+_________________________________
+_________________________________
+☹ The duke.task description or duke.command is incomplete.:$
+
+_________________________________
+_________________________________
+@@@@ Till we meet again, my friend @@@@
+_________________________________
