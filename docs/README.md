@@ -14,7 +14,7 @@
     
         Adds an deadline task with description `XXXX` by date `dd/mm/yyyy` and _(tag - optional)_ `tttt`
 
-        **Example:**
+        **Example of usage:**
         
         `deadline submit lab report by 01/10/2021`
    
