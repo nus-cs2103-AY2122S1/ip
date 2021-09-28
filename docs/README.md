@@ -183,6 +183,7 @@ ____________________________________________________________
 1. Solution below adapted from past student (CS2103T-W10)
 
     @@author BILLXYR
+    
    ```java
    dialog.setStyle("-fx-background-color: #001935; -fx-text-fill: #e6fbff; -fx-label-padding:5;"+ 
    "-fx-border-radius: 5; -fx-background-radius: 5;");
@@ -208,7 +209,8 @@ ____________________________________________________________
 
 4. Solution below is adapted from current student
 
-    @@authorAllardQuek
+    @@author AllardQuek
+    
     ```java
     File fileDirectory = new File(filePath);
                 if (!fileDirectory.exists()) {
