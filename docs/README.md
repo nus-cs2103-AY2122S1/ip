@@ -18,7 +18,7 @@
         
         `deadline submit lab report by 01/10/2021`
    
-        **Expected outcome: **
+        **Expected outcome:**
         
         deadline `submit lab report` on `01/10` added
 
