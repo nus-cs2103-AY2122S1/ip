@@ -1,6 +1,5 @@
 package duke;
 
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.commands.AddCommand;
@@ -39,71 +38,67 @@ public class Parser {
             taskDescription = commandAndDescription[1];
             assert taskDescription != null;
         }
-        try {
-            switch (commandWord) {
-            case "bye":
-                command = new ExitCommand();
-                break;
-            case "list":
-                command = new ListCommand();
-                break;
-            case "done":
-                if (taskDescription == null) {
-                    throw new TaskOutOfRangeException();
-                }
-                int taskNo = Integer.parseInt(taskDescription);
-                command = new MarkDoneCommand(taskNo);
-                break;
-            case "delete":
-                if (taskDescription == null) {
-                    throw new TaskOutOfRangeException();
-                }
-                taskNo = Integer.parseInt(taskDescription);
-                command = new DeleteCommand(taskNo);
-                break;
-            case "todo":
-                if (taskDescription == null) {
-                    throw new EmptyDescriptionException();
-                }
-                command = new AddCommand(TaskType.TODO, new String[]{taskDescription});
-                break;
-            case "deadline":
-                if (taskDescription == null) {
-                    throw new EmptyDescriptionException();
-                }
-                String[] descriptionDate;
-                if (taskDescription.contains("/")) {
-                    descriptionDate = taskDescription.split(" /by ");
-                } else {
-                    throw new MissingDateException();
-                }
-                command = new AddCommand(TaskType.DEADLINE, descriptionDate);
-                break;
-            case "event":
-                if (taskDescription == null) {
-                    throw new EmptyDescriptionException();
-                }
-                if (taskDescription.contains("/")) {
-                    descriptionDate = taskDescription.split(" /at ");
-                } else {
-                    throw new MissingDateException();
-                }
-                command = new AddCommand(TaskType.EVENT, descriptionDate);
-                break;
-            case "find":
-                if (taskDescription == null) {
-                    throw new EmptyDescriptionException();
-                }
-                command = new FindCommand(taskDescription);
-                break;
-            case "help":
-                command = new HelpCommand();
-                break;
-            default:
-                throw new InvalidInputException();
+        switch (commandWord) {
+        case "bye":
+            command = new ExitCommand();
+            break;
+        case "list":
+            command = new ListCommand();
+            break;
+        case "done":
+            if (taskDescription == null) {
+                throw new TaskOutOfRangeException();
             }
-        } catch (DateTimeParseException e) {
-            System.out.println("OOPS! Please input date in this format: yyyy-mm-dd");
+            int taskNo = Integer.parseInt(taskDescription);
+            command = new MarkDoneCommand(taskNo);
+            break;
+        case "delete":
+            if (taskDescription == null) {
+                throw new TaskOutOfRangeException();
+            }
+            taskNo = Integer.parseInt(taskDescription);
+            command = new DeleteCommand(taskNo);
+            break;
+        case "todo":
+            if (taskDescription == null) {
+                throw new EmptyDescriptionException();
+            }
+            command = new AddCommand(TaskType.TODO, new String[]{taskDescription});
+            break;
+        case "deadline":
+            if (taskDescription == null) {
+                throw new EmptyDescriptionException();
+            }
+            String[] descriptionDate;
+            if (taskDescription.contains("/")) {
+                descriptionDate = taskDescription.split(" /by ");
+            } else {
+                throw new MissingDateException();
+            }
+            command = new AddCommand(TaskType.DEADLINE, descriptionDate);
+            break;
+        case "event":
+            if (taskDescription == null) {
+                throw new EmptyDescriptionException();
+            }
+            if (taskDescription.contains("/")) {
+                descriptionDate = taskDescription.split(" /at ");
+            } else {
+                throw new MissingDateException();
+            }
+            command = new AddCommand(TaskType.EVENT, descriptionDate);
+            break;
+        case "find":
+            if (taskDescription == null) {
+                throw new EmptyDescriptionException();
+            }
+            command = new FindCommand(taskDescription);
+            break;
+        case "help":
+            command = new HelpCommand();
+            break;
+        default:
+            throw new InvalidInputException();
         }
         assert command != null;
         return command;
@@ -111,8 +106,9 @@ public class Parser {
 
     /**
      * Parses search string to obtain keywords for searching through tasklist.
+     *
      * @param searchString Search description from user input.
-     * @return Array of search words from broken down searchString. 
+     * @return Array of search words from broken down searchString.
      */
     public static ArrayList<String> parseSearchString(String searchString) {
         ArrayList<String> searchTerms = new ArrayList<>();

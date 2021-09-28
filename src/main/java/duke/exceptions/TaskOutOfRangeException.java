@@ -13,8 +13,8 @@ public class TaskOutOfRangeException extends DukeException {
     public TaskOutOfRangeException(int maxIndex) {
         super(maxIndex == 1
                 ? "Oops! No such task exists! You only have one task.\n"
-                : "Oops! No such task exists\nPlease use a number from 1 to "
-                + String.valueOf(maxIndex) + "\n");
+                : "Oops! No such task exists.\nPlease use a number from 1 to "
+                + String.valueOf(maxIndex) + ".\n");
     }
 
     public TaskOutOfRangeException() {
