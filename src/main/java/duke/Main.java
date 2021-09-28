@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private final Duke duke = new Duke("docs\\save.txt");
+    private final Duke duke = new Duke(".\\docs\\save.txt");
 
     /**
      * This method builds a GUI for Duke using FXML.
