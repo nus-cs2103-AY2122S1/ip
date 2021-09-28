@@ -2,14 +2,14 @@ package bot.utility;
 
 import static bot.constants.GlobalStringFormats.LINE_BREAK;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Represents a UI that the user interacts with.

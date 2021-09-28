@@ -1,9 +1,9 @@
 package bot.commands;
 
-import java.util.List;
-
 import static bot.constants.GlobalStringFormats.LINE_BREAK;
 import static bot.constants.GlobalStringFormats.TAB_SPACES;
+
+import java.util.List;
 
 import bot.tasks.Deadline;
 import bot.tasks.Event;

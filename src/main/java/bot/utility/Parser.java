@@ -1,6 +1,14 @@
 package bot.utility;
 
-import bot.commands.*;
+import bot.commands.AddCommand;
+import bot.commands.Command;
+import bot.commands.DeleteCommand;
+import bot.commands.DoneCommand;
+import bot.commands.EndCommand;
+import bot.commands.ErrorCommand;
+import bot.commands.FindCommand;
+import bot.commands.HelpCommand;
+import bot.commands.ListCommand;
 import bot.error.DukeException;
 
 /**

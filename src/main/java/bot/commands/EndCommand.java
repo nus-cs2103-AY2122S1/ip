@@ -1,12 +1,12 @@
 package bot.commands;
 
-import bot.tasks.Task;
-import bot.utility.Logger;
-import bot.utility.TaskList;
+import static bot.constants.GlobalStringFormats.LINE_BREAK;
 
 import java.util.List;
 
-import static bot.constants.GlobalStringFormats.LINE_BREAK;
+import bot.tasks.Task;
+import bot.utility.Logger;
+import bot.utility.TaskList;
 
 /**
  * Represents a command to end the program.

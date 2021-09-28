@@ -5,7 +5,7 @@ import static bot.constants.GlobalStringFormats.LINE_BREAK;
 /**
  * Represents a command to give helpful instructions to the user.
  */
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
     private static final String HELP_FORMAT = "Fear not! The list of instructions is here:";
     private static final String TODO_FORMAT = "'todo [task]' -->";
     private static final String TODO_INFO = " adds a Todo task to the list";
