@@ -12,11 +12,7 @@ public class Duke {
         this.storage = new Storage("data");
         this.tasks = new TaskList(this.storage.load());
     }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
+    
     public String getResponse(String input) {
         String response;
         try {
@@ -26,7 +22,6 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
-        //s
         return response;
     }
 }
