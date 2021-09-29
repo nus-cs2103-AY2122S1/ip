@@ -12,8 +12,8 @@ public class Ui {
      *
      * @return starting message in string format
      */
-    public String start() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+    public static String start() {
+        return "Hello! I'm Duke\nWhat can I do for you?\n(Type 'help' if you are unsure what to say)";
     }
 
     /**
@@ -128,7 +128,7 @@ public class Ui {
         for (int i = 0; i < similarTasks.size(); i++) {
             similarTasksAsString = similarTasksAsString + similarTasks.get(i) + "\n";
         }
-        return  similarTasksAsString;
+        return similarTasksAsString;
     }
 
 }

@@ -44,7 +44,7 @@ public class ListOfTasks {
      * @param information represents the information regarding task to be added.
      * @return the text for when the task is added.
      */
-    public String addTask(String information){
+    public String addTask(String information) {
         int oldCount = count;
         information = removeVal(information, "todo");
         tasks.add(count, new ToDo(information, "TODO"));
@@ -60,7 +60,7 @@ public class ListOfTasks {
      * @return list of tasks in string format
      */
     public String listOut() {
-        return ui.listTaskMessage() + "\n" + ui.listAllTasks(tasks,count);
+        return ui.listTaskMessage() + "\n" + ui.listAllTasks(tasks, count);
     }
 
     /**

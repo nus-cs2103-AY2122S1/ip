@@ -1,8 +1,0 @@
-TODO/1/math
-EVENT/1/project meeting /Mon 2-4pm
-DEADLINE/0/return book /2022-02-11
-TODO/0/science
-TODO/0/science
-TODO/0/science
-TODO/0/science
-TODO/0/science

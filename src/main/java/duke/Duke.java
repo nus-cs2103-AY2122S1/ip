@@ -47,16 +47,7 @@ public class Duke {
     public String getResponse(String input) {
         assert storage != null : "Storage needs to be initialised";
         assert ui != null : "Ui needs to be initialised";
-        return Parser.handleCommand(input,tasks);
-    }
-
-    /**
-     * Creates instance of duke and runs it.
-     *
-     * @param args required for main method
-     */
-    public static void main(String[]args) {
-        new Duke("data/duke.txt").run();
+        return Parser.handleCommand(input, tasks);
     }
 
 }

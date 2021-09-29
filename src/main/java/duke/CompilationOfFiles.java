@@ -42,7 +42,7 @@ public class CompilationOfFiles {
                 Scanner sc = new Scanner(newFile);
                 while (sc.hasNext()) {
                     String[] line = sc.nextLine().split("/");
-                    addTaskFromFile(line,tasks);
+                    addTaskFromFile(line, tasks);
                 }
             }
         } catch (IOException e) {
@@ -64,13 +64,13 @@ public class CompilationOfFiles {
                 t.markDone();
             }
             taskList.includeAdditionalTask(t);
-        } else if ((arr[0]).equals("DEADLINE") ) {
+        } else if ((arr[0]).equals("DEADLINE")) {
             Deadline d = new Deadline(arr[2], arr[3], "DEADLINE");
             if (arr[1].equals("1")) {
                 d.markDone();
             }
             taskList.includeAdditionalTask(d);
-        } else if ((arr[0]).equals("EVENT") ) {
+        } else if ((arr[0]).equals("EVENT")) {
             Event e = new Event(arr[2], arr[3], "EVENT");
             if (arr[1].equals("1")) {
                 e.markDone();
