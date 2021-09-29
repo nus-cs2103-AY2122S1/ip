@@ -18,7 +18,6 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        // String reply = this.parser.parse(input);
         String response;
         try {
             Command command = Parser.parse(input);
