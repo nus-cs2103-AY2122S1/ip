@@ -11,7 +11,7 @@ all commands can simply be typed. Dukebot also does not require connection as yo
 the files locally.
 
 
-![DukeBotUI](Mockup.png)
+![DukeBotUI](Ui.png)
 
 ## Features
 
