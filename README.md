@@ -1,5 +1,9 @@
 # Duke - Your personal assistant chatbot
 
+<div align = "center"> 
+<img src ="docs/Ui.png" width = "720" height = "1000">
+</div>
+
 > Why do anything unless it's going to be great?
 
 Duke is not just any chatbot - it's **your** chatbot which helps you keep your life in check!
