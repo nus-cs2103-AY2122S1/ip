@@ -1,0 +1,16 @@
+blah
+todo
+todo borrow book
+deadline
+deadline return book /by June 6th
+event
+event project meeting /at Aug 6th 2-4pm
+done
+done not-a-number
+done 1
+list
+delete
+delete not-a-number
+delete 1
+list
+bye
