@@ -12,7 +12,7 @@ public class Duke {
         this.storage = new Storage("data");
         this.tasks = new TaskList(this.storage.load());
     }
-    
+
     public String getResponse(String input) {
         String response;
         try {
