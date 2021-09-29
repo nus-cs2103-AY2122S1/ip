@@ -1,0 +1,26 @@
+todo
+Destroy humanity
+todoexercise
+deadline end of the world
+todo bake cake
+todo make cheese
+todo Ask Annie out for date
+done 3
+event Date with Annie / 30-08-2021
+deadline project 1 / 2021-08-30
+event mooncake festival /
+done 1
+event Annie's birthday party / 2022-01-26
+done 2
+delete 2
+list
+done 4
+done 100
+done -100
+done with life
+find Annie
+find annie
+delete 2
+delete 3
+list
+bye

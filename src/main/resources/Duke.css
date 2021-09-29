@@ -1,0 +1,29 @@
+#dialog {
+    -fx-border-color: pink;
+    -fx-border-width: 4.0;
+    -fx-background-color: black;
+}
+
+#scrollPane {
+    -fx-background-color: black;
+}
+
+#dialogContainer {
+    -fx-background-color: black;
+    -fx-background-image: none;
+}
+
+#anchor {
+    -fx-background-color: pink;
+}
+
+#userInput {
+    -fx-background-color: azure;
+    -fx-border-color: black;
+    -fx-border-width: 1.5;
+}
+
+#sendButton {
+    -fx-background-color: cornsilk;
+    -fx-text-fill: hotpink;
+}
