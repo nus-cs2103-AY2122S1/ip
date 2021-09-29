@@ -41,7 +41,7 @@ public class Ui {
      * @return number of tasks in string format
      */
     public String produceNumberOfTasks(int count) {
-        return "     Now you have " + count
+        return "Now you have " + count
                 + " task" + ((count > 1) ? "s" : "") + " in the list.";
     }
 
@@ -52,7 +52,7 @@ public class Ui {
      * @return specific task in string format
      */
     public String produceCurrentTask(Task currTask) {
-        return "       " + currTask.toString();
+        return currTask.toString();
     }
 
     /**
