@@ -1,6 +1,6 @@
 package captain;
 
-import static captain.parser.TaskParser.formatDate;
+import static captain.parser.AddCommandParser.formatDate;
 
 import java.io.File;
 import java.io.FileNotFoundException;

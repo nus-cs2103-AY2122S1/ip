@@ -11,10 +11,10 @@ import javafx.scene.image.Image;
  * @author Adam Ho
  */
 public class Captain {
+    private static final String FILEPATH = "./data/taskdata.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private static final String FILEPATH = "./data/taskdata.txt";
     private Image user = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/samoyed.png"));
 

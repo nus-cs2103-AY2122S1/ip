@@ -15,7 +15,7 @@ public class AddCommandTest {
     public void testExecute() {
         try {
             Task task = new Todo("Buy pen");
-            Command addCommand = new AddCommand(task);
+            Command addCommand = new TodoCommand(task);
             addCommand.execute(new TaskList(), new Ui(), new Storage("./data/duke.txt"));
         } catch (DukeException e) {
             e.printStackTrace();

@@ -6,17 +6,18 @@ import captain.Ui;
 import captain.task.Task;
 import captain.task.TaskList;
 
-public class AddCommand extends Command {
-    private Task task;
+public class AddCommand<T extends Task> extends Command {
 
-    public AddCommand(Task task) {
-        this.task = task;
+    private final T taskToAdd;
+
+    public AddCommand(T taskToAdd) {
+        this.taskToAdd = taskToAdd;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.addTask(task);
+        tasks.addTask(taskToAdd);
         storage.saveTasks(tasks);
-        return ui.showAddTask(tasks, task);
+        return ui.showAddTask(tasks, taskToAdd);
     }
 }

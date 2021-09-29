@@ -2,26 +2,12 @@ package captain.parser;
 
 import static captain.Commands.INVALID;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import captain.Commands;
 import captain.DukeException;
-import captain.DukeException.InvalidDateException;
-import captain.DukeException.InvalidTaskIndexException;
-import captain.command.AddCommand;
-import captain.command.ClearCommand;
-import captain.command.Command;
-import captain.command.DeleteCommand;
-import captain.command.DoneCommand;
-import captain.command.ExitCommand;
-import captain.command.FindCommand;
-import captain.command.InvalidCommand;
-import captain.command.ListCommand;
-import captain.command.SortCommand;
-import captain.task.Deadline;
-import captain.task.Event;
+import captain.command.*;
 
 /**
  * Represents a parser to make sense of user input.
@@ -29,11 +15,7 @@ import captain.task.Event;
  * @author Adam Ho
  */
 public class TaskParser {
-
-    public static final String NO_SPECIFIER = "";
-    public static final String BY_SPECIFIER = " /by ";
-    public static final String AT_SPECIFIER = " /at ";
-    public static final String FIND_SPECIFIER = ", ";
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<userCommand>\\S+)(?<taskDescription>.*)");
 
     /**
      * Makes sense of the user input.
@@ -42,37 +24,27 @@ public class TaskParser {
      * @throws DukeException Throws a DukeException if the user's input does not comply with current features.
      */
     public static Command parseCommand(String fullCommand) throws DukeException {
-        if (fullCommand.isBlank()) {
-            throw new DukeException("Please input a command!");
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(fullCommand.trim());
+
+        if (!matcher.matches()) {
+            throw new DukeException("Invalid command format!");
         }
 
-        String[] words = fullCommand.split(" ", 2);
-        Commands userCommand = getUserCommand(words[0]);
-        String userDescription = words.length > 1 ? words[1] : "";
-        String[] taskDescriptions;
-        LocalDate date;
+        String userCommand = matcher.group("userCommand");
+        String taskDescription = matcher.group("taskDescription");
+        Commands command = getUserCommand(userCommand);
 
-        switch (userCommand) {
+        switch (command) {
         case LIST:
             return new ListCommand();
-        case TODO:
-            taskDescriptions = getTaskDescriptions(userDescription, NO_SPECIFIER);
-            return new AddCommandParser().parse(taskDescriptions[0]);
-        case DEADLINE:
-            taskDescriptions = getTaskDescriptions(userDescription, BY_SPECIFIER);
-            date = formatDate(taskDescriptions[1]);
-            return new AddCommand(new Deadline(taskDescriptions[0], date));
-        case EVENT:
-            taskDescriptions = getTaskDescriptions(userDescription, AT_SPECIFIER);
-            date = formatDate(taskDescriptions[1]);
-            return new AddCommand(new Event(taskDescriptions[0], date));
+        case ADD:
+            return new AddCommandParser().parse(taskDescription);
         case DONE:
-            return new DoneCommand(toTaskIndex(userDescription));
+            return new DoneCommandParser().parse(taskDescription);
         case DELETE:
-            return new DeleteCommand(toTaskIndex(userDescription));
+            return new DeleteCommandParser().parse(taskDescription);
         case FIND:
-            taskDescriptions = getTaskDescriptions(userDescription, FIND_SPECIFIER);
-            return new FindCommand(taskDescriptions);
+            return new FindCommandParser().parse(taskDescription);
         case CLEAR:
             return new ClearCommand();
         case SORT:
@@ -84,16 +56,6 @@ public class TaskParser {
         }
     }
 
-    public static String[] getTaskDescriptions(String userDescription, String specifier) throws DukeException {
-        if (userDescription.isBlank()) {
-            throw new DukeException("oops, please add task description!");
-        }
-        if (specifier.isBlank()) {
-            return new String[] {userDescription};
-        }
-        return userDescription.split(specifier);
-    }
-
     public static Commands getUserCommand(String userCommand) {
         for (Commands c : Commands.values()) {
             if (c.userCommand.equalsIgnoreCase(userCommand)) {
@@ -101,33 +63,5 @@ public class TaskParser {
             }
         }
         return INVALID;
-    }
-
-    /**
-     * Converts the String representation of a number to an Integer representation.
-     * @param userDescription The task index input by the user.
-     * @return An Integer representation of the task index.
-     * @throws InvalidTaskIndexException Throws an InvalidTaskException if the user does not input a valid number.
-     */
-    public static Integer toTaskIndex(String userDescription) throws InvalidTaskIndexException {
-        try {
-            return Integer.parseInt(userDescription);
-        } catch (NumberFormatException e) {
-            throw new InvalidTaskIndexException();
-        }
-    }
-
-    /**
-     * Converts the String representation of a date to a LocalDate type.
-     * @param date The date input by the user.
-     * @return A LocalDate object representing the date.
-     * @throws InvalidDateException Throws an InvalidDateException if the input date is in the wrong format.
-     */
-    public static LocalDate formatDate(String date) throws InvalidDateException {
-        try {
-            return LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy"));
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateException();
-        }
     }
 }

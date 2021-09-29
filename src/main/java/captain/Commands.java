@@ -2,9 +2,7 @@ package captain;
 
 public enum Commands {
     LIST("list"),
-    TODO("todo"),
-    DEADLINE("deadline"),
-    EVENT("event"),
+    ADD("add"),
     DONE("done"),
     DELETE("delete"),
     FIND("find"),
