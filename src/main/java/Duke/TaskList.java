@@ -1,13 +1,7 @@
 package Duke;
 
 import Duke.task.Task;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -27,14 +21,14 @@ public class TaskList {
     }
 
     public String addTask(Task task) {
-        tasks.add(task);
-        return Ui.addTask(task, tasks.size());
+        this.tasks.add(task);
+        return Ui.addTask(task, this.tasks.size());
     }
 
     public String deleteTask(int n) {
-        Task task = tasks.get(n-1);
-        tasks.remove(n-1);
-        return Ui.deleteTask(task, tasks.size());
+        Task task = this.tasks.get(n-1);
+        this.tasks.remove(n-1);
+        return Ui.deleteTask(task, this.tasks.size());
     }
 
     public String findTasks(String search) {
@@ -44,11 +38,6 @@ public class TaskList {
                 matches.add(task);
             }
         }
-
         return Ui.findTasks(matches);
-    }
-
-    public int getNumberOfTasks() {
-        return this.tasks.size();
     }
 }

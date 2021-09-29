@@ -1,9 +1,6 @@
 package Duke;
 
-import Duke.task.Task;
-import Duke.task.Event;
-import Duke.task.Deadline;
-import Duke.task.Todo;
+import Duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,8 +13,8 @@ import java.util.Scanner;
 public class Storage {
     private File file;
 
-    public Storage(String filePath) {
-        File folder = new File(filePath);
+    public Storage() {
+        File folder = new File("data");
         folder.mkdir();
         file = new File(folder, "duke.txt");
         try {
@@ -60,51 +57,15 @@ public class Storage {
     }
 
     public void save(TaskList tasks) {
+        this.file.delete();
         try {
-            Scanner reader = new Scanner(this.file);
-            this.file.delete();
-            try {
-                this.file.createNewFile();
-                PrintWriter writer = new PrintWriter(this.file);
-                for (Task task : tasks.getTasks()) {
-                    writer.println(task.addToFile());
-                }
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            this.file.createNewFile();
+            PrintWriter writer = new PrintWriter(this.file);
+            for (Task task : tasks.getTasks()) {
+                writer.println(task.addToFile());
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void doneTask(int n) {
-        int count = 0;
-        ArrayList<String> tasks = new ArrayList<>();
-        try {
-            Scanner reader = new Scanner(this.file);
-            while (reader.hasNextLine()) {
-                count++;
-                String data = reader.nextLine();
-                if (count == n) {
-                    String update = data.substring(0, 4) + '1' + data.substring(5);
-                    tasks.add(update);
-                } else {
-                    tasks.add(data);
-                }
-            }
-            this.file.delete();
-            try {
-                this.file.createNewFile();
-                PrintWriter writer = new PrintWriter(this.file);
-                for (String task : tasks) {
-                    writer.println(task);
-                }
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

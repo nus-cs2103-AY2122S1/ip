@@ -19,10 +19,6 @@ public class Event extends Task {
         return "E | " +  status + " | " + this.description + " | " + this.time;
     }
 
-    public String getType() {
-        return type;
-    }
-
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

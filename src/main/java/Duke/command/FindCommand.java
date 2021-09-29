@@ -1,8 +1,6 @@
 package Duke.command;
 
-import Duke.Storage;
 import Duke.TaskList;
-import Duke.task.Todo;
 
 public class FindCommand extends Command {
     private String task;

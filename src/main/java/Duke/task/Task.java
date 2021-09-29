@@ -17,8 +17,6 @@ public abstract class Task {
         return this.description;
     }
 
-    public abstract String getType();
-
     public abstract String addToFile();
 
     public void markAsDone() {

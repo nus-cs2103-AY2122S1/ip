@@ -9,20 +9,19 @@ public class Duke {
     private TaskList tasks;
 
     public Duke() {
-        this.storage = new Storage("data");
+        this.storage = new Storage();
         this.tasks = new TaskList(this.storage.load());
     }
 
     public String getResponse(String input) {
-        String response;
         try {
             Command command = Parser.parse(input);
-            response = command.execute(this.tasks);
+            String response = command.execute(this.tasks);
             this.storage.save(this.tasks);
+            return response;
         } catch (DukeException e) {
             return e.getMessage();
         }
-        return response;
     }
 }
 

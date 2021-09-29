@@ -9,10 +9,6 @@ public class Todo extends Task {
         this.type = "Todo";
     }
 
-    public String getType() {
-        return type;
-    }
-
     public String addToFile() {
         return "T | 0 | " + this.description;
     }
