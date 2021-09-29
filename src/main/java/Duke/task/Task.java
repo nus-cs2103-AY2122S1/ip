@@ -1,6 +1,6 @@
-package Duke;
+package Duke.task;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -16,6 +16,10 @@ public class Task {
     public String getDesription() {
         return this.description;
     }
+
+    public abstract String getType();
+
+    public abstract String addToFile();
 
     public void markAsDone() {
         this.isDone = true;

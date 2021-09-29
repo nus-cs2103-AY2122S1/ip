@@ -1,9 +1,16 @@
-package Duke;
+package Duke.task;
 
 public class Todo extends Task {
 
+    protected String type;
+
     public Todo(String description) {
         super(description);
+        this.type = "Todo";
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String addToFile() {

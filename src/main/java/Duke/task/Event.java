@@ -1,19 +1,26 @@
-package Duke;
+package Duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
+    protected String type;
     protected LocalDate time;
 
     public Event(String description, LocalDate time) {
         super(description);
+        this.type = "Event";
         this.time = time;
     }
 
     public String addToFile() {
-        return "E | 0 | " + this.description + " | " + this.time;
+        int status = super.isDone == true ? 1 : 0;
+        return "E | " +  status + " | " + this.description + " | " + this.time;
+    }
+
+    public String getType() {
+        return type;
     }
 
     @Override
