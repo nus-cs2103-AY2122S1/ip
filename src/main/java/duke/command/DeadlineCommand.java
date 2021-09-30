@@ -12,10 +12,10 @@ public class DeadlineCommand extends Command {
     private Deadline deadline;
 
     public DeadlineCommand(String input) {
-        String[] data = input.split(" ", 2)[1].split(" /by ");
-        assert data.length == 2 : "Invalid command entered.";
-        String task = data[0];
-        LocalDate time = LocalDate.parse(data[1]);
+        String[] parsed = input.split(" ", 2)[1].split(" /by ");
+        assert parsed.length == 2 : "Invalid command entered.";
+        String task = parsed[0];
+        LocalDate time = LocalDate.parse(parsed[1]);
         this.deadline = new Deadline(task, time);
     }
 
