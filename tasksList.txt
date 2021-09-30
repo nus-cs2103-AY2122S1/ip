@@ -1,0 +1,12 @@
+E | 1 | sleep | 29/01/2090
+E | 1 | Apple | 11/09/2021
+D | 1 | CS2103T | 23/08/2021
+E | 1 | Have Dinner | 23/09/2022
+D | 1 | CS2103T ip | 27/08/2021
+E | 0 | SOC Social Night | 28/08/2021
+D | 0 | work | 23/09/2001
+D | 1 | task | 21/09/2021
+D | 1 | Testing | 12/09/2021
+T | 0 | laundry
+D | 1 | CS2103T iP | 17/09/2021
+T | 1 | sleep
