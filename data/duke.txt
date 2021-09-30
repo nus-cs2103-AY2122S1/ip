@@ -1,7 +1,7 @@
-T | 0 | sleep
 T | 0 | join sports club
-D | 0 | return book | 2015-03-03
-E | 0 | run | 2013-03-03
-T | 0 | sleep
-D | 0 | sleep | 2012-03-03
 D | 0 | return book | 2012-03-03
+E | 0 | interview | 2012-03-01
+T | 0 | sleep
+D | 0 | submit essay | 2012-03-03
+D | 0 | essay | 2012-03-01
+E | 0 | party | 2012-03-02
