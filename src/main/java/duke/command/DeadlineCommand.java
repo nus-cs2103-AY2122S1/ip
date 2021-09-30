@@ -20,6 +20,14 @@ public class DeadlineCommand extends Command {
     }
 
     /**
+     * Returns the deadline object
+     * @return The deadline object
+     */
+    public Deadline getDeadline() {
+        return this.deadline;
+    }
+
+    /**
      * Returns the result of the execution of the deadline command.
      * @param tasks List of tasks the user has added.
      * @return Result of the execution of the deadline command.

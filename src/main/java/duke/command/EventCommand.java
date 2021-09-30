@@ -20,6 +20,14 @@ public class EventCommand extends Command {
     }
 
     /**
+     * Returns the event object
+     * @return The event object
+     */
+    public Event getEvent() {
+        return this.event;
+    }
+
+    /**
      * Returns the result of the execution of the event command.
      * @param tasks List of tasks the user has added.
      * @return Result of the execution of the event command.

@@ -22,6 +22,14 @@ public class TodoCommand extends Command {
     }
 
     /**
+     * Returns the todo object
+     * @return The todo object
+     */
+    public Todo getTodo() {
+        return this.todo;
+    }
+
+    /**
      * Returns the result of the execution of the todo command.
      * @param tasks List of tasks the user has added.
      * @return Result of the execution of the todo command.
