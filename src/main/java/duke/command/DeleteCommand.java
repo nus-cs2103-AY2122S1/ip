@@ -1,6 +1,6 @@
-package Duke.command;
+package duke.command;
 
-import Duke.TaskList;
+import duke.TaskList;
 
 /**
  * Represents a delete command.

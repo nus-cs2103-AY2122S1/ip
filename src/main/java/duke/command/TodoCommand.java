@@ -1,8 +1,8 @@
-package Duke.command;
+package duke.command;
 
-import Duke.TaskList;
-import Duke.exception.DukeException;
-import Duke.task.Todo;
+import duke.TaskList;
+import duke.exception.DukeException;
+import duke.task.Todo;
 
 /**
  * Represents a todo command.
@@ -13,7 +13,8 @@ public class TodoCommand extends Command {
 
     public TodoCommand(String input) throws DukeException {
         String[] parsed = input.split(" ", 2);
-        if (parsed.length == 1) {
+        assert parsed.length != 2 : "Invalid command entered.";
+        if (parsed.length != 2) {
             throw new DukeException("Please enter a task after the command.");
         }
         String task = parsed[1];

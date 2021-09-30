@@ -1,7 +1,7 @@
-package Duke.command;
+package duke.command;
 
-import Duke.TaskList;
-import Duke.Ui;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents an exit command.

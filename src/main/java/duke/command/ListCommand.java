@@ -1,9 +1,9 @@
-package Duke.command;
+package duke.command;
 
 import java.util.ArrayList;
-import Duke.TaskList;
-import Duke.exception.DukeException;
-import Duke.task.Task;
+import duke.TaskList;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * Represents a list command.

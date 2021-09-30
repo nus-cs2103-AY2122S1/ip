@@ -1,6 +1,6 @@
-package Duke.gui;
+package duke.gui;
 
-import Duke.Duke;
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import Duke.Ui;
+import duke.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

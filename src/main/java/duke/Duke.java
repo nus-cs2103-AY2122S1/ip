@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
-import Duke.command.Command;
-import Duke.exception.DukeException;
+import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * This class encapsulates the Duke app.
