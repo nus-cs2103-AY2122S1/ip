@@ -25,9 +25,9 @@ Thank you.
 - User Guide art inspiration from [hsiaotingluv](https://github.com/hsiaotingluv) from [User Guide](https://github.com/hsiaotingluv/ip/blob/master/docs/README.md)
 ## *Repo Stats*
 
--   Project POSEIDON was initiated on 19th August, 2021, and took 12 coding sessions spread over 31 days and was last updated on 18th September, 2021.
+-   Project POSEIDON was initiated on 19th August, 2021, and took 15 coding sessions spread over 43 days and was last updated on 30th September, 2021.
 
--   2750 total lines of text of which 1500 LOC are in Java
+-   5300 total lines of text of which 3600 LOC are in Java
 
 ## *Author*
 [Yeluri Ketan](https://github.com/YeluriKetan) - Undergraduate, Computer Science, NUS '24

@@ -21,7 +21,7 @@
 ## :ocean: Introduction
 **P.O.S.E.I.D.O.N** (Poseidon) is a **desktop application for keeping track of todo tasks, upcoming deadlines and planning events**. Poseidon's efficient and intelligent algorithm, combined with an optimized Command Line Interface (CLI) and a simple Graphical User Interface (GUI) gives you a fast and smooth user experience. If you can type fast, Poseidon can help you plan and organize your day faster than traditional GUI apps.
 
-:merman: :trident: :ocean:
+:trident: :ocean:
 
 **P.O.S.E.I.D.O.N** -  stands for
 
@@ -109,14 +109,14 @@ e.g., `delete 3`
 ### :trident: List
 Lists all the tasks with their description, time(s) (if-applicable) and the done status.
 
-***Syntax:*** `list'`
+***Syntax:*** `list`
 
 e.g., `list`
 
 ### :trident: List Sorted
 Lists all the tasks with their description, time(s) (if-applicable) and the done status, sorted based on time.
 
-***Syntax:*** `list -s'`
+***Syntax:*** `list -s`
 
 e.g., `list -s`
 
@@ -125,7 +125,7 @@ Searches all the tasks based on the given content and shows the results in the f
 
 ***Syntax:*** `find 'content'`
 
-e.g., `find 'meeting'`
+e.g., `find meeting`
 
 ### :trident: Bye
 Exits the application.
