@@ -1,19 +1,14 @@
 package Duke.command;
 
-import Duke.Storage;
 import Duke.TaskList;
 import Duke.task.Deadline;
-import Duke.task.Todo;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
+/**
+ * Represents a deadline command.
+ */
 public class DeadlineCommand extends Command {
+
     private Deadline deadline;
 
     public DeadlineCommand(String input) {
@@ -23,6 +18,11 @@ public class DeadlineCommand extends Command {
         this.deadline = new Deadline(task, time);
     }
 
+    /**
+     * Returns the result of the execution of the deadline command.
+     * @param tasks List of tasks the user has added.
+     * @return Result of the execution of the deadline command.
+     */
     @Override
     public String execute(TaskList tasks) {
         return tasks.addTask(this.deadline);

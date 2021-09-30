@@ -2,9 +2,25 @@ package Duke.command;
 
 import java.util.ArrayList;
 import Duke.TaskList;
+import Duke.exception.DukeException;
 import Duke.task.Task;
 
+/**
+ * Represents a list command.
+ */
 public class ListCommand extends Command {
+
+    public ListCommand(String input) throws DukeException {
+        if (!input.equals("list")) {
+            throw new DukeException("Invalid command entered. Did you mean \"list\"?");
+        }
+    }
+
+    /**
+     * Returns the result of the execution of the list command.
+     * @param tasks List of tasks the user has added.
+     * @return Result of the execution of the list command.
+     */
     @Override
     public String execute(TaskList tasks) {
         String reply = "Here are the tasks in your list:\n";

@@ -1,9 +1,6 @@
 T | 0 | read book
-D | 0 | return book | 2013-03-03
-E | 1 | project meeting | 2012-01-03
 T | 0 | join sports club
 D | 0 | return book | 2015-03-03
 E | 0 | run | 2013-03-03
 T | 0 | sleep
-T | 0 | sleep
-T | 0 | 1
+D | 0 | sleep | 2012-03-03

@@ -10,6 +10,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private File file;
 
@@ -24,6 +27,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the tasks loaded from the file
+     * @return List containing the loaded tasks
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -38,6 +45,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Returns an individual task loaded from the file
+     * @param task String representation of the task in the file
+     * @return Task containing the loaded task
+     */
     public static Task loadTask(String task) {
         String[] parsed = task.split(" \\| ");
         String type = parsed[0];
@@ -56,6 +68,10 @@ public class Storage {
         return loadedTask;
     }
 
+    /**
+     * Saves the tasks in the file
+     * @param tasks List containing the current tasks
+     */
     public void save(TaskList tasks) {
         this.file.delete();
         try {

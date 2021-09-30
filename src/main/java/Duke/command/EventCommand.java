@@ -4,7 +4,11 @@ import Duke.TaskList;
 import Duke.task.Event;
 import java.time.LocalDate;
 
+/**
+ * Represents an event command.
+ */
 public class EventCommand extends Command {
+
     private Event event;
 
     public EventCommand(String input) {
@@ -14,6 +18,11 @@ public class EventCommand extends Command {
         this.event = new Event(task, time);
     }
 
+    /**
+     * Returns the result of the execution of the event command.
+     * @param tasks List of tasks the user has added.
+     * @return Result of the execution of the event command.
+     */
     @Override
     public String execute(TaskList tasks) {
         return tasks.addTask(this.event);

@@ -3,6 +3,9 @@ package Duke;
 import Duke.command.Command;
 import Duke.exception.DukeException;
 
+/**
+ * This class encapsulates the Duke app.
+ */
 public class Duke {
 
     private Storage storage;
