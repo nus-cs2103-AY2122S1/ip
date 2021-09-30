@@ -13,7 +13,7 @@ public class TodoCommand extends Command {
 
     public TodoCommand(String input) throws DukeException {
         String[] parsed = input.split(" ", 2);
-        assert parsed.length != 2 : "Invalid command entered.";
+        assert parsed.length == 2 : "Invalid command entered.";
         if (parsed.length != 2) {
             throw new DukeException("Please enter a task after the command.");
         }

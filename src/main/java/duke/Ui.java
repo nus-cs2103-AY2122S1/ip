@@ -76,4 +76,15 @@ public class Ui {
         }
         return reply;
     }
+
+    /**
+     * Returns a message to the user with the updated task
+     * @param task The updated task
+     * @return A message to the user with the updated task
+     */
+    public static String editTask(Task task) {
+        String reply = "Noted. I've updated the task:\n" +
+                task;
+        return reply;
+    }
 }

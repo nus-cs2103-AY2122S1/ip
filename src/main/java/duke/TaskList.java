@@ -67,4 +67,16 @@ public class TaskList {
         }
         return Ui.findTasks(matches);
     }
+
+    /**
+     * Updates a task with its new name.
+     * @param n Index of the task to be updated
+     * @param edit The new task name
+     * @return A message to the user that the task has been updated
+     */
+    public String editTask(int n, String edit) {
+        Task task = this.tasks.get(n-1);
+        task.setDescription(edit);
+        return Ui.editTask(task);
+    }
 }

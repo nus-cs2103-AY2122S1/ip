@@ -29,6 +29,14 @@ public abstract class Task {
     }
 
     /**
+     * Updates task name
+     * @param description The new task name
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
      * Returns the string representation of the task in the text file
      * @return string representation of the task in the text file
      */
