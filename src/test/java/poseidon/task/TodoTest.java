@@ -72,7 +72,7 @@ public class TodoTest {
     public void toStorage_todoObject_storageRep() {
         String description = "Finish all tasks";
         Todo todo = new Todo(description);
-        String expectedToStorageString = "T%false%Finish all tasks\n";
+        String expectedToStorageString = "T\tfalse\tFinish all tasks\n";
         assertEquals(expectedToStorageString, todo.toStorage());
     }
 }

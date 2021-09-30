@@ -26,7 +26,7 @@ public class DialogBox extends VBox {
     // Constants to be used for creation of a User's DialogBox.
     private static final Font USER_FONT = Font.loadFont(DialogBox.class.getResource("/fonts/JetBrainsMono-Italic.ttf")
                     .toExternalForm(),
-            15);
+            14);
     private static final String USER_BOX_STYLE = "-fx-background-color: #A3C4BC; -fx-background-radius: 20;";
     private static final String USER_ICON_STYLE =
             "-fx-border-color: #A3C4BC; -fx-border-width: 5; -fx-border-radius: 50;";
@@ -34,7 +34,7 @@ public class DialogBox extends VBox {
     // Constants to be used for creation of the Bot's DialogBox.
     private static final Font BOT_FONT = Font.loadFont(DialogBox.class.getResource("/fonts/JetBrainsMono-Regular.ttf")
                     .toExternalForm(),
-            15);
+            14);
     private static final String BOT_BOX_STYLE = "-fx-background-color: #E7EFC5; -fx-background-radius: 20;";
     private static final String BOT_ICON_STYLE =
             "-fx-border-color: #E7EFC5; -fx-border-width: 5; -fx-border-radius: 50;";

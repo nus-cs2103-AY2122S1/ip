@@ -53,7 +53,7 @@ public class TaskList {
     public String markTaskDone(int taskIndex) {
         Task currTask = tasks.get(taskIndex - 1);
         currTask.setDone();
-        assert currTask.toString().charAt(5) == 'X' : "Task is supposed to be marked done";
+        assert currTask.toString().charAt(4) == 'X' : "Task is supposed to be marked done";
         return "Nice! I've marked this task as done:\n"
                 + "  " + taskIndex + ". " + currTask;
     }

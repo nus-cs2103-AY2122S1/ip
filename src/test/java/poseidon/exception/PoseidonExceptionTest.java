@@ -14,8 +14,8 @@ public class PoseidonExceptionTest {
 
     @Test
     public void constructor_newPoseidonException_correctErrorMessage() {
-        String errorMsg = "Sample Error Message";
-        PoseidonException poseidonException = new PoseidonException(errorMsg);
-        assertEquals(errorMsg, poseidonException.getMessage());
+        String sampleErrorMsg = "Sample Error Message";
+        PoseidonException poseidonException = new PoseidonException(sampleErrorMsg);
+        assertEquals(sampleErrorMsg, poseidonException.getMessage());
     }
 }
