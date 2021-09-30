@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
-import Duke.command.*;
-import Duke.exception.DukeException;
+import duke.command.*;
+import duke.exception.DukeException;
 
 /**
  * Parses the user input and returns the corresponding command.

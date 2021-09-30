@@ -1,7 +1,7 @@
-package Duke.command;
+package duke.command;
 
-import Duke.TaskList;
-import Duke.task.Deadline;
+import duke.TaskList;
+import duke.task.Deadline;
 import java.time.LocalDate;
 
 /**
@@ -13,6 +13,7 @@ public class DeadlineCommand extends Command {
 
     public DeadlineCommand(String input) {
         String[] data = input.split(" ", 2)[1].split(" /by ");
+        assert data.length == 2 : "Invalid command entered.";
         String task = data[0];
         LocalDate time = LocalDate.parse(data[1]);
         this.deadline = new Deadline(task, time);

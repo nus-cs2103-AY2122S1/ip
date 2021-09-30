@@ -1,6 +1,6 @@
-package Duke;
+package duke;
 
-import Duke.task.*;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package Duke.exception;
+package duke.exception;
 
 /**
  * Represents an exception which occurs
