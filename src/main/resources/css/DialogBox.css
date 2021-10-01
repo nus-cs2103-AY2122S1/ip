@@ -1,0 +1,12 @@
+/* colour profile from https://material.io/design/color/the-color-system.html#tools-for-picking-colors */
+.userBox {
+    -fx-background-color: #64B5F6;
+}
+
+.dukeBox {
+    -fx-background-color: #4DB6AC;
+}
+
+.dukeBoxError {
+    -fx-background-color: #E57373;
+}
