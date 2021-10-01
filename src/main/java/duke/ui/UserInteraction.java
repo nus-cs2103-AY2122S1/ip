@@ -75,7 +75,8 @@ public class UserInteraction {
      * @param duke Display image of the duke bot
      */
     public static void greetUser(VBox dialogContainer, Image duke) {
-        Label greet = new Label("Namaste chacha!\nKaise yaad kiye humko?");
+        Label greet = new Label("Namaste chacha!\nKaise yaad kiye " +
+                "humko?(how can I help?)");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greet, new ImageView(duke))
         );
