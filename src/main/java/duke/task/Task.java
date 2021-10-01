@@ -14,7 +14,7 @@ public class Task {
     protected String description;
 
     /**
-     * Whether the task is done.
+     * The variable indicating whether the task is done.
      */
     protected boolean isDone = false;
 
@@ -76,7 +76,7 @@ public class Task {
     }
 
     /**
-     * Set the date of the task, if possible.
+     * Sets the date of the task, if possible.
      */
     public void setDate(LocalDate localDate) {
         return;
@@ -87,7 +87,7 @@ public class Task {
     }
 
     /**
-     * Set the description of the task.
+     * Sets the description of the task.
      *
      * @param description The new description.
      */

@@ -34,7 +34,7 @@ public class UpdateTaskCommand extends Command {
     }
 
     /**
-     * Decode the command body and set up the new task description/time accordingly.
+     * Decodes the command body and set up the new task description/time accordingly.
      *
      * @throws DukeException If anything goes wrong.
      */

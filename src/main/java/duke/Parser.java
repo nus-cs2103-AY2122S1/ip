@@ -151,6 +151,7 @@ public class Parser {
      *     <li>{@code deadline (description) /by (YYYY-MM-DD)}: add a new {@code Deadline} task;</li>
      *     <li>{@code event (description) /at (YYYY-MM-DD)}: add a new {@code Event} task;</li>
      *     <li>{@code done (item number)}: mark a certain task as done;</li>
+     *     <li>{@code undone (item number)}: undo a certain task;</li>
      *     <li>{@code delete (item number)}: delete a certain task;</li>
      *     <li>{@code query (YYYY-MM-DD)}: query all tasks that will happen or due on a certain day;</li>
      *     <li>{@code find (keyword)}: query all tasks that contain the keyword;</li>

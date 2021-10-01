@@ -97,12 +97,12 @@ public class TaskList {
     }
 
     /**
-     * Undone a completed task in the list.
+     * Undoes a completed task in the list.
      *
      * @param item The index of the task item to be undone.
      * @throws DukeException If the task is not done yet or the index is invalid.
      */
-    public void undoneTask(int item) throws DukeException {
+    public void undoTask(int item) throws DukeException {
         if (item <= 0) {
             throw new IndexMismatchException();
         }
@@ -150,7 +150,7 @@ public class TaskList {
     }
 
     /**
-     * Find out all tasks that is related to the given date and list them as a string.
+     * Finds out all tasks that is related to the given date and list them as a string.
      *
      * @param date A certain to filter the list.
      * @return A string of task description.
@@ -169,7 +169,7 @@ public class TaskList {
     }
 
     /**
-     * Find out all tasks that contains the given keyword and list them as a string.
+     * Finds out all tasks that contains the given keyword and list them as a string.
      *
      * @param keyword A keyword to filter the list.
      * @return A string of task description.

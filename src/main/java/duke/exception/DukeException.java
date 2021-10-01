@@ -5,7 +5,7 @@ package duke.exception;
  */
 public class DukeException extends RuntimeException {
     /**
-     * Constructors a {@code DukeException}.
+     * Constructs a {@code DukeException}.
      *
      * @param message The error message.
      */

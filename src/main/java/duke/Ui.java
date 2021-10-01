@@ -12,14 +12,14 @@ public class Ui {
     private static final String FAREWELL_TEXT = "Why do you choose to leave me!";
 
     /**
-     * Greet the users by printing the greeting text.
+     * Greets the users by printing the greeting text.
      */
     public static String greet() {
         return GREETING_TEXT;
     }
 
     /**
-     * Farewell the users by printing the farewell message.
+     * Farewells the users by printing the farewell message.
      */
     public static String farewell() {
         return FAREWELL_TEXT;
@@ -30,6 +30,7 @@ public class Ui {
      *
      * @param tasks The list to which a new task is added.
      * @param task  The task added to the list.
+     * @return The message indicating the addition of the task.
      */
     public static String addTaskMessage(TaskList tasks, Task task) {
         return "Got it. I've added this task:\n    "
@@ -43,6 +44,7 @@ public class Ui {
      *
      * @param taskNum The item number of the task.
      * @param task  The task added to the list.
+     * @return The message indicating the update of the task.
      */
     public static String updateTaskMessage(int taskNum, Task task) {
         return "Got it. I've update the task as:\n    "
@@ -54,6 +56,7 @@ public class Ui {
      *
      * @param tasks The list from which a task is removed.
      * @param task  The task that is removed.
+     * @return The message indicating the deletion of the task.
      */
     public static String removeTaskMessage(TaskList tasks, Task task) {
         int tasksSize = tasks.size();
@@ -67,6 +70,7 @@ public class Ui {
      * Returns a message when a task is done.
      *
      * @param task The task list to be marked done.
+     * @return The message indicating the task is done.
      */
     public static String taskDoneMessage(Task task) {
         return "Nice! I've marked this task as done:\n    " + task;
@@ -76,6 +80,7 @@ public class Ui {
      * Returns a message when a task is undone.
      *
      * @param task The task list to be undone.
+     * @return The message indicating the task in undone.
      */
     public static String taskUndoneMessage(Task task) {
         return "Alright. I've undone this task:\n    " + task;

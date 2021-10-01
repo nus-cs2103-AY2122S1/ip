@@ -50,7 +50,7 @@ public class ModifyTaskCommand extends Command {
             return Ui.taskDoneMessage(task);
         }
         case UNDONE: {
-            taskList.undoneTask(item);
+            taskList.undoTask(item);
             storage.refreshTask(taskList);
             return Ui.taskUndoneMessage(task);
         }

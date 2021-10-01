@@ -102,7 +102,7 @@ public class Storage {
     }
 
     /**
-     * Reset the file to make it only contains tasks in the given {@code taskList}.
+     * Resets the file to make it only contains tasks in the given {@code taskList}.
      *
      * @param taskList The {@code taskList} you want to overwrite the file data.
      * @throws DukeException If anything wrong happens.
