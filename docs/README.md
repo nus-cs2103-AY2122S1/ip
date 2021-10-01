@@ -40,7 +40,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list
 ```
 ---
-### `deadline [task description] /by [YYYY-MM-DD]` - Adds a deadline
+### `deadline [task description] /by [YYYY-MM-DD] [TIME]` - Adds a deadline
 
 A new deadline with the description, date and time will be added
 
