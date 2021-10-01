@@ -1,8 +1,5 @@
 package duke.ui;
 
-
-import duke.message.DukeMessage;
-import duke.message.MessageFactory;
 import duke.storage.StorageHandler;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -13,10 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.application.Platform;
 
 public class Duke extends Application {
     public static boolean conversationState;

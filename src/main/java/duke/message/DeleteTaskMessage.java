@@ -14,8 +14,6 @@ public class DeleteTaskMessage extends DukeMessage {
 
     public DeleteTaskMessage(int index) {
         this.taskIndex = index;
-        this.deletedTask = TaskList.getTaskList().getTasks()
-                .remove(taskIndex);
     }
 
     /**
@@ -37,8 +35,8 @@ public class DeleteTaskMessage extends DukeMessage {
         String reply;
         findTask(this.taskIndex);
         if(deletedTask != null) {
-            deletedTask.markAsDone();
-            reply = "Theek hai... ye task khatam!\n"
+            TaskList.getTaskList().getTasks().remove(deletedTask);
+            reply = "Theek hai... ye task hata diya!(deleted task)\n"
                     + deletedTask.getTaskString() + "\n";
         } else {
             reply = "Bhai dekh ke index daal!(no such index)";

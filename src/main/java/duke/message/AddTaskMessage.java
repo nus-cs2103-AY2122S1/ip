@@ -25,7 +25,8 @@ public class AddTaskMessage extends DukeMessage {
 
     @Override
     public String createMessageString() {
-        String reply = "Theek h bhai... ye task bhi list mein daal diya"
+        String reply = "Theek h bhai... ye task bhi list mein daal " +
+                "diya(added to the list)"
                 +"\n" + createdTask.getTaskString() +
                 "\nAb " + TaskList.getTaskList().getSize()
                 + " tasks hain list mein.\n";

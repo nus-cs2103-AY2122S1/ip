@@ -35,7 +35,7 @@ public class CompleteTaskMessage extends DukeMessage{
         findTask(this.taskIndex);
         if(queriedTask != null) {
             queriedTask.markAsDone();
-            reply = "Theek hai... ye task khatam!\n"
+            reply = "Theek hai... ye task khatam!(task done)\n"
                     + queriedTask.getTaskString() + "\n";
         } else {
             reply = "Bhai dekh ke index daal!(no such index)";

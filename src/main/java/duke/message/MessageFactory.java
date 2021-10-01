@@ -24,14 +24,10 @@ public class MessageFactory {
             } else if (userStr.length() >= 4 && userStr.substring(0,4).equals("done")) {
                 int len = userStr.length();
                 int taskIndex = userStr.charAt(len - 1) - 48;
-                if (taskIndex > TaskList.getTaskList().getTasks().size() || taskIndex < 0)
-                    throw new ArrayIndexOutOfBoundsException();
                 return new CompleteTaskMessage(taskIndex);
             } else if (userStr.length() >= 6 && userStr.substring(0,6).equals("delete")) {
                 int len = userStr.length();
                 int taskIndex = userStr.charAt(len - 1) - 48;
-                if (taskIndex > TaskList.getTaskList().getTasks().size())
-                    throw new ArrayIndexOutOfBoundsException();
                 return new DeleteTaskMessage(taskIndex);
             } else if (userStr.length() >= 4 && userStr.substring(0,4).equals("find")) {
                 String searchStr = userStr.substring(5);
@@ -39,12 +35,12 @@ public class MessageFactory {
             } else {
                 return new AddTaskMessage(userStr);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return new ErrorMessage("jo task ko select kerra h uska index padha tha??");
         } catch (IllegalFormatException | EmptyDescriptionException | InvalidCommandException exception) {
             return new ErrorMessage(exception.getMessage());
         } catch (Exception e) {
-            return new ErrorMessage("kya likhra h bhai??");
+            return new ErrorMessage("kya likhra h bhai??(message not " +
+                    "understood" +
+                    ")");
         }
     }
 }

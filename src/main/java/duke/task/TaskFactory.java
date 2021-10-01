@@ -25,12 +25,14 @@ public class TaskFactory {
                 if(taskDescription.stripLeading().equals(""))
                     throw new EmptyDescriptionException
                             ("Ja ammi se todo ka format seekh ke aa!\n" +
-                            "description bhi dena padta hai");
+                            "description bhi dena padta hai(missing " +
+                                    "description)");
                 return new ToDo(taskDescription);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new EmptyDescriptionException
                         ("Ja ammi se todo ka format seekh ke aa!\n" +
-                        "description bhi dena padta hai");
+                        "description bhi dena padta hai(incorrect " +
+                                "format of todo)");
             }
         } else if(taskStr.length() >= 8 && taskStr.substring(0, 8).equals("deadline")) {
             //create a deadline task
@@ -42,7 +44,9 @@ public class TaskFactory {
                 return new Deadline(taskDescription, deadlineDate);
             } catch (Exception e) {
                 throw new IllegalFormatException
-                        ("Ja ammi se deadline banane ka format seekh ke aa!");
+                        ("Ja ammi se deadline banane ka format seekh " +
+                                "ke aa!(incorrect format for " +
+                                "deadline)");
             }
         } else if(taskStr.substring(0, 5).equals("event")) {
             //create an event
@@ -53,7 +57,8 @@ public class TaskFactory {
                 return new Event(taskDescription, timeSlot);
             } catch (Exception e) {
                 throw new IllegalFormatException
-                        ("Ja ammi se event banane ka format seekh ke aa!");
+                        ("Ja ammi se event banane ka format seekh ke " +
+                                "aa!(incorrect format for event)");
             }
         } else {
             throw new InvalidCommandException("Kya likhra h hero??" +

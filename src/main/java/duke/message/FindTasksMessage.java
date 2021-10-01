@@ -25,7 +25,7 @@ public class FindTasksMessage extends DukeMessage {
         ArrayList<Task> taskList =
                 (ArrayList<Task>) TaskList.getTaskList().getTasks();
 
-        if (searchStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+        if (searchStr.matches("\\d{4}-\\d{2}-\\d{2}")) {    //regex for date
             String dateQuery =
                     LocalDate.parse(searchStr).format(DateTimeFormatter
                             .ofPattern("MMM dd yyyy"));
