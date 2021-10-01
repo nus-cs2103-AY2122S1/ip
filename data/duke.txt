@@ -1,0 +1,4 @@
+[T][ ] read book 
+[E][X] project meeting at: 2021-10-15 19:00
+[E][X] make pasta at: 2021-08-16 13:00
+[D][ ] submit ip by: 2021-08-16 23:59
