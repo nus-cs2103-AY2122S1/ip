@@ -101,7 +101,7 @@ Nice! I've marked this task as done:
     [T][X] shave
 ```
 ---
-### `Find [description]` - Find task with same description
+### `find [description]` - Find task with same description
 
 Searches all existing task to see if there is a match.
 
@@ -116,7 +116,7 @@ Here are the matching tasks in your list:
 1.[E][] cca lunch (at: Feb 4 2020)
 ```
 ---
-### `Delete [index]` - Delete task based on index
+### `delete [index]` - Delete task based on index
 
 Example of usage:
 
