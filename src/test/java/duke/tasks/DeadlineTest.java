@@ -18,7 +18,7 @@ class DeadlineTest {
     }
 
     @Test
-    void toSaveString() {
+    void testToSaveString() {
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
         LocalDateTime date = LocalDateTime.parse("2021/08/26 2359", inputFormat);
         Deadline ddl = new Deadline("complete ip", date);

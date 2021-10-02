@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class DoneCommandTest {
 
     @Test
-    void isExit() {
+    void testIsExit() {
         assertFalse(new DoneCommand("done 1").isExit());
     }
 }

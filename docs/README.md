@@ -33,7 +33,7 @@ DukeBai is a **desktop app for managing your upcoming tasks**, optimized for use
 5. Type the command in the command box and press Enter to execute it. You can try the follow example commands:
     -  `help`: Shows the list of available command and example usages.
     - `list`: Shows the list of tasks you have added.
-    - `todo homework `: Adds a new todo task named `homework`.
+    - `todo homework`: Adds a new todo task named `homework`.
     - `done 1`: Marks the first item on the list as done.
     - `delete 1`: Deletes the first item on the list.
     - `bye`: Exits the app.
@@ -247,7 +247,7 @@ Data in the task list is saved in the hard disk at `[JAR file location]/data/tas
 | ------------ | ----------------------------------- | ------------------------------------------- |
 | Add Todo     | `todo <description>`                | `todo read book`                            |
 | Add Deadline | `deadline <description> /by <date>` | `deadline assignment /by 2021/09/15 1300`   |
-| Add Event    | `event <description /at <date>`     | `event project meeting /at 2021/09/12 1700` |
+| Add Event    | `event <description> /at <date>`     | `event project meeting /at 2021/09/12 1700` |
 | Mark Done    | `done <task_num>`                   | `done 1`                                    |
 | Delete       | `delete <task_num>`                 | `delete 1`                                  |
 | Find         | `find <description>`                | `find meeting`                              |

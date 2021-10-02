@@ -1,6 +1,6 @@
+D|0|ip|01 Sep 2021 0000
+E|0|a|10 Sep 2021 0000
 E|0|project meeting|12 Sep 2021 1700
 E|0|meeting|15 Sep 2021 1200
 D|1|assignment|15 Sep 2021 1300
-E|0|a|10 Sep 2021 0000
 T|1|a
-D|0|ip|01 Sep 2021 0000
