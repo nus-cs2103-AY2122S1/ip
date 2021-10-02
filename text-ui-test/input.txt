@@ -1,0 +1,16 @@
+todo
+event
+deadline
+sjdnfjs
+delete
+done
+todo assignment
+event meeting /at tonight
+deadline call home /by tonight
+list
+done 1
+list
+delete 2
+done 2
+list
+bye
