@@ -1,9 +1,11 @@
-package duke;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import duke.Event;
+import duke.Task;
+import duke.Todo;
 
 public class DukeTest {
     @Test
