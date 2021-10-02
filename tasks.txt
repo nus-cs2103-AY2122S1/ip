@@ -4,3 +4,6 @@
 [D][ ] homework (by: 20 Feb 2020, 19.00 PM)
 [T][ ] walk dog
 [T][ ] Household Chores
+[T][ ] chicken
+[D][ ] homework
+[D][ ] chinese homework

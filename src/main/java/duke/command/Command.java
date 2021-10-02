@@ -13,6 +13,9 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.Todo;
 import duke.ui.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
 
 /**
  * The Command class is responsible for directing the user's interaction with Duke.
@@ -313,6 +316,9 @@ public abstract class Command {
         public void execute(TaskList tasklist, Ui ui, Storage storage) {
             ui.showExitMessage();
             isExit = true;
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(e -> Platform.exit());
+            pause.play();
         }
     }
 
