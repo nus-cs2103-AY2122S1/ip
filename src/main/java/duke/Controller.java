@@ -91,11 +91,19 @@ public class Controller implements Initializable {
             tasks = new TaskList();
         }
         listLabel.setText(tasks.toString());
+        addTaskError.setText("");
+        deleteError.setText("");
+        doneError.setText("");
+        updateError.setText("");
+    }
+
+    public void save() {
         try {
             storage.save(tasks);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        listLabel.setText(tasks.toString());
         addTaskError.setText("");
         deleteError.setText("");
         doneError.setText("");
@@ -110,7 +118,7 @@ public class Controller implements Initializable {
     public void add(ActionEvent a) {
         if (taskType.getText().equalsIgnoreCase("T")) {
             tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(), ""));
-            this.load();
+            this.save();
             assert addTaskError.getText().equals("");
         } else if (taskType.getText().equalsIgnoreCase("D") || taskType.getText().equalsIgnoreCase("E")) {
             if (taskDate.getValue() == null) {
@@ -119,7 +127,7 @@ public class Controller implements Initializable {
                 tasks.addTask(taskParse(taskType.getText(),
                         taskDescription.getText(),
                         taskDate.getValue().toString()));
-                this.load();
+                this.save();
                 assert addTaskError.getText().equals("");
             }
         } else {
@@ -140,7 +148,7 @@ public class Controller implements Initializable {
                 doneError.setText("Please enter a number in the list");
             } else {
                 tasks.markAsDone(doneIndex);
-                this.load();
+                this.save();
                 assert doneError.getText().equals("");
             }
         } catch (NumberFormatException e) {
@@ -160,7 +168,7 @@ public class Controller implements Initializable {
                 deleteError.setText("Please enter a number in the list");
             } else {
                 tasks.removeTask(deleteIndex);
-                this.load();
+                this.save();
                 assert deleteError.getText().equals("");
             }
         } catch (NumberFormatException e) {
@@ -181,7 +189,7 @@ public class Controller implements Initializable {
                 updateError.setText("Please enter a number in the list");
             } else {
                 tasks.updateTask(index, updateDescription.getText(), updateDate.getValue());
-                this.load();
+                this.save();
                 assert updateError.getText().equals("");
             }
         } catch (NumberFormatException e) {
