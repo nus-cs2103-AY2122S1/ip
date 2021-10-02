@@ -1,5 +1,7 @@
 package seedu.duke.tasks;
 
+import java.util.ArrayList;
+
 /**
  * Is a subclass of {@code Task} which emphasises on the amount of time needed
  * to complete this {@code TimedTask}.
@@ -24,8 +26,8 @@ public class TimedTask extends Task {
      * @param dateTime    is the time needed for this {@code TimedTask}.
      * @param isDone      checks if this {@code TimedTask} is done.
      */
-    public TimedTask(String description, String dateTime, boolean isDone) {
-        super(description, dateTime, isDone);
+    public TimedTask(String description, String dateTime, boolean isDone, ArrayList<String> tags) {
+        super(description, dateTime, isDone, tags);
     }
 
     /**
@@ -47,7 +49,7 @@ public class TimedTask extends Task {
      */
     @Override
     public TimedTask markAsDone() {
-        return new TimedTask(this.getDescription(), this.getDateTime(), true);
+        return new TimedTask(this.getDescription(), this.getDateTime(), true, this.getTags());
     }
 
     /**

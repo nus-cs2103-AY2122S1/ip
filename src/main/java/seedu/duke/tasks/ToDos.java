@@ -1,5 +1,7 @@
 package seedu.duke.tasks;
 
+import java.util.ArrayList;
+
 public class ToDos extends Task {
     /**
      * Constructor which inherits from the super class. Default having the isDone
@@ -19,8 +21,8 @@ public class ToDos extends Task {
      * @param isDone      determine whether the {@code ToDos} task is completed or
      *                    not.
      */
-    public ToDos(String description, boolean isDone) {
-        super(description, isDone);
+    public ToDos(String description, boolean isDone, ArrayList<String> tags) {
+        super(description, isDone, tags);
     }
 
     /**
@@ -42,7 +44,7 @@ public class ToDos extends Task {
      */
     @Override
     public ToDos markAsDone() {
-        return new ToDos(this.getDescription(), true);
+        return new ToDos(this.getDescription(), true, this.getTags());
     }
 
     /**

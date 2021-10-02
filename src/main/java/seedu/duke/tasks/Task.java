@@ -1,9 +1,12 @@
 package seedu.duke.tasks;
 
+import java.util.ArrayList;
+
 public class Task {
     protected final String description;
     protected final String dateTime;
     protected final boolean isDone;
+    protected final ArrayList<String> tags;
     protected AfterTask afterTask;
 
     /**
@@ -16,6 +19,7 @@ public class Task {
         this.description = description;
         this.dateTime = "";
         this.isDone = false;
+        this.tags = new ArrayList<String>();
     }
 
     /**
@@ -29,6 +33,7 @@ public class Task {
         this.description = description;
         this.dateTime = dateTime;
         this.isDone = false;
+        this.tags = new ArrayList<String>();
     }
 
     /**
@@ -38,10 +43,11 @@ public class Task {
      * @param description is the description of the {@code Task}.
      * @param isDone      determine whether the {@code Task} is completed or not.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, ArrayList<String> tags) {
         this.description = description;
         this.dateTime = "";
         this.isDone = isDone;
+        this.tags = new ArrayList<String>();
     }
 
     /**
@@ -52,10 +58,11 @@ public class Task {
      *                    {@code Task}.
      * @param isDone      determine whether the {@code Task} is completed or not.
      */
-    public Task(String description, String dateTime, boolean isDone) {
+    public Task(String description, String dateTime, boolean isDone, ArrayList<String> tags) {
         this.description = description;
         this.dateTime = dateTime;
         this.isDone = isDone;
+        this.tags = tags;
     }
 
     /**
@@ -126,11 +133,15 @@ public class Task {
      *         isDone property to be true
      */
     public Task markAsDone() {
-        return new Task(this.getDescription(), true);
+        return new Task(this.getDescription(), true, this.getTags());
     }
 
     public boolean hasAfterTask() {
         return this.afterTask != null;
+    }
+
+    public ArrayList<String> getTags() {
+        return this.tags;
     }
 
     /**

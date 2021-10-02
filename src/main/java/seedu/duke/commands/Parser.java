@@ -97,6 +97,9 @@ public class Parser {
         case VIEWSCHEDULE:
             return new ViewScheduleCommand();
 
+        case TAG:
+            return new TagCommand();
+
         case DELETE:
             return new DeleteCommand(getDescriptions(actionDescription));
 

@@ -95,6 +95,9 @@ public class TaskList {
                 .forEach(filteredTask -> foundList.add(filteredTask));
 
         return foundList;
+    }
+
+    public void addTags() {
 
     }
 }

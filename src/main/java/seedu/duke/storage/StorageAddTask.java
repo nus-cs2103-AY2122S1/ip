@@ -1,5 +1,7 @@
 package seedu.duke.storage;
 
+import java.util.ArrayList;
+
 import seedu.duke.commands.Ui;
 import seedu.duke.exceptions.action.DukeActionOutOfBoundException;
 import seedu.duke.tasks.Task;
@@ -56,5 +58,20 @@ public abstract class StorageAddTask {
     protected int scheduledTaskGetTo(String[] storageDataArray) {
         String dateTime = storageDataArray[3];
         return Integer.parseInt(dateTime.split(" ")[4]);
+    }
+
+    protected boolean hasTags(String currLine) {
+        return currLine.contains("|#tags");
+    }
+
+    protected ArrayList<String> addTags(String currLine) {
+        ArrayList<String> tags = new ArrayList<String>();
+        if (this.hasTags(currLine)) {
+            String[] tagList = currLine.split(" \\|#tags ")[1].split(" ");
+            for (int i = 0; i < tagList.length; i++) {
+                tags.add(tagList[i]);
+            }
+        }
+        return tags;
     }
 }
