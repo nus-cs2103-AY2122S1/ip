@@ -20,7 +20,7 @@ Features:
  - [ ] Reminders 
 
 
-If you Java programmer, you can use it to practice Java too. Here's the main method:
+If you Java programmer, you can use it to practice Java too. Here's the `main` method:
 
 ```java
 public class Main {
