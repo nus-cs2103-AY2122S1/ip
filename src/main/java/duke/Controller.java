@@ -97,6 +97,9 @@ public class Controller implements Initializable {
         updateError.setText("");
     }
 
+    /**
+     * Saves tasklist to storage when any actions are carried out
+     */
     public void save() {
         try {
             storage.save(tasks);
