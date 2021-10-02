@@ -1,29 +1,104 @@
-# User Guide
+# Duke How-To
 
-## Features 
+Welcome to Duke! <br/>
+This application presents a interactive user interface to create, tag and list our tasks.  <br/>
+ <br/>
+Try it out [here](https://github.com/ykwei7/ip/releases/download/A-Release/duke.jar)!
 
-### Feature-ABC
+## Key Features
 
-Description of the feature.
+1. **Task Management** - Add, delete and complete tasks of the following categories:
+ - Todo
+ - Deadline
+ - Event
 
-### Feature-XYZ
-
-Description of the feature.
+2. **Search via** (task name)
+ - Existing tasks can be filtered via their task names or their tagged categories. 
+ 
+3. **List** tasks
+ - Provides an overview of all tasks and their current status.
 
 ## Usage
 
-### `Keyword` - Describe action
+### Task Management
 
-Describe the action and its outcome.
+- #### `todo`- Adds a vanilla task
 
-Example of usage: 
+Usage: `todo TASKNAME`
 
-`keyword (optional arguments)`
+Creates a task of name `TASKNAME`.
 
-Expected outcome:
+<hr />
 
-Description of the outcome.
+- #### `deadline` - Adds a task with a deadline
 
-```
-expected output
-```
+Usage: `deadline TASKNAME /by DEADLINE`
+
+Creates a task of name `TASKNAME` by `DEADLINE`.
+
+<hr />
+
+- #### `event` - Adds a task with specific event details
+
+Usage: `event TASKNAME /at EVENT_DETAILS`
+
+Creates a task of name `TASKNAME` at `EVENT_DETAILS`.
+
+<hr />
+
+- ####  `delete` - Removes the task
+
+Usage: `delete 2`
+
+Second item on the list is deleted, displays an error if second item does not exists.
+
+<hr />
+
+- #### `done` - Mark task as completed
+
+Usage: `done 2`
+
+Second item on list is marked as completed, displays an error if it is already completed.
+
+<hr />
+
+- ####  `delete` - Deletes the task 
+
+Usage: `delete 2`
+
+Second item on the list is deleted, displays an error if second item does not exists.
+
+<hr />
+
+### **Search via** (task name)
+
+- #### `find` - Find task containing a specific keyword
+
+Usage: `find KEYWORD`
+
+Displays all the task that include `KEYWORD` in their task name.
+
+<hr />
+
+### List 
+
+- #### `list` - Lists all tasks
+
+Usage: `list`
+
+Displays all the task alongside their completion status.
+
+<hr />
+
+### Exit/Save 
+
+- #### `bye` - Exits program and saves tasklist to local memory
+
+Usage: `bye`
+
+Tasklist is stored in local memory
+
+
+
+
+

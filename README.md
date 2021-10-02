@@ -1,24 +1,104 @@
-# Duke project template
+# Duke How-To
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Welcome to Duke! <br/>
+This application presents a interactive user interface to create, tag and list our tasks.  <br/>
+ <br/>
+Try it out [here](https://github.com/ykwei7/ip/releases/download/A-Release/duke.jar)!
 
-## Setting up in Intellij
+## Key Features
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+1. **Task Management** - Add, delete and complete tasks of the following categories:
+ - Todo
+ - Deadline
+ - Event
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+2. **Search via** (task name)
+ - Existing tasks can be filtered via their task names or their tagged categories. 
+ 
+3. **List** tasks
+ - Provides an overview of all tasks and their current status.
+
+## Usage
+
+### Task Management
+
+- #### `todo`- Adds a vanilla task
+
+Usage: `todo TASKNAME`
+
+Creates a task of name `TASKNAME`.
+
+<hr />
+
+- #### `deadline` - Adds a task with a deadline
+
+Usage: `deadline TASKNAME /by DEADLINE`
+
+Creates a task of name `TASKNAME` by `DEADLINE`.
+
+<hr />
+
+- #### `event` - Adds a task with specific event details
+
+Usage: `event TASKNAME /at EVENT_DETAILS`
+
+Creates a task of name `TASKNAME` at `EVENT_DETAILS`.
+
+<hr />
+
+- ####  `delete` - Removes the task
+
+Usage: `delete 2`
+
+Second item on the list is deleted, displays an error if second item does not exists.
+
+<hr />
+
+- #### `done` - Mark task as completed
+
+Usage: `done 2`
+
+Second item on list is marked as completed, displays an error if it is already completed.
+
+<hr />
+
+- ####  `delete` - Deletes the task 
+
+Usage: `delete 2`
+
+Second item on the list is deleted, displays an error if second item does not exists.
+
+<hr />
+
+### **Search via** (task name)
+
+- #### `find` - Find task containing a specific keyword
+
+Usage: `find KEYWORD`
+
+Displays all the task that include `KEYWORD` in their task name.
+
+<hr />
+
+### List 
+
+- #### `list` - Lists all tasks
+
+Usage: `list`
+
+Displays all the task alongside their completion status.
+
+<hr />
+
+### Exit/Save 
+
+- #### `bye` - Exits program and saves tasklist to local memory
+
+Usage: `bye`
+
+Tasklist is stored in local memory
+
+
+
+
+
