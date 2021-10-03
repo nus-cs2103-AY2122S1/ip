@@ -54,6 +54,8 @@ public class ToDos extends Task {
      */
     @Override
     public String toString() {
-        return "[T][" + this.getStatusIcon() + "] " + this.getDescription();
+        String str = "[T][" + this.getStatusIcon() + "] " + this.getDescription();
+        str = this.addTagsToString(str);
+        return str;
     }
 }

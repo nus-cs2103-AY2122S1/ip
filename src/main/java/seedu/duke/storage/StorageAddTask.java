@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import seedu.duke.commands.Ui;
 import seedu.duke.exceptions.action.DukeActionOutOfBoundException;
+import seedu.duke.tasks.AfterTask;
 import seedu.duke.tasks.Task;
 
 public abstract class StorageAddTask {
@@ -61,17 +62,29 @@ public abstract class StorageAddTask {
     }
 
     protected boolean hasTags(String currLine) {
-        return currLine.contains("|#tags");
+        return currLine.contains(" #tags ");
     }
 
     protected ArrayList<String> addTags(String currLine) {
         ArrayList<String> tags = new ArrayList<String>();
         if (this.hasTags(currLine)) {
-            String[] tagList = currLine.split(" \\|#tags ")[1].split(" ");
+            String[] tagList = (currLine.split(" \\| #tags ")[1]).split(" ");
             for (int i = 0; i < tagList.length; i++) {
                 tags.add(tagList[i]);
             }
         }
         return tags;
+    }
+
+    protected Task checkAfterTask(String currLine, Task task) {
+        Task taskCopy = task;
+        if (currLine.contains(" | after") && currLine.contains(" | #tags")) {
+            String afterTaskDescription = currLine.split(" \\| after ")[1].split(" \\| #tags")[0];
+            taskCopy.setAfterTask(new AfterTask(afterTaskDescription));
+        } else if (currLine.contains(" | after")) {
+            String afterTaskDescription = currLine.split(" \\| after ")[1];
+            taskCopy.setAfterTask(new AfterTask(afterTaskDescription));
+        }
+        return taskCopy;
     }
 }

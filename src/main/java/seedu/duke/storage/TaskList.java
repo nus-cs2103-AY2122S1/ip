@@ -97,7 +97,13 @@ public class TaskList {
         return foundList;
     }
 
-    public void addTags() {
+    public void addTags(int index, String tags) {
+        Task currTask = taskList.get(index);
+        currTask.addTags(tags);
+    }
 
+    public void deleteTags(int index) {
+        Task currTask = taskList.get(index);
+        currTask.deleteTags();
     }
 }

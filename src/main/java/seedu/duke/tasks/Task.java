@@ -47,7 +47,7 @@ public class Task {
         this.description = description;
         this.dateTime = "";
         this.isDone = isDone;
-        this.tags = new ArrayList<String>();
+        this.tags = tags;
     }
 
     /**
@@ -142,6 +142,32 @@ public class Task {
 
     public ArrayList<String> getTags() {
         return this.tags;
+    }
+
+    public boolean hasTags() {
+        return this.tags.size() != 0;
+    }
+
+    public void addTags(String tags) {
+        String[] tagsArr = tags.split(" ");
+        for (int i = 0; i < tagsArr.length; i++) {
+            this.tags.add(tagsArr[i]);
+        }
+    }
+
+    public void deleteTags() {
+        this.tags.clear();
+    }
+
+    protected String addTagsToString(String str) {
+        if (this.hasTags()) {
+            String tags = "";
+            for (int i = 0; i < this.getTags().size(); i++) {
+                tags += String.format(" #%s ", this.getTags().get(i));
+            }
+            str += tags;
+        }
+        return str;
     }
 
     /**

@@ -109,8 +109,10 @@ public class ScheduledTask extends Task {
      */
     @Override
     public String toString() {
-        return "[ST][" + this.getStatusIcon() + "] " + this.getDescription() + " on " + this.getDate() + " at "
-                + this.getTimeFrom() + " to " + this.getTimeTo();
+        String str = "[ST][" + this.getStatusIcon() + "] " + this.getDescription() + " on " + this.getDate() + " at "
+        + this.getTimeFrom() + " to " + this.getTimeTo();
+        str = this.addTagsToString(str);
+        return str;
     }
 
 }

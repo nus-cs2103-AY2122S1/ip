@@ -98,7 +98,11 @@ public class Parser {
             return new ViewScheduleCommand();
 
         case TAG:
-            return new TagCommand();
+            descriptions = getDescriptions(actionDescription);
+            return new TagCommand(getTaggingId(descriptions), getTaggings(descriptions));
+        
+        case DELETETAG:
+            return new DeleteTagCommand(getDescriptions(actionDescription));
 
         case DELETE:
             return new DeleteCommand(getDescriptions(actionDescription));
@@ -178,5 +182,13 @@ public class Parser {
 
     private int getScheduledTimeTo(String descriptions) {
         return Integer.parseInt(descriptions.split(" /to ")[1].split(" ")[0]);
+    }
+
+    private String getTaggingId(String descriptions) {
+        return descriptions.split(" ")[0];
+    }
+
+    private String getTaggings(String descriptions) {
+        return descriptions.split(" ", 2)[1];
     }
 }

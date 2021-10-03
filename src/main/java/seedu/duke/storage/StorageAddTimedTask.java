@@ -2,8 +2,6 @@ package seedu.duke.storage;
 
 import java.util.ArrayList;
 
-import seedu.duke.tasks.AfterTask;
-
 import seedu.duke.tasks.TimedTask;
 
 public class StorageAddTimedTask extends StorageAddTask {
@@ -13,10 +11,8 @@ public class StorageAddTimedTask extends StorageAddTask {
         ArrayList<String> tags = addTags(currLine);
         TimedTask timedTask = new TimedTask(getDescriptions(storageDataArray), getDateTimeLocation(storageDataArray),
                 getIsDoneFromStorage(storageIsDone), tags);
-        if (currLine.contains(" | after")) {
-            String afterTaskDescription = currLine.split(" \\| after ")[1];
-            timedTask.setAfterTask(new AfterTask(afterTaskDescription));
-        }
+        timedTask = (TimedTask) checkAfterTask(currLine, timedTask);
+
         return timedTask;
     }
 

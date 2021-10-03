@@ -16,6 +16,7 @@ public enum CommandType {
     SCHEDULETASK("scheduletask"),
     VIEWSCHEDULE("viewschedule"),
     TAG("tag"),
+    DELETETAG("deletetag"),
     INVALID("invalid");
 
     private String command;
@@ -56,8 +57,10 @@ public enum CommandType {
             return CommandType.SCHEDULETASK;
         case "viewschedule":
             return CommandType.VIEWSCHEDULE;
-        case "tags":
+        case "tag":
             return CommandType.TAG;
+        case "deletetag":
+            return CommandType.DELETETAG;
         case "":
             return CommandType.EMPTY;
         default:

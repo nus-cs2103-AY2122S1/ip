@@ -2,7 +2,6 @@ package seedu.duke.storage;
 
 import java.util.ArrayList;
 
-import seedu.duke.tasks.AfterTask;
 import seedu.duke.tasks.Deadline;
 
 public class StorageAddDeadline extends StorageAddTask {
@@ -12,10 +11,7 @@ public class StorageAddDeadline extends StorageAddTask {
         ArrayList<String> tags = addTags(currLine);
         Deadline deadline = new Deadline(getDescriptions(storageDataArray), getDateTimeLocation(storageDataArray),
                 getIsDoneFromStorage(storageIsDone), tags);
-        if (currLine.contains(" | after")) {
-            String afterTaskDescription = currLine.split(" \\| after ")[1];
-            deadline.setAfterTask(new AfterTask(afterTaskDescription));
-        }
+        deadline = (Deadline) checkAfterTask(currLine, deadline);
         return deadline;
     }
 }

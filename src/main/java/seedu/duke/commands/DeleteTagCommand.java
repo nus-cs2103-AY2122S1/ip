@@ -4,26 +4,24 @@ import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
 import seedu.duke.timetable.Timetable;
 
-public class TagCommand extends Command {
+public class DeleteTagCommand extends Command {
     private final String taskId;
-    private final String tags;
 
-    public TagCommand(String taskId, String tags) {
+    public DeleteTagCommand(String taskId) {
         this.taskId = taskId;
-        this.tags = tags;
     }
 
     @Override
     public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         int index = Integer.parseInt(this.taskId) - 1;
-        taskList.addTags(index, this.tags);
-        storage.updateTags(index, tags);
-        return "Tags added";
+        taskList.deleteTags(index);
+        storage.deleteTags(index);
+        return "Tags deleted";
     }
 
     @Override
     public boolean isExit() {
         return false;
     }
-
+    
 }

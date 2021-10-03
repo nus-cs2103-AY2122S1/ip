@@ -59,7 +59,8 @@ public class TimedTask extends Task {
      */
     @Override
     public String toString() {
-        return "[TT][" + this.getStatusIcon() + "] " + this.getDescription() + " (needs " + this.getDateTime() + ")";
+        String str = "[TT][" + this.getStatusIcon() + "] " + this.getDescription() + " (needs " + this.getDateTime() + ")";
+        str = this.addTagsToString(str);
+        return str;
     }
-
 }

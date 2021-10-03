@@ -81,8 +81,10 @@ public class PeriodTask extends Task {
      */
     @Override
     public String toString() {
-        return "[PT][" + this.getStatusIcon() + "] " + this.getDescription() + " between " + this.getFrom() + " and "
-                + this.getTo();
+        String str = "[PT][" + this.getStatusIcon() + "] " + this.getDescription() + " between " + this.getFrom() + " and "
+        + this.getTo();
+        str = this.addTagsToString(str);
+        return str;
     }
 
     private LocalDate getLocalDateFromString(String date) {

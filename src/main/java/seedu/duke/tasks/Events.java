@@ -61,6 +61,8 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: " + this.getDateTime() + ")";
+        String str = "[E][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: " + this.getDateTime() + ")";
+        str = this.addTagsToString(str);
+        return str;
     }
 }
