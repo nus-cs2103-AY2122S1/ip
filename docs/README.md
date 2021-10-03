@@ -1,8 +1,7 @@
 # When the Duke is Sus - A User Guide
+<br/><br/>
 
 ## Features 
-
-<br/><br/>
 
 ### Keep track of different tasks
 
@@ -175,19 +174,19 @@ Sorts your tasks based on the arguments provided.
 
 `sort` - Standard sort by name (no arguments)
 
-`list /date` - Sort by date and time
+`sort /date` - Sort by date and time
 
-`list /done` - Sort by completion status
+`sort /done` - Sort by completion status
 
-`list /name` - Sort by name (Same as no arguments)
+`sort /name` - Sort by name (Same as no arguments)
 
-`list /added` - Sort by date in which task was added
+`sort /added` - Sort by date in which task was added
 
 Arguments can be stacked, list will be sorted by the first one first, followed by the second, etc.
 
-`list /done /date` - Sort by completion status first. For those with the completion status, sort by date and time.
+`sort /done /date` - Sort by completion status first. For those with the completion status, sort by date and time.
 
-`list /done /date /name` - Same as above, but for those with the same date and time, sorted in alphabetical order.
+`sort /done /date /name` - Same as above, but for those with the same date and time, sorted in alphabetical order.
 
 **Expected outcome:**
 
