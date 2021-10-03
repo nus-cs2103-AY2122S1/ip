@@ -126,8 +126,8 @@ public class Parser {
         String stringDate = unformattedDate.split(" ")[0];
         String time = unformattedDate.split(" ")[1];
 
-        LocalDate date = LocalDate.of(Integer.parseInt(stringDate.split("/")[2]),
-                Integer.parseInt(stringDate.split("/")[1]), Integer.parseInt(stringDate.split("/")[0]));
+        LocalDate date = LocalDate.of(Integer.parseInt(stringDate.split("-")[2]),
+                Integer.parseInt(stringDate.split("-")[1]), Integer.parseInt(stringDate.split("-")[0]));
 
         LocalDateTime dateTime = date.atTime(Integer.parseInt(time.substring(0, 2)),
                 Integer.parseInt(time.substring(2, 4)));
