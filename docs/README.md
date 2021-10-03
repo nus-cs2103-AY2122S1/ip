@@ -26,6 +26,8 @@ All tasks are automatically saved to `duke-task-list.txt` in the same folder as 
 
 ### GUI mode
 
+#### Run
+
 1. Double-click to run the IP in CLI mode
 
 Alternatively, run
@@ -55,6 +57,8 @@ java -jar duke.jar
 
 
 ### CLI mode
+
+#### Run
 
 ```
 java -jar duke.jar cli
