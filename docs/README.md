@@ -15,58 +15,102 @@ Duke is a personal task manager in the form of a chatbot. He can help you track 
 ## Features
 Duke supports 3 main types of tasks: Todos, Deadlines and Events. You can perform Create, Read and Delete operations on these tasks, or mark them as done. Duke also helps you search for tasks if the list gets too long.
 
-Furthermore, Duke recently supposed the function to add tags! You can now optionally add tag(s) to a post to highlight the category that post falls into.
+Furthermore, Duke recently supposed the function to add tags! You can now optionally add tag(s) to a post to highlight the category that post falls into. Remember to add the hex symbol infront of a tag to declare a tag. Also, tags do not have spaces.
 
 ## Usages
 
 #### `list` &mdash; List Tasks
-Lists all the tasks you have inserted into Duke.
-```
-list
-```
+Lists all the tasks you have inserted into Duke. <br> `list` <br>
+If the list is empty: <br>
+![List Command Empty List](./Ui_list_empty.png)
+
+If the list is not empty: <br>
+![List Command Not Empty List](./Ui_list_filled.png)
 
 
 #### `find` &mdash; Find Tasks
-Search for tasks that match a given search string (Case-Sensitive, for further accuracy!)
+Search for tasks that match a given search string (Case-Sensitive, for further accuracy!). <br>
+`find <search_string>`
 ```
-find <search_string>
+find win hearts
 ```
+If the keyword is present: <br>
+![Find Command Present](./Ui_find_present.png)
+
+If the keyword is absent: <br>
+![Find Command Absent](./Ui_find_absent.png)
 
 #### `done` &mdash; Mark a Task as done
-Marks a task as done. The task index is its position as shown in `list`.
+Marks a task as done. The task index is its position as shown in `list`. <br>
+`done <task_index>`
 ```
-done <task_index>
+done 1
 ```
+If the item is present: <br>
+![Done Command Present](./Ui_done_present.png)
+
+If the item is absent: <br>
+![Done Command Absent](./Ui_done_absent.png)
 
 #### `delete` &mdash; Remove a Task
-Remove a task from Duke. The task index is its position as shown in `list`.
+Remove a task from Duke. The task index is its position as shown in `list`. <br>
+`delete <task_index>`
 ```
-delete <task_index>
+delete 1
 ```
+If the item is present: <br>
+![Delete Command Present](./Ui_delete_present.png)
+
+If the item is absent: <br>
+![Delete Command Absent](./Ui_delete_absent.png)
 
 #### `todo` &mdash; Add a Todo
-Add a todo. Todos do not have any time specified.
+Add a todo. Todos do not have any time specified.<br>
+`todo <todo_name> <tag(s)>`
 ```
-todo <todo_name> <tag(s)>
+todo win hearts and minds #inspirational #YesWeCan
 ```
+Without tags: <br>
+![Todo tags_absent](./Ui_todo_tags_absent.png)
+
+With tags: <br>
+![Todo tags_present](./Ui_todo_tags_present.png)
 
 #### `deadline` &mdash; Add a Deadline
-Add a deadline. The `time` parameter should follow the format specified at `Guide format and input restrictions`. It must be strictly `dddd-mm-yy`
+Add a deadline. The `time` parameter should follow the format specified at `Guide format and input restrictions`. It must be strictly `yyyy-mm-dd`
+<br> `deadline <deadline_name> /by <time> <tag(s)>`
 ```
-deadline <deadline_name> /by <time> <tag(s)>
+deadline finish ip /by 2021-10-31
 ```
+Without tags: <br>
+![Deadline tags_absent](./Ui_deadline_tags_absent.png)
+
+With tags: <br>
+![Deadline tags_present](./Ui_deadline_tags_present.png)
+
 
 #### `event` &mdash; Add an Event
 Add an event. The `time` parameter should follow the format specified at `Guide format and input restrictions`.
+<br> `event <event_name> /at <location / date time> <tag(s)>`
 ```
-event <event_name> /at <time> <tag(s)>
+event music festival /at Sentosa, Dec 31st
 ```
+Without tags: <br>
+![Event tags_absent](./Ui_event_tags_absent.png)
+
+With tags: <br>
+![Event tags_present](./Ui_event_tags_present.png)
 
 #### `bye` &mdash; Exit app
-Exits the app. Duke will save your tasks so you do not need to re-enter them when you next launch Duke
+Exits the app. Duke will save your tasks to ensure that you do not need to re-enter them when you next launch Duke.
 ```
 bye
 ```
+![Duke_Bye](./Ui_bye.png)
+
+#### Miscellaneous
+For any commands that are not part of the command list, an error message will occur as follows: <br>
+![Command_absent](./Ui_command_absent.png)
 
 ## Acknowledgements
 * JSON formatting library from [Jackson](https://github.com/FasterXML/jackson)
