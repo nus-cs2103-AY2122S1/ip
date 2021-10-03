@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Duke is a personal task manager in the form of a chatbot. He can help you track your To-dos, events, and deadlines
+FakeApp is a personal task manager in the form of a chatbot. He can help you track your To-dos, events, and deadlines
 ![Duke Screenshot](./Ui.png)
 
 * Table of Contents
