@@ -1,7 +1,16 @@
-# User Guide
+---
+layout: page
+title: User Guide
+---
+
+Duke is a personal task manager in the form of a chatbot. He can help you track your To-dos, events, and deadlines
 ![Duke Screenshot](./Ui.png)
 
-Duke is a personal task manager in the form of a chatbot. He can help you track your To-dos, events, and deadlines. He has a GUI and a CLI interface.
+* Table of Contents
+  {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Quick Start
 1. Ensure you have Java 11 or above installed on your Computer.
 2. Download the latest `ip.jar` [here](https://github.com/DrWala/ip/releases).
