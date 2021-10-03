@@ -20,6 +20,8 @@ public class ToDos extends Task {
      * @param description is the description of the {@code ToDos} task.
      * @param isDone      determine whether the {@code ToDos} task is completed or
      *                    not.
+     * @param tags        is an {@code ArrayList<String>} of tags tied to this
+     *                    {@code ToDos}.
      */
     public ToDos(String description, boolean isDone, ArrayList<String> tags) {
         super(description, isDone, tags);

@@ -25,6 +25,8 @@ public class TimedTask extends Task {
      * @param description is the description of this {@code TimedTask}.
      * @param dateTime    is the time needed for this {@code TimedTask}.
      * @param isDone      checks if this {@code TimedTask} is done.
+     * @param tags        is an {@code ArrayList<String>} of tags tied to this
+     *                    {@code TimedTask}.
      */
     public TimedTask(String description, String dateTime, boolean isDone, ArrayList<String> tags) {
         super(description, dateTime, isDone, tags);
@@ -59,7 +61,8 @@ public class TimedTask extends Task {
      */
     @Override
     public String toString() {
-        String str = "[TT][" + this.getStatusIcon() + "] " + this.getDescription() + " (needs " + this.getDateTime() + ")";
+        String str = "[TT][" + this.getStatusIcon() + "] " + this.getDescription() + " (needs " + this.getDateTime()
+                + ")";
         str = this.addTagsToString(str);
         return str;
     }

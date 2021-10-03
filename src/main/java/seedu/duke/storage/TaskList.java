@@ -97,11 +97,22 @@ public class TaskList {
         return foundList;
     }
 
+    /**
+     * Adds tags to the {@code Task} of the specified index.
+     * 
+     * @param index is the task id from the list of {@code Task} added.
+     * @param tags  is the tags which will be added to the specified {@code Task}.
+     */
     public void addTags(int index, String tags) {
         Task currTask = taskList.get(index);
         currTask.addTags(tags);
     }
 
+    /**
+     * Deletes tags from {@code Task} of the specified index.
+     * 
+     * @param index is the task id from the list of {@code Task} added.
+     */
     public void deleteTags(int index) {
         Task currTask = taskList.get(index);
         currTask.deleteTags();

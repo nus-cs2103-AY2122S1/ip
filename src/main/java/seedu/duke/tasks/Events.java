@@ -26,6 +26,8 @@ public class Events extends Task {
      * @param dateTime    is the description of the location and time for the
      *                    {@code Events}.
      * @param isDone      determine whether this {@code Events} is completed or not.
+     * @param tags        is an {@code ArrayList<String>} of tags tied to this
+     *                    {@code Events}.
      */
     public Events(String description, String dateTime, boolean isDone, ArrayList<String> tags) {
         super(description, dateTime, isDone, tags);

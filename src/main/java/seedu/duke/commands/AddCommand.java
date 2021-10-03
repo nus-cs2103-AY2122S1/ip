@@ -51,6 +51,17 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the user wants to exit from the applications.
+     * 
+     * @return {@code false} as this command is not ready for user to exit the
+     *         application.
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
     private String getInputStorageDescription() {
         String inputToStorage = this.task.getSymbol() + Command.DATA_STORAGE_ISDONE_FALSE + this.task.getDescription();
         switch (this.task.getSymbol()) {
@@ -78,16 +89,5 @@ public class AddCommand extends Command {
     private String getReplyMessage(TaskList taskList) {
         return Ui.printMessage("Got it. I've added this task:\n" + this.task.toString() + "\n" + "Now you have "
                 + taskList.getTaskList().size() + " tasks in the list.");
-    }
-
-    /**
-     * Checks if the user wants to exit from the applications.
-     * 
-     * @return {@code false} as this command is not ready for user to exit the
-     *         application.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

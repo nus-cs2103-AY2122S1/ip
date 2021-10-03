@@ -96,13 +96,16 @@ Q: Will Duke able to check if the current Schedule which I will be added in clas
 
 | Action                   | Format/Example                                                                                                                   |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| help                     | help -> type this for some simple command suggestions                                                                            |
 | Adding Todo Task         | todo \<task> <br> todo run 5 rounds around the field                                                                             |
-| Adding Deadline          | deadline \<task> /by \<date and time> <br> deadline return book /by 12/01/2020 2000                                              |
+| Adding Deadline          | deadline \<task> /by \<date and time> <br> deadline return book /by 12-01-2020 2000                                              |
 | Adding an Event          | event \<task> /at \<date and time> <br> event project meeting /at Tue 6-8pm                                                      |
 | Adding a Timed Task      | timedtask \<task> /needs \<amount of time> <br> timedtask read books /needs 2hours                                               |
 | Adding a Period Task     | periodtask \<task> /between \<start date> and \<end date> <br> periodtask return book /between 25-01-2021 and 26-1-2021          |
 | Chaining a Task          | chaintask \<task> /after \<task index> <br> chaintask run 6 rounds /after 2                                                      |
 | Schedule a Task          | scheduletask \<task> /on \<date> /from \<time from> /to \<time to> <br> scheduletask run this /on 12-01-2020 /from 1400 /to 1600 |
+| Adding a Tag             | tag \<task id> \<your tags> <br> tag 1 fun exciting                                                                              |
+| Deleting tags            | deletetag \<task id> <br> deletetag 2                                                                                            |
 | Find an added Task       | find \<task> <br> find return book                                                                                               |
 | View all the Tasks       | list                                                                                                                             |
 | View all scheduled Tasks | viewschedule                                                                                                                     |
