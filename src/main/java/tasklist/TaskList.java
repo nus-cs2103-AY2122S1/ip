@@ -27,6 +27,8 @@ import ui.Ui;
 public class TaskList {
     public static final int DESCRIPTION_START = 1;
     public static final int INVALID = -1;
+    public static final int MINIMUM_DESCRIPTION = 2;
+    public static final int COMMAND_INDEX = 0;
 
 
     private final Ui messages = new Ui();
@@ -51,7 +53,7 @@ public class TaskList {
 
             //removes space in the command input and stores the strings in an array
             String[] inputArr = Parser.sanitizeInput(input);
-            String firstCommand = inputArr[0];
+            String firstCommand = inputArr[COMMAND_INDEX];
 
             if (input.equals("bye")) {
                 break;
@@ -87,12 +89,12 @@ public class TaskList {
             responseMessage = messages.goodbyeMessageGui();
         } else if (input.equals("list")) {
             responseMessage = messages.displayListTasksGui(this.taskList);
-        } else if (inputArr[0].equals("done")) {
+        } else if (inputArr[COMMAND_INDEX].equals("done")) {
             responseMessage = this.markAsDoneGui(inputArr[1]);
-        } else if (inputArr[0].equals("delete")) {
+        } else if (inputArr[COMMAND_INDEX].equals("delete")) {
             responseMessage = this.deleteTaskGui(inputArr[1]);
 
-        } else if (inputArr[0].equals("find")) {
+        } else if (inputArr[COMMAND_INDEX].equals("find")) {
             responseMessage = this.findTasksGui(inputArr);
         } else {
             //adds item input by the user into the inputList
@@ -121,13 +123,13 @@ public class TaskList {
      */
     public void addTask(String[] inputArr) {
         try {
-            if (inputArr[0].equals("todo")) {
+            if (inputArr[COMMAND_INDEX].equals("todo")) {
                 this.addTodo(inputArr);
 
-            } else if (inputArr[0].equals("deadline")) {
+            } else if (inputArr[COMMAND_INDEX].equals("deadline")) {
                 this.addDeadline(inputArr);
 
-            } else if (inputArr[0].equals("event")) {
+            } else if (inputArr[COMMAND_INDEX].equals("event")) {
                 this.addEvent(inputArr);
 
             } else {
@@ -147,13 +149,13 @@ public class TaskList {
      */
     public String addTaskGui(String[] inputArr) {
         try {
-            if (inputArr[0].equals("todo")) {
+            if (inputArr[COMMAND_INDEX].equals("todo")) {
                 return this.addTodoGui(inputArr);
 
-            } else if (inputArr[0].equals("deadline")) {
+            } else if (inputArr[COMMAND_INDEX].equals("deadline")) {
                 return this.addDeadlineGui(inputArr);
 
-            } else if (inputArr[0].equals("event")) {
+            } else if (inputArr[COMMAND_INDEX].equals("event")) {
                 return this.addEventGui(inputArr);
 
             } else {
@@ -554,7 +556,7 @@ public class TaskList {
      * @return boolean indicating if the input is valid or not.
      */
     public boolean descriptionInvalid(String[] inputArr) {
-        return inputArr.length < 2;
+        return inputArr.length < MINIMUM_DESCRIPTION;
     }
 
 }

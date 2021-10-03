@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 FakeApp is a personal task manager in the form of a chatbot. He can help you track your To-dos, events, and deadlines
-![Duke Screenshot](./Ui.png)
+![FakeApp Screenshot](./Ui.png)
 
 * Table of Contents
   {:toc}
@@ -20,11 +20,12 @@ FakeApp is a personal task manager in the form of a chatbot. He can help you tra
 ## Guide format and input restrictions
 - User input for commands are surrounded with angular brackets as such `<deadline_name>`. The brackets themselves are not part of the command.
 - All time input should be formatted as `yyyy-mm-dd`. For example, you if you want to indicate your data of 21st Jan, 2021, it should be inputted as `2021-01-21`.
+- Unsupported commands will not be processed, allowing you to type again!
 
 ## Features
-Duke supports 3 main types of tasks: Todos, Deadlines and Events. You can perform Create, Read and Delete operations on these tasks, or mark them as done. Duke also helps you search for tasks if the list gets too long.
+FakeApp supports 3 main types of tasks: Todos, Deadlines and Events. You can perform Create, Read and Delete operations on these tasks, or mark them as done. FakeApp also helps you search for tasks if the list gets too long.
 
-Furthermore, Duke recently supposed the function to add tags! You can now optionally add tag(s) to a post to highlight the category that post falls into. Remember to add the hex symbol infront of a tag to declare a tag. Also, tags do not have spaces.
+Furthermore, FakeApp recently supposed the function to add tags! You can now optionally add tag(s) to a post to highlight the category that post falls into. Remember to add the hex symbol infront of a tag to declare a tag. Also, tags do not have spaces.
 
 ## Usages
 
@@ -111,7 +112,7 @@ With tags: <br>
 ![Event tags_present](./Ui_event_tags_present.png)
 
 #### `bye` &mdash; Exit app
-Exits the app. Duke will save your tasks to ensure that you do not need to re-enter them when you next launch Duke.
+Exits the app. FakeApp will save your tasks to ensure that you do not need to re-enter them when you next launch Duke.
 ```
 bye
 ```
@@ -127,6 +128,6 @@ For any commands that are not part of the command list, an error message will oc
 * Unit Testing from [JUnit5](https://github.com/junit-team/junit5)
 * [Azeem](https://github.com/DrWala/) for his repo to help me install Gradle and get my JavaFX GUI working since it was not working on my end even after following the steps provided
 * [Prof Damith](https://github.com/damithc) for his gradle.yaml file for Continuous Integration
-* Team [Duke](https://github.com/se-edu) for the skeleton code for the original Duke App
+* Team [Duke](https://github.com/se-edu) for the skeleton code for the original FakeApp App
 * [AB3](https://github.com/nus-cs2103-AY1920S1/addressbook-level3) for reference to the BCD-Extension regarding Tags
 * All copyrighted images and their respective sources
