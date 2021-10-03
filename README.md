@@ -96,6 +96,7 @@ Q: Will Duke able to check if the current Schedule which I will be added in clas
 
 | Action                   | Format/Example                                                                                                                   |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| help                     | help -> type this for some simple command suggestions                                                                            |
 | Adding Todo Task         | todo \<task> <br> todo run 5 rounds around the field                                                                             |
 | Adding Deadline          | deadline \<task> /by \<date and time> <br> deadline return book /by 12-01-2020 2000                                              |
 | Adding an Event          | event \<task> /at \<date and time> <br> event project meeting /at Tue 6-8pm                                                      |
