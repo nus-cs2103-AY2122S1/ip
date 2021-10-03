@@ -27,6 +27,17 @@ public class PeriodTask extends Task {
         this.to = getLocalDateFromString(to);
     }
 
+    /**
+     * Secondary constructor for this class.
+     * 
+     * @param description is the description of this {@code PeriodTask}.
+     * @param from        is the start date which this {@code PeriodTask} can be
+     *                    completed.
+     * @param to          is the end date which this {@code PeriodTask} can be
+     *                    completed.
+     * @param tags        is an {@code ArrayList<String>} of tags tied to this
+     *                    {@code PeriodTask}.
+     */
     public PeriodTask(String description, String from, String to, ArrayList<String> tags) {
         super(description, false, tags);
         this.from = getLocalDateFromString(from);

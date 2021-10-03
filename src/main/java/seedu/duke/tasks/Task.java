@@ -130,24 +130,45 @@ public class Task {
      * Marks the current {@code Task} as done.
      * 
      * @return a new {@code Task} object with the same description, but setting
-     *         isDone property to be true
+     *         isDone property to be true.
      */
     public Task markAsDone() {
         return new Task(this.getDescription(), true, this.getTags());
     }
 
+    /**
+     * Checks if there is an {@code AfterTask} tied to this {@code Task}.
+     * 
+     * @return a boolean if there is an {@code AfterTask} tied to this {@code Task}.
+     */
     public boolean hasAfterTask() {
         return this.afterTask != null;
     }
 
+    /**
+     * Getter method, gets the tags for this {@code Task}.
+     * 
+     * @return {@code ArrayList<String>} which contains all the tags for this
+     *         {@code Task}.
+     */
     public ArrayList<String> getTags() {
         return this.tags;
     }
 
+    /**
+     * Checks if this {@code Task} have any tags.
+     * 
+     * @return a boolean, if this {@code Task} has any tags to it.
+     */
     public boolean hasTags() {
         return this.tags.size() != 0;
     }
 
+    /**
+     * Adds tags to this {@code Task}.
+     * 
+     * @param tags all the tags which will be added to this {@code Task}.''
+     */
     public void addTags(String tags) {
         String[] tagsArr = tags.split(" ");
         for (int i = 0; i < tagsArr.length; i++) {
@@ -155,10 +176,19 @@ public class Task {
         }
     }
 
+    /**
+     * Deletes all the tags in this {@code Task}.
+     */
     public void deleteTags() {
         this.tags.clear();
     }
 
+    /**
+     * Adds all the tags in this {@code Task} into a {@code String} for UI display.
+     * 
+     * @param str is the original {@code String} without tags added.
+     * @return a {@code String} with the tags added if there is a tag.
+     */
     protected String addTagsToString(String str) {
         if (this.hasTags()) {
             String tags = "";

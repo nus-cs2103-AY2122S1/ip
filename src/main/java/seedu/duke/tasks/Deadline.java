@@ -28,6 +28,8 @@ public class Deadline extends Task {
      *                    {@code Deadline}.
      * @param isDone      determine whether this {@code Deadline} is completed or
      *                    not.
+     * @param tags        is an {@code ArrayList<String>} of tags tied to this
+     *                    {@code Deadline}.
      */
     public Deadline(String description, String dateTime, boolean isDone, ArrayList<String> tags) {
         super(description, dateTime, isDone, tags);

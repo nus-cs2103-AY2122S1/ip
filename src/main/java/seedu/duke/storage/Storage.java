@@ -195,6 +195,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the taggings in the specified {@code Task}.
+     * 
+     * @param index is the task id for which the tag needs to be updated.
+     * @param tags  is the tags which will be tied to the specified {@code Task}.
+     */
     public void updateTags(int index, String tags) {
         int count = 0;
         String currLine;
@@ -215,6 +221,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes all the tags which the specified {@code Task} has.
+     * 
+     * @param index is the task id for which the tag needs to be updated.
+     */
     public void deleteTags(int index) {
         int count = 0;
         String currLine;

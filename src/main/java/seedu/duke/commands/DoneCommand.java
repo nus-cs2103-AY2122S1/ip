@@ -57,16 +57,6 @@ public class DoneCommand extends Command {
         }
     }
 
-    private String getReplyMessage(TaskList taskList, Task updatedTask) {
-        return Ui.printMessage(Ui.DONE_MESSAGE + "\n" + updatedTask.toString());
-    }
-
-    private String getReplyMessageWithAfterTask(TaskList taskList, Task updatedTask, String afterTaskDescription) {
-        String message = getReplyMessage(taskList, updatedTask);
-        message += "Added new task: " + afterTaskDescription;
-        return message;
-    }
-
     /**
      * Checks if the user wants to exit from the application.
      * 
@@ -76,5 +66,15 @@ public class DoneCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    private String getReplyMessage(TaskList taskList, Task updatedTask) {
+        return Ui.printMessage(Ui.DONE_MESSAGE + "\n" + updatedTask.toString());
+    }
+
+    private String getReplyMessageWithAfterTask(TaskList taskList, Task updatedTask, String afterTaskDescription) {
+        String message = getReplyMessage(taskList, updatedTask);
+        message += "Added new task: " + afterTaskDescription;
+        return message;
     }
 }

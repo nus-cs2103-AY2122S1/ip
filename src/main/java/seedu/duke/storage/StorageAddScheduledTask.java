@@ -17,4 +17,19 @@ public class StorageAddScheduledTask extends StorageAddTask {
         return scheduledTask;
     }
 
+    private String scheduledTaskGetDate(String[] storageDataArray) {
+        String dateTime = storageDataArray[3];
+        return dateTime.split(" ")[0];
+    }
+
+    private int scheduledTaskGetFrom(String[] storageDataArray) {
+        String dateTime = storageDataArray[3];
+        return Integer.parseInt(dateTime.split(" ")[2]);
+    }
+
+    private int scheduledTaskGetTo(String[] storageDataArray) {
+        String dateTime = storageDataArray[3];
+        return Integer.parseInt(dateTime.split(" ")[4]);
+    }
+
 }

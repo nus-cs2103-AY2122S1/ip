@@ -22,6 +22,8 @@ public class ScheduledTask extends Task {
      *                    on.
      * @param timeFrom    is the start time of this {@code ScheduledTask}.
      * @param timeTo      is the end time for this {@code ScheduledTask}.
+     * @param tags        is an {@code ArrayList<String>} of tags tied to this
+     *                    {@code ScheduledTask}.
      */
     public ScheduledTask(String description, String date, int timeFrom, int timeTo, ArrayList<String> tags) {
         super(description, false, tags);
@@ -33,6 +35,15 @@ public class ScheduledTask extends Task {
         this.date = date;
     }
 
+    /**
+     * Secondary constructor for this class.
+     * 
+     * @param description is the description of this {@code ScheduledTask}.
+     * @param date        is the date which this {@code ScheduledTask} will be held
+     *                    on.
+     * @param timeFrom    is the start time of this {@code ScheduledTask}.
+     * @param timeTo      is the end time for this {@code ScheduledTask}.
+     */
     public ScheduledTask(String description, String date, int timeFrom, int timeTo) {
         super(description);
 
@@ -120,7 +131,7 @@ public class ScheduledTask extends Task {
     @Override
     public String toString() {
         String str = "[ST][" + this.getStatusIcon() + "] " + this.getDescription() + " on " + this.getDate() + " at "
-        + this.getTimeFrom() + " to " + this.getTimeTo();
+                + this.getTimeFrom() + " to " + this.getTimeTo();
         str = this.addTagsToString(str);
         return str;
     }

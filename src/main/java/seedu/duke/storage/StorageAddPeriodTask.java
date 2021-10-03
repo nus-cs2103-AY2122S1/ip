@@ -16,4 +16,14 @@ public class StorageAddPeriodTask extends StorageAddTask {
         return periodTask;
     }
 
+    private String periodTaskGetFrom(String[] storageDataArray) {
+        String periodDate = storageDataArray[3];
+        return periodDate.split(" and ")[0];
+    }
+
+    private String periodTaskGetTo(String[] storageDataArray) {
+        String periodDate = storageDataArray[3];
+        return periodDate.split(" and ")[1];
+    }
+
 }
