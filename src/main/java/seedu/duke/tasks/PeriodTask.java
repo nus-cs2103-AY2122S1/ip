@@ -27,6 +27,12 @@ public class PeriodTask extends Task {
         this.to = getLocalDateFromString(to);
     }
 
+    public PeriodTask(String description, String from, String to, ArrayList<String> tags) {
+        super(description, false, tags);
+        this.from = getLocalDateFromString(from);
+        this.to = getLocalDateFromString(to);
+    }
+
     private PeriodTask(String description, LocalDate from, LocalDate to, boolean isDone, ArrayList<String> tags) {
         super(description, isDone, tags);
         this.from = from;
@@ -81,8 +87,8 @@ public class PeriodTask extends Task {
      */
     @Override
     public String toString() {
-        String str = "[PT][" + this.getStatusIcon() + "] " + this.getDescription() + " between " + this.getFrom() + " and "
-        + this.getTo();
+        String str = "[PT][" + this.getStatusIcon() + "] " + this.getDescription() + " between " + this.getFrom()
+                + " and " + this.getTo();
         str = this.addTagsToString(str);
         return str;
     }

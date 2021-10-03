@@ -23,6 +23,16 @@ public class ScheduledTask extends Task {
      * @param timeFrom    is the start time of this {@code ScheduledTask}.
      * @param timeTo      is the end time for this {@code ScheduledTask}.
      */
+    public ScheduledTask(String description, String date, int timeFrom, int timeTo, ArrayList<String> tags) {
+        super(description, false, tags);
+
+        this.taskDate = LocalDate.of(Integer.parseInt(date.split("-")[2]), Integer.parseInt(date.split("-")[1]),
+                Integer.parseInt(date.split("-")[0]));
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+        this.date = date;
+    }
+
     public ScheduledTask(String description, String date, int timeFrom, int timeTo) {
         super(description);
 
