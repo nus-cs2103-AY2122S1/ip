@@ -2,6 +2,8 @@
 
 ## Features 
 
+<br/><br/>
+
 ### Keep track of different tasks
 
 1. Todos - Simple tasks you plan to do.
@@ -17,7 +19,11 @@ Mark your tasks as complete
 ### Load and save your task list
 Saving and loading are done automatically onto your local hard drive
 
+<br/><br/>
+
 ## Usage
+
+<br/><br/>
 
 ### `todo` - Creates a todo task
 
