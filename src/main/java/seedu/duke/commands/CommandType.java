@@ -17,6 +17,7 @@ public enum CommandType {
     VIEWSCHEDULE("viewschedule"),
     TAG("tag"),
     DELETETAG("deletetag"),
+    HELP("help"),
     INVALID("invalid");
 
     private String command;
@@ -61,6 +62,8 @@ public enum CommandType {
             return CommandType.TAG;
         case "deletetag":
             return CommandType.DELETETAG;
+        case "help":
+            return CommandType.HELP;
         case "":
             return CommandType.EMPTY;
         default:

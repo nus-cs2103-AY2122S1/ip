@@ -107,6 +107,9 @@ public class Parser {
         case DELETE:
             return new DeleteCommand(getDescriptions(actionDescription));
 
+        case HELP:
+            return new HelpCommand();
+
         case FIND:
             return new FindCommand(getDescriptions(actionDescription));
 
