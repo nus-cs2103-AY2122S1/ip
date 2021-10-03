@@ -28,7 +28,7 @@ All tasks are automatically saved to `duke-task-list.txt` in the same folder as 
 
 #### Run
 
-1. Double-click to run the IP in CLI mode
+Double-click the jar file to run the IP in CLI mode.
 
 Alternatively, run
 
