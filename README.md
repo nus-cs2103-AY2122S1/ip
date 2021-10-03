@@ -48,6 +48,16 @@ Duke is a desktop app which serves to help you manage your daily tasks as well a
 -   Adds a Scheduled Task in Duke if this Scheduled Task does not clash with other Scheduled Tasks.
 -   Format: scheduletask run this /on 12-01-2020 /from 1400 /to 1600
 
+### Adding a tag to a Task: _tag \<task id> \<tags>_
+
+-   Adds a tag to a Task in the list
+-   Format: tag 1 fun exciting
+
+### Deletes tag from a Task: _deletetag \<task id>_
+
+-   Deletes tag from a Task in the list
+-   Format: deletetag 1
+
 ### Find you Task which user have added in Duke: _find \<keywords>_
 
 -   Helps to locate the Task which is previously added in Duke.
