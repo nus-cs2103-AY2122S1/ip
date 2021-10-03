@@ -1,5 +1,7 @@
 package seedu.duke.tasks;
 
+import java.util.ArrayList;
+
 /**
  * Is a subclass of {@code Task} which emphasises the location of this
  * {@code Events}.
@@ -25,8 +27,8 @@ public class Events extends Task {
      *                    {@code Events}.
      * @param isDone      determine whether this {@code Events} is completed or not.
      */
-    public Events(String description, String dateTime, boolean isDone) {
-        super(description, dateTime, isDone);
+    public Events(String description, String dateTime, boolean isDone, ArrayList<String> tags) {
+        super(description, dateTime, isDone, tags);
     }
 
     /**
@@ -49,7 +51,7 @@ public class Events extends Task {
      */
     @Override
     public Events markAsDone() {
-        return new Events(this.getDescription(), this.getDateTime(), true);
+        return new Events(this.getDescription(), this.getDateTime(), true, this.getTags());
     }
 
     /**
@@ -59,6 +61,8 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: " + this.getDateTime() + ")";
+        String str = "[E][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: " + this.getDateTime() + ")";
+        str = this.addTagsToString(str);
+        return str;
     }
 }

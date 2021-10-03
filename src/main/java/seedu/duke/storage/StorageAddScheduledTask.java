@@ -1,6 +1,5 @@
 package seedu.duke.storage;
 
-import seedu.duke.tasks.AfterTask;
 import seedu.duke.tasks.ScheduledTask;
 
 public class StorageAddScheduledTask extends StorageAddTask {
@@ -10,10 +9,8 @@ public class StorageAddScheduledTask extends StorageAddTask {
         ScheduledTask scheduledTask = new ScheduledTask(getDescriptions(storageDataArray),
                 scheduledTaskGetDate(storageDataArray), scheduledTaskGetFrom(storageDataArray),
                 scheduledTaskGetTo(storageDataArray));
-        if (currLine.contains(" | after")) {
-            String afterTaskDescription = currLine.split(" \\| after ")[1];
-            scheduledTask.setAfterTask(new AfterTask(afterTaskDescription));
-        }
+        scheduledTask = (ScheduledTask) checkAfterTask(currLine, scheduledTask);
+
         return scheduledTask;
     }
 

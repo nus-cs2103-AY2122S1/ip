@@ -47,43 +47,43 @@ public class Storage {
             Scanner sc = new Scanner(data);
             while (sc.hasNext()) {
                 currLine = sc.nextLine();
-                storageDataArray = currLine.replace("|", "/").split(" / ");
+                storageDataArray = currLine.split(" \\| ");
                 eventType = currLine.split(" ")[0];
                 storageIsDone = storageDataArray[1];
                 switch (eventType) {
 
-                case "T":
-                    StorageAddToDos getToDosCommand = new StorageAddToDos();
-                    currList.add(getToDosCommand.execute(currLine, storageDataArray, storageIsDone));
-                    break;
+                    case "T":
+                        StorageAddToDos getToDosCommand = new StorageAddToDos();
+                        currList.add(getToDosCommand.execute(currLine, storageDataArray, storageIsDone));
+                        break;
 
-                case "D":
-                    StorageAddDeadline getDeadlineCommand = new StorageAddDeadline();
-                    currList.add(getDeadlineCommand.execute(currLine, storageDataArray, storageIsDone));
-                    break;
+                    case "D":
+                        StorageAddDeadline getDeadlineCommand = new StorageAddDeadline();
+                        currList.add(getDeadlineCommand.execute(currLine, storageDataArray, storageIsDone));
+                        break;
 
-                case "E":
-                    StorageAddEvents getEventsCommand = new StorageAddEvents();
-                    currList.add(getEventsCommand.execute(currLine, storageDataArray, storageIsDone));
-                    break;
+                    case "E":
+                        StorageAddEvents getEventsCommand = new StorageAddEvents();
+                        currList.add(getEventsCommand.execute(currLine, storageDataArray, storageIsDone));
+                        break;
 
-                case "TT":
-                    StorageAddTimedTask getTimedTaskCommand = new StorageAddTimedTask();
-                    currList.add(getTimedTaskCommand.execute(currLine, storageDataArray, storageIsDone));
-                    break;
+                    case "TT":
+                        StorageAddTimedTask getTimedTaskCommand = new StorageAddTimedTask();
+                        currList.add(getTimedTaskCommand.execute(currLine, storageDataArray, storageIsDone));
+                        break;
 
-                case "PT":
-                    StorageAddPeriodTask getPeriodTaskCommand = new StorageAddPeriodTask();
-                    currList.add(getPeriodTaskCommand.execute(currLine, storageDataArray, storageIsDone));
-                    break;
+                    case "PT":
+                        StorageAddPeriodTask getPeriodTaskCommand = new StorageAddPeriodTask();
+                        currList.add(getPeriodTaskCommand.execute(currLine, storageDataArray, storageIsDone));
+                        break;
 
-                case "ST":
-                    StorageAddScheduledTask getScheduledTaskCommand = new StorageAddScheduledTask();
-                    currList.add(getScheduledTaskCommand.execute(currLine, storageDataArray, storageIsDone));
-                    break;
+                    case "ST":
+                        StorageAddScheduledTask getScheduledTaskCommand = new StorageAddScheduledTask();
+                        currList.add(getScheduledTaskCommand.execute(currLine, storageDataArray, storageIsDone));
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
                 }
             }
             sc.close();
@@ -195,6 +195,66 @@ public class Storage {
         }
     }
 
+    public void updateTags(int index, String tags) {
+        int count = 0;
+        String currLine;
+        String stringToAppend = "";
+
+        try {
+            Scanner sc = new Scanner(this.data);
+            while (sc.hasNextLine()) {
+                currLine = sc.nextLine();
+                currLine = updateTagsIfIsTheCurrentIndex(count, index, currLine, tags);
+                stringToAppend += currLine + "\n";
+                count++;
+            }
+            this.clearsFileAndWrite(stringToAppend);
+            sc.close();
+        } catch (IOException err) {
+            throw new DukeStorageUpdateException(err.toString());
+        }
+    }
+
+    public void deleteTags(int index) {
+        int count = 0;
+        String currLine;
+        String stringToAppend = "";
+
+        try {
+            Scanner sc = new Scanner(this.data);
+            while (sc.hasNextLine()) {
+                currLine = sc.nextLine();
+                currLine = deleteTagsIfIsTheCurrentIndex(count, index, currLine);
+                stringToAppend += currLine + "\n";
+                count++;
+            }
+            this.clearsFileAndWrite(stringToAppend);
+            sc.close();
+        } catch (IOException err) {
+            throw new DukeStorageUpdateException(err.toString());
+        }
+    }
+
+    private String deleteTagsIfIsTheCurrentIndex(int count, int index, String curr) {
+        String currLine = curr;
+        if (count == index && curr.contains(" | #tags ")) {
+            currLine = currLine.split(" \\| #tags ")[0];
+        }
+        return currLine;
+    }
+
+    private String updateTagsIfIsTheCurrentIndex(int count, int index, String curr, String tags) {
+        String currLine = curr;
+        if (count == index) {
+            if (currLine.contains(" | #tags ")) {
+                currLine += " " + tags;
+            } else {
+                currLine += " | #tags " + tags;
+            }
+        }
+        return currLine;
+    }
+
     private void clearsFileAndWrite(String stringToAppend) {
         try {
             FileWriter fileWriter = new FileWriter(this.data, false);
@@ -217,6 +277,11 @@ public class Storage {
     private String amendStringIfHasAfterTask(String curr) {
         String currLine = curr;
         if (currLine.contains(" | after")) {
+            if (currLine.split(" \\| after")[1].contains("#tags")) {
+                String tags = currLine.split(" \\| #tags ")[1];
+                currLine = currLine.split(" \\| after")[0];
+                currLine += " | #tags " + tags;
+            }
             currLine = currLine.split(" \\| after")[0];
         }
         return currLine;
@@ -225,7 +290,13 @@ public class Storage {
     private String amendIfIsToUpdateAfterTask(int count, int index, String curr, String description) {
         String currLine = curr;
         if (count == index) {
-            currLine += " | after " + description;
+            if (currLine.contains("#tags")) {
+                String tags = currLine.split(" \\| #tags ")[1];
+                currLine = currLine.split(" \\| #tags ")[0] + " | after " + description;
+                currLine += " | #tags " + tags;
+            } else {
+                currLine += " | after " + description;
+            }
         }
         return currLine;
     }

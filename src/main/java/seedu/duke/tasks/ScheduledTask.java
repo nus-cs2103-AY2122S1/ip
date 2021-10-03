@@ -2,6 +2,7 @@ package seedu.duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Is a subclass of {@code Task} which emphasises in completing this
@@ -32,8 +33,9 @@ public class ScheduledTask extends Task {
         this.date = date;
     }
 
-    private ScheduledTask(String description, LocalDate localDate, int timeFrom, int timeTo, boolean isDone) {
-        super(description, isDone);
+    private ScheduledTask(String description, LocalDate localDate, int timeFrom, int timeTo, boolean isDone,
+            ArrayList<String> tags) {
+        super(description, isDone, tags);
         this.taskDate = localDate;
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
@@ -96,7 +98,8 @@ public class ScheduledTask extends Task {
      */
     @Override
     public ScheduledTask markAsDone() {
-        return new ScheduledTask(this.getDescription(), this.getTaskDate(), this.getTimeFrom(), this.getTimeTo(), true);
+        return new ScheduledTask(this.getDescription(), this.getTaskDate(), this.getTimeFrom(), this.getTimeTo(), true,
+                this.getTags());
     }
 
     /**
@@ -106,8 +109,10 @@ public class ScheduledTask extends Task {
      */
     @Override
     public String toString() {
-        return "[ST][" + this.getStatusIcon() + "] " + this.getDescription() + " on " + this.getDate() + " at "
-                + this.getTimeFrom() + " to " + this.getTimeTo();
+        String str = "[ST][" + this.getStatusIcon() + "] " + this.getDescription() + " on " + this.getDate() + " at "
+        + this.getTimeFrom() + " to " + this.getTimeTo();
+        str = this.addTagsToString(str);
+        return str;
     }
 
 }

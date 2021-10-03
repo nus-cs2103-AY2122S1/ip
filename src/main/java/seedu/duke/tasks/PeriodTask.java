@@ -2,6 +2,7 @@ package seedu.duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Is a subclass of {@code Task} which emphasises in completing this
@@ -26,8 +27,8 @@ public class PeriodTask extends Task {
         this.to = getLocalDateFromString(to);
     }
 
-    private PeriodTask(String description, LocalDate from, LocalDate to, boolean isDone) {
-        super(description, isDone);
+    private PeriodTask(String description, LocalDate from, LocalDate to, boolean isDone, ArrayList<String> tags) {
+        super(description, isDone, tags);
         this.from = from;
         this.to = to;
     }
@@ -70,7 +71,7 @@ public class PeriodTask extends Task {
      */
     @Override
     public PeriodTask markAsDone() {
-        return new PeriodTask(this.getDescription(), this.from, this.to, true);
+        return new PeriodTask(this.getDescription(), this.from, this.to, true, this.getTags());
     }
 
     /**
@@ -80,8 +81,10 @@ public class PeriodTask extends Task {
      */
     @Override
     public String toString() {
-        return "[PT][" + this.getStatusIcon() + "] " + this.getDescription() + " between " + this.getFrom() + " and "
-                + this.getTo();
+        String str = "[PT][" + this.getStatusIcon() + "] " + this.getDescription() + " between " + this.getFrom() + " and "
+        + this.getTo();
+        str = this.addTagsToString(str);
+        return str;
     }
 
     private LocalDate getLocalDateFromString(String date) {

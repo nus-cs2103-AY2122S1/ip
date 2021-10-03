@@ -1,17 +1,18 @@
 package seedu.duke.storage;
 
-import seedu.duke.tasks.AfterTask;
+import java.util.ArrayList;
+
 import seedu.duke.tasks.ToDos;
 
 public class StorageAddToDos extends StorageAddTask {
 
     @Override
     public ToDos execute(String currLine, String[] storageDataArray, String storageIsDone) {
-        ToDos todos = new ToDos(getDescriptions(storageDataArray), getIsDoneFromStorage(storageIsDone));
-        if (currLine.contains(" | after")) {
-            String afterTaskDescription = currLine.split(" \\| after ")[1];
-            todos.setAfterTask(new AfterTask(afterTaskDescription));
-        }
+        ArrayList<String> tags = this.addTags(currLine);
+
+        ToDos todos = new ToDos(getDescriptions(storageDataArray), getIsDoneFromStorage(storageIsDone), tags);
+        todos = (ToDos) checkAfterTask(currLine, todos);
+
         return todos;
     }
 

@@ -95,6 +95,15 @@ public class TaskList {
                 .forEach(filteredTask -> foundList.add(filteredTask));
 
         return foundList;
+    }
 
+    public void addTags(int index, String tags) {
+        Task currTask = taskList.get(index);
+        currTask.addTags(tags);
+    }
+
+    public void deleteTags(int index) {
+        Task currTask = taskList.get(index);
+        currTask.deleteTags();
     }
 }

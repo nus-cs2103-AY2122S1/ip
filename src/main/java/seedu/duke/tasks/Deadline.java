@@ -1,5 +1,7 @@
 package seedu.duke.tasks;
 
+import java.util.ArrayList;
+
 /**
  * Is a subclass of {@code Task} which emphasises due date in {@code Deadline}.
  */
@@ -27,8 +29,8 @@ public class Deadline extends Task {
      * @param isDone      determine whether this {@code Deadline} is completed or
      *                    not.
      */
-    public Deadline(String description, String dateTime, boolean isDone) {
-        super(description, dateTime, isDone);
+    public Deadline(String description, String dateTime, boolean isDone, ArrayList<String> tags) {
+        super(description, dateTime, isDone, tags);
     }
 
     /**
@@ -50,7 +52,7 @@ public class Deadline extends Task {
      */
     @Override
     public Deadline markAsDone() {
-        return new Deadline(this.getDescription(), this.getDateTime(), true);
+        return new Deadline(this.getDescription(), this.getDateTime(), true, this.getTags());
     }
 
     /**
@@ -60,6 +62,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: " + this.getDateTime() + ")";
+        String str = "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: " + this.getDateTime() + ")";
+        str = this.addTagsToString(str);
+        return str;
     }
 }
