@@ -1,12 +1,1 @@
-title: "FakeApp"
 theme: jekyll-theme-cayman
-
-header_pages:
-
-markdown: kramdown
-
-repository: "https://darrenhoon.github.io/ip/"
-github_icon: "images/github-icon.png"
-
-plugins:
-  - jemoji

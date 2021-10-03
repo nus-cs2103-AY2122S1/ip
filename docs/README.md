@@ -1,15 +1,7 @@
----
-layout: page
-title: User Guide
----
-
+# User Guide
 FakeApp is a personal task manager in the form of a chatbot. He can help you track your To-dos, events, and deadlines
+<br><br>
 ![FakeApp Screenshot](./Ui.png)
-
-* Table of Contents
-  {:toc}
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed on your Computer.
