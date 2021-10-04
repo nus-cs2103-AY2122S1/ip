@@ -166,10 +166,10 @@ Simply enter the commond in the following format:
 
 Example:
 ```java
-Input:      find Tim
+Input:      find work food
 Output:     Refer to below for the expected output
 ```
-![image](https://user-images.githubusercontent.com/62177572/135905211-e7b1d826-6411-4c95-801f-aeba38775a00.png)
+![image](https://user-images.githubusercontent.com/62177572/135914871-0cac839d-3442-4a35-ad24-d4a906fb9d11.png)
 
 ---
 
