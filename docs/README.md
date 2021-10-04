@@ -50,7 +50,7 @@ bye                                                                             
 
 ---
 
-> ### a) Add `todo` task 🧾
+### a) Add `todo` task 🧾
 
 Add the simplest task, a `todo` task, into your MBBPH. He will track it for you!
 
@@ -67,7 +67,7 @@ Output:     [T][ ] eat food
 
 ---
 
-> ### b) Add `event` task 🏁
+### b) Add `event` task 🏁
 
 Think of future events? Add an `event` task into your MBBPH. He will track both the task and the event time!
 
