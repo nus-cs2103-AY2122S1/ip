@@ -54,7 +54,7 @@ bye                                                                             
 
 Add the simplest task, a `todo` task, into your MBBPH. He will track it for you!
 
-Simply enter the following format:
+Simply enter in the following format:
 
 - ```todo taskDesc```
 
@@ -71,7 +71,7 @@ Output:     [T][ ] eat food
 
 Think of future events? Add an `event` task into your MBBPH. He will track both the task and the event time!
 
-Simply enter the following format:
+Simply enter in the following format:
 
 - ```event taskDecs /at yyyy-mm-ddThh:mm:ss```
 
@@ -90,7 +90,7 @@ Output:     [E][ ] meet Tim (at: 2021-10-01 18:00:00)
 
 Deadline coming up? No worries, tell MBBPH to keep track for you!
 
-Simply enter the following format:
+Simply enter in the following format:
 - ```deadline taskDecs /by yyyy-mm-ddThh:mm:ss```
 
 **remember to input T between data and time to follow the ISO_LOCAL_DATE_TIME format**
@@ -108,7 +108,7 @@ Output:     [E][ ] work (by: 2021-10-01 18:00:00)
 
 Have too many tasks on hand? Ask MBBPH to display everything at once!
 
-Simply enter the following format:
+Simply enter in the following format:
 - ```list```
 
 Example:
@@ -124,7 +124,7 @@ Output:     Refer to below for the expected output
 
 Completed a task? Tell MBBPH to mark as done!
 
-Simply enter the following format:
+Simply enter in the following format:
 - ```done IndexOfTaskInList```
 
 **remember to use `list` to find the index before marking a task as done!
@@ -142,7 +142,7 @@ Output:     [T][X] eat food
 
 It's time to get rid of some tasks! Tell MBBPH to remove them from your task list!
 
-Simply enter the following format:
+Simply enter in the following format:
 - ```delete IndexOfTaskInList```
 
 **remember to use `list` to find the index before deleting a task
@@ -160,7 +160,7 @@ Output:     Refer to below for the expected output
 
 Losing track? Find a specific task using some keywords with the help of MBBPH!
 
-Simply enter the following format:
+Simply enter in the following format:
 - ```find keywords```
 
 **You can key in multiple keywords! However, remember to seperate them with `space`**
@@ -202,7 +202,7 @@ Output:     Refer to below for the expected output
 
 Done with MBBPH! Say bye!
 
-Simply enter either command:
+Simply enter in the following format:
 - ```bye```
 
 **Press `enter` again after the commond would fully close the software**
