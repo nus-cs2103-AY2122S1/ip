@@ -45,7 +45,171 @@ done        Integer (A task indexed in the task list)                           
 delete      Integer (A task indexed in the task list)                               -> Delete a task from the task list
 find        keywords (eg find homework play)                                        -> Find tasks that contain the respective keywords
 massops     delete / done                                                           -> Mark all task as done / delete all tasks
+bye                                                                                 -> Exit System
 ```
+
+---
+
+> ### Add `todo` task 🧾
+
+Add the simplest task, a `todo` task, into your MBBPH. He will track it for you!
+
+Simply enter the following format:
+
+- ```todo taskDesc```
+
+Example:
+```java
+Input:      todo eat food
+Output:     [T][ ] eat food
+```
+![image](https://user-images.githubusercontent.com/62177572/135904520-8ca39ed3-dbf0-44d9-bfde-fc605d073f02.png)
+
+---
+
+> ### Add `event` task 🏁
+
+Think of future events? Add an `event` task into your MBBPH. He will track both the task and the event time!
+
+Simply enter the following format:
+
+- ```event taskDecs /at yyyy-mm-ddThh:mm:ss```
+
+**remember to input T between data and time to follow the ISO_LOCAL_DATE_TIME format**
+
+Example:
+```java
+Input:      event meet Tim /at 2021-10-01T18:00:00
+Output:     [E][ ] meet Tim (at: 2021-10-01 18:00:00)
+```
+![image](https://user-images.githubusercontent.com/62177572/135904599-7a1ad537-cf0e-43fd-9778-cc515d7c361c.png)
+
+---
+
+### Add `deadline` ⏳
+
+Deadline coming up? No worries, tell MBBPH to keep track for you!
+
+Simply enter the following format:
+- ```deadline taskDecs /by yyyy-mm-ddThh:mm:ss```
+
+**remember to input T between data and time to follow the ISO_LOCAL_DATE_TIME format**
+
+Example:
+```java
+Input:      deadline work /by 2021-10-01T18:00:00
+Output:     [E][ ] work (by: 2021-10-01 18:00:00)
+```
+![image](https://user-images.githubusercontent.com/62177572/135904749-72638d17-2e2c-45f1-9618-c06a550cb88a.png)
+
+---
+
+### List 📃
+
+Have too many tasks on hand? Ask MBBPH to display everything at once!
+
+Simply enter the following format:
+- ```list```
+
+Example:
+```java
+Input:      list
+Output:     Refer to below for the expected output
+```
+![image](https://user-images.githubusercontent.com/62177572/135904845-16845f04-1b44-4fed-9acc-5f347f01d96f.png)
+
+---
+
+### Done ☑
+
+Completed a task? Tell MBBPH to mark as done!
+
+Simply enter the following format:
+- ```done IndexOfTaskInList```
+
+**remember to use `list` to find the index before marking a task as done!
+
+Example:
+```java
+Input:      done 1
+Output:     [T][X] eat food
+```
+![image](https://user-images.githubusercontent.com/62177572/135904918-c85dc0a5-3ab1-40bc-8d18-b471f429925c.png)
+
+---
+
+### Delete ❌
+
+It's time to get rid of some tasks! Tell MBBPH to remove them from your task list!
+
+Simply enter the following format:
+- ```delete IndexOfTaskInList```
+
+**remember to use `list` to find the index before deleting a task
+
+Example:
+```java
+Input:      delete 1
+Output:     Refer to below for the expected output
+```
+![image](https://user-images.githubusercontent.com/62177572/135905114-9ea5972b-9c6d-4d4d-8361-8186c32d125a.png)
+
+---
+
+### find 🔍
+
+Losing track? Find a specific task using some keywords with the help of MBBPH!
+
+Simply enter the following format:
+- ```find keywords```
+
+**You can key in multiple keywords! However, remember to seperate them with `space`**
+
+Example:
+```java
+Input:      find Tim
+Output:     Refer to below for the expected output
+```
+![image](https://user-images.githubusercontent.com/62177572/135905211-e7b1d826-6411-4c95-801f-aeba38775a00.png)
+
+---
+
+### MassOps 💪
+
+One powerful function of MBBPH is to do many things at once! You can delete all tasks on the task tracker or ask MBBPH to mark all as done!
+
+Simply enter either command:
+- ```massops done```
+- ```massops delete```
+
+**Think twice before doing that! It cannot be undone!**
+
+Example:
+```java
+Input:      massops done
+Output:     Refer to below for the expected output
+```
+![image](https://user-images.githubusercontent.com/62177572/135905355-43140c23-b68d-472c-abde-6e0cce0c09e6.png)
+```java
+Input:      massops delete
+Output:     Refer to below for the expected output
+```
+![image](https://user-images.githubusercontent.com/62177572/135905454-fdb1541d-8702-45ba-b7e0-ed2f2e32141b.png)
+
+---
+
+### Bye 👋
+
+Done with MBBPH! Say bye!
+
+Simply enter either command:
+- ```bye```
+
+**Press `enter` again after the commond would fully close the software**
+
+Example:
+![image](https://user-images.githubusercontent.com/62177572/135907686-ac9e6771-0987-44d6-ad62-d86155a4c9cc.png)
+
 
 ## 4. Make me better? 📈
 
