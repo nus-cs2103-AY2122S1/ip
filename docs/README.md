@@ -85,7 +85,7 @@ Output:     [E][ ] meet Tim (at: 2021-10-01 18:00:00)
 
 ---
 
-### c) Add `deadline` ⏳
+### c) Add `deadline` task ⏳
 
 Deadline coming up? No worries, tell MBBPH to keep track for you!
 
@@ -103,7 +103,7 @@ Output:     [E][ ] work (by: 2021-10-01 18:00:00)
 
 ---
 
-### d) List 📃
+### d) Show all task in `list` 📃
 
 Having too many tasks on hand? Ask MBBPH to display every task at once!
 
@@ -119,7 +119,7 @@ Output:     Refer to below for the expected output
 
 ---
 
-### e) Done ☑
+### e) Mark Task as `done` ☑
 
 Completed a task? Tell MBBPH to mark as done!
 
@@ -137,7 +137,7 @@ Output:     [T][X] eat food
 
 ---
 
-### f) Delete ❌
+### f) `delete` a Task ❌
 
 It's time to get rid of some tasks! Tell MBBPH to remove them from your task list!
 
@@ -155,7 +155,7 @@ Output:     Refer to below for the expected output
 
 ---
 
-### g) find 🔍
+### g) `find` using keywords 🔍
 
 Losing track? Find a specific task using some keywords with the help of MBBPH!
 
@@ -173,7 +173,7 @@ Output:     Refer to below for the expected output
 
 ---
 
-### h) MassOps 💪
+### h) Do more with `massops` 💪
 
 One powerful function of MBBPH is to do many things at once! You can delete all tasks on the task tracker or ask MBBPH to mark all as done!
 
@@ -199,7 +199,7 @@ Output:     Refer to below for the expected output
 
 ---
 
-### i) Bye 👋
+### i) Say `bye` 👋
 
 Done with MBBPH! Say bye!
 
@@ -239,6 +239,8 @@ public class Launcher {
 5. If the setup is correct, you should see something like this:
 
 ![Capture](https://user-images.githubusercontent.com/62177572/133310665-d8b89965-a71c-4836-81f6-7ba668f41dd5.PNG)
+
+6. Start Dev!
 
 ## 5. Credits
 - [Brian Griffin Picture Resource](https://en.wikipedia.org/wiki/File:Brian_Griffin.png)
