@@ -50,6 +50,7 @@ bye                                                                             
 
 ---
 
+
 ### a) Add `todo` task 🧾
 
 Add the simplest task, a `todo` task, into your MBBPH. He will track it for you!
@@ -184,12 +185,14 @@ Simply enter either command:
 
 **Think twice before doing that! It cannot be undone!**
 
-Example:
+Example for ```massops done```:
 ```java
 Input:      massops done
 Output:     Refer to below for the expected output
 ```
 ![image](https://user-images.githubusercontent.com/62177572/135905355-43140c23-b68d-472c-abde-6e0cce0c09e6.png)
+
+Example for ```massops delete```:
 ```java
 Input:      massops delete
 Output:     Refer to below for the expected output
@@ -208,6 +211,7 @@ Simply enter in the following format:
 **Press `enter` again after the commond would fully close the software**
 
 Example:
+
 ![image](https://user-images.githubusercontent.com/62177572/135907686-ac9e6771-0987-44d6-ad62-d86155a4c9cc.png)
 
 
