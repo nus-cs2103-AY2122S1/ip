@@ -236,7 +236,7 @@ public class Launcher {
 }
 ```
 
-If the setup is correct, you should see something like this:
+If the setup is correct, you should see something like this: (Try entering the command `event meet Tim /at 2103-03-21T21:03:21`, you should be able to get a simialr output.)
 
 ![Capture](https://user-images.githubusercontent.com/62177572/133310665-d8b89965-a71c-4836-81f6-7ba668f41dd5.PNG)
 
