@@ -50,7 +50,7 @@ bye                                                                             
 
 ---
 
-> ### Add `todo` task 🧾
+> ### a) Add `todo` task 🧾
 
 Add the simplest task, a `todo` task, into your MBBPH. He will track it for you!
 
@@ -67,7 +67,7 @@ Output:     [T][ ] eat food
 
 ---
 
-> ### Add `event` task 🏁
+> ### b) Add `event` task 🏁
 
 Think of future events? Add an `event` task into your MBBPH. He will track both the task and the event time!
 
@@ -86,7 +86,7 @@ Output:     [E][ ] meet Tim (at: 2021-10-01 18:00:00)
 
 ---
 
-### Add `deadline` ⏳
+### c) Add `deadline` ⏳
 
 Deadline coming up? No worries, tell MBBPH to keep track for you!
 
@@ -104,7 +104,7 @@ Output:     [E][ ] work (by: 2021-10-01 18:00:00)
 
 ---
 
-### List 📃
+### d) List 📃
 
 Have too many tasks on hand? Ask MBBPH to display everything at once!
 
@@ -120,7 +120,7 @@ Output:     Refer to below for the expected output
 
 ---
 
-### Done ☑
+### e) Done ☑
 
 Completed a task? Tell MBBPH to mark as done!
 
@@ -138,7 +138,7 @@ Output:     [T][X] eat food
 
 ---
 
-### Delete ❌
+### f) Delete ❌
 
 It's time to get rid of some tasks! Tell MBBPH to remove them from your task list!
 
@@ -156,7 +156,7 @@ Output:     Refer to below for the expected output
 
 ---
 
-### find 🔍
+### g) find 🔍
 
 Losing track? Find a specific task using some keywords with the help of MBBPH!
 
@@ -174,7 +174,7 @@ Output:     Refer to below for the expected output
 
 ---
 
-### MassOps 💪
+### h) MassOps 💪
 
 One powerful function of MBBPH is to do many things at once! You can delete all tasks on the task tracker or ask MBBPH to mark all as done!
 
@@ -198,7 +198,7 @@ Output:     Refer to below for the expected output
 
 ---
 
-### Bye 👋
+### i) Bye 👋
 
 Done with MBBPH! Say bye!
 
