@@ -19,7 +19,7 @@ public class HelpCommand implements Command {
     /**
      * Returns true if command is an exit command.
      *
-     * @return true if command is an exit command, false otherwise
+     * @return false if command is an exit command, false otherwise
      */
     @Override
     public boolean isExit() {

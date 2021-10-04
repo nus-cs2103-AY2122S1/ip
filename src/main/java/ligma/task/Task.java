@@ -15,6 +15,7 @@ public class Task {
      * Creates a Task object.
      *
      * @param desc                      the description of the task
+     * @param meta                      meta-info about task
      * @return                          task created
      */
     public Task(String desc, String meta) {
