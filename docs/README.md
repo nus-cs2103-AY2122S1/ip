@@ -1,4 +1,4 @@
-# Peter Griffin MBBPH (My Big Boy Peter Helper)
+# Peter Griffin MBBPH (My Big Boy Peter Helper) User Guide
 
 > ┏ (゜ω゜)=☞ 
 > 
