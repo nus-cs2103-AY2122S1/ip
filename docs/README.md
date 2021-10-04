@@ -236,11 +236,9 @@ public class Launcher {
 }
 ```
 
-5. If the setup is correct, you should see something like this:
+If the setup is correct, you should see something like this:
 
 ![Capture](https://user-images.githubusercontent.com/62177572/133310665-d8b89965-a71c-4836-81f6-7ba668f41dd5.PNG)
-
-6. Start Dev!
 
 ## 5. Credits
 - [Brian Griffin Picture Resource](https://en.wikipedia.org/wiki/File:Brian_Griffin.png)
