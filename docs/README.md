@@ -37,9 +37,9 @@ Clearly, I am here to clean up Tim's mess, this is what I do daily for this lazy
 - [X] Repond to the following commands:
 ```java
 Command     Custom Input                                                         Purpose
-todo        something                                                            -> Add a todo type task into the task list
-event       something /at yyyy-mm-ddThh:mm:ss (Format: ISO_LOCAL_DATE_TIME)      -> Add an event type task into the task list
-deadline    something /by yyyy-mm-ddThh:mm:ss (Format: ISO_LOCAL_DATE_TIME)      -> Add an deadline type task into the task list
+todo        taskDescription                                                      -> Add a todo type task into the task list
+event       taskDescription /at yyyy-mm-ddThh:mm:ss (Format: ISO_LOCAL_DATE_TIME)-> Add an event type task into the task list
+deadline    taskDescription /by yyyy-mm-ddThh:mm:ss (Format: ISO_LOCAL_DATE_TIME)-> Add an deadline type task into the task list
 list                                                                             -> Display all tasks with their status
 done        Integer (A task indexed in the task list)                            -> Mark a task as completed
 delete      Integer (A task indexed in the task list)                            -> Delete a task from the task list
