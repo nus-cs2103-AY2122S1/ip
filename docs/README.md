@@ -55,7 +55,7 @@ bye                                                                             
 
 Add the simplest task, a `todo` task, into your MBBPH. He will track it for you!
 
-Simply enter the commond in the following format:
+Simply enter the command in the following format:
 - ```todo taskDesc```
 
 Example:
@@ -71,7 +71,7 @@ Output:     [T][ ] eat food
 
 Thinking of future events? Add an `event` task into your MBBPH. He will track both the task and the event time!
 
-Simply enter the commond in the following format:
+Simply enter the command in the following format:
 - ```event taskDecs /at yyyy-mm-ddThh:mm:ss```
 
 **remember to input `T` between date and time to follow the ISO_LOCAL_DATE_TIME format.**
@@ -89,7 +89,7 @@ Output:     [E][ ] meet Tim (at: 2021-10-01 18:00:00)
 
 Deadline coming up? No worries, tell MBBPH to keep track for you!
 
-Simply enter the commond in the following format:
+Simply enter the command in the following format:
 - ```deadline taskDecs /by yyyy-mm-ddThh:mm:ss```
 
 **remember to input `T` between date and time to follow the ISO_LOCAL_DATE_TIME format.**
@@ -103,7 +103,7 @@ Output:     [E][ ] work (by: 2021-10-01 18:00:00)
 
 ---
 
-### d) Show all task in `list` 📃
+### d) Show all tasks in `list` 📃
 
 Having too many tasks on hand? Ask MBBPH to display every task at once!
 
@@ -123,7 +123,7 @@ Output:     Refer to below for the expected output
 
 Completed a task? Tell MBBPH to mark as done!
 
-Simply enter the commond in the following format:
+Simply enter the command in the following format:
 - ```done IndexOfTaskInList```
 
 **remember to use `list` to find the index of the task before marking a task as done!**
@@ -141,7 +141,7 @@ Output:     [T][X] eat food
 
 It's time to get rid of some tasks! Tell MBBPH to remove them from your task list!
 
-Simply enter the commond in the following format:
+Simply enter the command in the following format:
 - ```delete IndexOfTaskInList```
 
 **remember to use `list` to find the index of the task before deleting a task!**
@@ -159,10 +159,10 @@ Output:     Refer to below for the expected output
 
 Losing track? Find a specific task using some keywords with the help of MBBPH!
 
-Simply enter the commond in the following format:
+Simply enter the command in the following format:
 - ```find keywords```
 
-**You can key in multiple keywords! However, remember to seperate them with `space`.**
+**You can key in multiple keywords! However, remember to separate them with `space`.**
 
 Example:
 ```java
@@ -203,7 +203,7 @@ Output:     Refer to below for the expected output
 
 Done with MBBPH! Say bye!
 
-Simply enter the commond in the following format:
+Simply enter the command in the following format:
 - ```bye```
 
 **Press `enter` again after the commond would fully close the software.**
@@ -223,7 +223,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. Select the project directory, and click `OK`.
    1. If there are any further prompts, accept the defaults.
 3. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
+   In the same dialogue, set the **Project language level** field to the `SDK default` option.
 4. After that, locate the `src/main/java/Launcher.java` file, right-click it, and choose `Run Launcher.main()` (if the code editor is showing compile errors, try restarting the IDE). 
 
 ```java
