@@ -74,7 +74,7 @@ Thinking of future events? Add an `event` task into your MBBPH. He will track bo
 Simply enter the commond in the following format:
 - ```event taskDecs /at yyyy-mm-ddThh:mm:ss```
 
-**remember to input T between date and time to follow the ISO_LOCAL_DATE_TIME format.**
+**remember to input `T` between date and time to follow the ISO_LOCAL_DATE_TIME format.**
 
 Example:
 ```java
@@ -92,7 +92,7 @@ Deadline coming up? No worries, tell MBBPH to keep track for you!
 Simply enter the commond in the following format:
 - ```deadline taskDecs /by yyyy-mm-ddThh:mm:ss```
 
-**remember to input T between date and time to follow the ISO_LOCAL_DATE_TIME format.**
+**remember to input `T` between date and time to follow the ISO_LOCAL_DATE_TIME format.**
 
 Example:
 ```java
