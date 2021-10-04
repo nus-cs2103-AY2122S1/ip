@@ -74,7 +74,7 @@ Thinking of future events? Add an `event` task into your MBBPH. He will track bo
 Simply enter the commond in the following format:
 - ```event taskDecs /at yyyy-mm-ddThh:mm:ss```
 
-**remember to input T between date and time to follow the ISO_LOCAL_DATE_TIME format**
+**remember to input T between date and time to follow the ISO_LOCAL_DATE_TIME format.**
 
 Example:
 ```java
@@ -92,7 +92,7 @@ Deadline coming up? No worries, tell MBBPH to keep track for you!
 Simply enter the commond in the following format:
 - ```deadline taskDecs /by yyyy-mm-ddThh:mm:ss```
 
-**remember to input T between date and time to follow the ISO_LOCAL_DATE_TIME format**
+**remember to input T between date and time to follow the ISO_LOCAL_DATE_TIME format.**
 
 Example:
 ```java
@@ -144,7 +144,7 @@ It's time to get rid of some tasks! Tell MBBPH to remove them from your task lis
 Simply enter the commond in the following format:
 - ```delete IndexOfTaskInList```
 
-**remember to use `list` to find the index before deleting a task!
+**remember to use `list` to find the index before deleting a task!**
 
 Example:
 ```java
@@ -162,7 +162,7 @@ Losing track? Find a specific task using some keywords with the help of MBBPH!
 Simply enter the commond in the following format:
 - ```find keywords```
 
-**You can key in multiple keywords! However, remember to seperate them with `space`**
+**You can key in multiple keywords! However, remember to seperate them with `space`.**
 
 Example:
 ```java
@@ -206,7 +206,7 @@ Done with MBBPH! Say bye!
 Simply enter the commond in the following format:
 - ```bye```
 
-**Press `enter` again after the commond would fully close the software**
+**Press `enter` again after the commond would fully close the software.**
 
 Example:
 
