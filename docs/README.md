@@ -44,7 +44,7 @@ list                                                                            
 done        Integer (A task indexed in the task list)                               -> Mark a task as completed
 delete      Integer (A task indexed in the task list)                               -> Delete a task from the task list
 find        keywords (eg find homework play)                                        -> Find tasks that contain the respective keywords
-massops     delete / done							                                       -> Mark all task as done / delete all tasks
+massops     delete / done                                                           -> Mark all task as done / delete all tasks
 ```
 
 ## 4. Make me better? 📈
