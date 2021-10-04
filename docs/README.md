@@ -126,7 +126,7 @@ Completed a task? Tell MBBPH to mark as done!
 Simply enter the commond in the following format:
 - ```done IndexOfTaskInList```
 
-**remember to use `list` to find the index before marking a task as done!
+**remember to use `list` to find the index before marking a task as done!**
 
 Example:
 ```java
