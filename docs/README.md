@@ -126,7 +126,7 @@ Completed a task? Tell MBBPH to mark as done!
 Simply enter the commond in the following format:
 - ```done IndexOfTaskInList```
 
-**remember to use `list` to find the index before marking a task as done!**
+**remember to use `list` to find the index of the task before marking a task as done!**
 
 Example:
 ```java
@@ -144,7 +144,7 @@ It's time to get rid of some tasks! Tell MBBPH to remove them from your task lis
 Simply enter the commond in the following format:
 - ```delete IndexOfTaskInList```
 
-**remember to use `list` to find the index before deleting a task!**
+**remember to use `list` to find the index of the task before deleting a task!**
 
 Example:
 ```java
