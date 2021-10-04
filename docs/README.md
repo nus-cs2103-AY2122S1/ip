@@ -34,7 +34,7 @@ Clearly, I am here to clean up anyone's mess, this is what I do daily for YOU:
 
 ## 3. Features Development 👩‍💻
 
-- [X] Repond to the following commands:
+- [X] Respond to the following commands:
 ```java
 Command     Custom Input                                                            Purpose
 todo        taskDescription                                                         -> Add a todo type task into the task list
