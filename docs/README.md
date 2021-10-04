@@ -17,11 +17,11 @@
 ▒█░░░ ▀▀▀ ░░▀░░ ▀▀▀ ▀░▀▀ 　 ▒█▄▄█ ▀░▀▀ ▀▀▀ ▀░░ ▀░░ ▀▀▀ ▀░░▀ 　 ▒█░░▒█ ▒█▄▄█ ▒█▄▄█ ▒█░░░ ▒█░▒█
 ```
 
-Clearly, I am here to clean up Tim's mess, this is what I do daily for this lazy boy:
-- Greet him with some funny words. 👋
-- Scold him and make him continue working on his project. 😠
-- Keep track of his todos... *(He's from CS, he's quite busy apparently)* 😔
-- Remind him of his random events and his crazy deadlines. 😰
+Clearly, I am here to clean up anyone's mess, this is what I do daily for YOU:
+- Greet you with some funny words. 👋
+- Remind you to continue working on your project. 😠
+- Keep track of your todos... 😔
+- Remind you of your random events and your crazy deadlines. 😰
 
 ## 2. Do you want to get a piece of me? 🎃
 
