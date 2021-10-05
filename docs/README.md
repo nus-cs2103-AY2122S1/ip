@@ -7,25 +7,25 @@ Here are is a summary of commands that Duke responds to: (You can find the detai
 
 Command | Format | What it does
 ------- | ------ | ------------
-`list` | `list` | Displays a list of your current tasks.
-`todo` | `todo {task description}` | Adds a todo to your task list.
-`deadline` | `deadline {task description} /by {date/time}` | Adds a deadline to your task list.
-`event` | `event {task description} /at {date/time}` | Adds an event to your task list.
-`done`  | `done {number}` | Marks a task as done.
-`delete` | `delete {number}` | Deletes a task from the task list.
-`find` | `find {keyword}` | Finds all matching tasks that contain the specified keyword.
-`bye` | `bye` | Exits Duke.
+[`list`](#1-list-displays-all-your-tasks-you-entered-so-far-tasks-are-saved-even-if-you-quit-duke) | `list` | Displays a list of your current tasks.
+[`todo`](#2-todo-add-a-to-do-task) | `todo {task description}` | Adds a todo to your task list.
+[`deadline`](#3-deadline-adds-a-deadline-task) | `deadline {task description} /by {date/time}` | Adds a deadline to your task list.
+[`event`](#4-event-adds-an-event-task) | `event {task description} /at {date/time}` | Adds an event to your task list.
+[`done`](#5-done-marks-a-task-in-the-task-list-as-done) | `done {number}` | Marks a task as done.
+[`delete`](#6-delete-deletes-a-task-in-the-task-list) | `delete {number}` | Deletes a task from the task list.
+[`find`](#7-find-searches-for-all-tasks-in-the-task-list-that-matches-the-specified-keywords) | `find {keyword}` | Finds all matching tasks that contain the specified keyword.
+[`bye`](#8-bye-exits-duke) | `bye` | Exits Duke.
 
 ## Features 
 
 Feature list:
 - [x] List tasks
-- [x] [Add to-dos](#2-todo-add-a-to-do-task)
+- [x] Add to-dos
 - [x] Add deadlines
 - [x] Add events
 - [x] Complete tasks
 - [x] Delete tasks
-- [x] Search for tasks 
+- [x] Search for tasks
 - [x] Check for duplicate tasks
 
 ## Usage
@@ -104,7 +104,7 @@ Expected outcome:
 <img width="400" alt="Screenshot 2021-09-13 at 5 10 15 PM" src="https://user-images.githubusercontent.com/85099754/133056981-f1e26db2-ff14-4b7a-bdb0-0d932e467f47.png">
 
 
-### 5. `delete`: Deletes a task in the task list.
+### 6. `delete`: Deletes a task in the task list.
 
 **Format:** `delete {number}`
 
@@ -116,7 +116,7 @@ Expected outcome:
 <img width="400" alt="Screenshot 2021-09-13 at 5 11 03 PM" src="https://user-images.githubusercontent.com/85099754/133057104-edc9bc53-403f-4c91-adc6-74a9d6fd6a6f.png">
 
 
-### 5. `find`: Searches for all tasks in the task list that matches the specified keywords.
+### 7. `find`: Searches for all tasks in the task list that matches the specified keywords.
 
 **Format:** `find {keywords}`
 
@@ -129,7 +129,7 @@ Expected outcome (using example 1):
 
 <img width="400" alt="Screenshot 2021-09-13 at 5 12 51 PM" src="https://user-images.githubusercontent.com/85099754/133057445-9f272bf3-76dd-4dfc-af42-1958e01e4eab.png">
 
-### 6. `bye`: Exits Duke.
+### 8. `bye`: Exits Duke.
 
 **Format:** `bye`
 
