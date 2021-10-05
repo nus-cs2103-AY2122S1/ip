@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Main-Class: 
+Class-Path: snakeyaml-1.21.jar javafx-base-16-win.jar testng-7.1.0.jar j
+ unit-platform-engine-1.8.0.jar javafx-graphics-16.jar javafx-graphics-1
+ 6-win.jar javafx-base-16-linux.jar javax.inject-1.jar javafx-fxml-16-ma
+ c.jar javafx-base-16.jar aopalliance-1.0.jar javafx-graphics-16-mac.jar
+  javafx-base-16-mac.jar guice-4.1.0-no_aop.jar javafx-fxml-16-win.jar j
+ unit-jupiter-engine-5.8.0.jar junit-jupiter-api-5.8.0.jar javafx-contro
+ ls-16-mac.jar junit-platform-commons-1.8.0.jar javafx-controls-16-linux
+ .jar guava-19.0.jar javafx-controls-16-win.jar javafx-fxml-16-linux.jar
+  javafx-graphics-16-linux.jar opentest4j-1.2.0.jar jcommander-1.72.jar 
+ javafx-controls-16.jar
+
