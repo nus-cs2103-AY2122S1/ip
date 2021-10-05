@@ -181,7 +181,7 @@ Simply enter either command:
 - ```massops done```
 - ```massops delete```
 
-**Think twice before doing that! It cannot be undone!**
+**Think twice before entering the command! This action cannot be undone!**
 
 Example for ```massops done```:
 ```java
@@ -201,7 +201,7 @@ Output:     Refer to below for the expected output
 
 ### i) Say `bye` 👋
 
-Done with MBBPH! Say bye!
+Done with MBBPH? Say bye!
 
 Simply enter the command in the following format:
 - ```bye```
