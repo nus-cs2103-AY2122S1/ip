@@ -20,7 +20,7 @@ Command | Format | What it does
 
 Feature list:
 - [x] List tasks
-- [x] Add to-dos
+- [x] [Add to-dos](#2-todo-add-a-to-do-task)
 - [x] Add deadlines
 - [x] Add events
 - [x] Complete tasks
