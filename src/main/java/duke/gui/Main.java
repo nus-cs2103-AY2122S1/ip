@@ -35,7 +35,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            scene.getRoot().setStyle("-fx-font-family: 'serif'");
+            scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("Welcome to Duke!");
