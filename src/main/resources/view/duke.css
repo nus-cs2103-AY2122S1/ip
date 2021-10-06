@@ -1,0 +1,9 @@
+.background {
+    -fx-background-image:url('../images/background.jpeg');
+    -fx-background-size: 100% 100%;
+}
+
+.speech-bubble {
+    -fx-background-color: #F5CE42;
+    -fx-background-radius: 17px;
+}
