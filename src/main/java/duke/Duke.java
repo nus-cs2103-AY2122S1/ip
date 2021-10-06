@@ -14,15 +14,14 @@ public class Duke {
             this.taskList = new TaskList();
             this.storage = Storage.initStorage("data/", "data/duke.txt");
             storage.readFile(taskList);
-        }
-        catch(DukeException e) {
+        } catch(DukeException e) {
             Ui.showError(e.getMessage());
         }
 
     }
 
     /**
-     * Get the response according to the user input
+     * Gets the response according to the user input
      *
      * @param input user command
      * @return Duke's response
@@ -33,8 +32,7 @@ public class Duke {
             String response = Parser.parser(input, taskList);
             storage.saveToFile(taskList);
             return response;
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             return Ui.showError(e.getMessage());
         }
     }
