@@ -5,8 +5,8 @@ import javafx.application.Application;
 /**
  * Main launcher class
  */
-public class Launcher {
+public class DukeMain {
     public static void main(String[] args) {
-        Application.launch(Main.class, args);
+        Application.launch(MainLaunch.class, args);
     }
 }
