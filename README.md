@@ -1,8 +1,8 @@
-# duke.Duke project template
+# Duke Individual Project
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
-## Setting up in Intellij
+## Requirements
 
 Prerequisites: JDK 11.
 
@@ -10,7 +10,7 @@ Prerequisites: JDK 11.
 2. Double click duke.jar
 3. You may begin tracking your tasks!
 
-### Supported commands
+## Supported commands
 * todo
   * Adds a todo task
 * deadline
