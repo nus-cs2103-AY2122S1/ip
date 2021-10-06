@@ -140,6 +140,8 @@ Expected outcome:
 
 <img width="400" alt="Screenshot 2021-09-13 at 5 13 16 PM" src="https://user-images.githubusercontent.com/85099754/133057511-b98dccd7-6147-4d62-b9b9-bad110df4cb4.png">
 
+The application will then exit after 1.5 seconds
+
 
 #### Warning
 * Do not edit the `data/Duke.txt` file as Duke saves and loads your user data through this file. <br/>
