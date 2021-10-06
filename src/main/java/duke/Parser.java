@@ -60,11 +60,9 @@ public class Parser {
             default:
                 throw new IllegalStateException("Unexpected value: " + updateType);
             }
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! Invalid task number");
-        }
-        catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             throw new DukeException("OOPS!!! Invalid command");
         }
     }
@@ -80,7 +78,7 @@ public class Parser {
     }
 
     /**
-     * Handle the input started with "find"
+     * Handles the input started with "find"
      *
      * @param pieces split command
      * @param taskList a list of tasks
@@ -100,7 +98,7 @@ public class Parser {
     }
 
     /**
-     * Handle input started with "delete"
+     * Handles input started with "delete"
      *
      * @param pieces split command
      * @param taskList a list of tasks
