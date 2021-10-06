@@ -49,7 +49,7 @@ As stated there are currently 4 types of supported tasks:
     ```
     Example usage: `doafter CS2100 Tutorial 4 /after Watch CS2100 lecture`
 
-### Feature-Done-Delete-List
+### Feature-Done-Delete-List-Find
 
 Duke supports Done, Delete and List functionality.
 * Done: sets a selected task to be marked as done
@@ -69,5 +69,11 @@ Duke supports Done, Delete and List functionality.
         list
     ```
     Example usage: `list`
+
+* Find: finds all the tasks that matches the specified search term
+    ```
+        find {search-term}
+    ```
+    Example usage: `find homework`
 
 Click [here](https://github.com/muhammad-faruq/ip) for the github repo :grinning:

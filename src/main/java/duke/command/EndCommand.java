@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import javafx.application.Platform;
 
 /**
  * Class that implements command. This class is responsible for ending the application.
@@ -20,6 +21,8 @@ public class EndCommand implements Command {
      */
     @Override
     public String execute(TaskList t, Ui ui, Storage storage) {
+        Platform.exit();
+        System.exit(0);
         return ui.textFrame("Goodbye from Bob's list adder!");
     }
 
