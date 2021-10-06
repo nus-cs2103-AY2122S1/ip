@@ -13,5 +13,12 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
+text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/data/duke.txt
+
+# Duke.txt
+data/duke.txt
+
+# VSCODE files
+.vscode/
