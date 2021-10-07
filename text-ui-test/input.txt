@@ -1,0 +1,12 @@
+todo something
+deadline homework
+deadline homework /by friday night
+event
+event birthday /at next week
+list
+done 3
+list
+delete 2
+list
+hello
+bye
