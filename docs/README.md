@@ -20,10 +20,13 @@ operates using **text commands**.
 * Copy the file to the folder you want to use as the home folder for your Dukewu.
 * Double-click the file to start the app. The GUI should appear in a few seconds.
 
-![Quickstart](Quickstart.png?raw=true)
+<img src="Quickstart.png" width="400px">
 
 ## 3. Command Summary
 ***
+![CmdSummary](CmdSummary.png?raw=true)
+
+<!--
 | Summary | Command | Example |
 |---------| ------- |---------|
 |**Help:**|`help`|-|
@@ -36,6 +39,8 @@ operates using **text commands**.
 |**Done:**|`done NUMBER`|`done 5`|
 |**Clearall:**|`clearall` followed by `y`|-|
 |**Exit:**|`bye`|-|
+This table isn't working so I'm adding a .png file.
+-->
 
 ## 4. Command Features
 ***
@@ -54,14 +59,14 @@ Displays a list of commands that Dukewu supports.
 
 Format: `help`
 
-![Help](Help.png?raw=true)
+<img src="Help.png" width="400px">
 
 ### 4.2 Viewing the task list: `list`
 Displays your list of tasks.
 
 Format: `list`
 
-![List](List.png?raw=true)
+<img src="List.png" width="400px">
 
 ### 4.3 Creating a Todo task
 Adds a task with no deadline to the task list.
@@ -72,7 +77,7 @@ Examples:
 * `todo finish my homework`
 * `todo prepare a burial so my teammates can let me down one last time`
 
-![Todo](Todo.png?raw=true)
+<img src="Todo.png" width="400px">
 
 
 ### 4.4 Creating a Deadline task
@@ -86,7 +91,7 @@ Examples:
 * `deadline Finish my homework /by 2021-09-16`
 * `deadline Finish and submit my project /by 2021-09-17 23:59`
 
-![Deadline](Deadline.png?raw=true)
+<img src="Deadline.png" width="400px">
 
 ### 4.5 Creating a Event task
 Adds a task with a time that it occurs to the task list.
@@ -99,7 +104,7 @@ Examples:
 * `event Christmas party at my neighbour's /at 2021-12-25`
 * `event Grab Delivery collection /at 2021-12-25 23:59`
 
-![Event](Event.png?raw=true)
+<img src="Event.png" width="400px">
 
 ### 4.6 Finding entries: `find KEYWORD [MORE KEYWORDS]`
 Finds entries with certain keywords in them.
@@ -117,7 +122,7 @@ Examples:
   
   Returns `feed my cat boys` but not `feed my catboys` 
 
-![Find](Find.png?raw=true)
+<img src="Find.png" width="400px">
 
 ### 4.7 Deleting entries: `delete`
 Deletes task number `NUMBER` on the task list.
@@ -134,7 +139,7 @@ Examples:
   
     Deletes the 3rd entry in the task list.
 
-![Delete](Delete.png?raw=true)
+<img src="Delete.png" width="400px">
 
 ### 4.8 Marking entries as done: `done`
 Marks a task in the task list as done.
@@ -149,7 +154,7 @@ Examples:
   
   Marks the 4th entry in the task list as done.
 
-![Done](Done.png?raw=true)
+<img src="Done.png" width="400px">
 
 ### 4.9 Clearing all entries: `clearall`
 Clears all entries from the task list. Asks for confirmation before deletion.
@@ -157,7 +162,7 @@ Clears all entries from the task list. Asks for confirmation before deletion.
 
 Format: `clearall` followed by `y`
 
-![Clearall](Clearall.png?raw=true)
+<img src="Clearall.png" width="400px">
 
 ### 4.10 Exiting the program: `bye`
 Exits the program. 
@@ -166,7 +171,7 @@ Exits the program.
 
 Format: `bye`
 
-![Bye](Bye.png?raw=true)
+<img src="Bye.png" width="400px">
 
 ### 4.11 Saving the data
 Task data is automatically saved into the hard disk after any command that changes the data. There is no 
