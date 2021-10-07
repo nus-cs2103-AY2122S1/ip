@@ -16,6 +16,8 @@ deadline <String: task_name> | add a task of "DEADLINE" type
 find <String: matching_string> | finds all task whose name contains the matching_string
 tag <Int: task_number> <String: tag_name> | tag the specified task with the tag_name
 
+⚠️ You need to close the application by using the "bye" command or else changes will not be saved.
+
 ## Example usages
 
 Below are a few examples of using the listed commands above. Note they are not exhaustive.
