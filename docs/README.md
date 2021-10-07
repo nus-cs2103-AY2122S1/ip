@@ -42,19 +42,22 @@ Now you have 1 tasks in your list
 ___
 ### `event` - Add an event task
 
-Adds an event task with the date (dd MMM yyyy) to list.
+Adds an event task with the date and time to list.
 
-Format: event [description] /at [date]
+Format: event [description] /at [Date], [Time]
 
-Example of usage: `event funfair /at 22 Jun 2021`
+Date should be of format yyyy-MM-dd.
+Time should be of format HH:mm.
+
+Example of usage: `event funfair /at 2022-10-10, 11:30`
 
 Expected outcome:
 
 Shows message of event task added to the list with
-the date stored in the form yyyy-MM-dd
+the date stored in the form dd MMM yyyy
 
 ```
-added: [E][] funfair (at: 2021-06-22)
+added: [E][] funfair (at: 22 Oct 2022, 11:30 AM)
 Now you have 2 tasks in your list
 ```
 ___
@@ -62,17 +65,20 @@ ___
 
 Adds a deadline task with the date (dd MMM yyyy) to list.
 
-Format: deadline [description] /by [date]
+Format: deadline [description] /by [Date], [Time]
 
-Example of usage: `deadline quiz /by 22 Jun 2021`
+Date should be of format yyyy-MM-dd.
+Time should be of format HH:mm.
+
+Example of usage: `deadline quiz /by 2022-10-10, 11:30`
 
 Expected outcome:
 
 Shows message of event task added to the list with
-the date stored in the form yyyy-MM-dd
+the date stored in the form dd MMM yyyy
 
 ```
-added: [D][] quiz (at: 2021-06-22)
+added: [D][] quiz (at: 22 Oct 2022, 11:30 AM)
 Now you have 3 tasks in your list
 ```
 ___
@@ -109,7 +115,7 @@ Shows message of task at index 2 deleted.
 
 ```
 Noted. I've removed this task:
-[E][] funfair (at: 2021-06-22)
+[E][] funfair (at: 22 Oct 2022, 11:30 AM)
 Now you have 2 tasks in your list
 ```
 ___
@@ -127,7 +133,7 @@ Shows list.
 ```
 Here are the tasks in your list:
     1. [T][X] walk my dog
-    2. [D][] quiz (at: 2021-06-22)
+    2. [D][] quiz (at: 2 Oct 2022, 11:30 AM)
 ```
 ___
 
@@ -145,7 +151,7 @@ Shows list of all tasks that matches the word quiz.
 
 ```
 Here are the matching tasks in your list:
-    1. [D][] quiz (at: 2021-06-22)
+    1. [D][] quiz (at: 2 Oct 2022, 11:30 AM)
 ```
 ___
 ### `archive` - Archives all tasks in list
