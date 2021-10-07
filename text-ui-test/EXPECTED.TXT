@@ -1,7 +1,88 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+_____________________________________
+OOPS!!! I'm sorry, but I don't know what that means :-(
+_____________________________________
+_____________________________________
+Here are the tasks in your list:
+
+_____________________________________
+_____________________________________
+OOPS!!! Please enter a valid task number.
+_____________________________________
+_____________________________________
+Here are the tasks in your list:
+
+_____________________________________
+_____________________________________
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 1 task(s) in the list.
+_____________________________________
+_____________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+_____________________________________
+_____________________________________
+OOPS!!! Please enter a valid task number.
+_____________________________________
+_____________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+_____________________________________
+_____________________________________
+Got it. I've added this task:
+[D][ ] return book (by: Sunday)
+Now you have 2 task(s) in the list.
+_____________________________________
+_____________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+_____________________________________
+_____________________________________
+OOPS!!! Please enter a valid task number.
+_____________________________________
+_____________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+_____________________________________
+_____________________________________
+Got it. I've added this task:
+[E][ ] project meeting (at: Mon 2-4pm)
+Now you have 3 task(s) in the list.
+_____________________________________
+_____________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (at: Mon 2-4pm)
+_____________________________________
+_____________________________________
+OOPS!!! Please enter a valid task number.
+_____________________________________
+_____________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (at: Mon 2-4pm)
+_____________________________________
+_____________________________________
+Noted. I've removed this task:
+[D][ ] return book (by: Sunday)
+Now you have 2 task(s) in the list.
+_____________________________________
+_____________________________________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [E][ ] project meeting (at: Mon 2-4pm)
+_____________________________________
+_____________________________________
+Bye. Hope to see you again soon!
+_____________________________________
