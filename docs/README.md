@@ -173,3 +173,15 @@ Here is your schedule for this day:
   ...
 ```
 
+### `bye` - Exits from the app
+
+Exits from the app and closes the window.
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+The app window closes, and the app is stopped.
+
