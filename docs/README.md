@@ -36,6 +36,7 @@ Pingu helps you organize your tasks, using local storage to keep your files save
     - e.g. for command `todo [taskname]`, a user may enter `todo homework` 
 
 ### Table of Commands
+
 Function            | Command                  | Remarks   
 --------------------|--------------------------|----------------------------------
 Create task         | `todo [task name]` <br> `deadline [task name] /by [date] ` <br> `event [task name] /at [date]`| Format of date must be YYYY-MM-DD <br> You can optionally include time in `[date]`
