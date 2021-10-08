@@ -1,0 +1,9 @@
+[T][ ] buy eggs
+[E][X] volunteer (at: 15 Nov 2021, 14.00 PM)
+[T][ ] eat food
+[D][ ] homework (by: 20 Feb 2020, 19.00 PM)
+[T][ ] walk dog
+[T][ ] Household Chores
+[T][ ] chicken
+[D][ ] homework
+[D][ ] chinese homework
