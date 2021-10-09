@@ -1,0 +1,14 @@
+deadline homework due /by 2pm
+event cricket /at 10pm
+event concert /at 5pm
+list
+done 2
+list
+done 1
+list
+deadline assignment due /by 12am
+random
+deadline
+delete 2
+list
+bye
