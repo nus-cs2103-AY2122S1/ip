@@ -7,9 +7,9 @@ CAPTain is a desktop app for managing tasks, optimized for us via a Command Line
 ### Adding a task
 
 CAPTain offers you 3 types of tasks you can add into your task list.
-1. A todo task
-2. A task with deadline
-3. An event you'll be attending
+1. **Todo** - a todo task
+2. **Deadline** - a task with deadline
+3. **Event** - a task to do on a specified date
 
 ### Deleting a task
 Of course, CAPTain can remove a task from your task list as you wish.
@@ -33,20 +33,20 @@ Once you are satisfied with managing your task with CAPTain, you can exit the pr
 ## Usage
 
 ### `add` - adding a task
-Adds a task into the task list.
+Adds a task into the task list. The type of task added depends on the command format.
 
 Format:
-- ```todo TASK```
-- ```deadline TASK /by DATE```
-- ```event TASK /at DATE```
+- ```add TASK``` to add a Todo
+- ```add TASK /by DATE``` to add a Deadline
+- ```add TASK /at DATE``` to add an Event
 
 Example of usage:
-- ```todo math homework```
-- ```deadline proposal submision /by this sun```
-- ```event night cycling /at marina bay```
+- ```add math homework```
+- ```add proposal submision /by this sun```
+- ```add night cycling /at marina bay```
 
 CAPTain will notify you that your task have been added successfully.
-The type and status of task will be displayed as well.
+The type and status of the task will be displayed as well.
 
 ```
 Got it. I've added this task:
