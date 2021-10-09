@@ -112,7 +112,7 @@ public class TaskList {
      * Prints out the task(s) that contains the input keyword(s) in description
      *
      * @param keywords a list of keywords for searching tasks
-     * @return the list of task that contains the keyword(s)
+     * @return the list of task that contains the keyword
      */
     public String searchTaskFromKeyword(String ...keywords) {
         List<Task> matchingTasksList = new ArrayList<>();
