@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="106.0" prefWidth="404.0" stylesheets="@../style/style.css" type="javafx.scene.layout.HBox" xmlns = "http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <DialogPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="294.0" style="-fx-background-color: #464e43; -fx-background-radius: 30; -fx-padding: 10;">
+         <content>
+              <Text fx:id="dialog" lineSpacing="10.0" stroke="#867171" strokeType="OUTSIDE" strokeWidth="0.0" text="aaa" textAlignment="JUSTIFY" wrappingWidth="273.20001220703125">
+                  <font>
+                      <Font name="Arial Black" size="15.0" />
+                  </font>
+               <fill>
+                  <RadialGradient centerX="0.8088889567057291" centerY="0.5954198473282443" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.75" green="0.5466101765632629" blue="0.27000001072883606" opacity="0.9300000071525574" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.384799987077713" green="0.721938967704773" blue="0.7400000095367432" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill>
+               <effect>
+                  <Bloom threshold="0.54" />
+               </effect>
+              </Text>
+         </content>
+         <effect>
+            <Blend />
+         </effect>
+      </DialogPane>
+        <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <Glow />
+         </effect></ImageView>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>

@@ -1,0 +1,14 @@
+read book
+done 1
+list
+todo return book
+deadline borrow book /by not sure
+event project meeting /at afternoon
+done 3
+list
+todofadf
+deadline fdf/by today
+event event
+event event /aterror
+ todo dsfa
+bye
