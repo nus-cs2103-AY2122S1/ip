@@ -15,10 +15,8 @@ import java.util.Scanner;
 
 public class StorageList {
     private final ArrayList<Task> storageList = new ArrayList<>();
-    private File file;
 
     public StorageList(File file) throws FileNotFoundException {
-        this.file = file;
         readFile(new Scanner(file));
     }
 

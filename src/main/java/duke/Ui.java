@@ -25,26 +25,6 @@ public class Ui {
     }
 
     /**
-     * Returns a confirmation message.
-     *
-     * @return Confirmation message
-     */
-    public String fileConfirmation() {
-        return "I have received your file! Added tasks!\n";
-    }
-
-    /**
-     * Returns a message stating that the file is not found.
-     *
-     * @return Message telling users file is not found
-     */
-    public String fileNotFoundMsg() {
-        return "I am unable to find your file. "
-                + "Check that your 'duketest' file exists,"
-                + " or that your 'data' folder exists.";
-    }
-
-    /**
      * Returns a message stating that there is an IO error.
      *
      * @return Message stating that there is an IO error.

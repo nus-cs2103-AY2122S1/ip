@@ -47,7 +47,7 @@ public class Duke {
      * @param filePath File path to receive input from and write to.
      * @throws FileNotFoundException If file is not found.
      */
-    public Duke(String filePath) throws FileNotFoundException {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
@@ -56,9 +56,9 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
-            return new Duke("data/duketest.txt").run(input);
-        } catch (FileNotFoundException e) {
-            return ui.fileNotFoundMsg();
+            return new Duke("data").run(input);
+        } catch (IOException e) {
+            return ui.ioErrorMsg();
         }
     }
 

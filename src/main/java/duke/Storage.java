@@ -6,29 +6,35 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Storage {
-    private String filepath;
-    private Ui ui = new Ui();
+    private final Ui ui = new Ui();
+    private Path folderPath;
 
-    public Storage(String filepath) {
-        this.filepath = filepath;
+    private final String DATA_FILEPATH = "data/duketest.txt"; //fixed file path
+
+    public Storage(String folderPathString){
+        this.folderPath = Paths.get(folderPathString);
     }
 
-    public File load() throws FileNotFoundException {
-        File file = new File(filepath);
-        if (!file.exists()) {
-            throw new FileNotFoundException();
+    public File load() throws IOException {
+        if (!Files.exists(folderPath)) {
+            folderPath = Files.createDirectory(folderPath);
         }
-        ui.fileConfirmation();
+        File file = folderPath.resolve("duketest.txt").toFile();
+        if (!file.exists()) {
+            file.createNewFile();
+        }
         return file;
     }
 
     public void save(StorageList storageList) throws IOException {
-        FileWriter fw = new FileWriter(filepath);
+        FileWriter fw = new FileWriter(DATA_FILEPATH);
         String textToAdd = "";
 
         for (int i = 0; i < storageList.size(); i++) {
