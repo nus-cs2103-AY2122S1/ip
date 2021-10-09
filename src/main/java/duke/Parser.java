@@ -29,12 +29,12 @@ public class Parser {
      * @param tasks The list of tasks input by the user.
      * @param duke Current Duke.
      */
-    public Parser(String command, Ui ui
-            , Storage storage, TaskList tasks
-            , List<Storage> storageList
-            , List<Ui> uiList
-            , List<TaskList> tasksList
-            , Duke duke) {
+    public Parser(String command, Ui ui,
+                  Storage storage, TaskList tasks,
+                  List<Storage> storageList,
+                  List<Ui> uiList,
+                  List<TaskList> tasksList,
+                  Duke duke) {
         this.command = command;
         this.ui = ui;
         this.storage = storage;
