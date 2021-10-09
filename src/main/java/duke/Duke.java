@@ -50,7 +50,12 @@ public class Duke extends Application {
      * @param uiList List of past Ui.
      * @param tasksList List of past TaskLists.
      */
-    public void setElements(Storage storage, TaskList tasks, Ui ui, List<Storage> storageList, List<Ui> uiList, List<TaskList> tasksList) {
+    public void setElements(Storage storage
+            , TaskList tasks
+            , Ui ui
+            , List<Storage> storageList
+            , List<Ui> uiList
+            , List<TaskList> tasksList) {
         this.storage = storage;
         this.tasks = tasks;
         this.ui = ui;

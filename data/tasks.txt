@@ -1,4 +1,0 @@
-D | 1 | CS2103T assignment | 2021-08-20 14:15
-E | 0 | May's wedding | 2021-08-27 16:00
-T | 0 | Lunch with Jan
-D | 0 | CS2103T Finals | 2021-10-20 14:00

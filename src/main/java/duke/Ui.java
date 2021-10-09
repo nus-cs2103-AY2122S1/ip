@@ -1,17 +1,18 @@
 package duke;
 
+import java.util.ArrayList;
+
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import java.util.ArrayList;
 
 /**
  * Deals with the interaction of a user.
@@ -43,7 +44,8 @@ public class Ui {
      * @return Done message.
      */
     public String doneMessageToString(Task currentTask, boolean isDone) {
-        String message = String.format("Nice! I've marked this task as %s:", isDone ? "done" : "undone") + "\n" + currentTask.toString();
+        String message = String.format("Nice! I've marked this task as %s:", isDone ? "done" : "undone")
+                + "\n" + currentTask.toString();
         return message;
     }
 

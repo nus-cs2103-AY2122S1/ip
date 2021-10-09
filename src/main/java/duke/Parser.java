@@ -29,8 +29,12 @@ public class Parser {
      * @param tasks The list of tasks input by the user.
      * @param duke Current Duke.
      */
-    public Parser(String command, Ui ui, Storage storage, TaskList tasks, List<Storage> storageList
-            , List<Ui> uiList, List<TaskList> tasksList, Duke duke) {
+    public Parser(String command, Ui ui
+            , Storage storage, TaskList tasks
+            , List<Storage> storageList
+            , List<Ui> uiList
+            , List<TaskList> tasksList
+            , Duke duke) {
         this.command = command;
         this.ui = ui;
         this.storage = storage;
@@ -73,7 +77,7 @@ public class Parser {
             activity = Activity.FIND;
         } else if (command.startsWith("undo")) {
             activity = Activity.UNDO;
-        } else if (command.startsWith("help")){
+        } else if (command.startsWith("help")) {
             activity = Activity.HELP;
         } else {
             activity = Activity.NORMAL;

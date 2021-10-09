@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -11,6 +14,7 @@ import java.util.Scanner;
  */
 public class Storage implements Cloneable {
     private static String filePath;
+    private static final String DATA_FOLDER_PATH = "./data";
     private boolean shouldExit = false;
 
     /**
@@ -29,32 +33,13 @@ public class Storage implements Cloneable {
      * @throws IOException If an input or output operation is failed or interpreted.
      */
     public void save(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            String status = task.getDone() ? "1" : "0";
-            String date;
-            String activity;
-            String information;
-            if (task instanceof Event) {
-                activity = "E";
-                information = task.getDescription();
-                date = ((Event) task).getDate();
-                String desc = String.format("%s | %s | %s | %s\n", activity, status, information, date);
-                fw.write(desc);
-            } else if (task instanceof Deadline) {
-                activity = "D";
-                information = task.getDescription();
-                date = ((Deadline) task).getDate();
-                String desc = String.format("%s | %s | %s | %s\n", activity, status, information, date);
-                fw.write(desc);
-            } else if (task instanceof ToDo) {
-                activity = "T";
-                information = task.getDescription();
-                String desc = String.format("%s | %s | %s\n", activity, status, information);
-                fw.write(desc);
-            }
+        Path dataFolderPath = Paths.get(DATA_FOLDER_PATH);
+        if (Files.notExists(dataFolderPath)) {
+            dataFolderPath = Files.createDirectory(dataFolderPath);
         }
+
+        FileWriter fw = new FileWriter(filePath);
+        loadTasks(tasks, fw);
         fw.close();
     }
 
@@ -130,6 +115,41 @@ public class Storage implements Cloneable {
                     event.setDone();
                 }
                 tasks.add(event);
+            }
+        }
+    }
+
+    /**
+     * Loads the tasks previously written into FileWriter.
+     *
+     * @param tasks The tasks to be loaded.
+     * @param fw FileWriter to be loaded into
+     * @throws IOException If an input or output operation is failed or interpreted.
+     */
+    public void loadTasks(TaskList tasks, FileWriter fw) throws IOException {
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String status = task.getDone() ? "1" : "0";
+            String date;
+            String activity;
+            String information;
+            if (task instanceof Event) {
+                activity = "E";
+                information = task.getDescription();
+                date = ((Event) task).getDate();
+                String desc = String.format("%s | %s | %s | %s\n", activity, status, information, date);
+                fw.write(desc);
+            } else if (task instanceof Deadline) {
+                activity = "D";
+                information = task.getDescription();
+                date = ((Deadline) task).getDate();
+                String desc = String.format("%s | %s | %s | %s\n", activity, status, information, date);
+                fw.write(desc);
+            } else if (task instanceof ToDo) {
+                activity = "T";
+                information = task.getDescription();
+                String desc = String.format("%s | %s | %s\n", activity, status, information);
+                fw.write(desc);
             }
         }
     }

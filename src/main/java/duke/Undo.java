@@ -58,7 +58,7 @@ public class Undo implements GeneralCommand {
         uiList.remove(ui);
         tasksList.remove(tasks);
         storageList.remove(storage);
-        duke.setElements(storage, tasks, ui, storageList, uiList,  tasksList);
+        duke.setElements(storage, tasks, ui, storageList, uiList, tasksList);
         return ui.undoMessageToString(String.format("You have %s undo commands left available", tasksList.size()));
     }
 }
