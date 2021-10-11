@@ -1,0 +1,14 @@
+todo borrow book
+deadline read book /by 4 Aug
+event return book /at 5 Aug 4pm
+list
+done 2
+delete 1
+list
+blah
+todo
+deadline read book
+event return book
+delete 22
+done -1
+bye
