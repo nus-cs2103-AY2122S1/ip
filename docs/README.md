@@ -38,7 +38,7 @@ deadline {description} /by {date}
 event {description} /at {startDate} - {endDate}
 ```
 
-Currently Duke supports date inputs in the form `YYYY-MM-DD`. You can also optionally include time in the 24 hour format as: `YYY-MM-DD HHmm`.
+Currently Duke supports date inputs in the form `YYYY-MM-DD`. You can also optionally include time in the 24 hour format as: `YYYY-MM-DD HHmm`.
 
 #### Example of usage:
 
