@@ -1,8 +1,8 @@
 package duke;
 
-public class Event extends Task {//Starts and ends by a certain time
+public class Event extends Task { //Starts and ends by a certain time
 
-    protected String by;//Range of timing
+    protected String by; //Range of timing
 
     public Event(String description, String by) {
         super(description);

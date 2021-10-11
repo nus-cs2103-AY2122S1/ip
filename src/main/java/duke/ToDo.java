@@ -1,6 +1,7 @@
 package duke;
 
-public class ToDo extends Task {//No deadline
+//Has no deadline
+public class ToDo extends Task {
 
 
     public ToDo(String description) {

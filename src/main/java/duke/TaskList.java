@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    ArrayList<Task> list;
+    private ArrayList<Task> list;
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -46,35 +46,34 @@ public class TaskList {
         return this.list;
     }
 
-    public List<Integer> taskDistribution(){
+    public List<Integer> taskDistribution() {
         List<Integer> counter = new ArrayList<>();
         counter.add(0);
         counter.add(0);
         counter.add(0);
-        for(Task task: this.list){
-            if(task instanceof ToDo){
-               counter.set(0,counter.get(0) + 1);
-            }
-            else if(task instanceof Deadline){
-                counter.set(1,counter.get(1) + 1);
-            }
-            else if(task instanceof Event){
-                counter.set(2,counter.get(2) + 1);
+        for (Task task: this.list) {
+            if (task instanceof ToDo) {
+                counter.set(0, counter.get(0) + 1);
+            } else if (task instanceof Deadline) {
+                counter.set(1, counter.get(1) + 1);
+            } else if (task instanceof Event) {
+                counter.set(2, counter.get(2) + 1);
             }
         }
         return counter;
     }
-    public String taskCompetedPercentage(){
+
+    public String taskCompetedPercentage() {
         double totalTasks = list.size();
         double completedTasks = 0;
         double res;
-        for(Task task: this.list){
-            if(task.isDone){
-                completedTasks ++;
+        for (Task task: this.list) {
+            if (task.isDone) {
+                completedTasks++;
             }
         }
-        res = Math.round( completedTasks/totalTasks * 100);
-        System.out.println(completedTasks/totalTasks);
+        res = Math.round(completedTasks / totalTasks * 100);
+        System.out.println(completedTasks / totalTasks);
         return Double.toString(res);
     }
 

@@ -24,8 +24,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-//    @FXML
-//    private HBox dialogContainer;
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -38,8 +37,6 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-//        dialogContainer.setStyle("-fx-background-radius: 1.5em 1.5em 1.5em 1.5em;"
-//                + "-fx-background-color: #34b7eb;");
     }
 
     /**

@@ -10,9 +10,10 @@ import java.util.Scanner;
 
 class Storage {
 
+    public static TaskList tasklist;
     private String filePath;
-    static TaskList tasklist;
-    String FILE_PATH = "Data/DukeData.txt";
+
+    private final String filePath2 = "Data/DukeData.txt";
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -28,8 +29,8 @@ class Storage {
     void saveTasks(TaskList tasks) {
         try {
             Files.createDirectories(Paths.get("Data/"));
-            File data_file = new File(FILE_PATH);
-            FileWriter writer = new FileWriter(FILE_PATH);//Overwriting entire file
+            File dataFile = new File(filePath2);
+            FileWriter writer = new FileWriter(filePath2); //Overwriting entire file
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
                 writer.write(task.toString());
@@ -37,8 +38,8 @@ class Storage {
                 writer.write("\n");
             }
             writer.close();
-            if (data_file.createNewFile()) {
-                System.out.println("File created: " + data_file.getName());
+            if (dataFile.createNewFile()) {
+                System.out.println("File created: " + dataFile.getName());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,13 +53,13 @@ class Storage {
      * @param filePath FilePath where data is stored
      */
     static void readFile(String filePath) throws FileNotFoundException {
-        try{
+        try {
             File file = new File(filePath);
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
-            String currLine = scanner.nextLine();
-            char taskType = currLine.charAt(1);
-            switch (taskType) {
+                String currLine = scanner.nextLine();
+                char taskType = currLine.charAt(1);
+                switch (taskType) {
                 case 'T':
                     tasklist.addTask(new ToDo(currLine.substring(7)));
                     System.out.println(new ToDo(currLine.substring(7)));
@@ -76,10 +77,9 @@ class Storage {
                     tasklist.addTask(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
                     System.out.println(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
                     break;
-                 }
+                }
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
 
         }
 

@@ -2,14 +2,12 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Ui {
-    String line = "---------------------------------------------";
+    private String line = "---------------------------------------------";
 
-    //    private boolean loop = true;
-    TaskList taskList;
+    private TaskList taskList;
 
     Ui(TaskList list) {
         this.taskList = list;
@@ -53,14 +51,15 @@ public class Ui {
     public String doneResponse(String item) {
         String output = "";
         try {
-            item = item.replaceAll("\\D+", "");//Extracts number from input
+            item = item.replaceAll("\\D+", ""); //Extracts number from input
             int completedItem = Integer.parseInt(item);
-            taskList.get(completedItem - 1).markAsDone();//Set the task to done
+            taskList.get(completedItem - 1).markAsDone(); //Set the task to done
             System.out.println(line);
             System.out.println("     " + "Nice! I've marked this task as done:");
             System.out.println("     " + taskList.get(completedItem - 1));
             System.out.println(line);
-            output += line + "\n     Nice! I've marked this task as done:\n" + "     " + taskList.get(completedItem - 1) + '\n' + line;
+            output += line + "\n     Nice! I've marked this task as done:\n" + "     "
+                    + taskList.get(completedItem - 1) + '\n' + line;
 
         } catch (IndexOutOfBoundsException e) {
             System.out.println(line);
@@ -78,7 +77,7 @@ public class Ui {
      */
     public String deleteResponse(String item) {
         String output = "";
-        item = item.replaceAll("\\D+", "");//Extracts number from input
+        item = item.replaceAll("\\D+", ""); //Extracts number from input
         int removeItem = Integer.parseInt(item);
 
         System.out.println(line);
@@ -86,10 +85,10 @@ public class Ui {
         System.out.println("     " + taskList.get(removeItem - 1));
         System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
         System.out.println(line);
-        output += line + "\n     " + "Noted. I've removed this task:" + "     \n" +
-                taskList.get(removeItem - 1) + "\n     Now you have " + countTasks() + " task to be done on your list!\n"
-                + line;
-        taskList.removeTask(removeItem - 1);//Removes item at the corresponding index
+        output += line + "\n     " + "Noted. I've removed this task:" + "     \n"
+                + taskList.get(removeItem - 1) + "\n     Now you have " + countTasks()
+                + " task to be done on your list!\n" + line;
+        taskList.removeTask(removeItem - 1); //Removes item at the corresponding index
         return output;
     }
 
@@ -121,11 +120,13 @@ public class Ui {
         output += line;
         try {
             String description = input.substring(5, input.length());
-            System.out.println("     added: " + new ToDo(input));//Added item
-            taskList.addTask(new ToDo(description));//Added new task to arraylist
+            System.out.println("     added: " + new ToDo(input)); //Added item
+            taskList.addTask(new ToDo(description)); //Added new task to arraylist
             System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
             System.out.println(line);
-            output += "\n     added: " + new ToDo(input) + '\n' + "     Now you have " + countTasks() + " task to be done on your list!\n" + line;
+            output += "\n     added: " + new ToDo(input) + '\n'
+                    + "     Now you have " + countTasks()
+                    + " task to be done on your list!\n" + line;
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("     " + "Please tell us the todo task :)");
             output += "\n" + "Please tell us the todo task :)\n" + line;
@@ -142,28 +143,26 @@ public class Ui {
             String by = input.substring(input.lastIndexOf("/") + 1);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate localTimeObj = LocalDate.parse(by, formatter);
-            String description = input.substring(9, input.lastIndexOf("/"));//Extract description
+            String description = input.substring(9, input.lastIndexOf("/")); //Extract description
             System.out.println(line);
-            System.out.println("     added: " + new Deadline(description, localTimeObj.toString()));//Added item
-            taskList.addTask(new Deadline(description, localTimeObj.toString()));//Added new task to arraylist
+            System.out.println("     added: " + new Deadline(description, localTimeObj.toString())); //Added item
+            taskList.addTask(new Deadline(description, localTimeObj.toString())); //Added new task to arraylist
             System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
             System.out.println(line);
             output += line + "\n" + "     added: " + new Deadline(description, localTimeObj.toString())
-                    + "\n" + "     Now you have " + countTasks() + " task to be done on your list!\n" +
-                    line;
-//          continue;
+                    + "\n" + "     Now you have " + countTasks() + " task to be done on your list!\n"
+                    + line;
         } catch (Exception e) {
             String by = input.substring(input.lastIndexOf("/") + 1);
-            String description = input.substring(9, input.lastIndexOf("/"));//Extract description
+            String description = input.substring(9, input.lastIndexOf("/")); //Extract description
             System.out.println(line);
-            System.out.println("     added: " + new Deadline(description, by.toString()));//Added item
-            taskList.addTask(new Deadline(description, by));//Added new task to arraylist
+            System.out.println("     added: " + new Deadline(description, by.toString())); //Added item
+            taskList.addTask(new Deadline(description, by)); //Added new task to arraylist
             System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
             System.out.println(line);
             output += line + "\n" + "     added: " + new Deadline(description, by)
-                    + "\n" + "     Now you have " + countTasks() + " task to be done on your list!\n" +
-                    line;
-//                    continue;
+                    + "\n" + "     Now you have " + countTasks() + " task to be done on your list!\n"
+                    + line;
         }
         return output;
     }
@@ -176,23 +175,23 @@ public class Ui {
             LocalDate localTimeObj = LocalDate.parse(by, formatter);
             String description = input.substring(6, input.lastIndexOf("/"));
             System.out.println(line);
-            System.out.println("     added: " + new Event(description, localTimeObj.toString()));//Added item
-            taskList.addTask(new Event(description, localTimeObj.toString()));//Added new task to arraylist
+            System.out.println("     added: " + new Event(description, localTimeObj.toString())); //Added item
+            taskList.addTask(new Event(description, localTimeObj.toString())); //Added new task to arraylist
             System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
             System.out.println(line);
-            output += line + "\n     added: " + new Event(description, localTimeObj.toString()) + "\n" +
-                    "     Now you have " + countTasks() + " task to be done on your list!\n"
+            output += line + "\n     added: " + new Event(description, localTimeObj.toString()) + "\n"
+                    + "     Now you have " + countTasks() + " task to be done on your list!\n"
                     + line;
         } catch (Exception e) {
             String by = input.substring(input.lastIndexOf("/") + 1);
             String description = input.substring(6, input.lastIndexOf("/"));
             System.out.println(line);
-            System.out.println("     added: " + new Event(description, by));//Added item
-            taskList.addTask(new Event(description, by));//Added new task to arraylist
+            System.out.println("     added: " + new Event(description, by)); //Added item
+            taskList.addTask(new Event(description, by)); //Added new task to arraylist
             System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
             System.out.println(line);
-            output += line + "\n     added: " + new Event(description, by) + "\n" +
-                    "     Now you have " + countTasks() + " task to be done on your list!\n"
+            output += line + "\n     added: " + new Event(description, by) + "\n"
+                    + "     Now you have " + countTasks() + " task to be done on your list!\n"
                     + line;
         }
         return output;

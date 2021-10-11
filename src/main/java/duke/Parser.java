@@ -3,19 +3,19 @@ package duke;
 import java.util.Scanner;
 
 class Parser {
-    Ui ui;
-    Storage storage;
-    TaskList tasklist;
-    Scanner myScanner;
-    boolean breakLoop = false;
-    String FILE_PATH = "Data/DukeData.txt";
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasklist;
+    private Scanner myScanner;
+    private boolean breakLoop = false;
+    private String filepath = "Data/DukeData.txt";
 
     Parser(Scanner myScanner) {
-        this.storage = new Storage(FILE_PATH);
+        this.storage = new Storage(filepath);
         this.myScanner = myScanner;
         this.tasklist = Storage.tasklist;
         try {
-            Storage.readFile(FILE_PATH);
+            Storage.readFile(filepath);
         } catch (Exception e) {
             System.out.println(e);
         }
