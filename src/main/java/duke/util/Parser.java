@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import duke.DukeException;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
-import duke.commands.CommandType;
+import duke.tasks.TaskType;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoAfterCommand;
@@ -33,11 +33,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String firstToken = fullCommand.split(" ")[0];
 
-        // Check if user input is empty
-        if (fullCommand.equals("")) {
-            throw new DukeException("Please enter a command!");
-        }
-        assert fullCommand.split(" ").length >= 1 : "Input should not be empty!";
+        userInputNotEmpty(fullCommand);
 
         switch(firstToken) {
         case "bye":
@@ -45,91 +41,26 @@ public class Parser {
         case "list":
             return new ListAllCommand();
         case "delete":
-            try {
-                Parser.validateInput(fullCommand, CommandType.DELETE);
-
-                // Determine index of task to delete
-                int index = Integer.parseInt(fullCommand.split(" ")[1]);
-
-                return new DeleteCommand(index);
-            } catch (NumberFormatException e) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
-            }
+            return parseDelete(fullCommand);
         case "done":
-            try {
-                Parser.validateInput(fullCommand, CommandType.DONE);
-
-                // Determine index of task to mark as done
-                int index = Integer.parseInt(fullCommand.split(" ")[1]);
-                return new DoneCommand(index);
-            } catch (NumberFormatException e) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
-            }
+            return parseDone(fullCommand);
         case "todo":
-            Parser.validateInput(fullCommand, CommandType.TODO);
-            String todoDescription = Parser.parseDescription(fullCommand, CommandType.TODO);
-
-            assert !todoDescription.equals("") : "ToDo description should not be empty!";
-
-            return new TodoCommand(todoDescription);
+            return parseTodo(fullCommand);
         case "deadline":
-            try {
-                Parser.validateInput(fullCommand, CommandType.DEADLINE);
-
-                assert !fullCommand.split(" /by ")[1].strip().equals("")
-                        : "Datetime provided for Deadline cannot be empty";
-
-                LocalDateTime dueDateTime = Parser.parseDateTime(fullCommand, CommandType.DEADLINE);
-                String deadlineDescription = Parser.parseDescription(fullCommand, CommandType.DEADLINE);
-
-                assert !deadlineDescription.equals("") : "Description provided for Deadline cannot be empty!";
-
-                return new DeadlineCommand(deadlineDescription, dueDateTime);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
-            }
+            return parseDeadline(fullCommand);
         case "event":
-            try {
-                Parser.validateInput(fullCommand, CommandType.EVENT);
-
-                assert !fullCommand.split(" /at ")[1].strip().equals("")
-                        : "Datetime input for Event should not be empty!";
-
-                LocalDateTime eventDateTime = Parser.parseDateTime(fullCommand, CommandType.EVENT);
-                String eventDescription = Parser.parseDescription(fullCommand, CommandType.EVENT);
-
-                assert !eventDescription.equals("") : "Description for Event should not be empty!";
-
-                return new EventCommand(eventDescription, eventDateTime);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
-            }
+            return parseEvent(fullCommand);
         case "doafter":
-            try {
-                Parser.validateInput(fullCommand, CommandType.DOAFTER);
-
-                LocalDateTime doAfterDateTime = Parser.parseDateTime(fullCommand, CommandType.DOAFTER);
-                String doAfterDescription = Parser.parseDescription(fullCommand, CommandType.DOAFTER);
-                return new DoAfterCommand(doAfterDescription, doAfterDateTime);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid date.");
-            }
+            return parseDoAfter(fullCommand);
         case "find":
-            Parser.validateInput(fullCommand, CommandType.FIND);
-
-            // Parse search terms
-            String searchTerms = Parser.parseSearchTerms(fullCommand);
-
-            assert !searchTerms.equals("") : "Search terms for Find should not be empty!";
-
-            return new FindCommand(searchTerms);
+            return parseFind(fullCommand);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    private static String parseDescription(String inputCommand, CommandType commandType) throws DukeException {
-        switch (commandType) {
+    private static String parseDescription(String inputCommand, TaskType taskType) throws DukeException {
+        switch (taskType) {
         case TODO:
             return inputCommand.substring(TodoCommand.TODO_DESC_START);
         case EVENT:
@@ -143,9 +74,9 @@ public class Parser {
         }
     }
 
-    private static LocalDateTime parseDateTime(String inputCommand, CommandType commandType) throws DukeException {
+    private static LocalDateTime parseDateTime(String inputCommand, TaskType taskType) throws DukeException {
         String rawDateTime;
-        switch(commandType) {
+        switch(taskType) {
         case EVENT:
             rawDateTime = inputCommand.split("/at")[1].strip();
             break;
@@ -162,65 +93,137 @@ public class Parser {
         return LocalDateTime.parse(rawDateTime, formatter);
     }
 
-    private static void validateInput(String inputCommand, CommandType commandType) throws DukeException {
-        switch(commandType) {
-        case DONE:
-            //fallthrough
-        case DELETE:
-            if (inputCommand.split(" ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
-            }
-            break;
-        case TODO:
-            if (inputCommand.split(" ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-            }
-            break;
-        case DOAFTER:
-            // Check for valid description provided
-            if (inputCommand.split(" /after ")[0].split(" ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid deadline description.");
-            }
-            // Check for valid doAfter date provided
-            if (inputCommand.split(" /after ").length != 2) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid do after date.");
-            }
-            break;
-        case DEADLINE:
-            // Check for valid description provided
-            if (inputCommand.split(" /by ")[0].split(" ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid deadline description.");
-            }
-            // Check for valid due date provided
-            if (inputCommand.split(" /by ").length != 2) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
-            }
-            break;
-        case EVENT:
-            // Check for valid description provided
-            if (inputCommand.split(" /at ")[0].split(" ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid event description.");
-            }
-            // Check for valid event time provided
-            if (inputCommand.split(" /at ").length != 2) {
-                throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
-            }
-            break;
-        case FIND:
-            // Validate command and arguments
-            if (inputCommand.split(" ").length <= 1) {
-                throw new DukeException("Please provide a valid search term!");
-            }
-            break;
-        case BYE:
-            //fallthrough
-        case LIST:
-            //fallthrough
-        default:
-        }
-    }
-
     private static String parseSearchTerms(String inputCommand) {
         return inputCommand.substring(FindCommand.SEARCH_TERM_START_IDX).strip();
     }
-}
+
+    private static Command parseDone(String fullCommand) throws DukeException {
+        try {
+            if (fullCommand.split(" ").length <= 1) {
+                throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
+            }
+
+            // Determine index of task to mark as done
+            int index = Integer.parseInt(fullCommand.split(" ")[1]);
+            return new DoneCommand(index);
+        } catch (NumberFormatException e) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
+        }
+    }
+
+    private static Command parseDelete(String fullCommand) throws DukeException {
+        if (fullCommand.split(" ").length <= 1) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
+        }
+        try {
+            // Determine index of task to delete
+            int index = Integer.parseInt(fullCommand.split(" ")[1]);
+            return new DeleteCommand(index);
+        } catch (NumberFormatException e) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
+        }
+    }
+
+    private static Command parseTodo(String fullCommand) throws DukeException {
+        if (fullCommand.split(" ").length <= 1) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        String todoDescription = Parser.parseDescription(fullCommand, TaskType.TODO);
+
+        assert !todoDescription.equals("") : "ToDo description should not be empty!";
+
+        return new TodoCommand(todoDescription);
+    }
+
+    private static Command parseDeadline(String fullCommand) throws DukeException {
+        // Check for valid description provided
+        if (fullCommand.split(" /by ")[0].split(" ").length <= 1) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid deadline description.");
+        }
+        // Check for valid due date provided
+        if (fullCommand.split(" /by ").length != 2) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
+        }
+
+        try {
+            assert !fullCommand.split(" /by ")[1].strip().equals("")
+                    : "Datetime provided for Deadline cannot be empty";
+
+            LocalDateTime dueDateTime = Parser.parseDateTime(fullCommand, TaskType.DEADLINE);
+            String deadlineDescription = Parser.parseDescription(fullCommand, TaskType.DEADLINE);
+
+            assert !deadlineDescription.equals("") : "Description provided for Deadline cannot be empty!";
+
+            return new DeadlineCommand(deadlineDescription, dueDateTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
+        }
+
+    }
+
+    private static Command parseEvent(String fullCommand) throws DukeException {
+        // Check for valid description provided
+        if (fullCommand.split(" /at ")[0].split(" ").length <= 1) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid event description.");
+        }
+        // Check for valid event time provided
+        if (fullCommand.split(" /at ").length != 2) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
+        }
+
+        try {
+            assert !fullCommand.split(" /at ")[1].strip().equals("")
+                    : "Datetime input for Event should not be empty!";
+
+            LocalDateTime eventDateTime = Parser.parseDateTime(fullCommand, TaskType.EVENT);
+            String eventDescription = Parser.parseDescription(fullCommand, TaskType.EVENT);
+
+            assert !eventDescription.equals("") : "Description for Event should not be empty!";
+
+            return new EventCommand(eventDescription, eventDateTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
+        }
+    }
+
+    private static Command parseDoAfter(String fullCommand) throws DukeException {
+        // Check for valid description provided
+        if (fullCommand.split(" /after ")[0].split(" ").length <= 1) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid do after description.");
+        }
+        // Check for valid doAfter date provided
+        if (fullCommand.split(" /after ").length != 2) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid do after date.");
+        }
+
+        try {
+            LocalDateTime doAfterDateTime = Parser.parseDateTime(fullCommand, TaskType.DOAFTER);
+            String doAfterDescription = Parser.parseDescription(fullCommand, TaskType.DOAFTER);
+            return new DoAfterCommand(doAfterDescription, doAfterDateTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! Please provide a valid date.");
+        }
+    }
+
+    private static Command parseFind(String fullCommand) throws DukeException {
+        // Validate command and arguments
+        if (fullCommand.split(" ").length <= 1) {
+            throw new DukeException("Please provide a valid search term!");
+        }
+
+        // Parse search terms
+        String searchTerms = Parser.parseSearchTerms(fullCommand);
+
+        assert !searchTerms.equals("") : "Search terms for Find should not be empty!";
+
+        return new FindCommand(searchTerms);
+    }
+
+    private static void userInputNotEmpty(String fullCommand) throws DukeException {
+        // Check if user input is empty
+        if (fullCommand.equals("")) {
+            throw new DukeException("Please enter a command!");
+        }
+        assert fullCommand.split(" ").length >= 1 : "Input should not be empty!";
+    }
+ }
