@@ -37,34 +37,7 @@ public class Storage {
             myReader.close();
         }
 
-        ArrayList<Task> result = new ArrayList<>();
-        if (!data.equals("")) {
-            for (String i :
-                    data.split("\n")) {
-                if (i.split("\\|")[1].equals("T")) {
-                    Task newTask = new Todo(i.split("\\|")[2]);
-                    if (i.split("\\|")[0].equals("true")) {
-                        newTask.markAsDone();
-                    }
-                    result.add(newTask);
-                }
-                if (i.split("\\|")[1].equals("D")) {
-                    Task newTask = new Deadline(i.split("\\|")[2], i.split("\\|")[3]);
-                    if (i.split("\\|")[0].equals("true")) {
-                        newTask.markAsDone();
-                    }
-                    result.add(newTask);
-                }
-                if (i.split("\\|")[1].equals("E")) {
-                    Task newTask = new Event(i.split("\\|")[2], i.split("\\|")[3]);
-                    if (i.split("\\|")[0].equals("true")) {
-                        newTask.markAsDone();
-                    }
-                    result.add(newTask);
-                }
-            }
-        }
-        return result;
+        return Parser.storageParse(data);
     }
 
     /**
