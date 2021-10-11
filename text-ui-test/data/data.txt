@@ -1,0 +1,2 @@
+E | 1 | activity  | place
+T | 0 | this

@@ -1,7 +1,36 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello I'm DukePakage.Duke
+What can I do for you?
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+☹ Oops! Looks like you are missing the task number you wish to mark as done! Try again :-)
+☹ Oops! Your list is empty! Try adding a DukePakage.Task first!
+☹ Oops! Looks like you have no tasks in your list!
+☹ Oops! Looks like you are missing the description and the deadline date! Try again :-)
+☹ Oops! Looks like you are missing the deadline date! Try again :-)
+☹ Oops! Looks like you are missing the deadline date! Try again :-)
+Got it. I've added this task:
+[D][ ]  task  (by: date)
+Now you have 1 tasks in the list
+☹ Oops! Looks like you are missing the description and the event location! Try again :-)
+☹ Oops! Looks like you are missing the event location! Try again :-)
+☹ Oops! Looks like you are missing the event location! Try again :-)
+Got it. I've added this task:
+[E][ ]  activity  (at: place)
+Now you have 2 tasks in the list
+☹ Oops! Looks like you are missing the description! Try again :-)
+Got it. I've added this task:
+[T][ ]  this
+Now you have 3 tasks in the list
+Nice! I've marked this task as done:
+ [D][X]  task  (by: date)
+Nice! I've marked this task as done:
+ [E][X]  activity  (at: place)
+☹ Oops! Looks like you are missing the number of the task you wish to delete! Try again :-)
+☹ Oops! Looks like you are missing the number of the task you wish to delete! Try again :-)
+You may have entered something incorrectly. Try adding a number behind 'delete'!
+Noted. I've removed this task:
+[D][X]  task  (by: date)
+Now you have 2 tasks in the list
+Here are the tasks in your list:
+1.[E][X]  activity  (at: place)
+2.[T][ ]  this
+Bye. Hope to see you again soon!
