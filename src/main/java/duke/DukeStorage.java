@@ -9,11 +9,12 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.classes.TaskList;
-import duke.exceptions.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
+import duke.classes.tasks.Deadline;
+import duke.classes.tasks.Event;
+import duke.classes.tasks.Task;
+import duke.classes.tasks.ToDo;
+import duke.classes.exceptions.DukeException;
+
 
 /**
  * Duke class handling the storage and loading of the user's list
@@ -44,8 +45,10 @@ public class DukeStorage {
                 //Logic to piece through task strings
                 String[] words = data.split(" ");
                 boolean isDone = words[1].equals("X");
+                boolean hasTime = words[words.length - 1].equals("T");
                 String desc = "";
-                for (int i = 2; i < words.length - 1; i++) {
+                int descLength = hasTime ? words.length - 2 : words.length - 1;
+                for (int i = 2; i < descLength; i++) {
                     desc += words[i] + " ";
                 }
                 desc = desc.trim();
@@ -53,14 +56,21 @@ public class DukeStorage {
                 if (words[0].equals("T")) {
                     //Task is a toDo
                     desc += words[words.length - 1];
-
                     taskList.add(new ToDo(desc, isDone));
                 } else if (words[0].equals("E")) {
                     //Task is an Event
-                    taskList.add(new Event(desc, words[words.length - 1], isDone));
+                    if (hasTime) {
+                        taskList.add(new Event(desc, words[words.length - 2], words[words.length - 1], isDone));
+                    } else {
+                        taskList.add(new Event(desc, words[words.length - 1], isDone));
+                    }
                 } else if (words[0].equals("D")) {
                     //Task is a Deadline
-                    taskList.add(new Deadline(desc, words[words.length - 1], isDone));
+                    if (hasTime) {
+                        taskList.add(new Deadline(desc, words[words.length - 2], words[words.length - 1], isDone));
+                    } else {
+                        taskList.add(new Deadline(desc, words[words.length - 1], isDone));
+                    }
                 } else {
                     throw new DukeException("Invalid FileFormat");
                 }

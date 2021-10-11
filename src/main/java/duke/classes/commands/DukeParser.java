@@ -1,4 +1,4 @@
-package duke;
+package duke.classes.commands;
 
 import static java.lang.Integer.parseInt;
 
@@ -9,11 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import duke.classes.TaskList;
-import duke.exceptions.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
+import duke.classes.tasks.Deadline;
+import duke.classes.tasks.Event;
+import duke.classes.tasks.Task;
+import duke.classes.tasks.ToDo;
+import duke.classes.exceptions.DukeException;
+
 
 /**
  * Parser class handling the logic of the program

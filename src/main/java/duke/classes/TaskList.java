@@ -3,7 +3,7 @@ package duke.classes;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import duke.tasks.Task;
+import duke.classes.tasks.Task;
 
 /**
  * Lists of Tasks with Custom Functions

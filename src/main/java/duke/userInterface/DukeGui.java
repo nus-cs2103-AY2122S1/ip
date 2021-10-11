@@ -1,11 +1,14 @@
-package duke;
+package duke.userInterface;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeStorage;
+import duke.classes.commands.DukeParser;
+import duke.classes.commands.DukeUI;
 import duke.classes.TaskList;
-import duke.exceptions.DukeException;
+import duke.classes.exceptions.DukeException;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

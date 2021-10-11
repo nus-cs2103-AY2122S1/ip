@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
+import duke.classes.exceptions.DukeException;
+import duke.classes.tasks.Task;
 
 public class DukeStorageTest {
     @Test

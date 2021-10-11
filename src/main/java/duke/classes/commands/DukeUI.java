@@ -1,9 +1,9 @@
-package duke;
+package duke.classes.commands;
 
 import java.util.List;
 
 import duke.classes.TaskList;
-import duke.tasks.Task;
+import duke.classes.tasks.Task;
 
 /**
  * Duke class in-charge of generating user input to be returned by the GUI

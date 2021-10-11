@@ -6,10 +6,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+import duke.classes.commands.DukeParser;
+import duke.classes.commands.DukeUI;
 import org.junit.jupiter.api.Test;
 
 import duke.classes.TaskList;
-import duke.exceptions.DukeException;
+import duke.classes.exceptions.DukeException;
 
 public class DukeParserTest {
     @Test
