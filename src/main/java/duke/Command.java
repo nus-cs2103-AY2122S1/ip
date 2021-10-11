@@ -1,7 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -31,27 +29,12 @@ public class Command {
             case "bye":
                 return ui.showBye();
             case "list":
-                String list = "";
-                int listNum = 1;
-                for (int i = 0; i < tasks.size(); i++) {
-                    list += listNum + "." + tasks.get(i) + "\n";
-                    listNum++;
-                }
-                assert listNum == tasks.size()
-                        : "listNum and tasks size should be the same";
-                return ui.list(list);
+                return ui.list(tasks.list());
             case "done":
-                int doneNum = sc.nextInt() - 1;
-                assert doneNum < tasks.size() && doneNum > -1
-                        : "Task number should be in range";
-                tasks.get(doneNum).markAsDone();
-                return ui.done(tasks.get(doneNum));
+                return ui.done(tasks.doneTask(sc.nextInt() - 1));
             case "todo":
                 String todoDescription = sc.nextLine().trim();
-                Task todo = new Todo(todoDescription);
-                if (todoDescription.isEmpty()) {
-                    throw new DukeException(ui.emptyDescriptionError());
-                }
+                Task todo = Parser.todoHelper(todoDescription, ui);
                 tasks.add(todo);
                 save.writeToFile(filePath, tasks);
                 return ui.todo(tasks, todo);
@@ -65,42 +48,22 @@ public class Command {
                 return ui.delete(tasks, delete);
             case "deadline":
                 String[] deadlineArr = sc.nextLine().split("/by");
-                if (deadlineArr[0].strip().isEmpty()) {
-                    throw new DukeException(ui.emptyDescriptionError());
-                }
-                LocalDate d1 = LocalDate.parse(deadlineArr[1].trim());
-                Task deadline = new Deadline(deadlineArr[0].trim(),
-                        d1.format(DateTimeFormatter.ofPattern("MMM dd YYYY")));
+                Task deadline = Parser.deadlineHelper(deadlineArr, ui);
                 tasks.add(deadline);
                 save.writeToFile(filePath, tasks);
                 return ui.deadline(tasks, deadline);
             case "event":
                 String[] eventArr = sc.nextLine().split("/at");
-                if (eventArr[0].strip().isEmpty()) {
-                    throw new DukeException(ui.emptyDescriptionError());
-                }
-                Task event = new Event(eventArr[0].trim(), eventArr[1].trim());
+                Task event = Parser.eventHelper(eventArr, ui);
                 tasks.add(event);
                 save.writeToFile(filePath, tasks);
                 return ui.event(tasks, event);
             case "find":
                 String keyword = sc.nextLine().trim();
-                String findList = "\n";
-                if (keyword.strip().isEmpty()) {
-                    throw new DukeException(ui.emptyDescriptionError());
-                }
-                for (int i = 0; i < tasks.size(); i++) {
-                    if (tasks.get(i).getDescription().contains(keyword)) {
-                        findList += tasks.get(i) + "\n";
-                    }
-                }
-                return ui.find(findList);
+                return ui.find(tasks.find(keyword, ui));
             case "doafter":
                 String[] afterArr = sc.nextLine().split("/after");
-                if (afterArr[0].strip().isEmpty()) {
-                    throw new DukeException(ui.emptyDescriptionError());
-                }
-                Task doAfter = new DoAfter(afterArr[0].trim(), afterArr[1].trim());
+                Task doAfter = Parser.doAfterHelper(afterArr, ui);
                 tasks.add(doAfter);
                 save.writeToFile(filePath, tasks);
                 return ui.after(tasks, doAfter);
