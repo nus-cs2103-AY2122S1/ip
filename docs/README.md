@@ -24,9 +24,7 @@ operates using **text commands**.
 
 ## 3. Command Summary
 ***
-![CmdSummary](CmdSummary.png?raw=true)
 
-<!--
 | Summary | Command | Example |
 |---------| ------- |---------|
 |**Help:**|`help`|-|
@@ -39,8 +37,6 @@ operates using **text commands**.
 |**Done:**|`done NUMBER`|`done 5`|
 |**Clearall:**|`clearall` followed by `y`|-|
 |**Exit:**|`bye`|-|
-This table isn't working so I'm adding a .png file.
--->
 
 ## 4. Command Features
 ***
