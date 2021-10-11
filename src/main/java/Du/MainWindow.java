@@ -1,5 +1,6 @@
 package Du;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -58,6 +59,7 @@ public class MainWindow extends AnchorPane {
         Parser p = new Parser(du.getTasks());
         if (Objects.equals(input, "bye")) {
             du.end();
+            Platform.exit();
         }
         String response = p.parse(input);
         dialogContainer.getChildren().addAll(
