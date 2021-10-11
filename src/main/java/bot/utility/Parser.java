@@ -100,7 +100,9 @@ public class Parser {
             break;
         case "done":
         case "delete":
-            if (TaskList.isShorterThan(Integer.parseInt(input[1]))) {
+            if (Integer.parseInt(input[1]) <= 0) {
+                throw new DukeException("I can only perform operations using numbers bigger than 0!");
+            } else if (TaskList.isShorterThan(Integer.parseInt(input[1]))) {
                 throw new DukeException("I don't have that many tasks!");
             }
             break;

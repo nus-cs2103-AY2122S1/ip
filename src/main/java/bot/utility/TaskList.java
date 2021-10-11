@@ -31,4 +31,8 @@ public class TaskList {
     protected static boolean isShorterThan(int size) {
         return size > tasks.size();
     }
+
+    protected static boolean isEmpty() {
+        return tasks.isEmpty();
+    }
 }

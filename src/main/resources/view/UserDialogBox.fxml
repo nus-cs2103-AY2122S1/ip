@@ -9,7 +9,8 @@
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
-    <Label fx:id="dialog" alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" style="            -fx-wrap-text: true;            -fx-background-color: #0cc0f3;            -fx-background-radius: 20px;            -fx-border-color: #ffffff;            -fx-border-width: 2;            -fx-border-radius: 18px;            -fx-padding: 12;            -fx-min-height: 100;            -fx-min-width: 100;" text="Label">
+    <Label fx:id="dialog" alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity"
+           style="            -fx-wrap-text: true;            -fx-background-color: #0cc0f3;            -fx-background-radius: 20px;            -fx-border-color: #ffffff;            -fx-border-width: 2;            -fx-border-radius: 18px;            -fx-padding: 12;            -fx-min-height: 100;            -fx-min-width: 100;" text="Label">
         <HBox.margin>
             <Insets right="18.0" />
         </HBox.margin>

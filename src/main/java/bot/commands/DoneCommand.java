@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
      * @param indexString A String containing an integer value;
      */
     public DoneCommand(String indexString) {
-        this.index = Integer.parseInt(indexString);
+        this.index = Integer.parseInt(indexString) - 1;
     }
 
     /**

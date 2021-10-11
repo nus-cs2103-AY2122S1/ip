@@ -5,7 +5,10 @@ import static bot.constants.GlobalStringFormats.LINE_BREAK;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -57,6 +60,12 @@ public class Ui {
     }
 
     protected void close() {
-        stage.close();
+        new Timer().schedule(new TimerTask() {
+            public void run () {
+                Platform.exit();
+                System.exit(0);
+            }
+        }, 5000);
+        //stage.close();
     }
 }
