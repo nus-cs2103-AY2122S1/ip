@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Command {
 
     private String input;
+    private String filePath = "data/duke.txt";
 
     Command(String input) {
         this.input = input;
@@ -23,7 +24,6 @@ public class Command {
     public String execute(TaskList tasks, Ui ui, Storage save) {
         try {
             Scanner sc = new Scanner(input);
-            String filePath = "data/duke.txt";
             String command = Parser.parseCommand(sc.next());
             switch(command) {
             case "bye":
