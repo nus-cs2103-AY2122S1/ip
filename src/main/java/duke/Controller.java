@@ -123,7 +123,8 @@ public class Controller implements Initializable {
             tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(), ""));
             this.save();
             assert addTaskError.getText().equals("");
-        } else if (taskType.getText().equalsIgnoreCase("D") || taskType.getText().equalsIgnoreCase("E")) {
+        } else if (taskType.getText().equalsIgnoreCase("D")
+                || taskType.getText().equalsIgnoreCase("E")) {
             if (taskDate.getValue() == null) {
                 addTaskError.setText("Add a Date!");
             } else {

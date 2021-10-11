@@ -32,7 +32,9 @@ public class Task {
     /**
      * Marks task as not done
      */
-    public void markUndone() { this.isDone = false; }
+    public void markUndone() {
+        this.isDone = false;
+    }
 
     /**
      * Changes description of task
@@ -42,7 +44,7 @@ public class Task {
     public void changeDescription(String description) {
         this.description = description;
     }
-    
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
