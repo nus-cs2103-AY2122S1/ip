@@ -1,4 +1,4 @@
-package head;
+package front;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,12 +6,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import addon.Storage;
-import addon.Task;
-import addon.Task.Deadline;
-import addon.Task.Event;
-import addon.Task.Todo;
-import addon.Ui;
+import back.Deadline;
+import back.Event;
+import back.Storage;
+import back.Task;
+import back.Todo;
+import back.Ui;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,7 +49,7 @@ public class Sados extends Application {
         //top left buttons
         HBox saveLoad = new HBox();
         Button save = new Button("Save");
-        Image saveIcon = new Image(getClass().getResourceAsStream("/images/save.png"), 16, 16, true, true);
+        Image saveIcon = loadImage("/images/save.png");
         save.setGraphic(new ImageView(saveIcon));
 
         save.setOnAction(a -> {
@@ -57,17 +57,10 @@ public class Sados extends Application {
             Storage.saveToFile(list);
         });
         Button load = new Button("Load");
-        Image loadIcon = new Image(getClass().getResourceAsStream("/images/load.png"), 16, 16, true, true);
+        Image loadIcon = loadImage("/images/load.png");
         load.setGraphic(new ImageView(loadIcon));
         load.setOnAction(a -> {
-            if (new File("./save.txt").isFile()) {
-                try {
-                    tasks.clear();
-                    tasks.addAll(Storage.loadFile(new File("./save.txt")));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
+            loadSave();
         });
         saveLoad.getChildren().addAll(save, load);
         saveLoad.setSpacing(10);
@@ -79,7 +72,7 @@ public class Sados extends Application {
         //top right buttons
         HBox deleteDone = new HBox();
         Button delete = new Button("Delete");
-        Image deleteIcon = new Image(getClass().getResourceAsStream("/images/delete.png"), 16, 16, true, true);
+        Image deleteIcon = loadImage("/images/delete.png");
         delete.setGraphic(new ImageView(deleteIcon));
         delete.setOnAction(e -> {
             Task selected = listView.getSelectionModel().getSelectedItem();
@@ -90,7 +83,7 @@ public class Sados extends Application {
             }
         });
         Button done = new Button("Done");
-        Image doneIcon = new Image(getClass().getResourceAsStream("/images/done.png"), 16, 16, true, true);
+        Image doneIcon = loadImage("/images/done.png");
         done.setGraphic(new ImageView(doneIcon));
         done.setOnAction(e -> {
             Task selected = listView.getSelectionModel().getSelectedItem();
@@ -118,7 +111,7 @@ public class Sados extends Application {
         actions.getItems().addAll("Todo", "Event", "Deadline", "Search");
         actions.getSelectionModel().select(0);
         Button go = new Button("Go!");
-        Image goIcon = new Image(Sados.class.getResourceAsStream("/images/go.png"), 16, 16, true, true);
+        Image goIcon = loadImage("/images/go.png");
         go.setGraphic(new ImageView(goIcon));
 
         //text inputs parsing
@@ -129,54 +122,50 @@ public class Sados extends Application {
             boolean nameInputIsEmpty = nameInputString.isEmpty();
             String dateInputString = dateInput.getText();
             boolean dateInputIsEmpty = dateInputString.isEmpty();
-
-            if (option.equals("Todo")) {
+            LocalDate date = LocalDate.of(1, 1, 1);
+            if (!dateInputIsEmpty) {
+                try {
+                    date = LocalDate.parse(dateInputString);
+                } catch (DateTimeParseException err) {
+                    Popup.errorPopup("Date format error! (YYYY-MM-DD)");
+                }
+            }
+            switch (option) {
+            case "Todo":
                 if (nameInputIsEmpty) {
                     Popup.errorPopup("Name field is empty!");
                 } else {
                     Todo add = new Todo(nameInputString);
                     addTask(add);
                 }
-            } else if (option.equals("Search") && dateInputIsEmpty) {
-                if (nameInputIsEmpty) {
+                break;
+            case "Event":
+                if (nameInputIsEmpty || dateInputIsEmpty) {
+                    Popup.errorPopup("Name and/or Date fields are empty!");
+                } else {
+                    Event add = new Event(nameInputString, date);
+                    addTask(add);
+                }
+                break;
+            case "Deadline":
+                if (nameInputIsEmpty || dateInputIsEmpty) {
+                    Popup.errorPopup("Name and/or Date fields are empty!");
+                } else {
+                    Deadline add = new Deadline(nameInputString, date);
+                    addTask(add);
+                }
+                break;
+            default:
+                if (nameInputIsEmpty && dateInputIsEmpty) {
                     Popup.errorPopup("Name and Date fields are empty!");
+                } else if (nameInputIsEmpty) {
+                    filterResults(2, "", date);
+                } else if (dateInputIsEmpty) {
+                    filterResults(1, nameInputString, date);
                 } else {
-                    filterResults(1, nameInputString, LocalDate.of(1, 1, 1));
+                    filterResults(3, nameInputString, date);
                 }
-            } else {
-                if (dateInputIsEmpty) {
-                    if (nameInputIsEmpty) {
-                        Popup.errorPopup("Name and Date fields are empty!");
-                    } else {
-                        Popup.errorPopup("Date field is empty!");
-                    }
-                } else {
-                    LocalDate date;
-                    try {
-                        date = LocalDate.parse(dateInputString);
-                        if (option.equals("Search")) {
-                            if (nameInputIsEmpty) {
-                                filterResults(2, "", date);
-                            } else {
-                                filterResults(3, nameInputString, date);
-                            }
-                        } else {
-                            if (nameInputIsEmpty) {
-                                Popup.errorPopup("Name field is empty!");
-                            } else {
-                                if (option.equals("Event")) {
-                                    Event add = new Event(nameInputString, date);
-                                    addTask(add);
-                                } else if (option.equals("Deadline")) {
-                                    Deadline add = new Deadline(nameInputString, date);
-                                    addTask(add);
-                                }
-                            }
-                        }
-                    } catch (DateTimeParseException err) {
-                        Popup.errorPopup("Date format error! (YYYY-MM-DD)");
-                    }
-                }
+                break;
             }
             nameInput.clear();
             dateInput.clear();
@@ -207,6 +196,15 @@ public class Sados extends Application {
     }
 
     /**
+     * Loads an image.
+     * @param location Location of the image.
+     * @return Image
+     */
+    private Image loadImage(String location) {
+        return new Image(getClass().getResourceAsStream(location), 16, 16, true, true);
+    }
+
+    /**
      * Checks for duplicates in the tasklist, and asks if duplicates should be added.
      *
      * @param task Task to be added to the list.
@@ -224,6 +222,21 @@ public class Sados extends Application {
     }
 
     /**
+     * Loads tasks from save file.
+     */
+    private void loadSave() {
+        File saveFile = new File("./save.txt");
+        if (saveFile.isFile()) {
+            try {
+                tasks.clear();
+                tasks.addAll(Storage.loadFile(saveFile));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
      * Opens a popup window with the filtered items.
      *
      * @param type 1 if filtering only by name, 2 if filtering only by date, 3 if by both.
@@ -236,50 +249,88 @@ public class Sados extends Application {
         String dateString = Ui.printDate(date);
         String filterString;
 
-        //name only
-        if (type == 1) {
-            for (Task i : tasks) {
-                if (i.queryIfNameContains(nameString)) {
-                    list.add(i.toString());
-                }
-            }
-            filterString = nameString;
-        } else if (type == 2) { //date only
-            for (Task i : tasks) {
-                if (i instanceof Todo) {
-                    break;
-                } else if (i instanceof Event) {
-                    Event e = (Event) i;
-                    if (e.queryIfDateEquals(date)) {
-                        list.add(i.toString());
-                    }
-                } else if (i instanceof Deadline) {
-                    Deadline d = (Deadline) i;
-                    if (d.queryIfDateEquals(date)) {
-                        list.add(i.toString());
-                    }
-                }
-            }
-            filterString = dateString;
-        } else { //name and date
-            for (Task i : tasks) {
-                if (i.queryIfNameContains(nameString)) {
-                    if (i instanceof Event) {
-                        Event e = (Event) i;
-                        if (e.queryIfDateEquals(date)) {
-                            list.add(i.toString());
-                        }
-                    } else if (i instanceof Deadline) {
-                        Deadline d = (Deadline) i;
-                        if (d.queryIfDateEquals(date)) {
-                            list.add(i.toString());
-                        }
-                    }
-                }
-            }
+        switch(type) {
+        case 1:
+            filterName(list, nameString);
+            Popup.filterPopup(list, nameString);
+            break;
+        case 2:
+            filterDate(list, date);
+            Popup.filterPopup(list, dateString);
+            break;
+        default:
+            filterNameAndDate(list, nameString, date);
             filterString = nameString + " + " + dateString;
+            Popup.filterPopup(list, filterString);
+            break;
         }
-        Popup.filterPopup(list, filterString);
 
+    }
+
+    /**
+     * Adds task to list if it contains the parameter string in it's name
+     * @param list Task list to be added to.
+     * @param nameString Parameter string.
+     */
+    private void filterName(ObservableList<String> list, String nameString) {
+        for (Task i : tasks) {
+            addIfMatchName(i, list, nameString);
+        }
+    }
+
+    /**
+     * Adds task to list if it is on the same date as the parameter date.
+     * @param list Task list to be added to.
+     * @param date LocatDate object that is to be compared.
+     */
+    private void filterDate(ObservableList<String> list, LocalDate date) {
+        for (Task i : tasks) {
+            if (i instanceof Todo) {
+                break;
+            }
+            addIfMatchDate(i, list, date);
+        }
+    }
+
+    /**
+     * Adds task to list if it contains the parameter string in it's name and is on the parameter date.
+     * @param list Task list to be added to.
+     * @param nameString Parameter string.
+     * @param date LocatDate object that is to be compared.
+     */
+    private void filterNameAndDate(ObservableList<String> list, String nameString, LocalDate date) {
+        for (Task i : tasks) {
+            if (i instanceof Todo) {
+                break;
+            }
+            if (i.queryIfNameContains(nameString)) {
+                addIfMatchDate(i, list, date);
+            }
+        }
+    }
+
+    /**
+     * Adds task to list if it shares the same date as the parameter date.
+     * @param t Task to be checked.
+     * @param list List to be added to.
+     * @param date Date to be checked.
+     */
+    private void addIfMatchDate(Task t, ObservableList<String> list, LocalDate date) {
+        Event e = (Event) t;
+        if (e.queryIfDateEquals(date)) {
+            list.add(e.toString());
+        }
+    }
+
+    /**
+     * Adds task to list if it contains the parameter name.
+     * @param t Task to be checked.
+     * @param list List to be added to.
+     * @param nameString String to be checked.
+     */
+    private void addIfMatchName(Task t, ObservableList<String> list, String nameString) {
+        if (t.queryIfNameContains(nameString)) {
+            list.add(t.toString());
+        }
     }
 }

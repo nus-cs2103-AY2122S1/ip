@@ -4,17 +4,17 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import addon.Task.Deadline;
-import addon.Task.Event;
-import addon.Task.Todo;
+import back.Deadline;
+import back.Event;
+import back.Todo;
 
 /**
  * This class represents a test file for Duke.java.
  */
 
-public class sadTest {
+public class TasksTest {
     @Test
-    public void Deadline_createDeadline_deadlineStringReturned() {
+    public void deadlineConstructor_createDeadline_deadlineStringReturned() {
         Deadline deadline = new Deadline(
                 "2100 Lab3",
                 LocalDate.parse("2020-09-16")
@@ -24,7 +24,7 @@ public class sadTest {
 
 
     @Test
-    public void Todo_completedTodo_TodoStringReturned() {
+    public void todoMarkDone_completedTodo_todoStringReturned() {
         Todo todo = new Todo(
                 "Stretch"
         );
@@ -33,7 +33,7 @@ public class sadTest {
     }
 
     @Test
-    public void Event_completeEvent_EventStringReturned() {
+    public void eventConstructor_createEvent_eventStringReturned() {
         Event event = new Event(
                 "cake", LocalDate.parse("2020-11-18")
         );

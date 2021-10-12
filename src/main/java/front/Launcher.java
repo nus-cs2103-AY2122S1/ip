@@ -1,4 +1,4 @@
-package head;
+package front;
 
 import javafx.application.Application;
 
