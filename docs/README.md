@@ -23,7 +23,7 @@ You may tell duke what to do for you using the following commands:
 
 **Formats Supported**
 * `start_date` and `end_date` are in `yyyy-mm-dd` format
-* `start_time` and 'end_time' are in `hhmm` 24h format
+* `start_time` and `end_time` are in `hhmm` 24h format
 * `time_string` supports any input
 * `index` should be integer
 
