@@ -181,7 +181,6 @@ public class Storage {
         default:
             return new ToDo("Please delete this entry. I am a bug!");
         }
-
     }
 
     /**
@@ -209,6 +208,4 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
-
 }
