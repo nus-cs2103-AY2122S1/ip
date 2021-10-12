@@ -1,13 +1,14 @@
-import duke.core.Duke;
-import duke.task.Todo;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import duke.core.Duke;
+import duke.task.Todo;
+
 
 public class TodoTest {
     @Test
-    public void createTodoTest(){
+    public void createTodoTest() {
         try {
             Duke duke = new Duke("data/todoList2.txt");
             Todo todo = new Todo("test", false);
@@ -19,7 +20,7 @@ public class TodoTest {
     }
 
     @Test
-    public void searchKeywordTest(){
+    public void searchKeywordTest() {
         try {
             Duke duke = new Duke("data/todoList2.txt");
             Todo todo = new Todo("test", false);

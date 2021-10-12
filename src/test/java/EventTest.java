@@ -1,14 +1,14 @@
-import duke.core.Duke;
-import duke.task.Deadline;
-import duke.task.Event;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import duke.core.Duke;
+import duke.task.Event;
+
 
 public class EventTest {
     @Test
-    public void createEventTest(){
+    public void createEventTest() {
         try {
             Duke duke = new Duke("data/todoList2.txt");
             Event event = new Event("test", false, "/at 2020-11-03 4pm");
@@ -20,7 +20,7 @@ public class EventTest {
     }
 
     @Test
-    public void getTimeTest(){
+    public void getTimeTest() {
         try {
             Duke duke = new Duke("data/todoList2.txt");
             Event event = new Event("test", false, "/at 2020-11-03 4pm");

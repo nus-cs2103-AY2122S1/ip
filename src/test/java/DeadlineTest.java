@@ -1,13 +1,16 @@
-import duke.core.Duke;
-import duke.task.Deadline;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import duke.core.Duke;
+import duke.task.Deadline;
+
+
+
 
 public class DeadlineTest {
     @Test
-    public void createDeadlineTest(){
+    public void createDeadlineTest() {
         try {
             Duke duke = new Duke("data/todoList2.txt");
             Deadline deadline = new Deadline("test", false, "/by 2020-11-03 4pm");
@@ -19,7 +22,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void getTimeTest(){
+    public void getTimeTest() {
         try {
             Duke duke = new Duke("data/todoList2.txt");
             Deadline deadline = new Deadline("test", false, "/by 2020-11-03 4pm");
