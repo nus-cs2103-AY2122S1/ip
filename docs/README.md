@@ -102,3 +102,23 @@ Expected outcome:
 
 the list gets sorted chronologically based on the timing of the event and the deadline.
 
+### `find` - finds tasks that fit a given description
+
+Finds through all the tasks that fit the given description. Is case-insensitive.
+
+Example of usage:
+
+`find (description)`
+
+Expected outcome:
+
+A list of tasks that fit the given description.
+
+### `bye` - shuts down the application
+
+Saves all the data, and displays a goodbye message before shutting down the application.
+
+Expected outcome:
+
+The application replies with "Bye. Hope to see you soon!" before shutting down.
+

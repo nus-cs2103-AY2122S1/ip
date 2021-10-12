@@ -21,6 +21,7 @@ public class SortCommand extends Command {
             Task task = tasks.get(i);
             response.append(ui.printTask(task, i + 1));
         }
+        storage.save(tasks.getTasks());
         return response.toString();
     }
 }

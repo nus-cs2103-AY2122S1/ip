@@ -6,6 +6,10 @@ import bribot.parser.Parser;
 import bribot.storage.Storage;
 import bribot.task.TaskList;
 import bribot.ui.Ui;
+import javafx.application.Platform;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -36,6 +40,9 @@ public class BriBot {
         Command c = Parser.parse(input);
 
         try {
+            if (c.isExit()) {
+                delayedExit();
+            }
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.printDukeException(e.getMessage());
@@ -45,5 +52,19 @@ public class BriBot {
     public Ui getUi() {
         return this.ui;
     }
+
+    /**
+     * @author endriu_l/Jason C taken from stackoverflow.
+     */
+    private static void delayedExit() {
+        TimerTask exit = new TimerTask() {
+            public void run() {
+                Platform.exit();
+                System.exit(0);
+            }
+        };
+        new Timer().schedule(exit, 2000);
+    }
+
 
 }

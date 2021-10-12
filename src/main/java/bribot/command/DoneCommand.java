@@ -38,8 +38,12 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (index >= tasks.size()) {
+            throw new DukeException("Please enter the number of a task that exists in the list of tasks");
+        }
         Task task = tasks.get(index);
         tasks.markTask(index);
+        storage.save(tasks.getTasks());
         return ui.markTask(task);
     }
 }
