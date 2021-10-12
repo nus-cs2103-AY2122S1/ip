@@ -7,6 +7,7 @@ Please be patient with him as he's kind of slow and stupid, and sometimes he doe
 > "If it ain't broke, don't fix it" - Thomas Bertram Lance ([Source](https://digital.hagley.org/Nationbiz_197705#page/30/mode/2up))
 ---
 # Table of Contents
+- [Getting Started](#getting-started)
 - [Features](#features)
   - [Adding Tasks](#adding-tasks)
     - [ToDo](#todo)
@@ -18,6 +19,24 @@ Please be patient with him as he's kind of slow and stupid, and sometimes he doe
     - [Undo Task](#undo-task)
     - [Delete Task](#delete-task)
   - [Exiting InferiorDuke](#exiting-inferiorduke)
+
+---
+# Getting Started 🔧
+
+Before running InferiorDuke, ensure that you have the a ```data/duke.txt``` file located in the same directory as the the JAR executable ```duke-2.0.jar```. An example of a properly configured file setup is shown below:
+
+```
+Desktop
+├── folder
+     ├── duke-2.0.jar
+     ├── data
+          ├── duke.txt
+```
+To actually run InferiorDuke, execute the following command from the Command Line Interface in the directory that the ```duke-2.0.jar``` is located:
+
+```
+java -jar duke-2.0.jar
+```
 
 
 ---
