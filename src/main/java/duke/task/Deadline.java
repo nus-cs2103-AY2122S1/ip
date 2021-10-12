@@ -10,7 +10,7 @@ public class Deadline extends Task {
      * Constructor method of Deadline.
      *
      * @param description Description of a deadline.
-     * @param by Due time of a deadline.                   
+     * @param by Due time of a deadline.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -30,7 +30,7 @@ public class Deadline extends Task {
         } else {
             doneIndicator = "0";
         }
-        String[] string = new String[]{"D", doneIndicator, this.getDescription()};
+        String[] string = new String[]{"D", doneIndicator, this.getDescription(), byDate};
         return string;
     }
 

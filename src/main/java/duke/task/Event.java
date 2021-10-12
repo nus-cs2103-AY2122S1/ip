@@ -25,12 +25,12 @@ public class Event extends Task {
     @Override
     public String[] formatTaskInArray() {
         String doneIndicator;
-        if (this.isDone()) { 
+        if (this.isDone()) {
             doneIndicator = "1";
         } else {
             doneIndicator = "0";
         }
-        String[] str = new String[]{"E", doneIndicator, this.getDescription()};
+        String[] str = new String[]{"E", doneIndicator, this.getDescription(), atDate};
         return str;
     }
 

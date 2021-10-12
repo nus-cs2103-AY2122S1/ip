@@ -32,7 +32,7 @@ public class Parser {
             if (instr.length != 1) {
                 instrContent = instr[1];
             }
-            switch (instrType) { 
+            switch (instrType) {
             case "todo":
             case "t":
                 return ToDoCommand(instrContent);
@@ -72,7 +72,7 @@ public class Parser {
     public static boolean shouldExit(String command) {
         return command.equals("bye");
     }
-    
+
     /**
      * Handles the logic of exiting.
      *
@@ -164,7 +164,7 @@ public class Parser {
             }
         }
     }
-    
+
     /**
      * Handles the logic of finishing tasks.
      *
@@ -177,7 +177,9 @@ public class Parser {
             throw new DukeException("Please specify which task to mark as done. :)");
         } else {
             int index = Integer.parseInt(command);
-            if (index <= tasks.getListSize()) {
+            if (index <= 0) {
+                throw new DukeException("Your input index should be a positive integer.");
+            } else if (index <= tasks.getListSize()) {
                 return tasks.setAsDone(index);
             } else {
                 throw new DukeException("You only have " + tasks.getListSize() + " tasks now."
@@ -198,7 +200,9 @@ public class Parser {
             throw new DukeException("Please specify which task to delete. :)");
         } else {
             int index = Integer.parseInt(command);
-            if (index <= tasks.getListSize()) {
+            if (index <= 0) {
+                throw new DukeException("Your input index should be a positive integer.");
+            } else if (index <= tasks.getListSize()) {
                 return tasks.deleteTask(index);
             } else {
                 throw new DukeException("You only have " + tasks.getListSize() + " tasks now."
@@ -213,7 +217,10 @@ public class Parser {
      * @param command Details of find command.
      * @return The response string.
      */
-    public static String FindCommand(String command) {
+    public static String FindCommand(String command) throws DukeException {
+        if (command.equals("")) {
+            throw new DukeException("Please specify keyword for find command. :)");
+        }
         return tasks.showFind(command);
     }
 
