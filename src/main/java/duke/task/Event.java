@@ -58,22 +58,38 @@ public class Event extends Task {
         return stringBuilder.toString();
     }
 
+    /**
+     * set the status of task as the given status
+     * @param done
+     */
     @Override
     public void setDone(boolean done) {
         isDone = done;
     }
 
+    /**
+     * get task name
+     * @return
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * get the status of the task
+     * @return
+     */
     @Override
     public boolean isDone() {
         return isDone;
     }
 
 
+    /**
+     * get the task in string format
+     * @return
+     */
     @Override
     public String toString() {
         return "E" + " " + name + " "

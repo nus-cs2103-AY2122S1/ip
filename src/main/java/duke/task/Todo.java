@@ -43,16 +43,28 @@ public class Todo extends Task {
         return name;
     }
 
+    /**
+     * get the status of the task
+     * @return
+     */
     @Override
     public boolean isDone() {
         return isDone;
     }
 
+    /**
+     * set the status of task as the given status
+     * @param done
+     */
     @Override
     public void setDone(boolean done) {
         isDone = done;
     }
 
+    /**
+     * get the task in string format
+     * @return
+     */
     @Override
     public String toString() {
         return "T" + " " + name + " " + isDone + '\n';

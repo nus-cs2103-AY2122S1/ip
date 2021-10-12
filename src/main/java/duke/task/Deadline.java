@@ -23,11 +23,19 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * get name in recurring class
+     * @return
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * get the status of the task
+     * @return
+     */
     @Override
     public boolean isDone() {
         return isDone;
@@ -69,11 +77,19 @@ public class Deadline extends Task {
         return false;
     }
 
+    /**
+     * set the status of task as the given status
+     * @param done
+     */
     @Override
     public void setDone(boolean done) {
         isDone = done;
     }
 
+    /**
+     * get the task in string format
+     * @return
+     */
     @Override
     public String toString() {
         return "D" + " " + name + " "
