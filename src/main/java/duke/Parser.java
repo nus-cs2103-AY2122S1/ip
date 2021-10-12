@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -42,6 +43,8 @@ public class Parser {
                 return taskList.addTask(new Todo(scan.nextLine()));
             } catch (DukeException e) {
                 e.printMsg();
+            } catch (NoSuchElementException e) {
+                new DukeException("Todo cannot be empty :(").printMsg();
             }
             break;
         case "deadline":
@@ -51,6 +54,8 @@ public class Parser {
                 e.printMsg();
             } catch (DateTimeParseException e) {
                 System.out.println("Wrong date time format! Please use DD-MM-YYYY HHHH");
+            } catch (NoSuchElementException e) {
+                new DukeException("Deadline cannot be empty :(").printMsg();
             }
             break;
         case "event":
@@ -58,6 +63,8 @@ public class Parser {
                 return taskList.addTask(new Event(scan.nextLine()));
             } catch (DukeException e) {
                 e.printMsg();
+            } catch (NoSuchElementException e) {
+                new DukeException("Event cannot be empty :(").printMsg();
             }
             break;
         case "find":
