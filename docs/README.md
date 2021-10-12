@@ -45,11 +45,11 @@ Examples:
 
 Adding a Event Task to the list
 
-Format: `event TASKDESCRIPTION /atTIME_OF_EVENT`
+Format: `event TASKDESCRIPTION /at TIME_OF_EVENT`
 
 Examples:
-* `event Concert /at6pm today`
-* `event Lessons /at12/08/2021 6pm`
+* `event Concert /at 6pm today`
+* `event Lessons /at 12/08/2021 6pm`
 
 ### Deadline
 
@@ -58,17 +58,17 @@ Adding a Deadline Task to the list
 Format: `deadline TASKDESCRIPTION /by TIME_DUE`
 
 Examples:
-* `deadline Homework /at 6pm today`
-* `deadline Project work /at 12/08/2021 6pm`
+* `deadline Homework /by 6pm today`
+* `deadline Project work /by 12/08/2021 6pm`
 
 ### Recurring
 
 Adding a Recurring Task to the list
 
-Format: `recurring TASKDESCRIPTION /byTIME_DUE /recurring NUM_DAYS`
+Format: `recurring TASKDESCRIPTION /at TIME_DUE /repeat NUM_DAYS`
 
 Examples:
-* `recurring Tutorial /at 16/09/2021 /recurring 7`
+* `recurring Tutorial /at 16/09/2021 /repeat 7`
 
 ### List
 
