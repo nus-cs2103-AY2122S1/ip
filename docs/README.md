@@ -22,39 +22,46 @@ This command is for todo task, only task name is required
 
     todo [task name]
     
-Example
+#### Example
 
     todo do 2103 homework
+    
 ### Add Deadline task command
 This command is for the task that needs to be done by a deadline, task name and deadline are required.
 The deadline you enter should follow the format yyyy-mm-dd [more specific time]
 
     deadline [task name] /by [task time]
     
-Example
+#### Example
 
     deadline finish tutorial /by 2021-11-08 4pm
+    
 ### Add Event task command
 This command is for the task that happens at specific time, task name and time are required.
 The time you enter should follow the format yyyy-mm-dd [more specific time]
 
     event [task name] /at [task time]
-Example
+    
+#### Example
 
     event tutorial /at 2021-11-08 5pm
+    
 ### Add Recurring task command
 This command is for the recurring task like the task happens every Monday, task name and specific time and sessions are required.
 
     recur [task name] /at [task time] /[task counter]
-Example
+    
+#### Example
 
     recur lecture /at Mon 2pm /10
+    
 ### Mark a task as done
 This command is used to mark a task as finished but still keep the task in your record. For recurring task, every time your use this command,
 the number of sessions will decrease by 1. Task index is required.
 
     done [task index]
-Example
+    
+#### Example
 
     done 1
 
@@ -62,7 +69,8 @@ Example
 This command is used to delete a task from record, task index is required.
 
     delete [task index] 
-Example
+    
+#### Example
 
     delete 1
 
@@ -70,7 +78,8 @@ Example
 This command is used to find a task according to the keyword you entered
 
     find [task name]
-Example:
+    
+#### Example
 
     find run
 
