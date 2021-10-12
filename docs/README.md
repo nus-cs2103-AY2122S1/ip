@@ -16,7 +16,7 @@ Creates a deadline task that has a
 description and deadline to complete 
 the task by
 
-Format: `deadline [task] /by [yyyy-MM-dd]`
+Format: `deadline [task] /by [yyyy-MM-dd]` or `deadline [task] /by [yyyy-MM-dd] [HH:mm]`
 
 Example: `deadline Assignment /by 2021-09-21`
 creates a deadline and adds it into the list
@@ -39,7 +39,7 @@ Creates an event task that has a
 description and a time that the
 event will be held
 
-Format: `event [task] /at [yyyy-MM-dd]`
+Format: `event [task] /at [yyyy-MM-dd]` or `event [task] /at [yyyy-MM-dd] [HH:mm]`
 
 Example: `event Party /at 2021-09-25`
 creates an event and adds it into the list
@@ -50,11 +50,13 @@ Find tasks containing a reference string.
 
 Format: `find [ref]`
 
-### help: `help`
+### help: `help` 
 
 Displays help for specified keyword
 
 Format: `help [keyword]`
+
+Note: C-Help
 
 Example: `help find` returns 
 `find [keyword] ; 
