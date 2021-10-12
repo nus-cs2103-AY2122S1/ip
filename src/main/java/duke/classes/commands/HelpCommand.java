@@ -13,6 +13,6 @@ public class HelpCommand extends Command {
      * @return String to be output by Duke
      */
     public String execute() throws IllegalArgumentException {
-        return "View https://tchiong.github.io/ip/ for details on commands";
+        return "View https://tchiong.github.io/ip/ for help on commands";
     }
 }

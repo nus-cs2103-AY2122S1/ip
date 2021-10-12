@@ -6,7 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import duke.classes.commands.DukeParser;
+import duke.classes.DukeParser;
 import duke.classes.commands.DukeUI;
 import org.junit.jupiter.api.Test;
 

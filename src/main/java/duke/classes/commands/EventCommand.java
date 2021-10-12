@@ -32,7 +32,7 @@ public class EventCommand extends Command {
      * @return String to be output by Duke
      */
     public String execute() throws DukeException {
-        List<String> postFilter = taskList.separateDesc("/by", words);
+        List<String> postFilter = taskList.separateDesc("/at", words);
         String desc = postFilter.get(0);
 
         if (postFilter.get(1).equals("")) {

@@ -1,33 +1,26 @@
-package duke.classes.commands;
+package duke.classes;
 
-import static java.lang.Integer.parseInt;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import duke.classes.TaskList;
+import duke.classes.commands.DeadlineCommand;
+import duke.classes.commands.DeleteCommand;
+import duke.classes.commands.DoneCommand;
+import duke.classes.commands.EventCommand;
+import duke.classes.commands.ExitCommand;
+import duke.classes.commands.FindCommand;
+import duke.classes.commands.HelpCommand;
+import duke.classes.commands.ListCommand;
+import duke.classes.commands.TodoCommand;
 import duke.classes.exceptions.DukeException;
-import duke.classes.tasks.Deadline;
-import duke.classes.tasks.Event;
-import duke.classes.tasks.Task;
-import duke.classes.tasks.ToDo;
-
-
-
 
 /**
  * Parser class handling the logic of the program
  */
 public class DukeParser {
-    private TaskList taskList;
+    private final TaskList taskList;
 
     /**
      * Class Constructor
      *
-     * @param taskList The tasklist to be modified through user-input
+     * @param taskList The task list to be modified through user-input
      */
     public DukeParser(TaskList taskList) {
         this.taskList = taskList;
