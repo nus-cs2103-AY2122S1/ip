@@ -56,7 +56,7 @@ public class Storage {
     }
 
     /**
-     * Write taskList to Storage
+     * Writes taskList to Storage
      *
      * @param tasklist that is written to Storage
      */
@@ -70,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Clear text file containing tasks.
+     * Clears text file containing tasks.
      */
     public String resetTasks() {
         try {

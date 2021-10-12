@@ -27,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * Start the assistant.
+     * Starts the assistant.
      */
     public void start() {
         try {
