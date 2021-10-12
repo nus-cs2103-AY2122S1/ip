@@ -69,6 +69,112 @@ public class Database {
     }
 
     /**
+     * parse event task
+     * @param data
+     * @return
+     */
+    public Task parseEvent(String data) {
+        String[] s = data.split(" ");
+
+        boolean isDone;
+        if (s[s.length - 1].equals("false")) {
+            isDone = false;
+        } else {
+            isDone = true;
+        }
+        String taskNameEvent = "";
+        String taskTimeEvent = "";
+        boolean timePartEvent = false;
+        for (int i = 1; i < s.length - 1; i++) {
+            if (s[i].startsWith("/")) {
+                timePartEvent = true;
+                taskTimeEvent = s[i].substring(1);
+            } else if (timePartEvent) {
+                taskTimeEvent += " " + s[i];
+            } else {
+                if (s[i + 1].startsWith("/")) {
+                    taskNameEvent += s[i];
+                } else {
+                    taskNameEvent += s[i] + " ";
+                }
+
+            }
+        }
+        return new Event(taskNameEvent, isDone, taskTimeEvent);
+    }
+
+    /**
+     * parse deadline task
+     * @param data
+     * @return
+     */
+    public Task parseDeadline(String data) {
+        String[] s = data.split(" ");
+
+        boolean isDone;
+        if (s[s.length - 1].equals("false")) {
+            isDone = false;
+        } else {
+            isDone = true;
+        }
+        String taskNameDdl = "";
+        String taskTimeDdl = "";
+        boolean timePartDdl = false;
+        for (int i = 1; i < s.length - 1; i++) {
+            if (s[i].startsWith("/")) {
+                timePartDdl = true;
+                taskTimeDdl = s[i].substring(1);
+            } else if (timePartDdl) {
+                taskTimeDdl += " " + s[i];
+            } else {
+                if (s[i + 1].startsWith("/")) {
+                    taskNameDdl += s[i];
+                } else {
+                    taskNameDdl += s[i] + " ";
+                }
+            }
+        }
+        return new Deadline(taskNameDdl, isDone, taskTimeDdl);
+    }
+
+    /**
+     * parse recurring task
+     * @param data
+     * @return
+     */
+    public Task parseRecur(String data) {
+        String[] s = data.split(" ");
+
+        boolean isDone;
+        if (s[s.length - 1].equals("false")) {
+            isDone = false;
+        } else {
+            isDone = true;
+        }
+        String taskNameRecur = "";
+        String taskTimeRecur = "";
+        int counter = 0;
+        boolean timePartRecur = false;
+        for (int i = 1; i < s.length - 1; i++) {
+            if (s[i].startsWith("/") && !timePartRecur) {
+                timePartRecur = true;
+                taskTimeRecur = s[i].substring(1);
+            } else if (s[i].startsWith("/") && timePartRecur) {
+                counter = Integer.parseInt(s[i].substring(1));
+            } else if (timePartRecur) {
+                taskTimeRecur += " " + s[i];
+            } else {
+                if (s[i + 1].startsWith("/")) {
+                    taskNameRecur += s[i];
+                } else {
+                    taskNameRecur += s[i] + " ";
+                }
+            }
+        }
+        return new RecurringTask(taskNameRecur, isDone, taskTimeRecur, counter);
+    }
+
+    /**
      * parse data from string to task
      * @param data a string that contains a task information
      * @return
@@ -88,66 +194,11 @@ public class Database {
             assert s[0].equals("T") : "should be a todo event but it is not";
             return todo;
         case "E":
-            String taskNameEvent = "";
-            String taskTimeEvent = "";
-            boolean timePartEvent = false;
-            for (int i = 1; i < s.length - 1; i++) {
-                if (s[i].startsWith("/")) {
-                    timePartEvent = true;
-                    taskTimeEvent = s[i].substring(1);
-                } else if (timePartEvent) {
-                    taskTimeEvent += " " + s[i];
-                } else {
-                    if (s[i + 1].startsWith("/")) {
-                        taskNameEvent += s[i];
-                    } else {
-                        taskNameEvent += s[i] + " ";
-                    }
-
-                }
-            }
-            return new Event(taskNameEvent, isDone, taskTimeEvent);
+            return parseEvent(data);
         case "D":
-            String taskNameDdl = "";
-            String taskTimeDdl = "";
-            boolean timePartDdl = false;
-            for (int i = 1; i < s.length - 1; i++) {
-                if (s[i].startsWith("/")) {
-                    timePartDdl = true;
-                    taskTimeDdl = s[i].substring(1);
-                } else if (timePartDdl) {
-                    taskTimeDdl += " " + s[i];
-                } else {
-                    if (s[i + 1].startsWith("/")) {
-                        taskNameDdl += s[i];
-                    } else {
-                        taskNameDdl += s[i] + " ";
-                    }
-                }
-            }
-            return new Deadline(taskNameDdl, isDone, taskTimeDdl);
+            return parseDeadline(data);
         case "R":
-            String taskNameRecur = "";
-            String taskTimeRecur = "";
-            int counter = 0;
-            boolean timePartRecur = false;
-            for (int i = 1; i < s.length - 1; i++) {
-                if (s[i].startsWith("/") && !timePartRecur) {
-                    timePartRecur = true;
-                    taskTimeRecur = s[i].substring(1);
-                } else if (s[i].startsWith("/") && timePartRecur) {
-                    counter = Integer.parseInt(s[i].substring(1));
-                } else if (timePartRecur) {
-                    taskTimeRecur += " " + s[i];
-                } else {
-                    if (s[i + 1].startsWith("/")) {
-                        taskNameRecur += s[i];
-                    } else {
-                        taskNameRecur += s[i] + " ";
-                    }
-                }
-            }
-            return new RecurringTask(taskNameRecur, isDone, taskTimeRecur, counter);
+            return parseRecur(data);
         default:
             break;
         }

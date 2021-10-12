@@ -28,6 +28,11 @@ public class Duke extends Application {
     private static final String DELETE = "delete";
     private static final String LIST = "list";
     private static final String FIND = "find";
+    private static final String DEADLINE = "deadline";
+    private static final String RECUR = "recur";
+    private static final String TODO = "todo";
+    private static final String EVENT = "event";
+
 
     private ArrayList<Task> taskList;
     private Database database;
@@ -38,8 +43,6 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
-
 
 
     /**
@@ -146,6 +149,468 @@ public class Duke extends Application {
         return result;
     }
 
+    /**
+     * execute find command
+     * @param input
+     * @param task
+     * @return
+     */
+    public String executeFind(String input, ArrayList<Task> task) {
+        int taskNum = task.size();
+        String indentation = "       ";
+        String response = "";
+
+        String keywords = input;
+        String[] keyword = keywords.split(" ");
+        ArrayList<Task> result = searchTask(task, keyword[1]);
+        if (result.size() == 0) {
+            return ui.keywordNotFound;
+        }
+        try {
+            for (int i = 0; i < result.size(); i++) {
+                String s = indentation;
+                String s2 = "";
+
+                if (result.get(i) instanceof Todo) {
+                    s += (i + 1) + "." + " [T]";
+                    s2 = result.get(i).getName();
+                } else if (result.get(i) instanceof Deadline) {
+                    s += (i + 1) + "." + " [D]";
+                    s2 = result.get(i).getName() + " " + "(" + " "
+                            + ((Deadline) result.get(i)).getTime() + " )";
+                } else if (result.get(i) instanceof Event) {
+                    s += (i + 1) + "." + " [E]";
+                    s2 = result.get(i).getName() + " " + "(" + " " + ((Event) result.get(i)).getTime() + " )";
+                }
+                if (result.get(i).isDone() == false) {
+                    s += "[ ] " + s2 + "\n";
+                    response += s;
+                } else {
+                    s += "[X] " + s2;
+                    response += s + "\n";
+                }
+            }
+            return response;
+        } catch (IndexOutOfBoundsException e) {
+            return indentation + e.getMessage();
+        }
+    }
+
+    /**
+     * execute list command
+     * @param input
+     * @param task
+     * @return
+     */
+    public String executeList(String input, ArrayList<Task> task) {
+
+        int taskNum = task.size();
+        String indentation = "       ";
+        String response = "";
+
+        String keywords = input;
+        String[] keyword = keywords.split(" ");
+        try {
+            for (int i = 0; i < task.size(); i++) {
+                String s = indentation;
+                String s2 = "";
+
+                if (task.get(i) instanceof Todo) {
+                    s += (i + 1) + "." + " [T]";
+                    s2 = task.get(i).getName();
+                } else if (task.get(i) instanceof Deadline) {
+                    s += (i + 1) + "." + " [D]";
+                    s2 = task.get(i).getName() + " " + "(" + " " + ((Deadline) task.get(i)).getTime() + " )";
+                } else if (task.get(i) instanceof Event) {
+                    s += (i + 1) + "." + " [E]";
+                    s2 = task.get(i).getName() + " " + "(" + " " + ((Event) task.get(i)).getTime() + " )";
+                } else if (task.get(i) instanceof RecurringTask) {
+                    s += (i + 1) + "." + " [R]";
+                    s2 = task.get(i).getName() + " " + "(" + " " + ((RecurringTask) task.get(i)).getTime()
+                            + " ) " + ((RecurringTask) task.get(i)).getCounter() + " lessons";
+                }
+                if (task.get(i).isDone() == false) {
+                    s += "[ ] " + s2;
+                    response += s + "\n";
+                } else {
+                    s += "[X] " + s2;
+                    response += s + "\n";
+                }
+            }
+            return response;
+
+        } catch (IndexOutOfBoundsException e) {
+            return indentation + e.getMessage();
+        }
+    }
+
+    /**
+     * execute done command
+     * @param input
+     * @param task
+     * @return
+     */
+    public String executeDone(String input, ArrayList<Task> task) {
+        String indentation = "       ";
+        String response = "";
+        String keywords = input;
+        String[] keyword = keywords.split(" ");
+        try {
+            Integer num = Integer.valueOf(keyword[1]) - 1;
+            if (task.get(num) instanceof RecurringTask) {
+                int counter = ((RecurringTask) task.get(num)).getCounter();
+                RecurringTask recurringTask = (RecurringTask) task.get(num);
+                recurringTask.setCounter(counter - 1);
+            } else {
+                task.get(num).setDone(true);
+            }
+            database.updateData(task.get(num), num + 1);
+            String s = indentation;
+            String s2 = "";
+            if (task.get(num) instanceof Todo) {
+                s += (task.get(num).getIndex() + 1) + "." + " [T]";
+                s2 = task.get(num).getName();
+            } else if (task.get(num) instanceof Deadline) {
+                s += (task.get(num).getIndex() + 1) + "." + " [D]";
+                s2 = task.get(num).getName() + " " + "(" + " " + ((Deadline) task.get(num)).getTime() + " )";
+            } else if (task.get(num) instanceof Event) {
+                s += (task.get(num).getIndex() + 1) + "." + " [E]";
+                s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
+
+            } else if (task.get(num) instanceof RecurringTask) {
+                s += (task.get(num).getIndex() + 1) + "." + " [R]";
+                s2 = task.get(num).getName() + " " + "(" + " " + ((RecurringTask) task.get(num)).getTime()
+                        + " ) " + ((RecurringTask) task.get(num)).getCounter() + " lessons";
+
+            }
+
+
+            if (task.get(num) instanceof RecurringTask) {
+                s += "[ ]" + s2;
+                response += "Nice! I've remove one lesson from this task:\n";
+            } else {
+                s += "[X]" + s2;
+                response += ui.doneMessage + "\n";
+
+            }
+            response += s;
+            return response;
+
+        } catch (NullPointerException e) {
+            return ui.taskNumMessage;
+        } catch (IndexOutOfBoundsException e) {
+            return ui.taskNumMessage;
+        }
+    }
+
+    /**
+     * execute delete command
+     * @param input
+     * @param task
+     * @return
+     */
+    public String executeDelete(String input, ArrayList<Task> task) {
+        String indentation = "       ";
+        String response = "";
+        String keywords = input;
+        String[] keyword = keywords.split(" ");
+        try {
+            Integer num = Integer.valueOf(keyword[1]) - 1;
+
+            database.deleteData(num + 1);
+            String s = indentation + "     ";
+            String s2 = "";
+
+            if (task.get(num) instanceof Todo) {
+                s += (task.get(num).getIndex() + 1) + "." + " [T]";
+                s2 = task.get(num).getName();
+            } else if (task.get(num) instanceof Deadline) {
+                s += (task.get(num).getIndex() + 1) + "." + " [D]";
+                s2 = task.get(num).getName() + " " + "(" + " " + ((Deadline) task.get(num)).getTime() + " )";
+            } else if (task.get(num) instanceof Event) {
+                s += (task.get(num).getIndex() + 1) + "." + " [E]";
+                s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
+            } else if (task.get(num) instanceof RecurringTask) {
+                s += (task.get(num).getIndex() + 1) + "." + " [R]";
+                s2 = task.get(num).getName() + " " + "(" + " " + ((RecurringTask) task.get(num)).getTime() + " )";
+            }
+            if (task.get(num).isDone() == false) {
+                s += "[ ]" + s2;
+            } else {
+                s += "[X]" + s2;
+            }
+
+            task.remove(num.intValue());
+            response += s + "\n";
+            response += indentation + "Now you have " + task.size() + " " + "tasks in the list." + "\n";
+            return response;
+        } catch (NullPointerException e) {
+            return ui.noTaskMessage;
+        } catch (IndexOutOfBoundsException e) {
+            return ui.noTaskMessage;
+        }
+    }
+
+    /**
+     * execute bye command
+     * @return
+     */
+    public String executeBye() {
+        return ui.byeMessage;
+    }
+
+    /**
+     * execute deadline command
+     * @param input
+     * @param task
+     * @return
+     */
+    public String executeDeadline(String input, ArrayList<Task> task) {
+        int taskNum = task.size();
+        String indentation = "       ";
+        String response = "";
+        String keywords = input;
+        String[] keyword = keywords.split(" ");
+        if (keyword.length == 1) {
+            return ui.lackContentMessage;
+        }
+        String taskNameDdl = "";
+        String taskTimeDdl = "";
+        boolean timePartDdl = false;
+        int count = 0;
+        try {
+            for (int i = 1; i < keyword.length; i++) {
+                if (keyword[i].startsWith("/")) {
+                    timePartDdl = true;
+                    taskTimeDdl = keyword[i].substring(1) + ":";
+                } else if (timePartDdl) {
+                    taskTimeDdl += " " + keyword[i];
+                    if (count == 0) {
+                        try {
+                            LocalDate date = LocalDate.parse(keyword[i]);
+                        } catch (DateTimeException e) {
+                            return "Please follow the template:\n deadline [name] /by yyyy-mm-dd ....";
+                        }
+                    }
+                    count++;
+                } else {
+                    if (keyword[i + 1].startsWith("/")) {
+                        taskNameDdl += keyword[i];
+                    } else {
+                        taskNameDdl += keyword[i] + " ";
+                    }
+                }
+            }
+            if (taskTimeDdl.equals("")) {
+                return ui.lackContentMessage;
+            }
+
+            Task ddl = new Deadline(taskNameDdl, false, taskTimeDdl);
+            task.add(ddl);
+            database.writeToDatabase(ddl);
+            taskNum++;
+            response += "Got it. I've added this task:" + "\n";
+            response += indentation + "   [D][ ] " + taskNameDdl + " ( " + taskTimeDdl + " )\n";
+            response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
+            return response;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return ui.indexMessage;
+        }
+
+    }
+
+    /**
+     * execute event command
+     * @param input
+     * @param task
+     * @return
+     */
+    public String executeEvent(String input, ArrayList<Task> task) {
+        int taskNum = task.size();
+        String indentation = "       ";
+        String response = "";
+        String keywords = input;
+        String[] keyword = keywords.split(" ");
+        if (keyword.length == 1) {
+            return ui.lackContentMessage;
+        }
+
+        String taskNameEvent = "";
+        String taskTimeEvent = "";
+        int count1 = 0;
+        boolean timePartEvent = false;
+        try {
+            for (int i = 1; i < keyword.length; i++) {
+                if (keyword[i].startsWith("/")) {
+                    timePartEvent = true;
+                    taskTimeEvent = keyword[i].substring(1) + ":";
+                } else if (timePartEvent) {
+                    taskTimeEvent += " " + keyword[i];
+                    System.out.println(keyword[i]);
+                    if (count1 == 0) {
+                        try {
+                            LocalDate date = LocalDate.parse(keyword[i]);
+                        } catch (DateTimeException e) {
+                            return "Please follow the template: \n event [name] /at yyyy-mm-dd ....";
+                        }
+                    }
+                    count1++;
+                } else {
+                    if (keyword[i + 1].startsWith("/")) {
+                        taskNameEvent += keyword[i];
+                    } else {
+                        taskNameEvent += keyword[i] + " ";
+                    }
+
+                }
+            }
+            if (taskTimeEvent.equals("")) {
+                return ui.lackContentMessage;
+            }
+            Task event = new Event(taskNameEvent, false, taskTimeEvent);
+            task.add(event);
+            database.writeToDatabase(event);
+            taskNum++;
+            response += "Got it. I've added this task:" + "\n";
+            response += indentation + "   [E][ ] " + taskNameEvent + " ( " + taskTimeEvent + " )\n";
+            response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
+            return response;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return ui.indexMessage;
+        }
+
+    }
+
+    /**
+     * execute todo command
+     * @param input
+     * @param task
+     * @return
+     */
+    public String executeTodo(String input, ArrayList<Task> task) {
+        int taskNum = task.size();
+        String indentation = "       ";
+        String response = "";
+        String keywords = input;
+        String[] keyword = keywords.split(" ");
+        if (keyword.length == 1) {
+            return ui.lackContentMessage;
+        }
+        String taskNameTodo = "";
+        try {
+            for (int i = 1; i < keyword.length; i++) {
+                if (i == keyword.length - 1) {
+                    taskNameTodo += keyword[i];
+                } else {
+                    taskNameTodo += keyword[i] + " ";
+                }
+
+            }
+            Task todo = new Todo(taskNameTodo, false);
+
+            task.add(todo);
+            database.writeToDatabase(todo);
+            taskNum++;
+            response += "Got it. I've added this task:" + "\n";
+            response += indentation + "   [T][ ] " + taskNameTodo + "\n";
+            response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
+            return response;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return ui.indexMessage;
+        }
+
+    }
+
+    /**
+     * execute recur command
+     * @param input
+     * @param task
+     * @return
+     */
+    public String executeRecur(String input, ArrayList<Task> task) {
+        int taskNum = task.size();
+        String indentation = "       ";
+        String response = "";
+        String keywords = input;
+        String[] keyword = keywords.split(" ");
+        if (keyword.length == 1) {
+            return ui.lackContentMessage;
+        }
+        String taskNameRecur = "";
+        String taskTimeRecur = "";
+        int counter = 0;
+        boolean timePartRecur = false;
+        try {
+            for (int i = 1; i < keyword.length; i++) {
+                if (keyword[i].startsWith("/") && !timePartRecur) {
+                    timePartRecur = true;
+                    taskTimeRecur = keyword[i].substring(1) + ":";
+                } else if (keyword[i].startsWith("/") && timePartRecur) {
+                    counter = Integer.parseInt(keyword[i].substring(1));
+                } else if (timePartRecur) {
+                    taskTimeRecur += " " + keyword[i];
+                } else {
+                    if (keyword[i + 1].startsWith("/")) {
+                        taskNameRecur += keyword[i];
+                    } else {
+                        taskNameRecur += keyword[i] + " ";
+                    }
+                }
+            }
+            if (taskTimeRecur.equals("")) {
+                return ui.lackContentMessage;
+            }
+            Task recur = new RecurringTask(taskNameRecur, false, taskTimeRecur, counter);
+            task.add(recur);
+            database.writeToDatabase(recur);
+            taskNum++;
+            response += "Got it. I've added this task:" + "\n";
+            response += indentation + "   [R][ ] " + taskNameRecur + " ( " + taskTimeRecur + " ) "
+                    + counter + " lessons\n";
+            response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
+            return response;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return ui.indexMessage;
+        }
+
+    }
+    /**
+     * parse the input command line for execution
+     * @param input
+     * @return
+     */
+    public String commandParser(String input) {
+        if (input.equals("")) {
+            return ui.logo + "\n" + "\n" + ui.greeting + "\n";
+        }
+        String keywords = input;
+        String[] keyword = keywords.split(" ");
+        database = new Database("data/todoList2.txt");
+        ArrayList<Task> task = database.getData();
+
+        switch(keyword[0]) {
+        case FIND:
+            return executeFind(input, task);
+        case LIST:
+            return executeList(input, task);
+        case DONE:
+            return executeDone(input, task);
+        case DELETE:
+            return executeDelete(input, task);
+        case BYE:
+            return executeBye();
+        case TODO:
+            return executeTodo(input, task);
+        case EVENT:
+            return executeEvent(input, task);
+        case RECUR:
+            return executeRecur(input, task);
+        case DEADLINE:
+            return executeDeadline(input, task);
+        default:
+            return ui.unknownMessage;
+        }
+    }
 
     /**
      * give response to GUI when user types in text
@@ -153,325 +618,7 @@ public class Duke extends Application {
      * @return
      */
     public String getResponse(String input) {
-        if (input.equals("")) {
-            return ui.logo + "\n" + "\n" + ui.greeting + "\n";
-        }
-        database = new Database("data/todoList2.txt");
-        ArrayList<Task> task = database.getData();
-        int taskNum = task.size();
-        String indentation = "       ";
-        String response = "";
-
-        String keywords = input;
-        String[] keyword = keywords.split(" ");
-
-        switch(keyword[0]) {
-        case FIND:
-            ArrayList<Task> result = searchTask(task, keyword[1]);
-            if (result.size() == 0) {
-                return ui.keywordNotFound;
-            }
-            try {
-                for (int i = 0; i < result.size(); i++) {
-                    String s = indentation;
-                    String s2 = "";
-
-                    if (result.get(i) instanceof Todo) {
-                        s += (i + 1) + "." + " [T]";
-                        s2 = result.get(i).getName();
-                    } else if (result.get(i) instanceof Deadline) {
-                        s += (i + 1) + "." + " [D]";
-                        s2 = result.get(i).getName() + " " + "(" + " "
-                                + ((Deadline) result.get(i)).getTime() + " )";
-                    } else if (result.get(i) instanceof Event) {
-                        s += (i + 1) + "." + " [E]";
-                        s2 = result.get(i).getName() + " " + "(" + " " + ((Event) result.get(i)).getTime() + " )";
-                    }
-                    if (result.get(i).isDone() == false) {
-                        s += "[ ] " + s2 + "\n";
-                        response += s;
-                    } else {
-                        s += "[X] " + s2;
-                        response += s + "\n";
-                    }
-                }
-                return response;
-            } catch (IndexOutOfBoundsException e) {
-                return indentation + e.getMessage();
-            }
-        case LIST:
-            try {
-                for (int i = 0; i < task.size(); i++) {
-                    String s = indentation;
-                    String s2 = "";
-
-                    if (task.get(i) instanceof Todo) {
-                        s += (i + 1) + "." + " [T]";
-                        s2 = task.get(i).getName();
-                    } else if (task.get(i) instanceof Deadline) {
-                        s += (i + 1) + "." + " [D]";
-                        s2 = task.get(i).getName() + " " + "(" + " " + ((Deadline) task.get(i)).getTime() + " )";
-                    } else if (task.get(i) instanceof Event) {
-                        s += (i + 1) + "." + " [E]";
-                        s2 = task.get(i).getName() + " " + "(" + " " + ((Event) task.get(i)).getTime() + " )";
-                    } else if (task.get(i) instanceof RecurringTask) {
-                        s += (i + 1) + "." + " [R]";
-                        s2 = task.get(i).getName() + " " + "(" + " " + ((RecurringTask) task.get(i)).getTime()
-                                + " ) " + ((RecurringTask) task.get(i)).getCounter() + " lessons";
-                    }
-                    if (task.get(i).isDone() == false) {
-                        s += "[ ] " + s2;
-                        response += s + "\n";
-                    } else {
-                        s += "[X] " + s2;
-                        response += s + "\n";
-                    }
-                }
-                return response;
-
-            } catch (IndexOutOfBoundsException e) {
-                return indentation + e.getMessage();
-            }
-
-        case DONE:
-            try {
-                Integer num = Integer.valueOf(keyword[1]) - 1;
-                if (task.get(num) instanceof RecurringTask) {
-                    int counter = ((RecurringTask) task.get(num)).getCounter();
-                    RecurringTask recurringTask = (RecurringTask) task.get(num);
-                    recurringTask.setCounter(counter - 1);
-                } else {
-                    task.get(num).setDone(true);
-                }
-                database.updateData(task.get(num), num + 1);
-                String s = indentation;
-                String s2 = "";
-                if (task.get(num) instanceof Todo) {
-                    s += (task.get(num).getIndex() + 1) + "." + " [T]";
-                    s2 = task.get(num).getName();
-                } else if (task.get(num) instanceof Deadline) {
-                    s += (task.get(num).getIndex() + 1) + "." + " [D]";
-                    s2 = task.get(num).getName() + " " + "(" + " " + ((Deadline) task.get(num)).getTime() + " )";
-                } else if (task.get(num) instanceof Event) {
-                    s += (task.get(num).getIndex() + 1) + "." + " [E]";
-                    s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
-
-                } else if (task.get(num) instanceof RecurringTask) {
-                    s += (task.get(num).getIndex() + 1) + "." + " [R]";
-                    s2 = task.get(num).getName() + " " + "(" + " " + ((RecurringTask) task.get(num)).getTime()
-                            + " ) " + ((RecurringTask) task.get(num)).getCounter() + " lessons";
-
-                }
-
-
-                if (task.get(num) instanceof RecurringTask) {
-                    s += "[ ]" + s2;
-                    response += "Nice! I've remove one lesson from this task:\n";
-                } else {
-                    s += "[X]" + s2;
-                    response += ui.doneMessage + "\n";
-
-                }
-                response += s;
-                return response;
-
-            } catch (NullPointerException e) {
-                return ui.taskNumMessage;
-            } catch (IndexOutOfBoundsException e) {
-                return ui.taskNumMessage;
-            }
-        case DELETE:
-            try {
-                Integer num = Integer.valueOf(keyword[1]) - 1;
-
-                database.deleteData(num + 1);
-                String s = indentation + "     ";
-                String s2 = "";
-
-                if (task.get(num) instanceof Todo) {
-                    s += (task.get(num).getIndex() + 1) + "." + " [T]";
-                    s2 = task.get(num).getName();
-                } else if (task.get(num) instanceof Deadline) {
-                    s += (task.get(num).getIndex() + 1) + "." + " [D]";
-                    s2 = task.get(num).getName() + " " + "(" + " " + ((Deadline) task.get(num)).getTime() + " )";
-                } else if (task.get(num) instanceof Event) {
-                    s += (task.get(num).getIndex() + 1) + "." + " [E]";
-                    s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
-                } else if (task.get(num) instanceof RecurringTask) {
-                    s += (task.get(num).getIndex() + 1) + "." + " [R]";
-                    s2 = task.get(num).getName() + " " + "(" + " " + ((RecurringTask) task.get(num)).getTime() + " )";
-                }
-                if (task.get(num).isDone() == false) {
-                    s += "[ ]" + s2;
-                } else {
-                    s += "[X]" + s2;
-                }
-
-                task.remove(num.intValue());
-                response += s + "\n";
-                response += indentation + "Now you have " + task.size() + " " + "tasks in the list." + "\n";
-                return response;
-            } catch (NullPointerException e) {
-                return ui.noTaskMessage;
-            } catch (IndexOutOfBoundsException e) {
-                return ui.noTaskMessage;
-            }
-        case BYE:
-            return ui.byeMessage;
-        default:
-            try {
-                switch (keyword[0]) {
-                case "deadline":
-                    if (keyword.length == 1) {
-                        return ui.lackContentMessage;
-                    }
-                    String taskNameDdl = "";
-                    String taskTimeDdl = "";
-                    boolean timePartDdl = false;
-                    int count = 0;
-                    for (int i = 1; i < keyword.length; i++) {
-                        if (keyword[i].startsWith("/")) {
-                            timePartDdl = true;
-                            taskTimeDdl = keyword[i].substring(1) + ":";
-                        } else if (timePartDdl) {
-                            taskTimeDdl += " " + keyword[i];
-                            if (count == 0) {
-                                try {
-                                    LocalDate date = LocalDate.parse(keyword[i]);
-                                } catch (DateTimeException e) {
-                                    return "Please follow the template:\n deadline [name] /by yyyy-mm-dd ....";
-                                }
-                            }
-                            count++;
-                        } else {
-                            if (keyword[i + 1].startsWith("/")) {
-                                taskNameDdl += keyword[i];
-                            } else {
-                                taskNameDdl += keyword[i] + " ";
-                            }
-                        }
-                    }
-                    if (taskTimeDdl.equals("")) {
-                        return ui.lackContentMessage;
-                    }
-
-                    Task ddl = new Deadline(taskNameDdl, false, taskTimeDdl);
-                    task.add(ddl);
-                    database.writeToDatabase(ddl);
-                    taskNum++;
-                    response += "Got it. I've added this task:" + "\n";
-                    response += indentation + "   [D][ ] " + taskNameDdl + " ( " + taskTimeDdl + " )\n";
-                    response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
-                    return response;
-                case "recur":
-                    if (keyword.length == 1) {
-                        return ui.lackContentMessage;
-                    }
-                    String taskNameRecur = "";
-                    String taskTimeRecur = "";
-                    int counter = 0;
-                    boolean timePartRecur = false;
-                    for (int i = 1; i < keyword.length; i++) {
-                        if (keyword[i].startsWith("/") && !timePartRecur) {
-                            timePartRecur = true;
-                            taskTimeRecur = keyword[i].substring(1) + ":";
-                        } else if (keyword[i].startsWith("/") && timePartRecur) {
-                            counter = Integer.parseInt(keyword[i].substring(1));
-                        } else if (timePartRecur) {
-                            taskTimeRecur += " " + keyword[i];
-                        } else {
-                            if (keyword[i + 1].startsWith("/")) {
-                                taskNameRecur += keyword[i];
-                            } else {
-                                taskNameRecur += keyword[i] + " ";
-                            }
-                        }
-                    }
-                    if (taskTimeRecur.equals("")) {
-                        return ui.lackContentMessage;
-                    }
-                    Task recur = new RecurringTask(taskNameRecur, false, taskTimeRecur, counter);
-                    task.add(recur);
-                    database.writeToDatabase(recur);
-                    taskNum++;
-                    response += "Got it. I've added this task:" + "\n";
-                    response += indentation + "   [R][ ] " + taskNameRecur + " ( " + taskTimeRecur + " ) "
-                            + counter + " lessons\n";
-                    response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
-                    return response;
-                case "todo":
-                    if (keyword.length == 1) {
-                        return ui.lackContentMessage;
-                    }
-                    String taskNameTodo = "";
-                    for (int i = 1; i < keyword.length; i++) {
-                        if (i == keyword.length - 1) {
-                            taskNameTodo += keyword[i];
-                        } else {
-                            taskNameTodo += keyword[i] + " ";
-                        }
-
-                    }
-                    Task todo = new Todo(taskNameTodo, false);
-
-                    task.add(todo);
-                    database.writeToDatabase(todo);
-                    taskNum++;
-                    response += "Got it. I've added this task:" + "\n";
-                    response += indentation + "   [T][ ] " + taskNameTodo + "\n";
-                    response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
-                    return response;
-                case "event":
-                    if (keyword.length == 1) {
-                        return ui.lackContentMessage;
-                    }
-
-                    String taskNameEvent = "";
-                    String taskTimeEvent = "";
-                    int count1 = 0;
-                    boolean timePartEvent = false;
-                    for (int i = 1; i < keyword.length; i++) {
-                        if (keyword[i].startsWith("/")) {
-                            timePartEvent = true;
-                            taskTimeEvent = keyword[i].substring(1) + ":";
-                        } else if (timePartEvent) {
-                            taskTimeEvent += " " + keyword[i];
-                            System.out.println(keyword[i]);
-                            if (count1 == 0) {
-                                try {
-                                    LocalDate date = LocalDate.parse(keyword[i]);
-                                } catch (DateTimeException e) {
-                                    return "Please follow the template: \n event [name] /at yyyy-mm-dd ....";
-                                }
-                            }
-                            count1++;
-                        } else {
-                            if (keyword[i + 1].startsWith("/")) {
-                                taskNameEvent += keyword[i];
-                            } else {
-                                taskNameEvent += keyword[i] + " ";
-                            }
-
-                        }
-                    }
-                    if (taskTimeEvent.equals("")) {
-                        return ui.lackContentMessage;
-                    }
-                    Task event = new Event(taskNameEvent, false, taskTimeEvent);
-                    task.add(event);
-                    database.writeToDatabase(event);
-                    taskNum++;
-                    response += "Got it. I've added this task:" + "\n";
-                    response += indentation + "   [E][ ] " + taskNameEvent + " ( " + taskTimeEvent + " )\n";
-                    response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
-                    return response;
-                default:
-                    return ui.unknownMessage;
-                }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return ui.indexMessage;
-            }
-        }
+        return commandParser(input);
     }
 
 }
