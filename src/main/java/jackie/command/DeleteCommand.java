@@ -59,7 +59,7 @@ public class DeleteCommand extends Command {
      * @throws jackie.JackieException Will be thrown if unable to locate/update the storage file.
      */
     public String execute(jackie.TaskList taskList, jackie.Ui ui, jackie.Storage storage) throws JackieException {
-        if (index > taskList.size()) {
+        if (index > taskList.size() || taskList.size() == 0) {
             throw new JackieException("D: oopsie!!! The specified task does not exit.");
         }
         jackie.task.Task holder = taskList.getTask(index);

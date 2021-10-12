@@ -51,7 +51,6 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         dialog.setStyle("-fx-background-color: rgba(196, 196, 196, 0.8);");
         dialog.setAlignment(Pos.TOP_LEFT);
-        this.setPrefHeight(dialog.getMaxHeight());
         setAlignment(Pos.TOP_LEFT);
     }
 
