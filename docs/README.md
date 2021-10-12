@@ -46,7 +46,7 @@ creates an event and adds it into the list
 
 ### find: `find`
 
-Find tasks containing a reference string
+Find tasks containing a reference string.
 
 Format: `find [ref]`
 
