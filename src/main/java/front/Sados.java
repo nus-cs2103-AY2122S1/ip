@@ -316,9 +316,16 @@ public class Sados extends Application {
      * @param date Date to be checked.
      */
     private void addIfMatchDate(Task t, ObservableList<String> list, LocalDate date) {
-        Event e = (Event) t;
-        if (e.queryIfDateEquals(date)) {
-            list.add(e.toString());
+        if (t instanceof Event) {
+            Event e = (Event) t;
+            if (e.queryIfDateEquals(date)) {
+                list.add(e.toString());
+            }
+        } else {
+            Deadline d = (Deadline) t;
+            if (d.queryIfDateEquals(date)) {
+                list.add(d.toString());
+            }
         }
     }
 
