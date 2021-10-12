@@ -1,7 +1,40 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+------------------------------------------------
+Duck says:
+Hello, I'm Duck
+What do you need?
+------------------------------------------------
+------------------------------------------------
+Duck says:
+The list is empty! *quack*
+------------------------------------------------
+------------------------------------------------
+Duck says:
+added: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a consectetur nulla. Quisque sed tortor blandit, mollis quam ac, interdum erat. Nulla purus lorem, consequat sed ante ut, egestas finibus risus. Donec at risus mauris. Fusce placerat ligula enim, id lobortis sapien vestibulum sit amet. Fusce consequat risus sit amet rhoncus pellentesque. Nullam ex risus, varius eu dapibus ac, elementum in augue. Quisque accumsan aliquam felis in dictum. Ut eget leo fringilla, mollis quam a, dignissim nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed vitae risus dapibus, viverra diam eu, luctus neque. Mauris ut sodales nisl. Aenean gravida tincidunt nunc, et semper sem semper id. Duis vel urna vel quam molestie maximus et et sem. Vivamus eleifend massa at enim molestie condimentum. In sodales lectus eu pulvinar volutpat. [T] (No time specified)
+Currently 1 tasks in the list
+------------------------------------------------
+------------------------------------------------
+Duck says:
+added: jumping [D] (by: tonight maybe)
+Currently 2 tasks in the list
+------------------------------------------------
+------------------------------------------------
+Duck says:
+added: running [E] (at: around 9pm)
+Currently 3 tasks in the list
+------------------------------------------------
+------------------------------------------------
+Duck says:
+1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a consectetur nulla. Quisque sed tortor blandit, mollis quam ac, interdum erat. Nulla purus lorem, consequat sed ante ut, egestas finibus risus. Donec at risus mauris. Fusce placerat ligula enim, id lobortis sapien vestibulum sit amet. Fusce consequat risus sit amet rhoncus pellentesque. Nullam ex risus, varius eu dapibus ac, elementum in augue. Quisque accumsan aliquam felis in dictum. Ut eget leo fringilla, mollis quam a, dignissim nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed vitae risus dapibus, viverra diam eu, luctus neque. Mauris ut sodales nisl. Aenean gravida tincidunt nunc, et semper sem semper id. Duis vel urna vel quam molestie maximus et et sem. Vivamus eleifend massa at enim molestie condimentum. In sodales lectus eu pulvinar volutpat.  [T] [ ] (No time specified)
+2. jumping  [D] [ ] (by: tonight maybe)
+3. running  [E] [ ] (at: around 9pm)
+------------------------------------------------
+------------------------------------------------
+Duck says:
+You have completed duke.task 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a consectetur nulla. Quisque sed tortor blandit, mollis quam ac, interdum erat. Nulla purus lorem, consequat sed ante ut, egestas finibus risus. Donec at risus mauris. Fusce placerat ligula enim, id lobortis sapien vestibulum sit amet. Fusce consequat risus sit amet rhoncus pellentesque. Nullam ex risus, varius eu dapibus ac, elementum in augue. Quisque accumsan aliquam felis in dictum. Ut eget leo fringilla, mollis quam a, dignissim nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed vitae risus dapibus, viverra diam eu, luctus neque. Mauris ut sodales nisl. Aenean gravida tincidunt nunc, et semper sem semper id. Duis vel urna vel quam molestie maximus et et sem. Vivamus eleifend massa at enim molestie condimentum. In sodales lectus eu pulvinar volutpat.
+------------------------------------------------
+------------------------------------------------
+Duck says:
+1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a consectetur nulla. Quisque sed tortor blandit, mollis quam ac, interdum erat. Nulla purus lorem, consequat sed ante ut, egestas finibus risus. Donec at risus mauris. Fusce placerat ligula enim, id lobortis sapien vestibulum sit amet. Fusce consequat risus sit amet rhoncus pellentesque. Nullam ex risus, varius eu dapibus ac, elementum in augue. Quisque accumsan aliquam felis in dictum. Ut eget leo fringilla, mollis quam a, dignissim nulla. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed vitae risus dapibus, viverra diam eu, luctus neque. Mauris ut sodales nisl. Aenean gravida tincidunt nunc, et semper sem semper id. Duis vel urna vel quam molestie maximus et et sem. Vivamus eleifend massa at enim molestie condimentum. In sodales lectus eu pulvinar volutpat.  [T] [X] (No time specified)
+2. jumping  [D] [ ] (by: tonight maybe)
+3. running  [E] [ ] (at: around 9pm)
+------------------------------------------------
