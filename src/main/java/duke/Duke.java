@@ -57,6 +57,8 @@ public class Duke extends Application {
     private static TaskListInternal taskListInternal = new TaskListInternal();
     public static File file = new File("data/list.txt");
 
+    public static boolean exited = false;
+
     public static void main(String[] args) {
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
@@ -147,6 +149,9 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+        if (exited) {
+            System.exit(0);
+        }
     }
 
     /**
@@ -171,12 +176,15 @@ public class Duke extends Application {
      */
     public String getResponse(String command) {
 
+        storage.checkExistence();
+
         taskListInternal.initialise(file, storage);
 
         duke = initialiseDefaultExpression();
 
         if (command.equals(BYE_COMMAND)) {
             duke = initialiseLaughingExpression();
+            exited = true;
             return "Have a SPARKELOUS day.";
         } else if (command.equals(LIST_COMMAND)) {
 
