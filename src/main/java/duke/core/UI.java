@@ -14,11 +14,11 @@ public class UI {
             + indentation + "| |_| | |_| |   <  __/\n"
             + indentation + "|____/ \\__,_|_|\\_\\___|\n";
     public final String doneMessage = indentation + "Nice! I've marked this task as done:";
-    public final String remove_message = indentation + "Noted. I've removed this task:";
     public final String byeMessage = indentation + "Bye. Hope to see you again soon!" + "\n";
     public final String noTaskMessage = indentation + "Sorry, you do not have this task" + "\n";
     public final String taskNumMessage = indentation + "Sorry, please enter a task number bigger than 0" + "\n";
-    public final String lackContentMessage = indentation + "OOPS!!! The description or time of a task cannot be empty." + "\n";
+    public final String lackContentMessage = indentation
+            + "OOPS!!! The description or time of a task cannot be empty." + "\n";
     public final String indexMessage = indentation
             + "please follow the format of adding task" + "\n";
     public final String unknownMessage = indentation

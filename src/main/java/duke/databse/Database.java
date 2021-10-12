@@ -164,9 +164,8 @@ public class Database {
                     new FileWriter(filepath, true));
             out.write(todo.toString());
             out.close();
-        }
-        catch (IOException e) {
-            System.out.println("exception occoured" + e);
+        } catch (IOException e) {
+            System.out.println("exception occurred" + e);
         }
     }
 
