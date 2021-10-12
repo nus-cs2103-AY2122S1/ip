@@ -67,13 +67,17 @@ Format: `del INDEX` or `rem INDEX`
 
 Example: 
 
-In the following list, inputting `rem 1` will delete the task `1. [T][] homework`.
+In the following list,
 ```
 1. [T][] homework
 2. [D][] assignment (by: 12 December 2020)
 3. [E][] exam (at: 11 November 2021)
 ```
-
+Inputting `rem 1` will delete the task `1. [T][] homework`.
+```
+1. [D][] assignment (by: 12 December 2020)
+2. [E][] exam (at: 11 November 2021)
+```
 ### Marking a task as done `do`
 
 Marks the task with the specified index as done. In the list, `[X]` denotes that the
