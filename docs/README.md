@@ -170,7 +170,7 @@ Example:
 
 - `find dinner`
 
-<img src="https://github.com/tianyue58/ip/blob/master/docs/findScreen.png?raw=true" alt="FindGUI" style="zoom:33%;" height="300" width="130"/>
+<img src="https://github.com/tianyue58/ip/blob/master/docs/findScreen.png?raw=true" alt="FindGUI" style="zoom:33%;" />
 
 
 ### Exiting the program: `bye`
