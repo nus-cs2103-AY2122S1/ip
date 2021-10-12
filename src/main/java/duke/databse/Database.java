@@ -85,7 +85,7 @@ public class Database {
         switch (s[0]) {
         case "T":
             Todo todo = new Todo(s[1], isDone);
-            assert s[0] == "T" : "should be a todo event but it is not";
+            assert s[0].equals("T") : "should be a todo event but it is not";
             return todo;
         case "E":
             String taskname_event = "";

@@ -13,7 +13,7 @@ public class DatabaseTest {
     public void getDataTest(){
 
         try {
-            Database database = new Database("todoList.java");
+            Database database = new Database("data/todoList2.txt");
             database.getData();
         } catch(Exception e) {
             fail("Should not have thrown any exception");
@@ -24,7 +24,7 @@ public class DatabaseTest {
     public void writeDataTest(){
 
         try {
-            Database database = new Database("todoList.java");
+            Database database = new Database("data/todoList2.txt");
 
             database.writeToDatabase(new Todo("test", false));
             database.writeToDatabase(new Event("test", false, "/at 2020-11-02 4pm - 6pm"));
@@ -39,7 +39,7 @@ public class DatabaseTest {
     public void updateDataTest(){
 
         try {
-            Database database = new Database("todoList.java");
+            Database database = new Database("data/todoList2.txt");
 
             database.updateData(new Todo("test", false), 1);
             database.updateData(new Event("test", false, "/at 2020-11-02 4pm - 6pm"), 1);
