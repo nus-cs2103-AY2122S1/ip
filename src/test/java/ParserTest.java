@@ -16,9 +16,9 @@ import back.Todo;
  */
 
 public class ParserTest {
-    Todo TODO_INSTANCE = new Todo("sample todo");
-    Event EVENT_INSTANCE = new Event("cake", LocalDate.parse("2020-11-18"));
-    Deadline DEADLINE_INSTANCE = new Deadline("2100 Lab3", LocalDate.parse("2020-09-16"));
+    private Todo TODO_INSTANCE = new Todo("sample todo");
+    private Event EVENT_INSTANCE = new Event("cake", LocalDate.parse("2020-11-18"));
+    private Deadline DEADLINE_INSTANCE = new Deadline("2100 Lab3", LocalDate.parse("2020-09-16"));
 
 
     @Test

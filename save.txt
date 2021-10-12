@@ -5,10 +5,6 @@ E
 happy event
 2021-11-18
 0
-D
-sad deadline
-2021-09-13
-0
 T
 Very lOng task Name
 0

@@ -64,7 +64,8 @@ public class Storage {
                 parsedDate = Parser.parseDateString(fulldate);
                 returnList.add(new Event(name, parsedDate));
                 break;
-            //not handling other cases since type has to be T/E/D from line 48
+            default:
+                break;
             }
 
             String taskDoneInt = s.nextLine();

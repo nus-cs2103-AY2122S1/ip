@@ -226,13 +226,11 @@ public class Sados extends Application {
      */
     private void loadSave() {
         File saveFile = new File("./save.txt");
-        if (saveFile.isFile()) {
-            try {
-                tasks.clear();
-                tasks.addAll(Storage.loadFile(saveFile));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+        try {
+            tasks.clear();
+            tasks.addAll(Storage.loadFile(saveFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
