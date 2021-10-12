@@ -29,4 +29,6 @@ public class UI {
     public final String creatingFileMessage = indentation + "Creating a file to store your tasks : )";
     public final String wrongMessage = indexMessage + "OOPS!! Something wrong!";
     public final String keywordNotFound = indentation + "Sorry, we could not find any task contains the keyword";
+    public final String timeTemplateWrong = indentation
+            + "Please follow the template:\n deadline [name] /by yyyy-mm-dd ....";
 }

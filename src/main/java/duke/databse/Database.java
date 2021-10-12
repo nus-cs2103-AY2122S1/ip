@@ -37,9 +37,7 @@ public class Database {
 
             if (!file.getParentFile().exists()) {
                 boolean hasDir = file.getParentFile().mkdir();
-
             }
-
             if (!file.exists()) {
                 file.createNewFile();
             }

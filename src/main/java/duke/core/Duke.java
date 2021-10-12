@@ -156,7 +156,6 @@ public class Duke extends Application {
      * @return
      */
     public String executeFind(String input, ArrayList<Task> task) {
-        int taskNum = task.size();
         String indentation = "       ";
         String response = "";
 
@@ -203,8 +202,6 @@ public class Duke extends Application {
      * @return
      */
     public String executeList(String input, ArrayList<Task> task) {
-
-        int taskNum = task.size();
         String indentation = "       ";
         String response = "";
 
@@ -276,22 +273,17 @@ public class Duke extends Application {
             } else if (task.get(num) instanceof Event) {
                 s += (task.get(num).getIndex() + 1) + "." + " [E]";
                 s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
-
             } else if (task.get(num) instanceof RecurringTask) {
                 s += (task.get(num).getIndex() + 1) + "." + " [R]";
                 s2 = task.get(num).getName() + " " + "(" + " " + ((RecurringTask) task.get(num)).getTime()
                         + " ) " + ((RecurringTask) task.get(num)).getCounter() + " lessons";
-
             }
-
-
             if (task.get(num) instanceof RecurringTask) {
                 s += "[ ]" + s2;
                 response += "Nice! I've remove one lesson from this task:\n";
             } else {
                 s += "[X]" + s2;
                 response += ui.doneMessage + "\n";
-
             }
             response += s;
             return response;
@@ -383,15 +375,16 @@ public class Duke extends Application {
                 if (keyword[i].startsWith("/")) {
                     timePartDdl = true;
                     taskTimeDdl = keyword[i].substring(1) + ":";
+                } else if (timePartDdl && count == 0) {
+                    taskTimeDdl += " " + keyword[i];
+                    try {
+                        LocalDate date = LocalDate.parse(keyword[i]);
+                    } catch (DateTimeException e) {
+                        return ui.timeTemplateWrong;
+                    }
+                    count++;
                 } else if (timePartDdl) {
                     taskTimeDdl += " " + keyword[i];
-                    if (count == 0) {
-                        try {
-                            LocalDate date = LocalDate.parse(keyword[i]);
-                        } catch (DateTimeException e) {
-                            return "Please follow the template:\n deadline [name] /by yyyy-mm-dd ....";
-                        }
-                    }
                     count++;
                 } else {
                     if (keyword[i + 1].startsWith("/")) {
@@ -444,16 +437,16 @@ public class Duke extends Application {
                 if (keyword[i].startsWith("/")) {
                     timePartEvent = true;
                     taskTimeEvent = keyword[i].substring(1) + ":";
+                } else if (timePartEvent && count1 == 0) {
+                    taskTimeEvent += " " + keyword[i];
+                    try {
+                        LocalDate date = LocalDate.parse(keyword[i]);
+                    } catch (DateTimeException e) {
+                        return ui.timeTemplateWrong;
+                    }
+                    count1++;
                 } else if (timePartEvent) {
                     taskTimeEvent += " " + keyword[i];
-                    System.out.println(keyword[i]);
-                    if (count1 == 0) {
-                        try {
-                            LocalDate date = LocalDate.parse(keyword[i]);
-                        } catch (DateTimeException e) {
-                            return "Please follow the template: \n event [name] /at yyyy-mm-dd ....";
-                        }
-                    }
                     count1++;
                 } else {
                     if (keyword[i + 1].startsWith("/")) {
@@ -504,7 +497,6 @@ public class Duke extends Application {
                 } else {
                     taskNameTodo += keyword[i] + " ";
                 }
-
             }
             Task todo = new Todo(taskNameTodo, false);
 
