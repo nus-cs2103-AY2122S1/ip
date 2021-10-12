@@ -21,7 +21,7 @@ Laa-Laa Bot is a **desktop app to help you with your task management**, optimize
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `.jar` file from [here](https://github.com/tianyue58/ip/releases/tag/v0.3).
+2. Download the latest `.jar` file from [here](https://github.com/tianyue58/ip/releases/tag/v0.4).
 3. Copy the file to an empty folder you want to use as the home folder for your task list.
 4. Navigate to that folder and type command java -jar duke.jar or double click duke.jar to run it. The GUI should be similar to below.
 
