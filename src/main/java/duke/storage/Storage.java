@@ -17,7 +17,7 @@ import duke.task.ToDo;
 
 public class Storage {
 
-    private File storageFile;
+    private String storageFilePath;
 
     /**
      * Constructor for a Storage object.
@@ -25,8 +25,7 @@ public class Storage {
      * @param filePath
      */
     public Storage(String filePath) {
-        assert !filePath.isBlank() : "File Path is blank!";
-        this.storageFile = new File(filePath);
+        this.storageFilePath = filePath;
     }
 
     /**
@@ -38,6 +37,7 @@ public class Storage {
      */
     public void editStorage(int lineNumber, CommandType commandType) {
         int actualLineNumber = lineNumber + 1;
+        File storageFile = new File(storageFilePath);
         try {
             Scanner myScanner = new Scanner(storageFile);
             String newFileString = editStorageScanner(
@@ -91,6 +91,7 @@ public class Storage {
     }
 
     private void writeToFile(String newFileString) {
+        File storageFile = new File(storageFilePath);
         try {
             FileWriter myWriter = new FileWriter(storageFile);
             myWriter.write(newFileString);
@@ -129,6 +130,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> newArrayList = new ArrayList<>(100);
+        File storageFile = new File(storageFilePath);
         try {
             Scanner myScanner = new Scanner(storageFile);
             while (myScanner.hasNextLine()) {
@@ -137,7 +139,6 @@ public class Storage {
                     newArrayList.add(getTask(nextLine));
                 }
             }
-
         } catch (FileNotFoundException e) {
             throw e;
         }
@@ -190,6 +191,7 @@ public class Storage {
      * @param task The Task object to be added to the local file
      */
     public void addToStorage(Task task) {
+        File storageFile = new File(storageFilePath);
         try {
             Scanner myScanner = new Scanner(storageFile);
             if (myScanner.hasNextLine()) {

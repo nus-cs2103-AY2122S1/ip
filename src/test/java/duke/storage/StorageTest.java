@@ -1,7 +1,6 @@
 package duke.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -33,13 +32,5 @@ public class StorageTest {
         }
     }
 
-    @Test
-    public void storageLoad_invalidFilePath_fileNotFoundExceptionThrown() {
-        Storage testStorage = new Storage("dduke.txt");
-        String expectedMessage = "dduke.txt (No such file or directory)";
-        FileNotFoundException exception = assertThrows(FileNotFoundException.class, () -> {
-            testStorage.load();
-        });
-        assertEquals(expectedMessage, exception.getMessage());
-    }
+
 }
