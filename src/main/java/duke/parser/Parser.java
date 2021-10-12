@@ -77,7 +77,7 @@ public class Parser {
      * @throws DukeException The exception to be thrown when input is not as expected.
      */
     private static ToDoCommand addToDo(String[] input) throws DukeException {
-        if (input.length < 2) {
+        if (input.length < 2 || input[1].strip().isEmpty()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty");
         }
         return new ToDoCommand(new ToDo(input[1]));
@@ -96,7 +96,10 @@ public class Parser {
             throw new DukeException(formatErrorMsg);
         }
         String[] deadline = input[1].split("/", 2);
-        if (deadline.length < 2 || deadline[1].length() < 4) {
+        if (deadline[0].strip().isEmpty()) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty");
+        }
+        if (deadline.length < 2 || !deadline[1].startsWith("by") || deadline[1].length() < 4) {
             throw new DukeException(formatErrorMsg);
         }
         try {
@@ -121,7 +124,10 @@ public class Parser {
             throw new DukeException(formatErrorMsg);
         }
         String[] event = input[1].split("/", 2);
-        if (event.length < 2 || event[1].length() < 4) {
+        if (event[0].strip().isEmpty()) {
+            throw new DukeException("OOPS!!! The description of an event cannot be empty");
+        }
+        if (event.length < 2 || !event[1].startsWith("at") || event[1].length() < 4) {
             throw new DukeException(formatErrorMsg);
         }
         try {
