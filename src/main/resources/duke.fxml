@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="836.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.Controller">
+   <children>
+      <Label fx:id="listLabel" alignment="TOP_CENTER" layoutX="421.0" layoutY="3.0" prefHeight="830.0" prefWidth="560.0" text="Press Load" />
+      <Button layoutX="373.0" layoutY="14.0" mnemonicParsing="false" onAction="#load" text="Load" />
+      <Accordion layoutY="6.0" prefHeight="830.0" prefWidth="361.0">
+        <panes>
+          <TitledPane animated="false" text="Add Task">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="107.0" layoutY="24.0" prefHeight="17.0" prefWidth="110.0" text="Add details of task" />
+                        <TextField fx:id="taskType" layoutX="88.0" layoutY="86.0" />
+                        <Label layoutX="120.0" layoutY="59.0" prefHeight="17.0" prefWidth="85.0" text="Type (T,D,E)" />
+                        <TextField fx:id="taskDescription" layoutX="88.0" layoutY="172.0" />
+                        <DatePicker fx:id="taskDate" layoutX="76.0" layoutY="277.0" />
+                        <Label layoutX="126.0" layoutY="144.0" prefHeight="17.0" prefWidth="73.0" text="Description" />
+                        <Label layoutX="142.0" layoutY="243.0" prefHeight="17.0" prefWidth="42.0" text="Date" />
+                        <Label fx:id="addTaskError" layoutX="35.0" layoutY="362.0" prefHeight="26.0" prefWidth="243.0" />
+                        <Button layoutX="137.0" layoutY="321.0" mnemonicParsing="false" onAction="#add" text="Add" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Complete Task">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="84.0" layoutY="20.0" prefHeight="17.0" prefWidth="162.0" text="Enter Completed Task index" />
+                        <TextField fx:id="doneText" layoutX="81.0" layoutY="60.0" />
+                        <Button layoutX="122.0" layoutY="109.0" mnemonicParsing="false" onAction="#done" text="Complete" />
+                        <Label fx:id="doneError" layoutX="62.0" layoutY="182.0" prefHeight="17.0" prefWidth="243.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Find Task">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="105.0" layoutY="23.0" prefHeight="17.0" prefWidth="149.0" text="Enter word to filter for" />
+                        <TextField fx:id="findText" layoutX="98.0" layoutY="57.0" />
+                        <Button layoutX="159.0" layoutY="89.0" mnemonicParsing="false" onAction="#find" text="Find" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Update Task">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="127.0" layoutY="25.0" prefHeight="17.0" prefWidth="106.0" text="Enter Index to edit" />
+                        <TextField fx:id="updateIndex" layoutX="105.0" layoutY="53.0" />
+                        <TextField fx:id="updateDescription" layoutX="106.0" layoutY="132.0" />
+                        <DatePicker fx:id="updateDate" layoutX="94.0" layoutY="214.0" />
+                        <Label layoutX="136.0" layoutY="106.0" prefHeight="17.0" prefWidth="91.0" text="New Description" />
+                        <Label layoutX="118.0" layoutY="186.0" text="New Date (if applicable)" />
+                        <Button layoutX="154.0" layoutY="271.0" mnemonicParsing="false" onAction="#update" text="Update" />
+                        <Label fx:id="updateError" layoutX="66.0" layoutY="313.0" prefHeight="17.0" prefWidth="228.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+            <TitledPane animated="false" text="Delete Task">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="deleteError" layoutX="54.0" layoutY="156.0" prefHeight="26.0" prefWidth="243.0" />
+                        <TextField fx:id="deleteText" layoutX="105.0" layoutY="82.0" />
+                        <Button layoutX="143.0" layoutY="119.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
+                        <Label layoutX="102.0" layoutY="43.0" prefHeight="17.0" prefWidth="197.0" text="Enter Index of task to delete" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
+        </panes>
+      </Accordion>
+   </children>
+</AnchorPane>
