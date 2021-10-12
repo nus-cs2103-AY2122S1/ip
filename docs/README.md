@@ -13,15 +13,18 @@
 >Legend for datatype:
 >1. **bolded** String
 >2. *italic* int
+- list: Show all the task in the default record file 
+  * Example: list
 - todo <**description**>: create and save a todo task;
   * Example: todo Study for test
 - deadline <**description**> /by <**time in format yyyy-mm-dd**>: create and save a deadline task;
   * Example: deadline Assignment /by 2021-09-10
 - event <**description**> /at <**time in format yyyy-mm-dd**>: create and save an event task;
   * Example: event Meeting /at 2021-09-11
-- save <**directory**>: save the current task list to the specified directory;
+- save <**directory**>: save the current task list to a file in the specified directory;
   * Example: save data/myRecord
-- load <**directory**>: load the task list from the specified directory;
+- load <**directory**>: load the task list from the file in the specified directory and add the list 
+  to the default record file.
   * Example: load data/myRecord
 - done <*number*>: mark the task with *number* index as done;
   * Example: done 1
