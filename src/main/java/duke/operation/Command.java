@@ -1,5 +1,7 @@
 package duke.operation;
 
+import javafx.application.Platform;
+
 /**
  * This is Command class to contain command strings to separate
  * corresponding operations accordingly.
@@ -52,6 +54,7 @@ public enum Command {
 			return FIND;
 		}
 		case "bye": {
+			Platform.exit();
 			return BYE;
 		}
 		default: {
