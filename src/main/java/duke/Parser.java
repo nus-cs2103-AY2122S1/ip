@@ -35,6 +35,8 @@ public class Parser {
         EVENT,
     }
 
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+
     /**
      * Returns the DukeCommand parsed from input.
      *
@@ -50,50 +52,11 @@ public class Parser {
             } else if (input.equals("help")) {
                 return new HelpCommand();
             } else if (input.startsWith("done")) {
-                try {
-                    // filter out doneXXXX
-                    // StringIndexOutOfBoundsException thrown here if input = "done",
-                    // which is caught by IndexOutOfBoundsException
-                    if (input.charAt(4) != ' ') {
-                        throw new InvalidTaskException();
-                    }
-                    // NumberFormatException thrown here if substring is a invalid integer string
-                    int taskNum = Integer.parseInt(input.substring(5)) - 1;
-                    return new DoneCommand(taskNum);
-                } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    throw new InvalidArgumentsException();
-                }
+                return checkDoneCommand(input);
             } else if (input.startsWith("delete")) {
-                try {
-                    // filter out deleteXXXX
-                    // StringIndexOutOfBoundsException thrown here if input = "delete",
-                    // which is caught by IndexOutOfBoundsException
-                    if (input.charAt(6) != ' ') {
-                        throw new InvalidTaskException();
-                    }
-                    // NumberFormatException thrown here if substring is a invalid integer string
-                    int taskNum = Integer.parseInt(input.substring(7)) - 1;
-                    return new DeleteCommand(taskNum);
-                } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    throw new InvalidArgumentsException();
-                }
+                return checkDeleteCommand(input);
             } else if (input.startsWith("find")) {
-                try {
-                    // filter out findXXXX
-                    // StringIndexOutOfBoundsException thrown here if input = "find",
-                    // which is caught by IndexOutOfBoundsException
-                    if (input.charAt(4) != ' ') {
-                        throw new InvalidTaskException();
-                    }
-                    // filter out "find "
-                    if (input.length() == 5) {
-                        throw new InvalidArgumentsException();
-                    }
-                    String keyWord = input.substring(5);
-                    return new FindCommand(keyWord);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new InvalidArgumentsException();
-                }
+                return checkFindCommand(input);
             } else if (input.startsWith("todo")) {
                 return new TodoCommand((ToDo) parseTask(input, TaskType.TODO));
             } else if (input.startsWith("deadline")) {
@@ -143,8 +106,47 @@ public class Parser {
                 task.markDone();
             }
             return task;
-        } catch (InvalidArgumentsException | InvalidTaskException e) {
+        } catch (DukeException e) {
             throw new CorruptedFileException();
+        }
+    }
+
+    private static DukeCommand checkDoneCommand(String input) throws DukeException {
+        try {
+            if (input.charAt(4) != ' ') {
+                throw new InvalidTaskException();
+            }
+            int taskNum = Integer.parseInt(input.substring(5)) - 1;
+            return new DoneCommand(taskNum);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidArgumentsException();
+        }
+    }
+
+    private static DukeCommand checkDeleteCommand(String input) throws DukeException {
+        try {
+            if (input.charAt(6) != ' ') {
+                throw new InvalidTaskException();
+            }
+            int taskNum = Integer.parseInt(input.substring(7)) - 1;
+            return new DeleteCommand(taskNum);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidArgumentsException();
+        }
+    }
+
+    private static DukeCommand checkFindCommand(String input) throws DukeException {
+        try {
+            if (input.charAt(4) != ' ') {
+                throw new InvalidTaskException();
+            }
+            if (input.length() == 5) {
+                throw new InvalidArgumentsException();
+            }
+            String keyWord = input.substring(5);
+            return new FindCommand(keyWord);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidArgumentsException();
         }
     }
 
@@ -154,89 +156,86 @@ public class Parser {
      * @param input Input to be parsed.
      * @param type Type of Task.
      * @return Task parsed.
-     * @throws InvalidArgumentsException If arguments are missing or invalid.
-     * @throws InvalidTaskException If input contains unknown commands.
+     * @throws DukeException If arguments are missing or invalid or if input contains unknown commands.
      */
-    private static Task parseTask(String input, TaskType type) throws InvalidArgumentsException, InvalidTaskException {
-        int descriptionEnd;
-        String description;
-        String dateTime;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        Task task;
+    private static Task parseTask(String input, TaskType type) throws DukeException {
         switch (type) {
         case TODO:
-            try {
-                // filter out todoXXXX
-                // StringIndexOutOfBoundsException thrown here if input = "todo"
-                if (input.charAt(4) != ' ') {
-                    throw new InvalidTaskException();
-                }
-                // StringIndexOutOfBoundsException thrown here if input = "todo "
-                description = input.substring(5);
-                // Checks if description is all whitespace
-                if (description.trim().isEmpty()) {
-                    throw new InvalidArgumentsException();
-                }
-                task = new ToDo(description);
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new InvalidArgumentsException();
-            }
-            break;
+            return parseTodoTask(input);
         case DEADLINE:
-            try {
-                // filter out deadlineXXXX
-                // StringIndexOutOfBoundsException thrown here if input = "deadline"
-                if (input.charAt(8) != ' ') {
-                    throw new InvalidTaskException();
-                }
-                descriptionEnd = input.indexOf(" /by ");
-                // StringIndexOutOfBoundsException thrown here if input = "deadline /by "
-                // or if " /by " is not present in input
-                description = input.substring(9, descriptionEnd);
-                // Checks if description is all whitespace
-                if (description.trim().isEmpty()) {
-                    throw new InvalidArgumentsException();
-                }
-                // StringIndexOutOfBoundsException thrown here if input = "deadline $String /by "
-                dateTime = input.substring(descriptionEnd + 5);
-                // Checks if dateTime is all whitespace
-                if (dateTime.trim().isEmpty()) {
-                    throw new InvalidArgumentsException();
-                }
-                task = new Deadline(description, LocalDateTime.parse(dateTime, formatter));
-            } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
-                throw new InvalidArgumentsException();
-            }
-            break;
+            return parseDeadlineTask(input);
         case EVENT:
-            try {
-                // filter out eventXXXX
-                // StringIndexOutOfBoundsException thrown here if input = "event"
-                if (input.charAt(5) != ' ') {
-                    throw new InvalidTaskException();
-                }
-                descriptionEnd = input.indexOf(" /at ");
-                // StringIndexOutOfBoundsException thrown here if input = "event /at"
-                // or if " /at " is not present in input
-                description = input.substring(6, descriptionEnd);
-                // Checks if description is all whitespace
-                if (description.trim().isEmpty()) {
-                    throw new InvalidArgumentsException();
-                }
-                // StringIndexOutOfBoundsException thrown here if input = "event $String /at "
-                dateTime = input.substring(descriptionEnd + 5);
-                // Checks if dateTime is all whitespace
-                if (dateTime.trim().isEmpty()) {
-                    throw new InvalidArgumentsException();
-                }
-                task = new Event(description, LocalDateTime.parse(dateTime, formatter));
-            } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
-                throw new InvalidArgumentsException();
-            }
-            break;
+            return parseEventTask(input);
         default:
             assert false : "Invalid task type";
             throw new InvalidTaskException();
+        }
+    }
+
+    private static Task parseTodoTask(String input) throws DukeException {
+        String description;
+        Task task;
+        try {
+            if (input.charAt(4) != ' ') {
+                throw new InvalidTaskException();
+            }
+            description = input.substring(5);
+            if (description.trim().isEmpty()) {
+                throw new InvalidArgumentsException();
+            }
+            task = new ToDo(description);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidArgumentsException();
+        }
+        return task;
+    }
+
+    private static Task parseDeadlineTask(String input) throws DukeException {
+        int descriptionEnd;
+        String description;
+        String dateTime;
+        Task task;
+        try {
+            if (input.charAt(8) != ' ') {
+                throw new InvalidTaskException();
+            }
+            descriptionEnd = input.indexOf(" /by ");
+            description = input.substring(9, descriptionEnd);
+            if (description.trim().isEmpty()) {
+                throw new InvalidArgumentsException();
+            }
+            dateTime = input.substring(descriptionEnd + 5);
+            if (dateTime.trim().isEmpty()) {
+                throw new InvalidArgumentsException();
+            }
+            task = new Deadline(description, LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER));
+        } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
+            throw new InvalidArgumentsException();
+        }
+        return task;
+    }
+
+    private static Task parseEventTask(String input) throws DukeException {
+        int descriptionEnd;
+        String description;
+        String dateTime;
+        Task task;
+        try {
+            if (input.charAt(5) != ' ') {
+                throw new InvalidTaskException();
+            }
+            descriptionEnd = input.indexOf(" /at ");
+            description = input.substring(6, descriptionEnd);
+            if (description.trim().isEmpty()) {
+                throw new InvalidArgumentsException();
+            }
+            dateTime = input.substring(descriptionEnd + 5);
+            if (dateTime.trim().isEmpty()) {
+                throw new InvalidArgumentsException();
+            }
+            task = new Event(description, LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER));
+        } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
+            throw new InvalidArgumentsException();
         }
         return task;
     }
