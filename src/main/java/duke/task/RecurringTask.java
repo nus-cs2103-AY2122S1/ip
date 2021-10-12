@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.time.LocalDate;
 
 public class RecurringTask extends Task {
     private String name;
@@ -8,24 +7,8 @@ public class RecurringTask extends Task {
     private String time;
     private int counter;
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public void setCounter(int counter) {
-        this.counter = counter;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getCounter() {
-        return counter;
-    }
-
     /**
-     * constructor
+     * constructor for recurring task
      * @param name
      * @param isDone
      * @param time
@@ -38,16 +21,60 @@ public class RecurringTask extends Task {
         this.counter = counter;
     }
 
+    /**
+     * set time for recurring task
+     * @param time
+     */
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    /**
+     * set counter for recurring class
+     * @param counter
+     */
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    /**
+     * set name for recurring class
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * get counter in recurring class
+     * @return
+     */
+    public int getCounter() {
+        return counter;
+    }
+
+    /**
+     * get name in recurring class
+     * @return
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * get info about whether the task is done or not
+     * @return
+     */
     @Override
     public boolean isDone() {
         return isDone;
     }
 
+    /**
+     * get string format of the task
+     * @return
+     */
     @Override
     public String toString() {
         return "R" + " " + name + " "
@@ -77,9 +104,14 @@ public class RecurringTask extends Task {
         return false;
     }
 
+    /**
+     * set the task as given status
+     * @param done
+     */
     @Override
     public void setDone(boolean done) {
         isDone = done;
     }
 
 }
+

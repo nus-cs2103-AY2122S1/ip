@@ -30,12 +30,11 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private final String LIST = "list";
-    private final String BYE = "bye";
-    private final String DONE = "done";
-    private final String DELETE = "delete";
-    private final String FIND = "find";
-    private final String RECUR = "recur";
+    private final static String LIST = "list";
+    private final static String BYE = "bye";
+    private final static String DONE = "done";
+    private final static String DELETE = "delete";
+    private final static String FIND = "find";
 
 
     /**
@@ -52,6 +51,10 @@ public class Duke extends Application {
     public Duke() {
     }
 
+    /**
+     * Start Duke GUI
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -205,7 +208,8 @@ public class Duke extends Application {
                         s2 = task.get(i).getName() + " " + "(" + " " + ((Event) task.get(i)).getTime() + " )";
                     } else if (task.get(i) instanceof RecurringTask) {
                         s += (i + 1) + "." + " [R]";
-                        s2 = task.get(i).getName() + " " + "(" + " " + ((RecurringTask) task.get(i)).getTime() + " ) " + ((RecurringTask) task.get(i)).getCounter() + " lessons";
+                        s2 = task.get(i).getName() + " " + "(" + " " + ((RecurringTask) task.get(i)).getTime()
+                                + " ) " + ((RecurringTask) task.get(i)).getCounter() + " lessons";
                     }
                     if (task.get(i).isDone() == false) {
                         s += "[ ] " + s2;
@@ -246,7 +250,8 @@ public class Duke extends Application {
 
                 } else if (task.get(num) instanceof RecurringTask) {
                     s += (task.get(num).getIndex() + 1) + "." + " [R]";
-                    s2 = task.get(num).getName() + " " + "(" + " " + ((RecurringTask) task.get(num)).getTime() + " ) " + ((RecurringTask) task.get(num)).getCounter() + " lessons";
+                    s2 = task.get(num).getName() + " " + "(" + " " + ((RecurringTask) task.get(num)).getTime()
+                            + " ) " + ((RecurringTask) task.get(num)).getCounter() + " lessons";
 
                 }
 
@@ -312,16 +317,16 @@ public class Duke extends Application {
                     if (keyword.length == 1) {
                         return ui.lack_content_message;
                     }
-                    String taskname_ddl = "";
-                    String tasktime_ddl = "";
-                    boolean timepart_ddl = false;
+                    String taskNameDdl = "";
+                    String taskTimeDdl = "";
+                    boolean timePartDdl = false;
                     int count = 0;
                     for (int i = 1; i < keyword.length; i++) {
                         if (keyword[i].startsWith("/")) {
-                            timepart_ddl = true;
-                            tasktime_ddl = keyword[i].substring(1) + ":";
-                        } else if (timepart_ddl ) {
-                            tasktime_ddl += " " + keyword[i];
+                            timePartDdl = true;
+                            taskTimeDdl = keyword[i].substring(1) + ":";
+                        } else if (timePartDdl) {
+                            taskTimeDdl += " " + keyword[i];
                             if (count == 0) {
                                 try {
                                     LocalDate date = LocalDate.parse(keyword[i]);
@@ -332,79 +337,80 @@ public class Duke extends Application {
                             count++;
                         } else {
                             if (keyword[i + 1].startsWith("/")) {
-                                taskname_ddl += keyword[i];
+                                taskNameDdl += keyword[i];
                             } else {
-                                taskname_ddl += keyword[i] + " ";
+                                taskNameDdl += keyword[i] + " ";
                             }
                         }
                     }
-                    if (tasktime_ddl.equals("")) {
+                    if (taskTimeDdl.equals("")) {
                         return ui.lack_content_message;
                     }
 
-                    Task ddl = new Deadline(taskname_ddl, false, tasktime_ddl);
+                    Task ddl = new Deadline(taskNameDdl, false, taskTimeDdl);
                     task.add(ddl);
                     database.writeToDatabase(ddl);
                     taskNum++;
                     response += "Got it. I've added this task:" + "\n";
-                    response += indentation + "   [D][ ] " + taskname_ddl + " ( " + tasktime_ddl + " )\n";
+                    response += indentation + "   [D][ ] " + taskNameDdl + " ( " + taskTimeDdl + " )\n";
                     response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
                     return response;
                 case "recur":
                     if (keyword.length == 1) {
                         return ui.lack_content_message;
                     }
-                    String taskname_recur = "";
-                    String tasktime_recur = "";
+                    String taskNameRecur = "";
+                    String taskTimeRecur = "";
                     int counter = 0;
-                    boolean timepart_recur = false;
+                    boolean timePartRecur = false;
                     for (int i = 1; i < keyword.length; i++) {
-                        if (keyword[i].startsWith("/") && timepart_recur == false) {
-                            timepart_recur = true;
-                            tasktime_recur = keyword[i].substring(1) + ":";
-                        } else if (keyword[i].startsWith("/") && timepart_recur == true) {
-                            counter = Integer.valueOf(keyword[i].substring(1));
-                        } else if (timepart_recur) {
-                            tasktime_recur += " " + keyword[i];
+                        if (keyword[i].startsWith("/") && !timePartRecur) {
+                            timePartRecur = true;
+                            taskTimeRecur = keyword[i].substring(1) + ":";
+                        } else if (keyword[i].startsWith("/") && timePartRecur) {
+                            counter = Integer.parseInt(keyword[i].substring(1));
+                        } else if (timePartRecur) {
+                            taskTimeRecur += " " + keyword[i];
                         } else {
                             if (keyword[i + 1].startsWith("/")) {
-                                taskname_recur += keyword[i];
+                                taskNameRecur += keyword[i];
                             } else {
-                                taskname_recur += keyword[i] + " ";
+                                taskNameRecur += keyword[i] + " ";
                             }
                         }
                     }
-                    if (tasktime_recur.equals("")) {
+                    if (taskTimeRecur.equals("")) {
                         return ui.lack_content_message;
                     }
-                    Task recur = new RecurringTask(taskname_recur, false, tasktime_recur, counter);
+                    Task recur = new RecurringTask(taskNameRecur, false, taskTimeRecur, counter);
                     task.add(recur);
                     database.writeToDatabase(recur);
                     taskNum++;
                     response += "Got it. I've added this task:" + "\n";
-                    response += indentation + "   [R][ ] " + taskname_recur + " ( " + tasktime_recur + " ) "+ counter + " lessons\n";
+                    response += indentation + "   [R][ ] " + taskNameRecur + " ( " + taskTimeRecur + " ) "
+                            + counter + " lessons\n";
                     response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
                     return response;
                 case "todo":
                     if (keyword.length == 1) {
                         return ui.lack_content_message;
                     }
-                    String taskname_todo = "";
+                    String taskNameTodo = "";
                     for (int i = 1; i < keyword.length; i++) {
                         if (i == keyword.length - 1) {
-                            taskname_todo += keyword[i];
+                            taskNameTodo += keyword[i];
                         } else {
-                            taskname_todo += keyword[i] + " ";
+                            taskNameTodo += keyword[i] + " ";
                         }
 
                     }
-                    Task todo = new Todo(taskname_todo, false);
+                    Task todo = new Todo(taskNameTodo, false);
 
                     task.add(todo);
                     database.writeToDatabase(todo);
                     taskNum++;
                     response += "Got it. I've added this task:" + "\n";
-                    response += indentation + "   [T][ ] " + taskname_todo + "\n";
+                    response += indentation + "   [T][ ] " + taskNameTodo + "\n";
                     response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
                     return response;
                 case "event":
@@ -412,16 +418,16 @@ public class Duke extends Application {
                         return ui.lack_content_message;
                     }
 
-                    String taskname_event = "";
-                    String tasktime_event = "";
+                    String taskNameEvent = "";
+                    String taskTimeEvent = "";
                     int count1 = 0;
-                    boolean timepart_event = false;
+                    boolean timePartEvent = false;
                     for (int i = 1; i < keyword.length; i++) {
                         if (keyword[i].startsWith("/")) {
-                            timepart_event = true;
-                            tasktime_event = keyword[i].substring(1) + ":";
-                        } else if (timepart_event) {
-                            tasktime_event += " " + keyword[i];
+                            timePartEvent = true;
+                            taskTimeEvent = keyword[i].substring(1) + ":";
+                        } else if (timePartEvent) {
+                            taskTimeEvent += " " + keyword[i];
                             System.out.println(keyword[i]);
                             if (count1 == 0) {
                                 try {
@@ -433,22 +439,22 @@ public class Duke extends Application {
                             count1++;
                         } else {
                             if (keyword[i + 1].startsWith("/")) {
-                                taskname_event += keyword[i];
+                                taskNameEvent += keyword[i];
                             } else {
-                                taskname_event += keyword[i] + " ";
+                                taskNameEvent += keyword[i] + " ";
                             }
 
                         }
                     }
-                    if (tasktime_event.equals("")) {
+                    if (taskTimeEvent.equals("")) {
                         return ui.lack_content_message;
                     }
-                    Task event = new Event(taskname_event, false, tasktime_event);
+                    Task event = new Event(taskNameEvent, false, taskTimeEvent);
                     task.add(event);
                     database.writeToDatabase(event);
                     taskNum++;
                     response += "Got it. I've added this task:" + "\n";
-                    response += indentation + "   [E][ ] " + taskname_event + " ( " + tasktime_event + " )\n";
+                    response += indentation + "   [E][ ] " + taskNameEvent + " ( " + taskTimeEvent + " )\n";
                     response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
                     return response;
                 default:

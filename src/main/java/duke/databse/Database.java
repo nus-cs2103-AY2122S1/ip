@@ -1,5 +1,12 @@
 package duke.databse;
 
+import duke.core.UI;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.RecurringTask;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,8 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.core.UI;
-import duke.task.*;
+
+
+
 
 
 /**
@@ -39,11 +47,7 @@ public class Database {
             if (!file.exists()) {
                 file.createNewFile();
             }
-//            if (file.createNewFile()) {
-//                System.out.println(ui.creating_file_message);
-//            } else {
-//                System.out.println(ui.reading_file_message);
-//            }
+
         } catch (IOException e) {
             System.out.println("An error occurred in creating or opening file.");
         }
@@ -88,69 +92,66 @@ public class Database {
             assert s[0].equals("T") : "should be a todo event but it is not";
             return todo;
         case "E":
-            String taskname_event = "";
-            String tasktime_event = "";
-            boolean timepart_event = false;
+            String taskNameEvent = "";
+            String taskTimeEvent = "";
+            boolean timePartEvent = false;
             for (int i = 1; i < s.length - 1; i++) {
                 if (s[i].startsWith("/")) {
-                    timepart_event = true;
-                    tasktime_event = s[i].substring(1);
-                } else if (timepart_event) {
-                    tasktime_event += " " + s[i];
+                    timePartEvent = true;
+                    taskTimeEvent = s[i].substring(1);
+                } else if (timePartEvent) {
+                    taskTimeEvent += " " + s[i];
                 } else {
                     if (s[i + 1].startsWith("/")) {
-                        taskname_event += s[i];
+                        taskNameEvent += s[i];
                     } else {
-                        taskname_event += s[i] + " ";
+                        taskNameEvent += s[i] + " ";
                     }
 
                 }
             }
-            Event event = new Event(taskname_event, isDone, tasktime_event);
-            return event;
+            return new Event(taskNameEvent, isDone, taskTimeEvent);
         case "D":
-            String taskname_ddl = "";
-            String tasktime_ddl = "";
-            boolean timepart_ddl = false;
+            String taskNameDdl = "";
+            String taskTimeDdl = "";
+            boolean timePartDdl = false;
             for (int i = 1; i < s.length - 1; i++) {
                 if (s[i].startsWith("/")) {
-                    timepart_ddl = true;
-                    tasktime_ddl = s[i].substring(1);
-                } else if (timepart_ddl) {
-                    tasktime_ddl += " " + s[i];
+                    timePartDdl = true;
+                    taskTimeDdl = s[i].substring(1);
+                } else if (timePartDdl) {
+                    taskTimeDdl += " " + s[i];
                 } else {
                     if (s[i + 1].startsWith("/")) {
-                        taskname_ddl += s[i];
+                        taskNameDdl += s[i];
                     } else {
-                        taskname_ddl += s[i] + " ";
+                        taskNameDdl += s[i] + " ";
                     }
                 }
             }
-            Deadline deadline = new Deadline(taskname_ddl, isDone, tasktime_ddl);
-            return deadline;
+            return new Deadline(taskNameDdl, isDone, taskTimeDdl);
         case "R":
-            String taskname_recur = "";
-            String tasktime_recur = "";
+            String taskNameRecur = "";
+            String taskTimeRecur = "";
             int counter = 0;
-            boolean timepart_recur = false;
+            boolean timePartRecur = false;
             for (int i = 1; i < s.length - 1; i++) {
-                if (s[i].startsWith("/") && timepart_recur == false) {
-                    timepart_recur = true;
-                    tasktime_recur = s[i].substring(1);
-                } else if (s[i].startsWith("/") && timepart_recur == true) {
-                    counter = Integer.valueOf(s[i].substring(1));
-                } else if (timepart_recur) {
-                    tasktime_recur += " " + s[i];
+                if (s[i].startsWith("/") && !timePartRecur) {
+                    timePartRecur = true;
+                    taskTimeRecur = s[i].substring(1);
+                } else if (s[i].startsWith("/") && timePartRecur) {
+                    counter = Integer.parseInt(s[i].substring(1));
+                } else if (timePartRecur) {
+                    taskTimeRecur += " " + s[i];
                 } else {
                     if (s[i + 1].startsWith("/")) {
-                        taskname_recur += s[i];
+                        taskNameRecur += s[i];
                     } else {
-                        taskname_recur += s[i] + " ";
+                        taskNameRecur += s[i] + " ";
                     }
                 }
             }
-            RecurringTask recurringTask = new RecurringTask(taskname_recur, isDone, tasktime_recur, counter);
-            return recurringTask;
+            return new RecurringTask(taskNameRecur, isDone, taskTimeRecur, counter);
         default:
             break;
         }

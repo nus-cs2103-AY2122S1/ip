@@ -11,7 +11,7 @@ public class Deadline extends Task {
     private String time;
 
     /**
-     * constructor
+     * Constructor for deadline class
      * @param name
      * @param isDone
      * @param time

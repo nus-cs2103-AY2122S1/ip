@@ -11,7 +11,7 @@ public class Event extends Task {
     private String time;
 
     /**
-     * constrctor
+     * Constructor for Event class
      * @param name
      * @param isDone
      * @param time
