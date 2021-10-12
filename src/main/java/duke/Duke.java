@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.DateTimeException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import javafx.application.Application;
@@ -81,7 +83,7 @@ public class Duke extends Application {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (DukeException | DateTimeException e) {
                 ui.showError(e.getMessage());
             }
             ui.showLine();
@@ -200,9 +202,8 @@ public class Duke extends Application {
         try {
             Command parsedCommand = Parser.parse(stringInput);
             parsedCommand.execute(tasks, ui, storage);
-        } catch (DukeException e) {
+        } catch (DukeException | DateTimeException e) {
             ui.showError(e.getMessage());
-            System.out.println(e.getMessage());
         }
         userInput.clear();
     }

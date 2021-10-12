@@ -6,10 +6,11 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
+import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
 import duke.task.Event;
 import duke.task.Task;
-
 
 public class AddCommandTest {
     @Test
@@ -18,10 +19,7 @@ public class AddCommandTest {
         TaskList tasks = new TaskList();
 
         Command addCommand = new AddCommand(event);
-        try {
-            addCommand.execute(tasks, null, null);
-        } catch (NullPointerException e) {
-            assertEquals(tasks.getIndex(0), event);
-        }
+        addCommand.execute(tasks, new Ui(), new Storage("./dummy.txt"));
+        assertEquals(tasks.getIndex(0), event);
     }
 }

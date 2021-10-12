@@ -30,7 +30,7 @@ Saves tasks to a file, then exits Duk.
 
 ### `list` - Display all tasks
 
-Displays list of all tasks currently stored in Duk.
+Displays list of all tasks currently stored in Duk. Any input after list will be ignored.
 
 ---
 
@@ -94,7 +94,7 @@ ere are the matching tasks in your list:
 
 ### `event` - Adds new Event
 
-Adds a new event to the task list.
+Adds a new event to the task list. Event must contain a non-empty description.
 
 Example of usage: 
 
@@ -113,7 +113,7 @@ Got it. I've added this task:
 
 ### `deadline` - Adds new Deadline
 
-Adds a new deadline to the task list.
+Adds a new deadline to the task list. Deadline must contain a non-empty description.
 
 Example of usage: 
 
@@ -132,7 +132,7 @@ Got it. I've added this task:
 
 ### `todo` - Adds new Todo
 
-Adds a new todo to the task list.
+Adds a new todo to the task list. Todo must contain a non-empty description.
 
 Example of usage: 
 

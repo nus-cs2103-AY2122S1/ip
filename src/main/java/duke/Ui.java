@@ -23,7 +23,7 @@ public class Ui {
     /**
      * Sole constructor for invocation by Duke.
      */
-    protected Ui() {
+    public Ui() {
         super();
         inputReader = new Scanner(System.in);
     }

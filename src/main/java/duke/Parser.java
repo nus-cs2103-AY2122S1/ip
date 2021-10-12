@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 // Duke Commands
 import duke.command.AddCommand;
@@ -33,7 +34,7 @@ public class Parser {
      * @return Command corresponding to the input recieved.
      * @throws DukeException Invalid inputs recieved.
      */
-    protected static Command parse(String input) throws DukeException {
+    protected static Command parse(String input) throws DukeException, DateTimeParseException {
         assert input != null;
 
         String[] inputArray = input.split(" ");
@@ -47,11 +48,19 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
-            selectedTask = Integer.parseInt(inputArray[1]) - 1;
-            return new DoneCommand(selectedTask);
+            try {
+                selectedTask = Integer.parseInt(inputArray[1]) - 1;
+                return new DoneCommand(selectedTask);
+            } catch (NumberFormatException e) {
+                throw new DukeException("Invalid input for done, index must be an integer.");
+            }
         case "delete":
-            selectedTask = Integer.parseInt(inputArray[1]) - 1;
-            return new DeleteCommand(selectedTask);
+            try {
+                selectedTask = Integer.parseInt(inputArray[1]) - 1;
+                return new DeleteCommand(selectedTask);
+            } catch (NumberFormatException e) {
+                throw new DukeException("Invalid input for delete, index must be an integer.");
+            }
         case "find":
             return new FindCommand(input.substring(5));
         case "event":
@@ -71,14 +80,28 @@ public class Parser {
      * @param input Input to be parsed.
      * @return Event representing input.
      */
-    private static Command parseEvent(String input) {
+    private static Command parseEvent(String input) throws DukeException, DateTimeParseException {
         String[] params;
         params = input.split("/at");
+
+        if (params.length < 2) {
+            throw new DukeException("Invalid input: missing /at");
+        }
+
+        if (params[0].length() < (COMMAND_EVENT_LENGTH + 2)) {
+            throw new DukeException("Invalid input: description must not be empty");
+        }
+
         params[0] = params[0].substring(COMMAND_EVENT_LENGTH,
-                params[0].length() - 1);
-        params[1] = params[1].substring(1);
-        return new AddCommand(new Event(params[0],
-                LocalDate.parse(params[1])));
+                params[0].length() - 1).trim();
+        params[1] = params[1].substring(1).trim();
+        LocalDate date = LocalDate.parse(params[1]);
+
+        if (params[0].equals("")) {
+            throw new DukeException("Invalid input: description must not be empty");
+        }
+
+        return new AddCommand(new Event(params[0], date));
     }
 
     /**
@@ -87,14 +110,28 @@ public class Parser {
      * @param input Input to be parsed.
      * @return Deadline representing input.
      */
-    private static Command parseDeadline(String input) {
+    private static Command parseDeadline(String input) throws DukeException, DateTimeParseException {
         String[] params;
         params = input.split("/by");
+
+        if (params.length < 2) {
+            throw new DukeException("Invalid input: missing /by");
+        }
+
+        if (params[0].length() < (COMMAND_DEADLINE_LENGTH + 2)) {
+            throw new DukeException("Invalid input: description must not be empty");
+        }
+
         params[0] = params[0].substring(COMMAND_DEADLINE_LENGTH,
                 params[0].length() - 1);
         params[1] = params[1].substring(1);
-        return new AddCommand(new Deadline(params[0],
-                LocalDate.parse(params[1])));
+        LocalDate date = LocalDate.parse(params[1]);
+
+        if (params[0].equals("")) {
+            throw new DukeException("Invalid input: description must not be empty");
+        }
+
+        return new AddCommand(new Deadline(params[0], date));
     }
 
     /**
@@ -104,15 +141,12 @@ public class Parser {
      * @return Todo representing input.
      * @throws DukeException If the string has an empty description.
      */
-    private static Command parseTodo(String input) throws DukeException {
-        try {
-            String name = input.substring(COMMAND_TODO_LENGTH);
-            if (name.equals("")) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
-            return new AddCommand(new ToDo(name));
-        } catch (StringIndexOutOfBoundsException e) {
+    private static Command parseTodo(String input) throws DukeException, DateTimeParseException {
+        if (input.trim().length() <= COMMAND_TODO_LENGTH) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
+
+        String name = input.substring(COMMAND_TODO_LENGTH).trim();
+        return new AddCommand(new ToDo(name));
     }
 }
