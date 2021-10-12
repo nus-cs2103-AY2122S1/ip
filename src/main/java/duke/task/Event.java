@@ -12,9 +12,9 @@ public class Event extends Task {
 
     /**
      * Constructor for Event class
-     * @param name
-     * @param isDone
-     * @param time
+     * @param name the name of the task
+     * @param isDone whether the task is done
+     * @param time the time of the task
      */
     public Event(String name, boolean isDone, String time) {
         super();
@@ -25,8 +25,8 @@ public class Event extends Task {
 
     /**
      * search whether keyword exist
-     * @param keyword
-     * @return
+     * @param keyword the keyword used to search current tasks
+     * @return whether the task has the keyword
      */
     public boolean searchKeyword(String keyword) {
         String[] s = name.split(" ");
@@ -40,7 +40,7 @@ public class Event extends Task {
 
     /**
      * return the time in a certain format
-     * @return
+     * @return task time
      */
     public String getTime() {
         String[] s = this.time.split(" ");
@@ -60,7 +60,7 @@ public class Event extends Task {
 
     /**
      * set the status of task as the given status
-     * @param done
+     * @param done whether the task is done
      */
     @Override
     public void setDone(boolean done) {
@@ -69,7 +69,7 @@ public class Event extends Task {
 
     /**
      * get task name
-     * @return
+     * @return the name of the task
      */
     @Override
     public String getName() {
@@ -78,7 +78,7 @@ public class Event extends Task {
 
     /**
      * get the status of the task
-     * @return
+     * @return whether the task is done or not
      */
     @Override
     public boolean isDone() {
@@ -88,7 +88,7 @@ public class Event extends Task {
 
     /**
      * get the task in string format
-     * @return
+     * @return the string format of the task
      */
     @Override
     public String toString() {

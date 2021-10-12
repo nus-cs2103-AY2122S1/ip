@@ -12,9 +12,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor for deadline class
-     * @param name
-     * @param isDone
-     * @param time
+     * @param name the name of the task
+     * @param isDone whether the task is done
+     * @param time the time of the task
      */
     public Deadline(String name, boolean isDone, String time) {
         super();
@@ -25,7 +25,7 @@ public class Deadline extends Task {
 
     /**
      * get name in recurring class
-     * @return
+     * @return the name of the task
      */
     @Override
     public String getName() {
@@ -34,7 +34,7 @@ public class Deadline extends Task {
 
     /**
      * get the status of the task
-     * @return
+     * @return whether the task is done
      */
     @Override
     public boolean isDone() {
@@ -44,7 +44,7 @@ public class Deadline extends Task {
 
     /**
      * get time in a certain format
-     * @return
+     * @return the time of the task
      */
     public String getTime() {
         String[] s = this.time.split(" ");
@@ -64,8 +64,8 @@ public class Deadline extends Task {
 
     /**
      * search whether keyword exist
-     * @param keyword
-     * @return
+     * @param keyword the keyword used to search current tasks
+     * @return whether the tasks contain the keyword
      */
     public boolean searchKeyword(String keyword) {
         String[] s = name.split(" ");
@@ -79,7 +79,7 @@ public class Deadline extends Task {
 
     /**
      * set the status of task as the given status
-     * @param done
+     * @param done whether the task is done
      */
     @Override
     public void setDone(boolean done) {
@@ -88,7 +88,7 @@ public class Deadline extends Task {
 
     /**
      * get the task in string format
-     * @return
+     * @return a string format of the task
      */
     @Override
     public String toString() {

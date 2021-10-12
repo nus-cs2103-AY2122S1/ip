@@ -47,14 +47,14 @@ public class Duke extends Application {
 
     /**
      * Constructor
-     * @param filePath
+     * @param filePath the path that we read and write data
      */
     public Duke(String filePath) {
         database = new Database(filePath);
     }
 
     /**
-     * Constructor
+     * Constructor for duke required no parameters
      */
     public Duke() {
     }
@@ -137,7 +137,7 @@ public class Duke extends Application {
      * search for a task from task list using a keyword
      * @param tasklist a list that contains all the tasks
      * @param keyword the keyword for searching
-     * @return
+     * @return a list of tasks that contains keyword
      */
     public ArrayList<Task> searchTask(ArrayList<Task> tasklist, String keyword) {
         ArrayList<Task> result = new ArrayList<>();
@@ -151,9 +151,9 @@ public class Duke extends Application {
 
     /**
      * execute find command
-     * @param input
-     * @param task
-     * @return
+     * @param input the command given by user
+     * @param task a list of current tasks
+     * @return a string that contains all matched tasks
      */
     public String executeFind(String input, ArrayList<Task> task) {
         String indentation = "       ";
@@ -197,9 +197,9 @@ public class Duke extends Application {
 
     /**
      * execute list command
-     * @param input
-     * @param task
-     * @return
+     * @param input the command given by user
+     * @param task a list of current tasks
+     * @return all the tasks we have
      */
     public String executeList(String input, ArrayList<Task> task) {
         String indentation = "       ";
@@ -243,9 +243,9 @@ public class Duke extends Application {
 
     /**
      * execute done command
-     * @param input
-     * @param task
-     * @return
+     * @param input the command given by user
+     * @param task a list of current tasks
+     * @return a string that tells user the result of the command
      */
     public String executeDone(String input, ArrayList<Task> task) {
         String indentation = "       ";
@@ -297,9 +297,9 @@ public class Duke extends Application {
 
     /**
      * execute delete command
-     * @param input
-     * @param task
-     * @return
+     * @param input the command given by user
+     * @param task a list of current tasks
+     * @return a string that tells user the result of the command
      */
     public String executeDelete(String input, ArrayList<Task> task) {
         String indentation = "       ";
@@ -345,7 +345,7 @@ public class Duke extends Application {
 
     /**
      * execute bye command
-     * @return
+     * @return a string that says goodbye
      */
     public String executeBye() {
         return ui.byeMessage;
@@ -353,9 +353,9 @@ public class Duke extends Application {
 
     /**
      * execute deadline command
-     * @param input
-     * @param task
-     * @return
+     * @param input the command given by user
+     * @param task a list of current tasks
+     * @return a string that tells user the result of the command
      */
     public String executeDeadline(String input, ArrayList<Task> task) {
         int taskNum = task.size();
@@ -414,9 +414,9 @@ public class Duke extends Application {
 
     /**
      * execute event command
-     * @param input
-     * @param task
-     * @return
+     * @param input the command given by user
+     * @param task a list of current tasks
+     * @return a string that tells user the result of the command
      */
     public String executeEvent(String input, ArrayList<Task> task) {
         int taskNum = task.size();
@@ -476,9 +476,9 @@ public class Duke extends Application {
 
     /**
      * execute todo command
-     * @param input
-     * @param task
-     * @return
+     * @param input the command given by user
+     * @param task a list of current tasks
+     * @return a string that tells user the result of the command
      */
     public String executeTodo(String input, ArrayList<Task> task) {
         int taskNum = task.size();
@@ -515,9 +515,9 @@ public class Duke extends Application {
 
     /**
      * execute recur command
-     * @param input
-     * @param task
-     * @return
+     * @param input the command given by user
+     * @param task a list of current tasks
+     * @return a string that tells user the result of the command
      */
     public String executeRecur(String input, ArrayList<Task> task) {
         int taskNum = task.size();
@@ -568,8 +568,8 @@ public class Duke extends Application {
     }
     /**
      * parse the input command line for execution
-     * @param input
-     * @return
+     * @param input the command given by user
+     * @return a string that tells user the result of the command
      */
     public String commandParser(String input) {
         if (input.equals("")) {
@@ -606,8 +606,8 @@ public class Duke extends Application {
 
     /**
      * give response to GUI when user types in text
-     * @param input
-     * @return
+     * @param input the command given by user
+     * @return a string that tells user the result of the command
      */
     public String getResponse(String input) {
         return commandParser(input);

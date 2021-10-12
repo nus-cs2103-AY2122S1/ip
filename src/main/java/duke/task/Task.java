@@ -6,7 +6,6 @@ package duke.task;
 public class Task {
     private String name;
     private boolean isDone;
-    private int index;
 
 
     public Task() {
@@ -15,20 +14,18 @@ public class Task {
 
     /**
      * constructor for Task
-     * @param name
-     * @param isDone
-     * @param index
+     * @param name the name of the task
+     * @param isDone whether the class is done ot not
      */
-    public Task(String name, boolean isDone, int index) {
+    public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
-        this.index = index;
     }
 
     /**
      * search whether keyword exist
-     * @param keyword
-     * @return
+     * @param keyword the keyword used to search current tasks
+     * @return whether the task has the keyword
      */
     public boolean searchKeyword(String keyword) {
         String[] s = name.split(" ");
@@ -42,7 +39,7 @@ public class Task {
 
     /**
      * set the status of task as the given status
-     * @param done
+     * @param done whether the class is done ot not
      */
     public void setDone(boolean done) {
         isDone = done;
@@ -50,7 +47,7 @@ public class Task {
 
     /**
      * get the name of the task
-     * @return
+     * @return the name of the task
      */
     public String getName() {
         return name;
@@ -58,30 +55,22 @@ public class Task {
 
     /**
      * get the status of the task
-     * @return
+     * @return whether the class is done ot not
      */
     public boolean isDone() {
         return isDone;
     }
 
-    /**
-     * get the index of the class
-     * @return
-     */
-    public int getIndex() {
-        return index;
-    }
 
     /**
      * get the task in string format
-     * @return
+     * @return the string format of the task
      */
     @Override
     public String toString() {
         return "Task{"
                 + "name='" + this.name + '\''
                 + ", isDone=" + isDone
-                + ", index=" + index
                 + '}' + '\n';
     }
 }

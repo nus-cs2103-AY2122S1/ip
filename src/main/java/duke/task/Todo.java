@@ -9,9 +9,9 @@ public class Todo extends Task {
     private boolean isDone;
 
     /**
-     * constructor
-     * @param name
-     * @param isDone
+     * constructor for todo event
+     * @param name the name of the task
+     * @param isDone whether the class is done ot not
      */
     public Todo(String name, boolean isDone) {
         super();
@@ -21,8 +21,8 @@ public class Todo extends Task {
 
     /**
      * search whether keyword exist
-     * @param keyword
-     * @return
+     * @param keyword the keyword used to search current tasks
+     * @return whether the tasks contain the keyword
      */
     public boolean searchKeyword(String keyword) {
         String[] s = name.split(" ");
@@ -36,7 +36,7 @@ public class Todo extends Task {
 
     /**
      * get task name
-     * @return
+     * @return the name of the task
      */
     @Override
     public String getName() {
@@ -45,7 +45,7 @@ public class Todo extends Task {
 
     /**
      * get the status of the task
-     * @return
+     * @return whether the class is done ot not
      */
     @Override
     public boolean isDone() {
@@ -54,7 +54,7 @@ public class Todo extends Task {
 
     /**
      * set the status of task as the given status
-     * @param done
+     * @param done whether the class is done ot not
      */
     @Override
     public void setDone(boolean done) {
@@ -63,7 +63,7 @@ public class Todo extends Task {
 
     /**
      * get the task in string format
-     * @return
+     * @return the string format of the task
      */
     @Override
     public String toString() {

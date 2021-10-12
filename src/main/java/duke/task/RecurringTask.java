@@ -9,9 +9,10 @@ public class RecurringTask extends Task {
 
     /**
      * constructor for recurring task
-     * @param name
-     * @param isDone
-     * @param time
+     * @param name the name of the task
+     * @param isDone whether the task is done
+     * @param time the time of the task
+     * @param counter the number of session the recurring class has
      */
     public RecurringTask(String name, boolean isDone, String time, int counter) {
         super();
@@ -23,7 +24,7 @@ public class RecurringTask extends Task {
 
     /**
      * set time for recurring task
-     * @param time
+     * @param time the time of the task
      */
     public void setTime(String time) {
         this.time = time;
@@ -31,7 +32,7 @@ public class RecurringTask extends Task {
 
     /**
      * set counter for recurring class
-     * @param counter
+     * @param counter the number of the session of the task
      */
     public void setCounter(int counter) {
         this.counter = counter;
@@ -39,7 +40,7 @@ public class RecurringTask extends Task {
 
     /**
      * set name for recurring class
-     * @param name
+     * @param name the name of the task
      */
     public void setName(String name) {
         this.name = name;
@@ -47,7 +48,7 @@ public class RecurringTask extends Task {
 
     /**
      * get counter in recurring class
-     * @return
+     * @return the number of session of the task
      */
     public int getCounter() {
         return counter;
@@ -55,7 +56,7 @@ public class RecurringTask extends Task {
 
     /**
      * get name in recurring class
-     * @return
+     * @return the name of the class
      */
     @Override
     public String getName() {
@@ -64,7 +65,7 @@ public class RecurringTask extends Task {
 
     /**
      * get info about whether the task is done or not
-     * @return
+     * @return whether the class is done or not
      */
     @Override
     public boolean isDone() {
@@ -73,7 +74,7 @@ public class RecurringTask extends Task {
 
     /**
      * get string format of the task
-     * @return
+     * @return the string format of the task
      */
     @Override
     public String toString() {
@@ -83,7 +84,7 @@ public class RecurringTask extends Task {
 
     /**
      * get time in a certain format
-     * @return
+     * @return the time of the task
      */
     public String getTime() {
         return this.time;
@@ -91,8 +92,8 @@ public class RecurringTask extends Task {
 
     /**
      * search whether keyword exist
-     * @param keyword
-     * @return
+     * @param keyword the keyword used to search current tasks
+     * @return whether the task has the keyword
      */
     public boolean searchKeyword(String keyword) {
         String[] s = name.split(" ");
@@ -106,7 +107,7 @@ public class RecurringTask extends Task {
 
     /**
      * set the task as given status
-     * @param done
+     * @param done whether the class is done or not
      */
     @Override
     public void setDone(boolean done) {

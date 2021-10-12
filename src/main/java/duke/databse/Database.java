@@ -26,7 +26,7 @@ public class Database {
 
     /**
      * Constructor for database
-     * @param filePath
+     * @param filePath the file path used to read and write data
      */
     public Database(String filePath) {
         try {
@@ -50,7 +50,7 @@ public class Database {
 
     /**
      * read data from file
-     * @return
+     * @return a list of tasks stored in the file
      */
     public ArrayList<Task> getData() {
         ArrayList<Task> objectsList = new ArrayList<>();
@@ -68,8 +68,8 @@ public class Database {
 
     /**
      * parse event task
-     * @param data
-     * @return
+     * @param data a string format of the task
+     * @return a task that is represented by the string
      */
     public Task parseEvent(String data) {
         String[] s = data.split(" ");
@@ -103,8 +103,8 @@ public class Database {
 
     /**
      * parse deadline task
-     * @param data
-     * @return
+     * @param data a string format of the task
+     * @return a task that is represented by the string
      */
     public Task parseDeadline(String data) {
         String[] s = data.split(" ");
@@ -137,8 +137,8 @@ public class Database {
 
     /**
      * parse recurring task
-     * @param data
-     * @return
+     * @param data a string format of the task
+     * @return a task that is represented by the string
      */
     public Task parseRecur(String data) {
         String[] s = data.split(" ");
@@ -174,8 +174,8 @@ public class Database {
 
     /**
      * parse data from string to task
-     * @param data a string that contains a task information
-     * @return
+     * @param data a string format of the task
+     * @return a task that is represented by the string
      */
     public Task parseData(String data) {
         String[] s = data.split(" ");
@@ -205,7 +205,7 @@ public class Database {
 
     /**
      * write data to file
-     * @param todo
+     * @param todo the task that to be write to file
      */
     public void writeToDatabase(Task todo) {
         try {
@@ -220,8 +220,8 @@ public class Database {
 
     /**
      * update data to file
-     * @param task
-     * @param index
+     * @param task the task that to be updated
+     * @param index the index of the task
      */
     public void updateData(Task task, int index) {
         String data = "";
@@ -253,7 +253,7 @@ public class Database {
 
     /**
      * delete data from file
-     * @param index
+     * @param index the index of the task that to be deleted
      */
     public void deleteData(int index) {
         String data = "";
@@ -285,7 +285,7 @@ public class Database {
 
     /**
      * run database
-     * @param args
+     * @param args system argument
      */
     public static void main(String[] args) {
         Database d = new Database("todoList.txt");
