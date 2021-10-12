@@ -1,12 +1,5 @@
 package duke.databse;
 
-import duke.core.UI;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.RecurringTask;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -14,9 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
-
+import duke.core.UI;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.RecurringTask;
+import duke.task.Task;
+import duke.task.Todo;
 
 
 /**
@@ -67,7 +63,7 @@ public class Database {
                 objectsList.add(parseData(data));
             }
         } catch (IOException e) {
-            System.out.println(ui.wrong_message);
+            System.out.println(ui.wrongMessage);
         }
         return objectsList;
     }
@@ -183,7 +179,6 @@ public class Database {
         String data = "";
         try {
             Scanner myReader = new Scanner(file);
-
             while (myReader.hasNextLine()) {
                 if (index == 1) {
                     myReader.nextLine();
@@ -196,7 +191,7 @@ public class Database {
             myReader.close();
 
         } catch (IOException e) {
-            System.out.println(ui.wrong_message);
+            System.out.println(ui.wrongMessage);
         }
 
         try {
@@ -204,7 +199,7 @@ public class Database {
             fw.write(data);
             fw.close();
         } catch (IOException e) {
-            System.out.println(ui.wrong_message);
+            System.out.println(ui.wrongMessage);
         }
     }
 
@@ -229,14 +224,14 @@ public class Database {
             myReader.close();
 
         } catch (IOException e) {
-            System.out.println(ui.wrong_message);
+            System.out.println(ui.wrongMessage);
         }
         try {
             FileWriter fw = new FileWriter(file);
             fw.write(data);
             fw.close();
         } catch (IOException e) {
-            System.out.println(ui.wrong_message);
+            System.out.println(ui.wrongMessage);
         }
     }
 

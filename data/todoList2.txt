@@ -1,5 +1,4 @@
-D test //by 2020-11-03 4pm false
-T jump false
+T jump true
 E run /at: 2021-11-08 4pm false
 D run /by: 2021-11-08 4pm false
 T do 2103 homework false
@@ -25,3 +24,11 @@ R lecture /at: Mon 2pm /10 false
 E tutorial /at: 2021-11-08 5pm false
 D finish tutorial /by: 2021-11-08 4pm false
 T do 2103 homework false
+D finish tutorial /by: 2021-11-08 4pm false
+E tutorial /at: 2021-11-08 5pm false
+T do 2103 homework false
+R lecture /at: Mon 2pm /10 false
+T do 2103 homework false
+D finish tutorial /by: 2021-11-08 4pm false
+E tutorial /at: 2021-11-08 5pm false
+R lecture /at: Mon 2pm /10 false
