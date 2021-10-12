@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox fx:id="textBox" maxHeight="-Infinity" styleClass="text-box" stylesheets="@duke.css">
+            <children>
+                <Label fx:id="dialog" text="Label" wrapText="true">
+                    <padding>
+                        <Insets left="15.0" right="15.0" top="15.0" bottom="15.0"/>
+                    </padding>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Label>
+            </children>
+            <HBox.margin>
+                <Insets left="15.0" right="15.0" />
+            </HBox.margin>
+        </HBox>
+        <Circle fx:id="displayPicture" pickOnBounds="true" radius="48.0">
+            <HBox.margin>
+                <Insets />
+            </HBox.margin></Circle>
+    </children>
+    <padding>
+        <Insets left="5.0" right="5.0" top="15.0" bottom="15.0"/>
+    </padding>
+
+</fx:root>
