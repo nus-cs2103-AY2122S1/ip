@@ -170,7 +170,7 @@ Example:
 
 - `find dinner`
 
-<img src="https://github.com/tianyue58/ip/blob/master/docs/findScreen.png?raw=true" alt="FindGUI" style="zoom:33%;" />
+<img src="https://github.com/tianyue58/ip/blob/master/docs/findScreen.png?raw=true" alt="FindGUI" style="zoom:33%;" height="300" width="130"/>
 
 
 ### Exiting the program: `bye`
@@ -196,7 +196,7 @@ Data in the task list is saved in the hard disk at `[JAR file location]/data/Duk
 | Set as Done  | `done <task-index>`                 | `done 1`                                        |
 | Delete       | `delete <task_index>`               | `delete 1`                                      |
 | Find         | `find <keyword>`                    | `find dinner`                                   |
-| List         | `list`                              |                                                 |
-| Exit         | `bye`                               |                                                 |
-                                                                                 |
+| List         | `list`                              | `list`                                          |
+| Exit         | `bye`                               | `bye`                                           |
+                                                                          
 
