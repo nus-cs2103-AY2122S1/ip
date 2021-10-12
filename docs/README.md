@@ -1,5 +1,5 @@
 # User Guide
-Duke is a chat-bot style task organizer that allows users to 
+TaskMe is a chat-bot style task organizer that allows users to 
 keep track of tasks that needs to be completed.
 
 ## Installation
@@ -25,6 +25,20 @@ Sorts all the tasks by their name or by the event type and lists it all out.
 
 ## Usage
 
+### `Task` - Adds a Task
+
+Adds a task to the list in the format of:<br/>`task {task name}`
+
+Example of usage:<br/>
+`task meeting `
+
+Expected outcome: <br/>
+```
+I've added this task:
+[T][] meeting
+You have 1 tasks left!
+```
+
 ### `Deadline` - Adds a deadline task
 
 Adds a Deadline task to the list in the format of:<br/>`deadline {deadline name} /by {dd/mm/yyyy hhmm}`
@@ -39,6 +53,20 @@ I've added this task:
 You have 1 tasks left!
 ```
 
+### `Event` - Adds a event task
+
+Adds a event task to the list in the format of:<br/>`event {event name} /at {dd/mm/yyyy hhmm}`
+
+Example of usage:<br/>
+`event meeting /at 12/12/2021 1400`
+
+Expected outcome: <br/>
+```
+I've added this task:
+[E][] meeting (at: Dec 12 2021 Sun 14:00)
+You have 1 tasks left!
+```
+
 ### `Sort` - Sorts the list of tasks
 
 Sort command syntax:<br/>
@@ -50,4 +78,7 @@ Example of usage:<br/>
 Expected outcome: <br/>
 ```
 Tasks are sorted alphabetically.
+[E][] meeting (at: Dec 12 2021 Sun 14:00)
+[D][] read book (by: Dec 13 2021 Mon 12:00)
+[T][] watch lecture 
 ```
