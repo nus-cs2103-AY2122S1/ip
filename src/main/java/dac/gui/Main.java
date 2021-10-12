@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    public static final String FILE_PATH = "taskList.txt";
+    public static final String FILE_PATH = System.getProperty("user.home") + "/taskList.txt";
     public static final String GREETING = "Hello! Welcome to Dog-and-Cat!\n"
             + "I am a dog and you are a cat.\n"
             + "What can I do for you?";
