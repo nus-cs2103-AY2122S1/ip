@@ -7,6 +7,8 @@ track of tasks that needs to be completed. It is optimized for use
 via a Command Line Interface (CLI) while also having the benefits
 of a Graphical User Interface (GUI).
 
+![image](https://raw.githubusercontent.com/squeakysquak/ip/master/docs/Ui.png)
+
 ## Features 
 
 ### Adding Tasks to the list
