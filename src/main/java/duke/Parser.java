@@ -57,11 +57,11 @@ public class Parser {
         case ("done"):
             throw new DukeException("Please ensure that there is a number after the command 'done'. Try again.");
         case ("deadline"):
-            throw new DukeException("Please ensure that there is a task description after the command 'deadline' "
+            throw new DukeException("Please ensure that there is a task description after the command 'deadline', "
                     + "and a deadline after '/by'. Try again.");
         case ("event"):
-            throw new DukeException("Please ensure that there is a task description after the command 'event' "
-                    + "with a date and time after '/at'. Try again.");
+            throw new DukeException("Please ensure that there is a task description after the command 'event', "
+                    + "and a date and time after '/at'. Try again.");
         case ("todo"):
             throw new DukeException("Please ensure that there is a task description after the command 'todo'. "
                     + "Try again.");
