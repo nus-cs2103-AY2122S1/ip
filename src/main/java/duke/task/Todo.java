@@ -34,7 +34,10 @@ public class Todo extends Task {
         return false;
     }
 
-
+    /**
+     * get task name
+     * @return
+     */
     @Override
     public String getName() {
         return name;
