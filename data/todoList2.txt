@@ -1,4 +1,8 @@
-T jump false
+T jump true
 T jump false
 E run /at: 2021-11-08 4pm false
 D run /by: 2021-11-08 4pm false
+T do 2103 homework false
+D finish tutorial /by: 2021-11-08 4pm false
+E tutorial /at: 2021-11-08 5pm false
+R lecture /at: Mon 2pm /10 false
