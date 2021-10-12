@@ -104,7 +104,8 @@ public class Controller implements Initializable {
         try {
             storage.save(tasks);
         } catch (IOException e) {
-            e.printStackTrace();
+            storage = new Storage("duke.txt");
+            this.save();
         }
         listLabel.setText(tasks.toString());
         addTaskError.setText("");

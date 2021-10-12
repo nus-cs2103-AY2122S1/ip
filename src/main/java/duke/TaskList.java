@@ -93,35 +93,34 @@ public class TaskList {
      */
     public String findTask(String find) {
         ArrayList<Task> result = new ArrayList<>();
-        for (Task t :
-                this.list) {
+        for (Task t : this.list) {
             if (t.toString().toLowerCase().contains(find.toLowerCase())) {
                 result.add(t);
             }
         }
-        if (result.size() == 0) {
+        return TaskListToString(result);
+    }
+
+    /**
+     * Given an ArrayList of Task returns the String to be displayed in duke
+     *
+     * @return String to be displayed
+     */
+    public String TaskListToString(ArrayList<Task> taskArrayList) {
+        if (taskArrayList.size() == 0) {
             return "There are no matching task in your list!\n";
-        } else {
-            String listContent = "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < result.size(); i++) {
-                listContent += (i + 1) + ". " + result.get(i).toString() + "\n";
-            }
-            return listContent;
         }
+        String listContent = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            listContent += (i + 1) + ". " + taskArrayList.get(i).toString() + "\n";
+        }
+        return listContent;
+
     }
 
     @Override
     public String toString() {
-        if (this.list.isEmpty()) {
-            return "There are no tasks in your list!\n";
-        } else {
-            String listContent = "Here are the tasks in your list:\n";
-            for (int i = 0; i < list.size(); i++) {
-                listContent += (i + 1) + ". " + list.get(i).toString() + "\n";
-            }
-            return listContent;
-        }
+        return TaskListToString(this.list);
     }
-
 
 }

@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -38,23 +39,44 @@ public class Parser {
      */
     public static ArrayList<Task> storageParse(String storageData) {
         ArrayList<Task> tasks = new ArrayList<>();
-        if (!storageData.equals("")) {
-            for (String i :
-                    storageData.split("\n")) {
-                Task newTask;
-                String[] inputs = i.split("\\|");
-                if (inputs.length < 4) {
-                    newTask = taskParse(inputs[1], inputs[2], null);
-                } else {
-                    newTask = taskParse(inputs[1], inputs[2], inputs[3]);
-                }
+        if (storageData.equals("")) {
+            return tasks;
+        }
+        for (String i : storageData.split("\n")) {
+            Task newTask;
+            String[] inputs = i.split("\\|");
 
-                if (inputs[0].equals("true")) {
-                    newTask.markAsDone();
-                }
-                tasks.add(newTask);
+            if (inputs.length < 4) {
+                newTask = taskParse(inputs[1], inputs[2], null);
+            } else {
+                newTask = taskParse(inputs[1], inputs[2], inputs[3]);
             }
+
+            if (inputs[0].equals("true")) {
+                assert newTask != null;
+                newTask.markAsDone();
+            }
+            tasks.add(newTask);
         }
         return tasks;
+    }
+
+    /**
+     * Parses date related inputs and produce LocalDate object for duke
+     *
+     * @param dateString input to be parsed in
+     * @return LocalDate object requested
+     */
+    public static LocalDate dateParse(String dateString) {
+        LocalDate date;
+        if (dateString.contains("/")) {
+            String[] inputs = dateString.split("/");
+            date = LocalDate.parse(inputs[2] + "-" + inputs[1] + "-" +
+                    (Integer.parseInt(inputs[0]) < 10 ? "0" + inputs[0] :
+                            inputs[0]));
+        } else {
+            date = LocalDate.parse(dateString);
+        }
+        return date;
     }
 }

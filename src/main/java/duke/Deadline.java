@@ -13,13 +13,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        if (by.contains("/")) {
-            date = LocalDate.parse(by.split("/")[2] + "-" + by.split("/")[1] + "-"
-                    + (Integer.parseInt(by.split("/")[0]) < 10 ? "0" + by.split("/")[0] :
-                    by.split("/")[0]));
-        } else {
-            date = LocalDate.parse(by);
-        }
+        date = Parser.dateParse(by);
     }
 
     public void changeDate(LocalDate date) {

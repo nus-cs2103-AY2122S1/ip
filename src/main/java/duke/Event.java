@@ -13,13 +13,7 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        if (at.contains("/")) {
-            date = LocalDate.parse(at.split("/")[2] + "-" + at.split("/")[1] + "-" +
-                    (Integer.parseInt(at.split("/")[0]) < 10 ? "0" + at.split("/")[0] :
-                            at.split("/")[0]));
-        } else {
-            date = LocalDate.parse(at);
-        }
+        this.date = Parser.dateParse(at);
     }
 
     public void changeDate(LocalDate date) {
