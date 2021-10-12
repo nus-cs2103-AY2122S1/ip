@@ -46,15 +46,18 @@ public class Event extends Task {
     }
 
     private static String extractDesc(String descAndTime) throws DukeException {
-        if (descAndTime.equals("")) {
-            throw new DukeException("\\u2639 OOPS!!! Your event needs a description.\n");
+        String rawDesc = descAndTime.split(" at ")[0];
+        String trimmedDesc = rawDesc.trim();
+        if (trimmedDesc.equals("")) {
+            throw new DukeException("OOPS!!! Your event needs a description.\n");
         }
-        return descAndTime.split(" at ")[0];
+        return trimmedDesc;
     }
 
     private static String extractTime(String descAndTime) throws DukeException {
         try {
-            return descAndTime.split(" at ")[1];
+            String rawTime = descAndTime.split(" at ")[1];
+            return rawTime.trim();
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! You need to specify a time.\n");
         }

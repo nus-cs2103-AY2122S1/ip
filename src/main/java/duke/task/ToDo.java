@@ -32,10 +32,11 @@ public class ToDo extends Task {
     }
 
     private static String getDescription(String description) throws DukeException {
-        if (description.equals("")) {
+        String trimmedDesc = description.trim();
+        if (trimmedDesc.equals("")) {
             throw new DukeException("OOPS!!! Your todo needs a description.\n");
         }
-        return description;
+        return trimmedDesc;
     }
 
     @Override

@@ -49,15 +49,19 @@ public class Deadline extends Task {
     }
 
     private static String extractDesc(String descAndTime) throws DukeException {
-        if (descAndTime.equals("")) {
+        String rawDesc = descAndTime.split(" by ")[0];
+        String trimmedDesc = rawDesc.trim();
+        if (trimmedDesc.equals("")) {
             throw new DukeException("OOPS!!! Your deadline needs a description.\n");
         }
-        return descAndTime.split(" by ")[0];
+        return trimmedDesc;
     }
 
     private static String extractTime(String descAndTime) throws DukeException {
         try {
-            return descAndTime.split(" by ")[1];
+            String rawTime = descAndTime.split(" by ")[1];
+            String trimmedTime = rawTime.trim();
+            return trimmedTime;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! You need to specify a time.\n");
         }
