@@ -1,6 +1,6 @@
 package duke;
 
-import duke.userInterface.MainLaunch;
+import duke.ui.MainLaunch;
 import javafx.application.Application;
 
 /**

@@ -9,11 +9,12 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.classes.TaskList;
+import duke.classes.exceptions.DukeException;
 import duke.classes.tasks.Deadline;
 import duke.classes.tasks.Event;
 import duke.classes.tasks.Task;
 import duke.classes.tasks.ToDo;
-import duke.classes.exceptions.DukeException;
+
 
 
 /**

@@ -1,4 +1,4 @@
-package duke.userInterface;
+package duke.ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -6,55 +6,44 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import duke.classes.DukeParser;
-import duke.classes.commands.DukeUI;
 import org.junit.jupiter.api.Test;
 
+import duke.classes.DukeParser;
 import duke.classes.TaskList;
 import duke.classes.exceptions.DukeException;
 
 public class DukeParserTest {
     @Test
     public void test1() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
         TaskList taskList = new TaskList(new ArrayList<>());
-        DukeUI ui = new DukeUI();
-
+        String result = "";
         DukeParser test = new DukeParser(taskList);
         try {
-            test.parse("test");
+            result = test.parse("what");
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            result = e.getMessage();
         }
 
-        String expectedOutput = "!!! I'm sorry, but I don't know what that means. !!!\r\n";
+        String expectedOutput = "!!! I'm sorry, but I don't know what what means. !!!";
 
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput, result);
     }
 
     @Test
     public void test2() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
         TaskList taskList = new TaskList(new ArrayList<>());
-        DukeUI ui = new DukeUI();
-
+        String result = "";
         DukeParser test = new DukeParser(taskList);
         try {
-            test.parse("todo Test");
+            result = test.parse("todo Test");
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
 
-        String expectedOutput = "____________________________________________________________\n"
-                + "Got it. I've added this task: \n"
-                + "\t[T][ ] Test\n"
-                + "Now you have 1 tasks in the list.\n"
-                + "____________________________________________________________";
+        String expectedOutput =
+                "Got it. I've added this task:\n\t" + "[T][ ] test"
+                        + "\nNow you have " + 1 + " tasks in the list.";
 
-        assertEquals(expectedOutput, outContent.toString().trim().replace("\r", ""));
+        assertEquals(expectedOutput, result);
     }
 }
