@@ -23,6 +23,9 @@ public class Ui {
         return count;
     }
 
+    /**
+     * Prints welcome message when bot is first started
+     */
     public static void welcomeUser() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -32,6 +35,11 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
+    /**
+     * Generates statistics for user to see about different kind of tasks stored
+     * @param item
+     * @return String with task breakdown
+     */
     public String statsReponse(String item) {
         String output = "";
         List<Integer> distribution = taskList.taskDistribution();
@@ -92,6 +100,10 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Generates standard response to user input bye
+     * @return String
+     */
     public String byeResponse() {
         String output = "";
         System.out.println(line);
@@ -101,6 +113,10 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Called when uses the list command and generates a list of items stored in the {@code taskList}
+     * @return String with responses
+     */
     public String listResponse() {
         String output = "";
         System.out.println(line);
@@ -114,6 +130,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     *Response generated when user adds a todo item to the list
+     * @param input
+     * @return String message for user
+     */
     public String todoResponse(String input) {
         System.out.println(line);
         String output = "";
@@ -137,6 +158,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     *Response generated when user adds a deadline item to the list
+     * @param input
+     * @return String message for user
+     */
     public String deadlineResponse(String input) {
         String output = "";
         try {
@@ -167,6 +193,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     *Response generated when user adds a event item to the list
+     * @param input
+     * @return String message for user
+     */
     public String eventResponse(String input) {
         String output = "";
         try {
@@ -196,7 +227,11 @@ public class Ui {
         }
         return output;
     }
-
+    /**
+     *Response generated when user searches for an item in the list
+     * @param input the item being looked for
+     * @return String message for user
+     */
     public String findResponse(String input) {
         String output = "";
         String keyWord = input.substring(input.lastIndexOf("find") + 5);
@@ -209,6 +244,10 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Output generated when user types an invalid command
+     * @return a String with standard response
+     */
     public String invalidInput() {
         String output = "";
         System.out.println(line);

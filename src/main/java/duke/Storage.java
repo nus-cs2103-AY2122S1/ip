@@ -23,7 +23,6 @@ class Storage {
     /**
      * Gets called when user inputs bye.Saves tasks to hard disk in
      * DukeData.txt file
-     *
      * @param tasks TaskList containing tasks
      */
     void saveTasks(TaskList tasks) {
@@ -49,7 +48,6 @@ class Storage {
 
     /**
      * Called when chatbot starts to load up TaskList
-     *
      * @param filePath FilePath where data is stored
      */
     static void readFile(String filePath) throws FileNotFoundException {
@@ -77,10 +75,11 @@ class Storage {
                     tasklist.addTask(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
                     System.out.println(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
                     break;
+                default:
                 }
             }
         } catch (Exception e) {
-
+            System.out.println(e);
         }
 
     }

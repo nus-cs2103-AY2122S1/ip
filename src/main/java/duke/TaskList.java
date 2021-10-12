@@ -18,11 +18,20 @@ public class TaskList {
         this.list.add(task);
     }
 
-    public void removeTask(int i) {
-        this.list.remove(i);
+    /**
+     *Deletes task from {@code list} based on index given
+     * @param index
+     */
+    public void removeTask(int index) {
+        this.list.remove(index);
         assert list.size() >= 0 : "List size is negative!";
     }
 
+    /**
+     * Searches for task in the {@code list} based on input String
+     * @param input
+     * @return {@code TaskList} containing task found
+     */
     public TaskList findTask(String input) {
         TaskList searchResult = new TaskList();
         for (int i = 0; i < list.size(); i++) {
@@ -34,18 +43,35 @@ public class TaskList {
         return searchResult;
     }
 
+    /**
+     * Finds total number of tasks stored
+     * @return Size of {@code TaskList}
+     */
     public int size() {
         return list.size();
     }
 
-    public Task get(int i) {
-        return list.get(i);
+    /**
+     * Retrieves a specific task based on index provided
+     * @param index
+     * @return Task at specific index
+     */
+    public Task get(int index) {
+        return list.get(index);
     }
 
+    /**
+     * Retrieves entire list of tasks
+     * @return all tasks
+     */
     public ArrayList<Task> getList() {
         return this.list;
     }
 
+    /**
+     * Called to provide statistics for number of tasks of each type left to do
+     * @return a list of integer
+     */
     public List<Integer> taskDistribution() {
         List<Integer> counter = new ArrayList<>();
         counter.add(0);
@@ -63,6 +89,10 @@ public class TaskList {
         return counter;
     }
 
+    /**
+     * Calculates number of task done divided by total tasks stored in the list
+     * @return String percentage
+     */
     public String taskCompetedPercentage() {
         double totalTasks = list.size();
         double completedTasks = 0;

@@ -4,6 +4,10 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Instantiates the parent class Task
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
