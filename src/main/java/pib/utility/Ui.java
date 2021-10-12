@@ -191,6 +191,11 @@ public class Ui {
             String s19 = "New value cannot be blank";
             System.out.println(DIVIDER);
             return s19;
+        case "wrong-edit-datetime-format":
+            String s20 = "Ensure date format is YYYY-MM-DD or time format is HHMM\n";
+            System.out.println(20);
+            System.out.println(DIVIDER);
+            return s20;
         default:
             String defaultError = "Error Occurred!";
             System.out.println(defaultError);

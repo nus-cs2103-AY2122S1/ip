@@ -138,7 +138,7 @@ public class Deadline extends Task {
             }
             return Ui.printUpdateSuccessful();
         } catch (DateTimeParseException e) {
-            throw new PibException("wrong-datetime-format");
+            throw new PibException("wrong-edit-datetime-format");
         }
     }
 }
