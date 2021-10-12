@@ -13,5 +13,10 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+/text-response-test/ACTUAL.txt
+text-response-test/EXPECTED-UNIX.TXT
+.vscode/settings.json
+src/main/java/duke/Parser_BACKUP_956.java
+src/main/java/duke/Parser_BASE_956.java
+src/main/java/duke/Parser_LOCAL_956.java
+src/main/java/duke/Parser_REMOTE_956.java
