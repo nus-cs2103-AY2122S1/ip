@@ -2,6 +2,8 @@ package duke;
 
 import java.util.Scanner;
 
+import javafx.application.Platform;
+
 class Parser {
     private Ui ui;
     private Storage storage;
@@ -28,12 +30,13 @@ class Parser {
 
     public void breakOutLoop() {
         breakLoop = true;
+        Platform.exit();
     }
 
     /**
      * Calls appropriate UI functions based on input
-     *
      * @param input String passed by user
+     * @return String with output for user
      */
     public String parse(String input) {
         String output = "";

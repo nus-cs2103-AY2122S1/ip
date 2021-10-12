@@ -13,10 +13,17 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Outputs a X if task is completed
+     * @return String X or space
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Marks a task as completed
+     */
     public void markAsDone() {
         this.isDone = true;
     }
