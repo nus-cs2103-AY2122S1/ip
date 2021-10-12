@@ -6,20 +6,23 @@ package duke.task;
 public class Task {
     private String name;
     private boolean isDone;
+    private int index;
 
 
     public Task() {
 
     };
 
+
     /**
      * constructor for Task
      * @param name the name of the task
      * @param isDone whether the class is done ot not
      */
-    public Task(String name, boolean isDone) {
+    public Task(String name, boolean isDone, int index) {
         this.name = name;
         this.isDone = isDone;
+        this.index = index;
     }
 
     /**
@@ -35,6 +38,14 @@ public class Task {
             }
         }
         return false;
+    }
+
+    /**
+     * get the index of the task
+     * @return the index of the task
+     */
+    public int getIndex() {
+        return index;
     }
 
     /**
@@ -60,6 +71,8 @@ public class Task {
     public boolean isDone() {
         return isDone;
     }
+
+
 
 
     /**
