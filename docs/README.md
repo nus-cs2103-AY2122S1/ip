@@ -43,10 +43,6 @@ Notes on features:
 
 Shows a message displaying all the available commands Duke recognises.
 
-### `quit` - Exiting the program
-
-Exits the programs.
-
 ### `todo` - Adding a Todo
 
 Adds a Todo to task list.
