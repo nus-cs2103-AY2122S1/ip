@@ -69,9 +69,9 @@ You have 1 tasks left!
 
 ### `Sort` - Sorts the list of tasks
 
-Sorts the list of tasks based on the given keyword. Current keywords TaskMe supports are ``name`` and ``type``.
-``name`` sorts the list of tasks alphabetically.
-``type`` sorts the list of tasks by the type.
+Sorts the list of tasks based on the given keyword. Current keywords TaskMe supports are ``name`` and ``type``.<br/>
+``name`` sorts the list of tasks alphabetically.<br/>
+``type`` sorts the list of tasks by the type.<br/>
 
 Sort command syntax:<br/>
 `sort {name/type}`
