@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * get the result of duke according to user input
+     * Returns the result of duke according to user input.
      *
      * @param userInput string of user input
      * @return the response of duke

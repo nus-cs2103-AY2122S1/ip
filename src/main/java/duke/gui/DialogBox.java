@@ -50,7 +50,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * generate a new userdialog box with user message and avatar
+     * Returns a new userdialog box with user message and avatar
      *
      * @param text the user message to be displayed in the dialog box
      * @param img user avatar
@@ -61,7 +61,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * generate a new duke dialog box with message wne avatar. Orientation is left-right flip of user dialog box.
+     * Returns a new duke dialog box with message wne avatar. Orientation is left-right flip of user dialog box.
      *
      * @param text the duke message to be displayed in the dialog box
      * @param img duke avatar
