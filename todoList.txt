@@ -1,0 +1,13 @@
+E run run run /at: 2020-02-12 4-6pm true
+D run and run /by: 2020-11-20 4pm true
+D cs2105 /by: 2020-11-20 Mon 2pm true
+R physic tutorial /Mon: 4-6pm /2 false
+T finish script false
+E run run run /at: 2020-02-12 4-6pm true
+D run and run /by: 2020-11-20 4pm true
+D cs2105 /by: 2020-11-20 Mon 2pm true
+R physic tutorial /Mon: 4-6pm /2 false
+T finish script false
+T jump false
+T jump false
+T run false
