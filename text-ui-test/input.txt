@@ -1,0 +1,13 @@
+hello
+todo test this
+list
+deadline really test this /by now
+list
+event hi /at easy?
+list
+done 3
+list
+done 2
+list
+done 1
+bye
