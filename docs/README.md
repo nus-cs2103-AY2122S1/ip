@@ -233,7 +233,7 @@ Gotcha my dear! I have restored the previous version.
 
 ### `bye` - Show Welfare Message
 
-Show Welfare Message.\
+Show Farewell Message.\
 The program window will remain open and the program will continue running. 
 
 Example of usage:
