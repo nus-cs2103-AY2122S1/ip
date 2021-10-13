@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="600.0" maxWidth="400.0" minHeight="600.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #FFD660;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+  <children>
+      <SplitPane dividerPositions="0.951450892857143" maxHeight="600.0" maxWidth="400.0" minHeight="600.0" minWidth="400.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+        <items>
+          <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="575.0" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="400.0" pannable="true" prefHeight="575.0" style="-fx-background-color: #FFD660; -fx-background: transparent;" vbarPolicy="ALWAYS" vvalue="1.0">
+            <content>
+              <VBox fx:id="dialogContainer" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" />
+            </content>
+          </ScrollPane>
+            <SplitPane dividerPositions="0.7911073825503354" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="400.0" prefHeight="100.0" prefWidth="400.0">
+               <items>
+                <TextField fx:id="userInput" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="300.0" onAction="#handleUserInput" prefHeight="100.0" prefWidth="313.0" />
+                <Button fx:id="sendButton" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="60.0" mnemonicParsing="false" onAction="#handleUserInput" text="Send" />
+               </items>
+            </SplitPane>
+        </items>
+      </SplitPane>
+  </children>
+</AnchorPane>

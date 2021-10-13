@@ -5,3 +5,28 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm duke.duke
+What can I do for you?
+Got it. I've added this task: 
+[T][ ] borrow book
+Now you have 1 tasks in the list.
+Got it. I've added this task: 
+[D][ ] read book  (by: tonight)
+Now you have 2 tasks in the list.
+Got it. I've added this task: 
+[E][ ] return book  (at: 10am tomorrow)
+Now you have 3 tasks in the list.
+1.[T][ ] borrow book
+2.[D][ ] read book  (by: tonight)
+3.[E][ ] return book  (at: 10am tomorrow)
+Nice! I've marked this task as done: 
+[T][X] borrow book
+1.[T][X] borrow book
+2.[D][ ] read book  (by: tonight)
+3.[E][ ] return book  (at: 10am tomorrow)
+Noted. I've removed this task: 
+[D][ ] read book  (by: tonight)
+Now you have 2 tasks in the list.
+1.[T][X] borrow book
+2.[E][ ] return book  (at: 10am tomorrow)
+Bye. Hope to see you again soon!
