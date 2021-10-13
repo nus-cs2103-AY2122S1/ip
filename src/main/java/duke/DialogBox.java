@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,11 +13,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
-import java.io.IOException;
-import java.util.Collections;
 
 /**
  * An example of a custom control using FXML.
@@ -38,7 +44,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-//        dialog.setPadding(new Insets(0, 30, 0, 30));
+        dialog.setFont(Font.font("Arial", FontWeight.NORMAL, 16));
         dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,
                 new CornerRadii(5), new Insets(-3, -6, -3, -6))));
         displayPicture.setImage(img);

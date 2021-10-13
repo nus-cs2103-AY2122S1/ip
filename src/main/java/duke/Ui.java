@@ -91,9 +91,33 @@ public class Ui {
      * @return String msg to be printed
      */
     public String taskAddedMessage(Task task, int totalTask) {
-        String msg = "Got it. I've added this task." + "\n";
-        msg += task + "\n";
-        msg += "Now you have " + totalTask + " tasks in the list.";
-        return msg;
+        if (task != null) {
+            String msg = "Got it. I've added this task." + "\n";
+            msg += task + "\n";
+            msg += "Now you have " + totalTask + " tasks in the list.";
+            return msg;
+        } else {
+            return "Please check your fields once again!";
+        }
+
+    }
+
+    /**
+     * Display deadline added message.
+     *
+     * @param task The Task that is to be Added.
+     * @param totalTask The new total number of task.
+     * @return String msg to be printed
+     */
+    public String taskWithDateAddedMessage(Task task, int totalTask) {
+        if (task != null) {
+            String msg = "Got it. I've added this task." + "\n";
+            msg += task + "\n";
+            msg += "Now you have " + totalTask + " tasks in the list.";
+            return msg;
+        } else {
+            return "Incorrect date format! Please follow YYYY-MM-DD for the date";
+        }
+
     }
 }

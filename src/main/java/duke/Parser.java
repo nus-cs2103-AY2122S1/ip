@@ -1,12 +1,15 @@
 package duke;
 
-import duke.command.*;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
-import java.time.LocalDate;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 
 public class Parser {
@@ -28,60 +31,14 @@ public class Parser {
         } else if (isDone(input)) {
             return new DoneCommand(input);
         } else if (input.toUpperCase().contains(CommandList.FIND.toString())) {
-            if (input.length() > 5) {
-                String taskMessage = input.substring(5);
-                return new FindCommand(taskMessage.strip());
-            } else {
-                throw new IncompleteCommandException("OOPS incomplete command! Your find command "
-                        + "should have a text after the find like: find book");
-            }
-
-        } else {
-            //ADD duke.command.Command
-            Task newTask = null;
-            if (input.toUpperCase().contains(CommandList.TODO.toString())) {
-                if (input.length() <= 5) {
-                    throw new IncompleteCommandException("OOPS!!! The description of a todo cannot be empty.");
-                }
-                String taskMessage = input.substring(5);
-                newTask = new Todo(taskMessage.strip());
-
-            } else if (input.toUpperCase().contains(CommandList.DEADLINE.toString())) {
-                if (input.length() <= 8) {
-                    throw new IncompleteCommandException("OOPS!!! The description of a deadline cannot be empty.");
-                }
-
-                if (input.contains("/by")) {
-                    String[] stringArr = input.substring(9).split("/by");
-                    LocalDate date;
-                    try {
-                        date = LocalDate.parse(stringArr[1].strip());
-                        newTask = new Deadline(stringArr[0], date);
-                    } catch (Exception e) {
-                        System.out.println("Incorrect date format! Please follow YYYY-MM-DD for the date");
-                    }
-
-                } else {
-                    System.out.println("Your deadline is missing a /by (date)");
-                }
-
-            } else if (input.toUpperCase().contains(CommandList.EVENT.toString())) {
-                if (input.length() <= 5) {
-                    throw new IncompleteCommandException("OOPS!!! The description of a event cannot be empty.");
-                }
-                boolean containsAt = input.contains("/at");
-                if (containsAt) {
-                    String[] stringArr = input.substring(6).split("/at");
-                    newTask = new Event(stringArr[0], LocalDate.parse(stringArr[1].strip()));
-                } else {
-                    System.out.println("Your duke.task.Event is missing a /at (date)");
-                }
-            }
-            if (newTask != null) {
-                return new AddCommand(input, newTask);
-            }
+            return new FindCommand(input.strip());
+        } else if (input.toUpperCase().contains(CommandList.TODO.toString())) {
+            return new TodoCommand(input.strip());
+        } else if (input.toUpperCase().contains(CommandList.DEADLINE.toString())) {
+            return new DeadlineCommand(input.strip());
+        } else if (input.toUpperCase().contains(CommandList.EVENT.toString())) {
+            return new EventCommand(input.strip());
         }
-
         return new InvalidCommand("");
     }
 
