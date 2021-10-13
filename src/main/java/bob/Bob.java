@@ -113,7 +113,31 @@ public class Bob extends Application {
      */
     @Override
     public void start(Stage stage) {
-        // Step 1. Setting up required components.
+        AnchorPane mainLayout = getMainLayout();
+        setDarkerBackground(mainLayout);
+
+        scene = new Scene(mainLayout);
+        stage.setScene(scene);
+        stage.show();
+
+        formatWindow(stage, mainLayout);
+        setLighterBackground();
+        displayGreeting();
+        handleMissingDirectoryOrFile();
+        displayReadyMessage();
+
+        handleInput();
+
+        // Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Sets up the required components for the JavaFX GUI.
+     *
+     * @return Main layout of the application window.
+     */
+    private AnchorPane getMainLayout() {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -126,8 +150,15 @@ public class Bob extends Application {
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        return mainLayout;
+    }
 
-        // Setting the main darker background.
+    /**
+     * Sets the main darker background of the GUI.
+     *
+     * @param mainLayout Main layout of the application window.
+     */
+    private void setDarkerBackground(AnchorPane mainLayout) {
         Image bg = new Image(this.getClass().getResourceAsStream("/images/Background.jpeg"));
         BackgroundImage bgImage = new BackgroundImage(bg,
                 BackgroundRepeat.REPEAT,
@@ -136,13 +167,15 @@ public class Bob extends Application {
                 BackgroundSize.DEFAULT);
         Background background = new Background(bgImage);
         mainLayout.setBackground(background);
+    }
 
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        // Step 2. Formatting the window to look as expected.
+    /**
+     * Formats the application window and its internal nodes to the correct size and position.
+     *
+     * @param stage The primary stage provided by JavaFX for the GUI.
+     * @param mainLayout Main layout of the application window.
+     */
+    private void formatWindow(Stage stage, AnchorPane mainLayout) {
         stage.setTitle("Bob");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -170,13 +203,12 @@ public class Bob extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
-        // Displaying the initial message when Bob first starts up.
-        dialogContainer.getChildren().addAll(
-                DialogBox.getBobDialog(new Label(ui.getStartMessage()), new ImageView(bob))
-        );
-
-        // Setting the paler chat background.
+    /**
+     * Sets the paler chat background in the GUI.
+     */
+    private void setLighterBackground() {
         Image img = new Image(this.getClass().getResourceAsStream("/images/PaleBackground.png"));
         BackgroundImage bImg = new BackgroundImage(img,
                 BackgroundRepeat.REPEAT,
@@ -185,8 +217,22 @@ public class Bob extends Application {
                 BackgroundSize.DEFAULT);
         Background bGround = new Background(bImg);
         dialogContainer.setBackground(bGround);
+    }
 
-        // Displaying the appropriate Bob messages if the data directory or bob.txt file do not exist yet.
+    /**
+     * Displays Bob's initial greeting in the GUI.
+     */
+    private void displayGreeting() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBobDialog(new Label(ui.getStartMessage()), new ImageView(bob))
+        );
+    }
+
+    /**
+     * Displays the appropriate Bob messages in the GUI if time is needed to initialise a new data directory
+     * or bob.txt file.
+     */
+    private void handleMissingDirectoryOrFile() {
         if (!isDirectoryPresent) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getBobDialog(new Label(ui.getDirectoryLoadingErrorMessage()), new ImageView(bob))
@@ -196,19 +242,23 @@ public class Bob extends Application {
                     DialogBox.getBobDialog(new Label(ui.getFileLoadingErrorMessage()), new ImageView(bob))
             );
         }
+    }
 
-        // Displaying Bob's greeting message once initialisation is completed.
+    /**
+     * Displays Bob's ready message in the GUI when the data directory and bob.txt file are both present.
+     */
+    private void displayReadyMessage() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getBobDialog(new Label(ui.getGreetingMessage()), new ImageView(bob))
         );
+    }
 
-        // Step 3. Add functionality to handle user input.
+    /**
+     * Handles user input from the GUI.
+     */
+    private void handleInput() {
         sendButton.setOnMouseClicked((event) -> handleUserInput());
-
         userInput.setOnAction((event) -> handleUserInput());
-
-        // Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
     /**
@@ -216,46 +266,84 @@ public class Bob extends Application {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        // If the user types in the special command "bye" the GUI should terminate.
         if (Objects.equals(userInput.getText(), "bye")) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getBobDialog(new Label(ui.getGoodbyeMessage()), new ImageView(bob))
-            );
-            userInput.clear();
-
-            // Leave a short pause of 2 seconds after the user inputs "bye" to display Bob's goodbye message
-            // before automatically closing the window and terminating the program.
-            PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished(event -> Platform.exit());
-            delay.play();
+            handleBye(userText);
         } else { // If the user types in any other command the GUI should show the corresponding response from Bob.
-            String response = parser.getResponse(userInput.getText(), ui, tasks, storage);
-            // If the user types in the help command Bob should return a hyperlink to the help page.
-            if (Objects.equals(userInput.getText(), "help")) {
-                Hyperlink dukeText = new Hyperlink(response);
-                dukeText.setVisited(true); // Set the hyperlink as visited so that the text is black.
-                dukeText.setOnAction(e -> {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://feliciaivane.github.io/ip/"));
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    } catch (URISyntaxException ex) {
-                        ex.printStackTrace();
-                    }
-                });
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(userText, new ImageView(user)),
-                        new HelpDialogBox(dukeText, new ImageView(bob))
-                );
-            } else { // If the user types in any other command Bob should return its response as regular text.
-                Label dukeText = new Label(response);
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(userText, new ImageView(user)),
-                        DialogBox.getBobDialog(dukeText, new ImageView(bob))
-                );
-            }
-            userInput.clear();
+            handleNonBye(userText);
         }
+    }
+
+    /**
+     * Displays the appropriate Bob farewell message and terminates the GUI when the user inputs "bye".
+     *
+     * @param userText Label containing the user input text.
+     */
+    private void handleBye(Label userText) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getBobDialog(new Label(ui.getGoodbyeMessage()), new ImageView(bob))
+        );
+        userInput.clear();
+
+        // Leave a short pause of 2 seconds after the user inputs "bye" to display Bob's goodbye message
+        // before automatically closing the window and terminating the program.
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
+    }
+
+    /**
+     * Takes in the user input (except "bye") and displays both the user input and Bob's response in the GUI.
+     *
+     * @param userText Label containing the user input text.
+     */
+    private void handleNonBye(Label userText) {
+        String response = parser.getResponse(userInput.getText(), ui, tasks, storage);
+        // If the user types in the help command Bob should return a hyperlink to the help page.
+        if (Objects.equals(userInput.getText(), "help")) {
+            handleHelp(userText, response);
+        } else { // If the user types in any other command Bob should return its response as regular text.
+            handleOthers(userText, response);
+        }
+        userInput.clear();
+    }
+
+    /**
+     * Displays a clickable link to Bob's User Guide and the rest of Bob's response in the GUI when the user
+     * inputs "help".
+     *
+     * @param userText Label containing the user input text.
+     * @param response Bob's response to the user input.
+     */
+    private void handleHelp(Label userText, String response) {
+        Hyperlink dukeText = new Hyperlink(response);
+        dukeText.setVisited(true); // Set the hyperlink as visited so that the text is black.
+        dukeText.setOnAction(e -> {
+            try {
+                Desktop.getDesktop().browse(new URI("https://feliciaivane.github.io/ip/"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (URISyntaxException ex) {
+                ex.printStackTrace();
+            }
+        });
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                new HelpDialogBox(dukeText, new ImageView(bob))
+        );
+    }
+
+    /**
+     * Takes in the user input (except "help" or "bye") and displays both the user input and Bob's response in the GUI.
+     *
+     * @param userText Label containing the user input text.
+     * @param response Bob's response to the user input.
+     */
+    private void handleOthers(Label userText, String response) {
+        Label dukeText = new Label(response);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getBobDialog(dukeText, new ImageView(bob))
+        );
     }
 }
