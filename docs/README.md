@@ -11,7 +11,7 @@
 
 ### All you need to do is,
 
-1. download it from [here](https://github.com/jackgugz/ip/releases/download/A-Release/Jackie-1.0.jar).
+1. download it from [here](https://github.com/jackgugz/ip/releases/download/A-Release-2/Jackie-1.0.jar).
 2. double-click it.
 3. add your tasks.
 4. let it manage your tasks for you 👍
