@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: #25294a;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </HBox.margin>
+         <image>
+            <Image url="@../images/SirDuke.jpg" />
+         </image></ImageView>
+      <HBox maxHeight="-Infinity" maxWidth="250.0" style="-fx-background-color: #343a68; -fx-background-radius: 5;">
+         <children>
+          <Label fx:id="dialog" minHeight="-Infinity" text="Label" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Courier New" size="12.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets right="10.0" />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" />
+         </padding>
+         <HBox.margin>
+            <Insets top="5.0" />
+         </HBox.margin>
+      </HBox>
+  </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets left="5.0" top="5.0" />
+   </padding>
+</fx:root>
