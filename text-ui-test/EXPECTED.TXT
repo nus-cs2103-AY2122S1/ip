@@ -1,7 +1,20 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Aloha! I'm Sophia.
+What can I do for you?
+Sure thing! I've added this task:
+  [T][ ] borrow book
+Here are the tasks in your list:
+1.[T][ ] borrow book
+Sure thing! I've added this task:
+  [T][ ] read book
+Sure thing! I've added this task:
+  [D][ ] return book (by: Dec 06 2019 18:00)
+Here are the tasks in your list:
+1.[T][ ] borrow book
+2.[T][ ] read book
+3.[D][ ] return book (by: Dec 06 2019 18:00)
+Sure thing! I've added this task:
+  [E][ ] project meeting (at: Mar 10 2021 17:00)
+Noted! I've removed this task:
+[T][ ] borrow book
+Now you have 3 tasks in the list.
+Bye. Hope to see you again soon!

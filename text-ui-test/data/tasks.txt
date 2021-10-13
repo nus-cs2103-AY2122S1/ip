@@ -1,0 +1,6 @@
+D | 0 | return book | 06/12/2019 1800
+E | 0 | project meeting | 10/03/2021 1700
+T | 0 | borrow book
+T | 0 | read book
+D | 0 | return book | 06/12/2019 1800
+E | 0 | project meeting | 10/03/2021 1700
