@@ -32,7 +32,7 @@
 
 ### Feature - Managing todos/deadlines/events
 
-Allow creat, read and delete functionalities of todo/deadline/event tasks
+Allow create, read and delete functionalities of todo/deadline/event tasks
 
 ### Feature - Find tasks on specified date
 
