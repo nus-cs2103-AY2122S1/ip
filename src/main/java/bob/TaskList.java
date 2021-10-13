@@ -119,8 +119,7 @@ public class TaskList {
         }
         if (noOfResults == 0) {
             throw new NoSearchResultException();
-        } else {
-            return result;
         }
+        return result;
     }
 }

@@ -40,57 +40,84 @@ public class Storage {
     public ArrayList<Task> load() throws DirectoryNotFoundException, FileNotFoundException {
         File dataDirectory = new File(this.path);
 
-        // Check for data directory
-        boolean directoryExists = dataDirectory.exists();
-        if (!directoryExists) {
-            throw new DirectoryNotFoundException();
-        }
-
-        // Check for bob.txt
-        File bobFile = new File(this.path + "/bob.txt");
-        boolean fileExists = bobFile.exists();
-        if (!fileExists) {
-            throw new FileNotFoundException();
-        }
+        findDataDirectory(dataDirectory);
+        File bobFile = findBobFile();
 
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(bobFile);
             while (s.hasNext()) {
-                String curr = s.nextLine();
-                Task newTask;
-                boolean isComplete;
-                assert (curr.matches("\\[T](.*)") || curr.matches("\\[D](.*)")
-                        || curr.matches("\\[E](.*)"));
-                if (curr.matches("\\[T](.*)")) {
-                    String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
-                    newTask = new Todo(splitCurr[1]);
-                    isComplete = curr.contains("[X]");
-                } else if (curr.matches("\\[D](.*)")) {
-                    String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
-                    String[] splitRight = splitCurr[1].split(" \\(by: ", 2);
-                    String deadline = splitRight[1].substring(0, splitRight[1].length() - 1);
-                    newTask = new Deadline(splitRight[0], formatDate(deadline));
-                    isComplete = curr.contains("[X]");
-                } else if (curr.matches("\\[E](.*)")) {
-                    String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
-                    String[] splitRight = splitCurr[1].split(" \\(at: ", 2);
-                    String timing = splitRight[1].substring(0, splitRight[1].length() - 1);
-                    newTask = new Event(splitRight[0], formatDate(timing));
-                    isComplete = curr.contains("[X]");
-                } else { // Should never reach this branch.
-                    newTask = new Task("");
-                    isComplete = false;
-                }
-                tasks.add(newTask);
-                if (isComplete) {
-                    newTask.markCompleted();
-                }
+                addTaskToTasklist(tasks, s);
             }
         } catch (IOException | InvalidDateException e) {
             System.out.println(e.getMessage());
         }
         return tasks;
+    }
+
+    /**
+     * Checks if the data directory already exists, and throw a DirectoryNotFoundException if it does not exist yet.
+     *
+     * @param dataDirectory Path to the data directory.
+     * @throws DirectoryNotFoundException If the data directory does not exist yet.
+     */
+    private void findDataDirectory(File dataDirectory) throws DirectoryNotFoundException {
+        boolean directoryExists = dataDirectory.exists();
+        if (!directoryExists) {
+            throw new DirectoryNotFoundException();
+        }
+    }
+
+    /**
+     * Checks if bob.txt already exists, and returns it if it exists.
+     *
+     * @return The bob.txt file.
+     * @throws FileNotFoundException If bob.txt does not exist yet.
+     */
+    private File findBobFile() throws FileNotFoundException {
+        File bobFile = new File(this.path + "/bob.txt");
+        boolean fileExists = bobFile.exists();
+        if (!fileExists) {
+            throw new FileNotFoundException();
+        }
+        return bobFile;
+    }
+
+    /**
+     * Adds the next task saved in bob.txt to the TaskList being instantiated.
+     *
+     * @param tasks TaskList to be instantiated using the data in bob.txt.
+     * @param s Scanner that reads from bob.txt.
+     * @throws InvalidDateException If the date is given in the wrong format.
+     */
+    private void addTaskToTasklist(ArrayList<Task> tasks, Scanner s) throws InvalidDateException {
+        String curr = s.nextLine();
+        Task newTask;
+        boolean isComplete;
+        if (curr.matches("\\[T](.*)")) {
+            String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
+            newTask = new Todo(splitCurr[1]);
+            isComplete = curr.contains("[X]");
+        } else if (curr.matches("\\[D](.*)")) {
+            String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
+            String[] splitRight = splitCurr[1].split(" \\(by: ", 2);
+            String deadline = splitRight[1].substring(0, splitRight[1].length() - 1);
+            newTask = new Deadline(splitRight[0], formatDate(deadline));
+            isComplete = curr.contains("[X]");
+        } else if (curr.matches("\\[E](.*)")) {
+            String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
+            String[] splitRight = splitCurr[1].split(" \\(at: ", 2);
+            String timing = splitRight[1].substring(0, splitRight[1].length() - 1);
+            newTask = new Event(splitRight[0], formatDate(timing));
+            isComplete = curr.contains("[X]");
+        } else { // Should never reach this branch.
+            newTask = new Task("");
+            isComplete = false;
+        }
+        tasks.add(newTask);
+        if (isComplete) {
+            newTask.markCompleted();
+        }
     }
 
     /**
@@ -106,14 +133,25 @@ public class Storage {
         String year;
         String[] splitDate = date.split(" ", 3);
 
-        assert (splitDate[1].length() == 1 || splitDate[1].length() == 2);
         day = splitDate[1].length() == 1 ? "0" + splitDate[1] : splitDate[1];
 
-        assert (splitDate[0] == "Jan" || splitDate[0] == "Feb" || splitDate[0] == "Mar" || splitDate[0] == "Apr"
-                || splitDate[0] == "May" || splitDate[0] == "Jun" || splitDate[0] == "Jul" || splitDate[0] == "Aug"
-                || splitDate[0] == "Sep" || splitDate[0] == "Oct" || splitDate[0] == "Nov" || splitDate[0] == "Dec");
+        month = getMonth(splitDate[0]);
 
-        switch (splitDate[0]) {
+        year = splitDate[2];
+
+        // Return year, month and day Strings in the required format.
+        return year + "-" + month + "-" + day;
+    }
+
+    /**
+     * Formats the month from the printed format to the format required to make a LocalDate object.
+     * (e.g. "Jan" to "01")
+     *
+     * @param month Month of an Event or Deadline task in the printed format.
+     * @return Month in the String format required to make a LocalDate object.
+     */
+    private String getMonth(String month) {
+        switch (month) {
         case "Jan":
             month = "01";
             break;
@@ -153,12 +191,7 @@ public class Storage {
         default:
             month = "00"; // Should never reach this branch.
         }
-
-        assert (splitDate[2].length() == 4);
-        year = splitDate[2];
-
-        // Return year, month and day Strings in the required format.
-        return year + "-" + month + "-" + day;
+        return month;
     }
 
     /**
