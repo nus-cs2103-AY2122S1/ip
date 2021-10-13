@@ -19,7 +19,7 @@ public class TaskListTest {
         TaskList tasks = new TaskList();
         Todo todo = new Todo("test");
         String expected = "Got it. I've added this task:\n  "
-                + "[T][ ] test"
+                + "[T][MEDIUM][ ] test"
                 + "\nNow you have 1 tasks in the list.";
         assertEquals(expected, tasks.addTask(todo));
     }

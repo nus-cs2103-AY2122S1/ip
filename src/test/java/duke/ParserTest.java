@@ -31,7 +31,7 @@ public class ParserTest {
         TaskList taskList = new TaskList();
         Parser parser = new Parser(taskList);
         String expected = "Got it. I've added this task:\n  "
-                + "[D][ ] lab 1 (by: Sep 4 2021, 2:00 pm)"
+                + "[D][MEDIUM][ ] lab 1\n  (by: Sep 4 2021, 2:00 pm)"
                 + "\nNow you have 1 tasks in the list.";
         assertEquals(expected, parser.parse("deadline lab 1 /by 2021-09-04 14:00"));
     }
