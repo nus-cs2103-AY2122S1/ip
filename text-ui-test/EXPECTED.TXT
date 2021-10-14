@@ -1,7 +1,50 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Ad astra abyssosque! I am katheryne.Katheryne, the receptionist here at the Adventurers' Guild.
+How may I assist?
+I'm... not sure what to say to that... 
+katheryne.task.Todo item 'research stocks' added to your list
+There are currently 1 items in your list.
+'friend's birthday party' added to your list, scheduled for 6pm Sunday
+There are currently 2 items in your list.
+'Project Intern' added to your list, scheduled for 7pm Friday
+There are currently 3 items in your list.
+'IP' added to your list, do by midnight Thursday
+There are currently 4 items in your list.
+katheryne.task.Todo item 'buy snacks for my sister' added to your list
+There are currently 5 items in your list.
+Here's the list I've stored for you:
+1) [katheryne.task.Todo]     [ ] research stocks
+2) [katheryne.task.Event]    [ ] friend's birthday party (at: 6pm Sunday)
+3) [katheryne.task.Event]    [ ] Project Intern (at: 7pm Friday)
+4) [katheryne.task.Deadline] [ ] IP (by: midnight Thursday)
+5) [katheryne.task.Todo]     [ ] buy snacks for my sister
+There are currently 5 items in your list.
+Traveller, please specify by index which katheryne.task you completed.
+[katheryne.task.Todo]     [X] buy snacks for my sister
+There are currently 5 items in your list.
+Here's the list I've stored for you:
+1) [katheryne.task.Todo]     [ ] research stocks
+2) [katheryne.task.Event]    [ ] friend's birthday party (at: 6pm Sunday)
+3) [katheryne.task.Event]    [ ] Project Intern (at: 7pm Friday)
+4) [katheryne.task.Deadline] [ ] IP (by: midnight Thursday)
+5) [katheryne.task.Todo]     [X] buy snacks for my sister
+There are currently 5 items in your list.
+That's not a valid index...
+Here's the list I've stored for you:
+1) [katheryne.task.Todo]     [ ] research stocks
+2) [katheryne.task.Event]    [ ] friend's birthday party (at: 6pm Sunday)
+3) [katheryne.task.Event]    [ ] Project Intern (at: 7pm Friday)
+4) [katheryne.task.Deadline] [ ] IP (by: midnight Thursday)
+5) [katheryne.task.Todo]     [X] buy snacks for my sister
+There are currently 5 items in your list.
+Okay, I'll delete the following item:
+[katheryne.task.Todo]     [ ] research stocks
+There are currently 4 items in your list.
+Here's the list I've stored for you:
+1) [katheryne.task.Event]    [ ] friend's birthday party (at: 6pm Sunday)
+2) [katheryne.task.Event]    [ ] Project Intern (at: 7pm Friday)
+3) [katheryne.task.Deadline] [ ] IP (by: midnight Thursday)
+4) [katheryne.task.Todo]     [X] buy snacks for my sister
+There are currently 4 items in your list.
+Traveller, please specify by index what I should delete.
+That's not a valid index...
+Ad Astra Abyssoque, Traveller!

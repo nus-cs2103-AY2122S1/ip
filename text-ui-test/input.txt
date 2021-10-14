@@ -1,0 +1,17 @@
+Hi katheryne.Katheryne!
+todo research stocks
+event friend's birthday party /at 6pm Sunday
+event Project Intern /at 7pm Friday
+deadline IP /by midnight Thursday
+todo buy snacks for my sister
+list
+done
+done 5
+list
+done 8
+list
+delete 1
+list
+delete
+delete -3
+bye
