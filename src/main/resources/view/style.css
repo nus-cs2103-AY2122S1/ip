@@ -47,20 +47,20 @@
     -fx-font-family: fantasy;
     -fx-font-weight: bold;
 }
+
 /* table view styles adapted from https://edencoding.com/style-tableview-javafx/ */
 .table-view .table-cell {
+    -fx-text-fill: black;
     -fx-border-color: transparent;
     -fx-padding: 2px 5px 5px 2px;
 }
 
-.table-row-cell:hover {
-    -fx-text-background-color: rgba(155, 89, 182, 1);
-}
 .table-row-cell:odd {
     -fx-background-color: rgba(228, 210, 228, 0.3);
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
+
 .table-row-cell:even {
     -fx-background-color: rgba(255, 255, 204, 0.3);
     -fx-background-insets: 0, 0 0 1 0;
@@ -75,10 +75,10 @@
     -fx-background-color: transparent;
     -fx-padding: 5;
     -fx-alignment: center;
+    -fx-text-fill: black;
 }
 
 .table-view .column-header-background{
-    /*-fx-background-color: linear-gradient(to bottom, rgba(228, 210, 228, 1), lightgoldenrodyellow);*/
     -fx-background-color: rgba(228, 210, 228, 0.7);
     -fx-background-radius: 7px 7px 0px 0px;
     -fx-background-insets: 0 11px 0 0;
