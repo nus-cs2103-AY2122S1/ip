@@ -28,12 +28,12 @@ import javafx.stage.Stage;
 /**
  * Controller for Help Page.
  */
-public class HelpPage extends AnchorPane {
+public class    HelpPage extends AnchorPane {
     @FXML
     private Button exitButton;
 
     @FXML
-    private TableView tableView;
+    private TableView<Command> tableView;
 
     @FXML
     private TableColumn<Command, String> command;
