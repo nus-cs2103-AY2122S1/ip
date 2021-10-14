@@ -1,4 +1,9 @@
-T/1/buy food
-D/1/return book /2021-10-10 10:10
-T/0/borrow book
-D/0/eat food /2021-10-14 15:22
+T/1/return book
+E/0/noodle party /2022-10-10 10:10
+E/1/rice party /2022-11-11 12:44
+E/0/porridge party /2022-12-12 00:44
+E/1/bread party /2022-08-08 12:33
+E/0/egg party /2022-09-09 13:13
+E/0/choco party /2021-11-11 12:33
+E/0/sweet party /2021-12-12 13:33
+E/0/after party /2021-12-30 00:24

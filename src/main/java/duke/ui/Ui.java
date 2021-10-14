@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.data.TaskList;
-import duke.exception.DukeException;
 import duke.task.Task;
 
 /**

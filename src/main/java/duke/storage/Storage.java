@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import duke.data.TaskList;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -37,7 +38,7 @@ public class Storage {
      * @return list of tasks
      * @throws IOException
      */
-    public TaskList loadData() throws IOException {
+    public TaskList loadData() throws IOException, DukeException {
         File file = getFile(path);
         tasks = new TaskList();
 
@@ -45,25 +46,29 @@ public class Storage {
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
 
-            String taskType = getTaskType(s);
+            Character taskType = getTaskType(s);
             boolean isDone = getTaskStatus(s);
             String taskName = getTaskName(s);
 
             switch (taskType) {
-            case "T":
+            case 'T':
                 ToDo todo = new ToDo(taskName, isDone);
                 tasks.addTask(todo);
-            case "D":
+                break;
+            case 'D':
                 LocalDateTime by = getDateTime(s);
                 Deadline deadline = new Deadline(taskName, by, isDone);
                 tasks.addTask(deadline);
-            case "E":
+                break;
+            case 'E':
                 LocalDateTime at = getDateTime(s);
                 Event event = new Event(taskName, at, isDone);
                 tasks.addTask(event);
+                break;
+            default:
+                throw new DukeException();
             }
         }
-        System.out.println(System.lineSeparator());
         sc.close();
         return tasks;
     }
@@ -79,8 +84,8 @@ public class Storage {
         return file;
     }
 
-    private String getTaskType(String s) {
-        return s.substring(0, 0);
+    private Character getTaskType(String s) {
+        return s.charAt(0);
     }
 
     private String getTaskName(String s) {

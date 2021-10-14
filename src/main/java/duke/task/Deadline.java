@@ -50,8 +50,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy K:mm a");
-        return String.format("[D]%s(by:%s)", super.toString(), this.by.format(formatter));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
+        return String.format("[D]%s(by: %s)", super.toString(), this.by.format(formatter));
     }
 
 }

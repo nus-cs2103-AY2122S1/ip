@@ -19,8 +19,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,9 +29,6 @@ import javafx.stage.Stage;
  * Controller for Help Page.
  */
 public class HelpPage extends AnchorPane {
-    @FXML
-    private ScrollPane scrollPane;
-
     @FXML
     private Button exitButton;
 
@@ -48,9 +43,6 @@ public class HelpPage extends AnchorPane {
 
     @FXML
     private TableColumn<Command, String> format;
-
-    @FXML
-    private TableView tableView;
 
     private final Stage stage;
     private final Scene prev;
@@ -78,34 +70,9 @@ public class HelpPage extends AnchorPane {
      * Builds the help page
      */
     public void start() {
-<<<<<<< Updated upstream
         command.setCellValueFactory(new PropertyValueFactory<>("cmd"));
         usage.setCellValueFactory(new PropertyValueFactory<>("usage"));
         format.setCellValueFactory(new PropertyValueFactory<>("format"));
-=======
-        label.setText("Here's some help!");
-        //noinspection rawtypes
-        tableView = new TableView();
-        TableColumn<Command, String> command = new TableColumn<>("Command");
-        TableColumn<Command, String> function = new TableColumn<>("Function");
-        TableColumn<Command, String> format = new TableColumn<>("Format");
-
-        command.setCellValueFactory(
-            new PropertyValueFactory<>("CMD")
-        );
-
-        function.setCellValueFactory(
-            new PropertyValueFactory<>("USAGE")
-        );
-
-        format.setCellValueFactory(
-            new PropertyValueFactory<>("FORMAT")
-        );
-
-        tableView.getColumns().add(command);
-        tableView.getColumns().add(function);
-        tableView.getColumns().add(format);
->>>>>>> Stashed changes
 
         ObservableList<Command> data = FXCollections.observableArrayList(
             new ByeCommand(), new HelpCommand(), new ListCommand(),

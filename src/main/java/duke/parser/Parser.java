@@ -17,6 +17,7 @@ import duke.command.TodoCommand;
 import duke.data.TaskList;
 import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
+import duke.exception.ExtraInputException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidDescriptionException;
 import duke.exception.InvalidEntryException;
@@ -56,7 +57,7 @@ public class Parser {
             return new TodoCommand(todoName);
         case "deadline":
             checkDescIsValid(s, "/by", commandWord);
-            String deadlineName =  getTaskName(commandWord, s);
+            String deadlineName = getTaskName(commandWord, s);
             LocalDateTime deadlineDateTime = getDateTime("/by", s);
             return new DeadlineCommand(deadlineName, deadlineDateTime);
         case "event":
@@ -74,10 +75,13 @@ public class Parser {
             String keyword = getDesc(s);
             return new FindCommand(keyword);
         case "list":
+            checkForExtraDesc(commandWord, s);
             return new ListCommand();
         case "help":
+            checkForExtraDesc(commandWord, s);
             return new HelpCommand();
         case "bye":
+            checkForExtraDesc(commandWord, s);
             return new ByeCommand();
         default:
             throw new InvalidEntryException();
@@ -125,7 +129,7 @@ public class Parser {
         throw new EmptyDescriptionException(s);
     }
 
-    private LocalDateTime getDateTime(String pre,String s) throws InvalidDateTimeException, EmptyDescriptionException {
+    private LocalDateTime getDateTime(String pre, String s) throws InvalidDateTimeException, EmptyDescriptionException {
         try {
             String dt = getNameAndDateTimeArr(pre, s)[1];
             String dtSpaceRemoved = dt.trim();
@@ -167,6 +171,12 @@ public class Parser {
         // check if description has missing date/time
         if (desc.endsWith(pre)) {
             throw new TaskNoDateTimeException(taskType);
+        }
+    }
+
+    private void checkForExtraDesc(String commandWord, String s) throws ExtraInputException {
+        if (!s.substring(commandWord.length()).isEmpty()) {
+            throw new ExtraInputException(commandWord);
         }
     }
 }
