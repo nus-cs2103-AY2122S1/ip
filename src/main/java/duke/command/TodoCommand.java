@@ -6,9 +6,9 @@ import duke.task.ToDo;
 import duke.ui.Ui;
 
 public class TodoCommand extends Command {
-    static final String CMD = "list";
-    static final String USAGE = "marks specified task as done";
-    static final String FORMAT = "done {task number}";
+    static final String CMD = "todo";
+    static final String USAGE = "add tasks to be done";
+    static final String FORMAT = "todo {description}";
 
     private String name;
 

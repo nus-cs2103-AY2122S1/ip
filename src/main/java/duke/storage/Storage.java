@@ -38,47 +38,66 @@ public class Storage {
      * @throws IOException
      */
     public TaskList loadData() throws IOException {
-        File file = new File(path);
+        File file = getFile(path);
         tasks = new TaskList();
 
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            String s = sc.nextLine();
+
+            String taskType = getTaskType(s);
+            boolean isDone = getTaskStatus(s);
+            String taskName = getTaskName(s);
+
+            switch (taskType) {
+            case "T":
+                ToDo todo = new ToDo(taskName, isDone);
+                tasks.addTask(todo);
+            case "D":
+                LocalDateTime by = getDateTime(s);
+                Deadline deadline = new Deadline(taskName, by, isDone);
+                tasks.addTask(deadline);
+            case "E":
+                LocalDateTime at = getDateTime(s);
+                Event event = new Event(taskName, at, isDone);
+                tasks.addTask(event);
+            }
+        }
+        System.out.println(System.lineSeparator());
+        sc.close();
+        return tasks;
+    }
+
+    private File getFile(String path) throws IOException {
+        File file = new File(path);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdir();
         }
-
         if (!file.exists()) {
             file.createNewFile();
-        } else {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNextLine()) {
-                String s = sc.nextLine();
-
-                String[] arr = s.split("/");
-                boolean isDone = (arr[1].equals("1"));
-                String name = arr[2];
-
-                if (s.contains("T")) {
-                    ToDo todo = new ToDo(name, isDone);
-                    tasks.addTask(todo);
-                }
-
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-                if (s.contains("D")) {
-                    LocalDateTime by = LocalDateTime.parse(arr[3], formatter);
-                    Deadline deadline = new Deadline(name, by, isDone);
-                    tasks.addTask(deadline);
-                }
-
-                if (s.contains("E")) {
-                    LocalDateTime at = LocalDateTime.parse(arr[3], formatter);
-                    Event event = new Event(name, at, isDone);
-                    tasks.addTask(event);
-                }
-            }
-            System.out.println(System.lineSeparator());
-            sc.close();
         }
-        return tasks;
+        return file;
+    }
+
+    private String getTaskType(String s) {
+        return s.substring(0, 0);
+    }
+
+    private String getTaskName(String s) {
+        String[] arr = s.split("/");
+        return arr[2];
+    }
+
+    private boolean getTaskStatus(String s) {
+        String[] arr = s.split("/");
+        return arr[1].equals("1");
+    }
+
+    private LocalDateTime getDateTime(String s) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String[] arr = s.split("/");
+        assert arr.length == 4;
+        return LocalDateTime.parse(arr[3], formatter);
     }
 
     /**

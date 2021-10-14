@@ -49,6 +49,9 @@ public class HelpPage extends AnchorPane {
     @FXML
     private TableColumn<Command, String> format;
 
+    @FXML
+    private TableView tableView;
+
     private final Stage stage;
     private final Scene prev;
 
@@ -75,14 +78,39 @@ public class HelpPage extends AnchorPane {
      * Builds the help page
      */
     public void start() {
+<<<<<<< Updated upstream
         command.setCellValueFactory(new PropertyValueFactory<>("cmd"));
         usage.setCellValueFactory(new PropertyValueFactory<>("usage"));
         format.setCellValueFactory(new PropertyValueFactory<>("format"));
+=======
+        label.setText("Here's some help!");
+        //noinspection rawtypes
+        tableView = new TableView();
+        TableColumn<Command, String> command = new TableColumn<>("Command");
+        TableColumn<Command, String> function = new TableColumn<>("Function");
+        TableColumn<Command, String> format = new TableColumn<>("Format");
+
+        command.setCellValueFactory(
+            new PropertyValueFactory<>("CMD")
+        );
+
+        function.setCellValueFactory(
+            new PropertyValueFactory<>("USAGE")
+        );
+
+        format.setCellValueFactory(
+            new PropertyValueFactory<>("FORMAT")
+        );
+
+        tableView.getColumns().add(command);
+        tableView.getColumns().add(function);
+        tableView.getColumns().add(format);
+>>>>>>> Stashed changes
 
         ObservableList<Command> data = FXCollections.observableArrayList(
-                new ByeCommand(), new HelpCommand(), new ListCommand(),
-                new DoneCommand(), new DeleteCommand(), new TodoCommand(),
-                new DeadlineCommand(), new EventCommand(), new FindCommand()
+            new ByeCommand(), new HelpCommand(), new ListCommand(),
+            new DoneCommand(), new DeleteCommand(), new TodoCommand(),
+            new DeadlineCommand(), new EventCommand(), new FindCommand()
         );
         tableView.setItems(data);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);

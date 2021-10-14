@@ -3,16 +3,17 @@ package duke.exception;
 /**
  * Throws exception specific to Duke
  */
-public abstract class DukeException extends Exception {
+public class DukeException extends Exception {
 
     /**
      * Constructs DukeException object
      *
-     * @param task task with error
      */
-    public DukeException(String task) {
-        super(task);
+    public DukeException() {
+        super("");
     }
 
-    public abstract String getError();
+    public String getError() {
+        return "OOPS!!! Sorry something went wrong :(";
+    }
 }

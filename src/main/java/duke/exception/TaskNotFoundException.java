@@ -8,11 +8,9 @@ public class TaskNotFoundException extends DukeException {
 
     /**
      * Constructs TaskNotFoundException object
-     *
-     * @param msg error message
      */
-    public TaskNotFoundException(String msg) {
-        super(msg);
+    public TaskNotFoundException() {
+        super();
         this.error = "OOPS!!! I cannot find this task! Please select an existing task number.";
     }
 

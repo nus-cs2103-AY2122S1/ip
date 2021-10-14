@@ -12,7 +12,6 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
-import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.data.TaskList;
@@ -20,8 +19,9 @@ import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidDescriptionException;
+import duke.exception.InvalidEntryException;
 import duke.exception.MissingPreException;
-import duke.exception.NoNumberException;
+import duke.exception.NotATaskNumberException;
 import duke.exception.TaskNoDateTimeException;
 import duke.exception.TaskNoNameException;
 import duke.exception.TaskNotFoundException;
@@ -46,133 +46,127 @@ public class Parser {
     /**
      * Deals with interpreting user commands
      *
-     * @return
+     * @return command to execute
      */
-    public Command parse(String input) throws DukeException {
-        if (input.equals("bye")) {
-            return new ByeCommand();
-        }
-
-        if (input.equals("help")) {
-            return new HelpCommand();
-        }
-
-        if (input.equals("list")) {
+    public Command parse(String s) throws DukeException {
+        String commandWord = getCommandWord(s);
+        switch (commandWord) {
+        case "todo":
+            String todoName = getTaskName(commandWord, s);
+            return new TodoCommand(todoName);
+        case "deadline":
+            checkDescIsValid(s, "/by", commandWord);
+            String deadlineName =  getTaskName(commandWord, s);
+            LocalDateTime deadlineDateTime = getDateTime("/by", s);
+            return new DeadlineCommand(deadlineName, deadlineDateTime);
+        case "event":
+            checkDescIsValid(s, "/at", commandWord);
+            String eventName = getTaskName(commandWord, s);
+            LocalDateTime eventDateTime = getDateTime("/at", s);;
+            return new EventCommand(eventName, eventDateTime);
+        case "done":
+            int doneTaskNum = getTaskNum(s);
+            return new DoneCommand(doneTaskNum);
+        case "delete":
+            int deleteTaskNum = getTaskNum(s);
+            return new DeleteCommand(deleteTaskNum);
+        case "find":
+            String keyword = getDesc(s);
+            return new FindCommand(keyword);
+        case "list":
             return new ListCommand();
-        }
-
-        if (input.contains("done")) {
-            int taskNum = getNum(input);
-            return new DoneCommand(taskNum);
-        }
-
-        if (input.contains("delete")) {
-            int taskNum = getNum(input);
-            return new DeleteCommand(taskNum);
-        }
-
-
-        if (input.contains("todo")) {
-            String desc = getDesc(input);
-            return new TodoCommand(desc);
-        }
-
-        if (input.contains("deadline")) {
-            String desc = getDesc(input);
-            if (checkDescIsValid(desc, "/by")) {
-                String[] parts = desc.split("/by");
-                String name = parts[0];
-                LocalDateTime by = getDateTime(parts[1]);
-                return new DeadlineCommand(name, by);
-            }
-        }
-
-        if (input.contains("event")) {
-            String desc = getDesc(input);
-            if (checkDescIsValid(desc, "/at")) {
-                String[] parts = desc.split("/at");
-                String name = parts[0];
-                LocalDateTime at = getDateTime(parts[1]);
-                return new EventCommand(name, at);
-            }
-        }
-
-        if (input.contains("find")) {
-            String keyword = getDesc(input);
-            if (!keyword.equals("")) {
-                return new FindCommand(keyword);
-            }
-        }
-
-        return new InvalidCommand();
-    }
-
-    private int getNum(String s) throws DukeException {
-        try {
-            if (s.contains(" ")) {
-                String[] parts = s.split(" ", 2);
-
-                assert parts[0].equals("done") || parts[0].equals("delete")
-                        : "Invalid Keyword";
-
-                int num = Integer.parseInt(parts[1]);
-
-                if (num <= 0 || num > this.tasks.getSize()) {
-                    throw new TaskNotFoundException("error");
-                }
-                return num - 1;
-            } else {
-                throw new NoNumberException("error");
-            }
-        } catch (NumberFormatException exception) {
-            throw new NoNumberException("error");
+        case "help":
+            return new HelpCommand();
+        case "bye":
+            return new ByeCommand();
+        default:
+            throw new InvalidEntryException();
         }
     }
 
-    private String getDesc(String s) throws DukeException {
+    private String getCommandWord(String input) {
+        String trimmed = input.trim();
+        if (trimmed.contains(" ")) {
+            return trimmed.substring(0, input.indexOf(" "));
+        }
+        return trimmed;
+    }
+
+    private String getTaskName(String commandWord, String s) throws DukeException {
+        switch (commandWord) {
+        case "todo":
+            return getDesc(s);
+        case "deadline":
+            String[] deadlineNameAndDateTimeArr = getNameAndDateTimeArr("/by", s);
+            assert deadlineNameAndDateTimeArr.length == 2;
+            return deadlineNameAndDateTimeArr[0];
+        case "event":
+            String[] eventNameAndDateTimeArr = getNameAndDateTimeArr("/at", s);
+            assert eventNameAndDateTimeArr.length == 2;
+            return eventNameAndDateTimeArr[0];
+        default:
+            throw new DukeException();
+        }
+    }
+
+    private String[] getNameAndDateTimeArr(String pre, String s) throws EmptyDescriptionException {
+        String desc = getDesc(s);
+        return desc.split(pre);
+    }
+
+
+    private String getDesc(String s) throws EmptyDescriptionException {
         if (s.contains(" ")) {
             String[] parts = s.split(" ", 2);
-
-            boolean isKeyword = (parts[0].equals("todo") || parts[0].equals("deadline")
-                    || parts[0].equals("event") || parts[0].equals("find"));
-            assert isKeyword : "Invalid Keyword!";
-
-            if (!parts[1].equals("")) {
+            if (!parts[1].isEmpty()) {
                 return parts[1];
             }
         }
-        throw new EmptyDescriptionException("error", s);
+        throw new EmptyDescriptionException(s);
     }
 
-    private LocalDateTime getDateTime(String s) throws InvalidDateTimeException {
+    private LocalDateTime getDateTime(String pre,String s) throws InvalidDateTimeException, EmptyDescriptionException {
         try {
-            String dt = s.replaceFirst(" ", "");
+            String dt = getNameAndDateTimeArr(pre, s)[1];
+            String dtSpaceRemoved = dt.trim();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime dateTime = LocalDateTime.parse(dt, formatter);
+            LocalDateTime dateTime = LocalDateTime.parse(dtSpaceRemoved, formatter);
             return dateTime;
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException("error");
+            throw new InvalidDateTimeException();
         }
     }
 
-    private boolean checkDescIsValid(String description, String pre) throws DukeException {
-        String task = pre.equals("/by") ? "deadline" : "event";
-        boolean hasPreposition = description.contains(pre);
-        boolean hasNameOrDateTime = !description.equals("") && !description.equals(pre);
-        boolean isMissingName = description.startsWith(pre);
-        boolean isMissingDateTime = description.endsWith(pre);
-
-        if (hasPreposition) {
-            if (hasNameOrDateTime) {
-                if (isMissingName) {
-                    throw new TaskNoNameException("error", task);
-                } else if (isMissingDateTime) {
-                    throw new TaskNoDateTimeException("error", task);
-                }
-                return true;
+    private int getTaskNum(String s) throws TaskNotFoundException, NotATaskNumberException, EmptyDescriptionException {
+        try {
+            String desc = getDesc(s);
+            int num = Integer.parseInt(desc);
+            if (num <= 0 || num > this.tasks.getSize()) {
+                throw new TaskNotFoundException();
             }
-            throw new InvalidDescriptionException("error", task);
+            return num - 1;
+        } catch (NumberFormatException exception) {
+            throw new NotATaskNumberException();
         }
-        throw new MissingPreException("error", pre);
+    }
+
+    private void checkDescIsValid(String input, String pre, String taskType) throws DukeException {
+        String desc = getDesc(input);
+        // check if description has required preposition
+        if (!desc.contains(pre)) {
+            throw new MissingPreException(pre);
+        }
+        // check if description has missing name and date/time
+        if (desc.equals("") || desc.equals(pre)) {
+            throw new InvalidDescriptionException(taskType);
+        }
+        // check if description has missing task name
+        if (desc.startsWith(pre)) {
+            throw new TaskNoNameException(taskType);
+        }
+        // check if description has missing date/time
+        if (desc.endsWith(pre)) {
+            throw new TaskNoDateTimeException(taskType);
+        }
     }
 }

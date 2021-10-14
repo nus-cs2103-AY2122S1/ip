@@ -9,11 +9,10 @@ public class InvalidDescriptionException extends DukeException {
     /**
      * Constructs InvalidDescriptionException object
      *
-     * @param msg error message
      * @param task type of task with error
      */
-    public InvalidDescriptionException(String msg, String task) {
-        super(msg);
+    public InvalidDescriptionException(String task) {
+        super();
         this.error = String.format("OOPS!!! Please enter a proper description for %s", task);
     }
 

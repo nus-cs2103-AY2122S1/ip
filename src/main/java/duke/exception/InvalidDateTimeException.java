@@ -7,11 +7,9 @@ public class InvalidDateTimeException extends DukeException {
 
     /**
      * Constructs InvalidDateTimeException object
-     *
-     * @param msg error message
      */
-    public InvalidDateTimeException(String msg) {
-        super(msg);
+    public InvalidDateTimeException() {
+        super();
     }
 
     /**

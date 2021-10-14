@@ -7,11 +7,9 @@ public class InvalidEntryException extends DukeException {
 
     /**
      * Constructor for creating InvalidEntryException object
-     *
-     * @param msg error message
      */
-    public InvalidEntryException(String msg) {
-        super(msg);
+    public InvalidEntryException() {
+        super();
     }
 
     /**

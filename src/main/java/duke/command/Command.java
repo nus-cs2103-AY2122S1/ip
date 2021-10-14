@@ -8,7 +8,6 @@ import duke.ui.Ui;
  * Stores description of usage and format of command.
  */
 public abstract class Command {
-
     /**
      * Constructs Command object
      */

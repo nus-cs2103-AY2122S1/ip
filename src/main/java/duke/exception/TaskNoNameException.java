@@ -9,11 +9,10 @@ public class TaskNoNameException extends DukeException {
     /**
      * Constructs TaskNoNameException object
      *
-     * @param msg error message
      * @param task type of task with error
      */
-    public TaskNoNameException(String msg, String task) {
-        super(msg);
+    public TaskNoNameException(String task) {
+        super();
         this.error = String.format("OOPS!!! Please enter a name for your %s!\n", task);
     }
 

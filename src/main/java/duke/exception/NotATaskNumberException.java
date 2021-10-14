@@ -3,15 +3,14 @@ package duke.exception;
 /**
  * Thrown when user does not enter task number to delete a task or mark a task as completed
  */
-public class NoNumberException extends DukeException {
+public class NotATaskNumberException extends DukeException {
 
     /**
-     * Constructs NoNumberException object
+     * Constructs NotATaskNumberException object
      *
-     * @param msg error message
      */
-    public NoNumberException(String msg) {
-        super(msg);
+    public NotATaskNumberException() {
+        super();
     }
 
     /**

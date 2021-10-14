@@ -9,11 +9,10 @@ public class TaskNoDateTimeException extends DukeException {
     /**
      * Constructs TaskNoDateTimeException object
      *
-     * @param msg error message
      * @param task type of task with error
      */
-    public TaskNoDateTimeException(String msg, String task) {
-        super(msg);
+    public TaskNoDateTimeException(String task) {
+        super();
         this.error = String.format("OOPS!!! Please enter a date/time for your %s!\n", task);
     }
 

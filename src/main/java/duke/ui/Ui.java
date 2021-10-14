@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.data.TaskList;
+import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
@@ -64,7 +65,6 @@ public class Ui {
         return String.format("Noted.I've removed this task:\n%s\nNow you have %d %s in the list\n", task, size, t);
     }
 
-
     /**
      * Lists required tasks in the list
      *
@@ -72,34 +72,52 @@ public class Ui {
      * @param cmd  determine which message to be shown
      */
     public String showTaskList(TaskList list, String cmd) {
-        boolean isListCmd = cmd.equals("list");
-        boolean isFindCmd = cmd.equals("find");
-        boolean isPastCmd = cmd.equals("past");
-
-        assert (isListCmd || isFindCmd || isPastCmd)
-                : "Command is invalid";
-
         if (!list.getList().isEmpty()) {
             StringBuilder sb = new StringBuilder();
 
-            String msg = isListCmd
-                    ? "Here are the tasks in your list:"
-                    : isFindCmd
-                    ? "Here are the matching tasks in your list:"
-                    : "Here are your past records!";
+            String msg = getShowListMessage(cmd);
             sb.append(msg).append("\n");
 
-            for (int i = 0; i < list.getSize(); i++) {
-                Task t = list.getTask(i);
-                String s = String.format("%d.%s%n", i + 1, t);
-                sb.append(s);
-            }
+            generateTasks(list, sb);
 
             return sb.toString();
-        } else {
-            return isPastCmd
-                    ? "You have no past records!"
-                    : "You have no tasks!";
+        }
+        return getEmptyListMsg(cmd);
+    }
+
+    private String getShowListMessage(String cmd) {
+        assert (cmd.equals("list") || cmd.equals("find") || cmd.equals("past"))
+            : "Command is invalid";
+        switch (cmd) {
+        case "list":
+            return "Here are the tasks in your list:";
+        case "find":
+            return "Here are the matching tasks in your list:";
+        case "past":
+            return "Here are your past records!";
+        default:
+            return "There was an error showing the list :(";
+        }
+    }
+
+    private String getEmptyListMsg(String cmd) {
+        switch (cmd) {
+        case "list":
+            return "You have no tasks!";
+        case "find":
+            return "You have no matching tasks!";
+        case "past":
+            return "You have no past records!";
+        default:
+            return "There was an error showing the list :(";
+        }
+    }
+
+    private void generateTasks(TaskList list, StringBuilder sb) {
+        for (int i = 0; i < list.getSize(); i++) {
+            Task t = list.getTask(i);
+            String s = String.format("%d.%s%n", i + 1, t);
+            sb.append(s);
         }
     }
 }

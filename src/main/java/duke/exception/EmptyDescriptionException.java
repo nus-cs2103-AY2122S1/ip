@@ -9,12 +9,12 @@ public class EmptyDescriptionException extends DukeException {
     /**
      * Constructs EmptyDescriptionException object
      *
-     * @param msg error message
-     * @param task type of task with error
+     * @param cmd type of cmd with error
      */
-    public EmptyDescriptionException(String msg, String task) {
-        super(msg);
-        this.error = String.format("OOPS!!! The description of a %s cannot be empty.\n", task);
+    public EmptyDescriptionException(String cmd) {
+        super();
+        this.error = String.format("OOPS!!! Description should not be empty for %s! Send \"help\" if you need! \n",
+            cmd.toUpperCase());
     }
 
     /**

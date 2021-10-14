@@ -9,11 +9,10 @@ public class MissingPreException extends DukeException {
     /**
      * Constructs MissingPreException object
      *
-     * @param msg error message
      * @param pre preposition not provided
      */
-    public MissingPreException(String msg, String pre) {
-        super(msg);
+    public MissingPreException(String pre) {
+        super();
         this.error = String.format("OOPS!!! Missing %s preposition!", pre);
     }
 
