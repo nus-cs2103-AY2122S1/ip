@@ -102,7 +102,10 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         Scene prev = this.getScene();
         HelpPage helpPage = new HelpPage(stage, prev);
+        Scene scene = new Scene(helpPage);
+        stage.setScene(scene);
         helpPage.start();
+        stage.show();
     }
 
     private void exit() {

@@ -6,19 +6,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefHeight="400.0" prefWidth="600.0" type="AnchorPane">
-    <children>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0"
-                    vvalue="1.0"/>
-        <Button fx:id="exitButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#exitHelpPage"
-                prefHeight="41.0" prefWidth="76.0" text="Exit"/>
-        <Label fx:id="label" text="Label" wrapText="true" minHeight="-Infinity" />
-        <TableView fx:id="tableView" layoutX="35.0" layoutY="28.0" prefHeight="200.0" prefWidth="227.0">
-            <columns>
-                <TableColumn prefWidth="75.0" text="Command" fx:id="cmd" />
-                <TableColumn prefWidth="75.0" text="Function" fx:id="fn" />
-                <TableColumn prefWidth="75.0" text="Format" fx:id="format" />
-            </columns>
-        </TableView>
-    </children>
+<?import java.net.URL?>
+<fx:root xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefHeight="360.0" prefWidth="700.0" type="AnchorPane"
+         styleClass="help-page">
+    <stylesheets><URL value="@style.css"/></stylesheets>
+            <children>
+                <TableView fx:id="tableView" layoutY="50.0">
+                    <columns>
+                        <TableColumn prefWidth="70.0" text="Command" fx:id="command"/>
+                        <TableColumn prefWidth="350.0" text="Usage" fx:id="usage" />
+                        <TableColumn prefWidth="275.0" text="Format" fx:id="format" />
+                    </columns>
+                </TableView>
+                <Button fx:id="exitButton" layoutX="300.0" layoutY="350.0" mnemonicParsing="false" onAction="#exitHelpPage"
+                        prefHeight="41.0" prefWidth="76.0" text="Exit"/>
+            </children>
 </fx:root>

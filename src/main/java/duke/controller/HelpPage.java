@@ -25,7 +25,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -39,7 +38,16 @@ public class HelpPage extends AnchorPane {
     private Button exitButton;
 
     @FXML
-    private Label label;
+    private TableView tableView;
+
+    @FXML
+    private TableColumn<Command, String> command;
+
+    @FXML
+    private TableColumn<Command, String> usage;
+
+    @FXML
+    private TableColumn<Command, String> format;
 
     private final Stage stage;
     private final Scene prev;
@@ -67,44 +75,17 @@ public class HelpPage extends AnchorPane {
      * Builds the help page
      */
     public void start() {
-        label.setText("Here's some help!");
-        //noinspection rawtypes
-        TableView tableView = new TableView();
-        TableColumn<Command, String> command = new TableColumn<>("Command");
-        TableColumn<Command, String> function = new TableColumn<>("Function");
-        TableColumn<Command, String> format = new TableColumn<>("Format");
-
-        command.setCellValueFactory(
-                new PropertyValueFactory<>("CMD")
-        );
-
-        function.setCellValueFactory(
-                new PropertyValueFactory<>("USAGE")
-        );
-
-        format.setCellValueFactory(
-                new PropertyValueFactory<>("FORMAT")
-        );
-
-        tableView.getColumns().add(command);
-        tableView.getColumns().add(function);
-        tableView.getColumns().add(format);
+        command.setCellValueFactory(new PropertyValueFactory<>("cmd"));
+        usage.setCellValueFactory(new PropertyValueFactory<>("usage"));
+        format.setCellValueFactory(new PropertyValueFactory<>("format"));
 
         ObservableList<Command> data = FXCollections.observableArrayList(
                 new ByeCommand(), new HelpCommand(), new ListCommand(),
                 new DoneCommand(), new DeleteCommand(), new TodoCommand(),
                 new DeadlineCommand(), new EventCommand(), new FindCommand()
         );
-
         tableView.setItems(data);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        VBox vBox = new VBox();
-        vBox.getChildren().addAll(label, tableView, exitButton);
-
-        Scene scene = new Scene(vBox);
-        stage.setScene(scene);
-        stage.show();
     }
 
     /**

@@ -9,7 +9,7 @@ import duke.ui.Ui;
 public class EventCommand extends Command {
     static final String CMD = "event";
     static final String USAGE = "add tasks that need that starts at a specific time";
-    static final String FORMAT = "event {task name} /by {yyyy-MM-dd HH:mm}";
+    static final String FORMAT = "event {task name} /at {yyyy-MM-dd HH:mm}";
 
     private String name;
     private LocalDateTime at;

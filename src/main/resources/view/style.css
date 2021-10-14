@@ -48,7 +48,62 @@
     -fx-font-weight: bold;
 }
 
-.column-header-background {
+.table-view .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 2px 5px 5px 2px;
+}
+
+.table-row-cell:hover {
+    /*-fx-background-color: #93f9b911;*/
+    -fx-text-background-color: rgba(228, 210, 228, 1);
+}
+.table-row-cell:odd {
+    -fx-background-color: rgba(228, 210, 228, 0.3);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:even {
+    -fx-background-color: rgba(255, 255, 204, 0.3);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:empty {
     -fx-background-color: transparent;
 }
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-padding: 5;
+    -fx-alignment: center;
+}
+
+.table-view .column-header-background{
+    /*-fx-background-color: linear-gradient(to bottom, rgba(228, 210, 228, 1), lightgoldenrodyellow);*/
+    -fx-background-color: rgba(228, 210, 228, 0.7);
+    -fx-background-radius: 7px 7px 0px 0px;
+    -fx-background-insets: 0 11px 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-column-halignment: center;
+    -fx-text-alignment: center;
+}
+
+.help-page {
+    -fx-background-color: white;
+}
+
+#exitButton {
+    -fx-font-family: fantasy;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 100;
+    -fx-background-color: rgba(228, 210, 228, 0.7);
+}
+
+
+
 
