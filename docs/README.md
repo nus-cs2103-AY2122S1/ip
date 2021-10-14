@@ -4,7 +4,7 @@
 Trouble remembering you daily tasks? Fret no more! My bot will save your time :)
 
 * [Features](#features)
-<<<<<<< HEAD
+
     * [View items in your task list](#adding-a-todo-todo)
     * [Add TODO/EVENT/DEADLINE tasks](#adding-a-deadline-deadline)
     * [Delete tasks](#adding-a-event-event)
@@ -41,8 +41,6 @@ event <Taskname> </Time>
 ## Bye to exit
 ```todo <Taskname>```
 *Writes data to loal hard disk
-<<<<<<< HEAD
 *Exits the bot
-=======
-*Exits the bot
->>>>>>> 1ec35629802c9e2a61807aa3f7aebf3baf074714
+
+
