@@ -1,10 +1,11 @@
 package pib.tasks;
 
-import org.junit.jupiter.api.Test;
-import pib.pibexception.PibException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import pib.pibexception.PibException;
 
 
 public class TodoTest {

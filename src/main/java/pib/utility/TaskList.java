@@ -1,6 +1,6 @@
 package pib.utility;
 
-import static pib.utility.Ui.DIVIDER;
+import static pib.utility.Messages.DIVIDER;
 
 import java.util.ArrayList;
 

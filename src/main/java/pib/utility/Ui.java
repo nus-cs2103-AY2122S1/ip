@@ -1,12 +1,34 @@
 package pib.utility;
 
+import static pib.utility.Messages.DIVIDER;
+import static pib.utility.Messages.ERROR_ALREADY_MARKED_AS_DONE;
+import static pib.utility.Messages.ERROR_BLANK_DELETE_INDEX;
+import static pib.utility.Messages.ERROR_BLANK_MARK_AS_DONE_INDEX;
+import static pib.utility.Messages.ERROR_DATETIME_WRONG_FORMAT;
+import static pib.utility.Messages.ERROR_DEADLINE_WRONG_FORMAT;
+import static pib.utility.Messages.ERROR_DEFAULT;
+import static pib.utility.Messages.ERROR_EDIT_DATETIME_WRONG_FORMAT;
+import static pib.utility.Messages.ERROR_EDIT_WRONG_FORMAT;
+import static pib.utility.Messages.ERROR_EMPTY_LIST;
+import static pib.utility.Messages.ERROR_EMPTY_NEW_VALUE;
+import static pib.utility.Messages.ERROR_EMPTY_QUERY;
+import static pib.utility.Messages.ERROR_EMPTY_TASK_DESCRIPTION;
+import static pib.utility.Messages.ERROR_EVENT_WRONG_FORMAT;
+import static pib.utility.Messages.ERROR_FNF_EXCEPTION;
+import static pib.utility.Messages.ERROR_INVALID_UPDATE_PART;
+import static pib.utility.Messages.ERROR_IOOB_EXCEPTION;
+import static pib.utility.Messages.ERROR_IO_EXCEPTION;
+import static pib.utility.Messages.ERROR_LOADING_SAVED_DATA;
+import static pib.utility.Messages.ERROR_NO_TODO_DATE;
+import static pib.utility.Messages.ERROR_SAVING_DATA;
+import static pib.utility.Messages.ERROR_UNKNOWN_COMMAND;
+
 import pib.pibexception.PibException;
 
 /**
  * Class to handle the messages printed to the UI
  */
 public class Ui {
-    public static final String DIVIDER = "____________________________________________________________\n";
 
     public String printWelcome() {
         String s = "Hello! I'm pib\n" + "Tell me something!\n";
@@ -92,6 +114,12 @@ public class Ui {
         return s;
     }
 
+    private static String showError(String errorMsg) {
+        System.out.println(errorMsg);
+        System.out.println(DIVIDER);
+        return errorMsg;
+    }
+
     /**
      * Shows the correct error message to the UI when a PibException is caught
      *
@@ -100,107 +128,48 @@ public class Ui {
     public static String printError(String error) {
         switch (error) {
         case "empty-list":
-            String s1 = "Task list is currently empty\n";
-            System.out.println(s1);
-            System.out.println(DIVIDER);
-            return s1;
+            return showError(ERROR_EMPTY_LIST);
         case "empty-task-description":
-            String s2 = "Task description can't be blank\n";
-            System.out.println(s2);
-            System.out.println(DIVIDER);
-            return s2;
+            return showError(ERROR_EMPTY_TASK_DESCRIPTION);
         case "empty-query":
-            String s3 = "Tell me what word you are looking for!\n";
-            System.out.println(s3);
-            System.out.println(DIVIDER);
-            return s3;
+            return showError(ERROR_EMPTY_QUERY);
         case "d-wrong-format":
-            String s4 = "Please format the command as: deadline <task> /by <yyyy-mm-dd> <hhmm>\n";
-            System.out.println(s4);
-            System.out.println(DIVIDER);
-            return s4;
+            return showError(ERROR_DEADLINE_WRONG_FORMAT);
         case "e-wrong-format":
-            String s5 = "Please format the command as: event <task> /at <yyyy-mm-dd> <hhmm>\n";
-            System.out.println(s5);
-            System.out.println(DIVIDER);
-            return s5;
+            return showError(ERROR_EVENT_WRONG_FORMAT);
         case "wrong-datetime-format":
-            String s6 = "Ensure date-time format is YYYY-MM-DD HHMM\n";
-            System.out.println(s6);
-            System.out.println(DIVIDER);
-            return s6;
+            return showError(ERROR_DATETIME_WRONG_FORMAT);
         case "blank-markasdone-index":
-            String s7 = "Tell me which item to mark as done!\n";
-            System.out.println(s7);
-            System.out.println(DIVIDER);
-            return s7;
+            return showError(ERROR_BLANK_MARK_AS_DONE_INDEX);
         case "ioob-exception":
-            String s8 = "Please enter a valid task number!\n";
-            System.out.println(s8);
-            System.out.println(DIVIDER);
-            return s8;
+            return showError(ERROR_IOOB_EXCEPTION);
         case "blank-delete-index":
-            String s9 = "Tell me which item to delete!\n";
-            System.out.println(s9);
-            System.out.println(DIVIDER);
-            return s9;
+            return showError(ERROR_BLANK_DELETE_INDEX);
         case "already-markedasdone":
-            String s10 = "Item is already marked as done!\n";
-            System.out.println(s10);
-            System.out.println(DIVIDER);
-            return s10;
+            return showError(ERROR_ALREADY_MARKED_AS_DONE);
         case "error-loading":
-            String s11 = "Error loading saved data\n";
-            System.out.println(s11);
-            System.out.println(DIVIDER);
-            return s11;
+            return showError(ERROR_LOADING_SAVED_DATA);
         case "error-saving":
-            String s12 = "Error saving data\n";
-            System.out.println(s12);
-            System.out.println(DIVIDER);
-            return s12;
+            return showError(ERROR_SAVING_DATA);
         case "fnf-exception":
-            String s13 = "Error locating file\n";
-            System.out.println(s13);
-            System.out.println(DIVIDER);
-            return s13;
+            return showError(ERROR_FNF_EXCEPTION);
         case "io-exception":
-            String s14 = "IOException\n";
-            System.out.println(s14);
-            System.out.println(DIVIDER);
-            return s14;
+            return showError(ERROR_IO_EXCEPTION);
         case "unknown-command":
-            String s15 = "Uh oh :( I don't know that command\n";
-            System.out.println(s15);
-            System.out.println(DIVIDER);
-            return s15;
+            return showError(ERROR_UNKNOWN_COMMAND);
         case "edit-wrong-format":
-            String s16 = "Please format command as: edit <task number> </i or /d or /t> <new value>";
-            System.out.println(s16);
-            System.out.println(DIVIDER);
-            return s16;
+            return showError(ERROR_EDIT_WRONG_FORMAT);
         case "no-todo-date":
-            String s17 = "Todo tasks do not contain date";
-            System.out.println(DIVIDER);
-            return s17;
+            return showError(ERROR_NO_TODO_DATE);
         case "invalid-update-part":
-            String s18 = "Use /i to update task Information, /d to update task Date and /t to update task Time";
-            System.out.println(DIVIDER);
-            return s18;
+            return showError(ERROR_INVALID_UPDATE_PART);
         case "empty-new-value":
-            String s19 = "New value cannot be blank";
-            System.out.println(DIVIDER);
-            return s19;
+            return showError(ERROR_EMPTY_NEW_VALUE);
         case "wrong-edit-datetime-format":
-            String s20 = "Ensure date format is YYYY-MM-DD or time format is HHMM\n";
-            System.out.println(20);
-            System.out.println(DIVIDER);
-            return s20;
+            return showError(ERROR_EDIT_DATETIME_WRONG_FORMAT);
         default:
-            String defaultError = "Error Occurred!";
-            System.out.println(defaultError);
-            System.out.println(DIVIDER);
-            return defaultError;
+            assert false;
+            return showError(ERROR_DEFAULT);
         }
     }
 }
