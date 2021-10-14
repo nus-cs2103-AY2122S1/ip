@@ -1,16 +1,16 @@
 package pib.utility;
 
-import pib.pibexception.PibException;
-import pib.tasks.Deadline;
-import pib.tasks.Event;
-import pib.tasks.Task;
-import pib.tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import pib.pibexception.PibException;
+import pib.tasks.Deadline;
+import pib.tasks.Event;
+import pib.tasks.Task;
+import pib.tasks.Todo;
 
 /**
  * Class to handle loading the saved data and saving data to external file
@@ -66,13 +66,16 @@ public class Storage {
         Task newTask = null;
         switch (taskDetails[0]) {
         case "T":
-            newTask = Todo.createTodo(taskDetails[2], Integer.parseInt(taskDetails[1]), false);
+            newTask = Todo.createTodo(taskDetails[2],
+                    Integer.parseInt(taskDetails[1]), false);
             break;
         case "E":
-            newTask = Event.createEvent(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
+            newTask = Event.createEvent(taskDetails[2],
+                    Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
             break;
         case "D":
-            newTask = Deadline.createDeadline(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
+            newTask = Deadline.createDeadline(taskDetails[2],
+                    Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
             break;
         default:
             break;

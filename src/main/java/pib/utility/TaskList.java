@@ -1,16 +1,16 @@
 package pib.utility;
 
+import static pib.utility.Ui.DIVIDER;
+
+import java.util.ArrayList;
+
 import pib.Pib;
 import pib.enums.TaskType;
+import pib.pibexception.PibException;
 import pib.tasks.Deadline;
 import pib.tasks.Event;
 import pib.tasks.Task;
 import pib.tasks.Todo;
-import pib.pibexception.PibException;
-
-import java.util.ArrayList;
-
-import static pib.utility.Ui.DIVIDER;
 
 /**
  * Class to store the tasks created
@@ -35,8 +35,8 @@ public class TaskList {
     /**
      * Prints to UI the entire list of Tasks and returns the string version.
      *
-     * @throws PibException when the TaskList is empty
      * @return String representation of the list
+     * @throws PibException when the TaskList is empty
      */
     public String viewList() throws PibException {
         if (list.size() == 0) {
@@ -68,8 +68,8 @@ public class TaskList {
      *
      * @param t type of task as specified by the enum TaskType
      * @param taskDetails task details (i.e. the remaining part of the command)
-     * @throws PibException if the creation of new Tasks throws a PibException
      * @return String containing response to be printed to user
+     * @throws PibException if the creation of new Tasks throws a PibException
      */
     public String add(TaskType t, String taskDetails) throws PibException {
         assert t != null;
@@ -113,8 +113,8 @@ public class TaskList {
      * Deletes task specified by the task number
      *
      * @param taskNum Index of task to be deleted (starting from 1)
-     * @throws PibException when IndexOutOfBoundsException is thrown when user enters invalid task number/blank
      * @return String containing response to be printed to user
+     * @throws PibException when IndexOutOfBoundsException is thrown when user enters invalid task number/blank
      */
     public String delete(int taskNum) throws PibException {
         try {
@@ -131,8 +131,8 @@ public class TaskList {
      * Marks a task as specified by the task number
      *
      * @param taskNum Index of task to be marked as done (starting from 1)
-     * @throws PibException when IndexOutOfBoundsException is thrown when user enters invalid task number/blank
      * @return String containing response to be printed to user
+     * @throws PibException when IndexOutOfBoundsException is thrown when user enters invalid task number/blank
      */
     public String markAsDone(int taskNum) throws PibException {
         try {

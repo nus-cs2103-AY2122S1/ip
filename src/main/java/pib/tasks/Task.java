@@ -1,7 +1,7 @@
 package pib.tasks;
 
-import pib.utility.Ui;
 import pib.pibexception.PibException;
+import pib.utility.Ui;
 
 /**
  * Task is an abstract parent class of other specific types of tasks
@@ -52,8 +52,8 @@ public abstract class Task {
     /**
      * Toggles the checkbox for the isDone variable
      *
-     * @throws PibException when user tries to call this method on a task that is already marked as done
      * @return String containing response to be printed to user
+     * @throws PibException when user tries to call this method on a task that is already marked as done
      */
     public String markAsDone() throws PibException {
         if (isDone == 1) {
@@ -63,11 +63,6 @@ public abstract class Task {
         return Ui.printMarkAsDoneSuccess(description);
     }
 
-    /**
-     * Getter for description
-     *
-     * @return description of task
-     */
     public String getDescription() {
         return description;
     }
@@ -86,11 +81,6 @@ public abstract class Task {
         return Ui.printUpdateSuccessful();
     }
 
-    /**
-     * Getter for isDone
-     *
-     * @return isDone value 0 (false) or 1 (true)
-     */
     protected int getIsDone() {
         return isDone;
     }

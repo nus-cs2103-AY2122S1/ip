@@ -94,7 +94,7 @@ public class Ui {
 
     /**
      * Shows the correct error message to the UI when a PibException is caught
-     * 
+     *
      * @param error type of error specified by PibException
      */
     public static String printError(String error) {

@@ -1,9 +1,9 @@
 package pib.utility;
 
+import java.util.Scanner;
+
 import pib.enums.TaskType;
 import pib.pibexception.PibException;
-
-import java.util.Scanner;
 
 /**
  * Class to parse the user input

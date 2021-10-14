@@ -9,7 +9,7 @@ public class PibException extends Exception {
     private String errorType;
 
     /**
-     * Public constructor for this class
+     * Constructs a new PibException with an error message
      *
      * @param e error message to be used to call the printError method in Ui class
      */

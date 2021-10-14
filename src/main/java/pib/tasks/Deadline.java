@@ -58,6 +58,27 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Creates a Deadline task using saved data
+     *
+     * @param description task description
+     * @param isDone value 0 (false) or 1 (true)
+     * @param date String showing date of Deadline task
+     * @param time String showing time of Deadline task
+     * @param printMessage Boolean to indicate whether to print the success message after each Task is added
+     * @return Deadline object with these 4 fields initialised
+     */
+    public static Deadline createDeadline(String description, int isDone,
+                                          String date, String time, boolean printMessage) {
+        assert description != null;
+        assert !description.isBlank();
+        assert date != null;
+        assert !date.isBlank();
+        assert time != null;
+        assert !time.isBlank();
+        return new Deadline(description, isDone, date, time, printMessage);
+    }
+
     private static String[] getDateTimePortion(String details, int atIndex) {
         return details.substring(atIndex + 4).trim().split(" ");
     }
@@ -71,31 +92,12 @@ public class Deadline extends Task {
     }
 
     private static String getTimeString(String s) {
-        return LocalTime.parse(s.trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
+        return LocalTime.parse(s.trim(), DateTimeFormatter.ofPattern("HHmm"))
+                .format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 
     private static String getDateString(String s) {
         return LocalDate.parse(s.trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-    }
-
-    /**
-     * Creates a Deadline task using saved data
-     *
-     * @param description task description
-     * @param isDone value 0 (false) or 1 (true)
-     * @param date String showing date of Deadline task
-     * @param time String showing time of Deadline task
-     * @param printMessage Boolean to indicate whether to print the success message after each Task is added
-     * @return Deadline object with these 4 fields initialised
-     */
-    public static Deadline createDeadline(String description, int isDone, String date, String time, boolean printMessage) {
-        assert description != null;
-        assert !description.isBlank();
-        assert date != null;
-        assert !date.isBlank();
-        assert time != null;
-        assert !time.isBlank();
-        return new Deadline(description, isDone, date, time, printMessage);
     }
 
     /**

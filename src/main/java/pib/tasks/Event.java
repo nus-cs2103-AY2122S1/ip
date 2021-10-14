@@ -58,26 +58,6 @@ public class Event extends Task {
         }
     }
 
-    private static String[] getDateTimePortion(String details, int atIndex) {
-        return details.substring(atIndex + 4).trim().split(" ");
-    }
-
-    private static String getDescriptionPortion(String details, int atIndex) {
-        return details.substring(0, atIndex).trim();
-    }
-
-    private static int getAtIndex(String details) {
-        return details.indexOf("/at ");
-    }
-
-    private static String getTimeString(String s) {
-        return LocalTime.parse(s.trim(), DateTimeFormatter.ofPattern("HHmm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
-    }
-
-    private static String getDateString(String s) {
-        return LocalDate.parse(s.trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-    }
-
     /**
      * Creates an Event task using saved data
      *
@@ -96,6 +76,27 @@ public class Event extends Task {
         assert time != null;
         assert !time.isBlank();
         return new Event(description, isDone, date, time, printMessage);
+    }
+
+    private static String[] getDateTimePortion(String details, int atIndex) {
+        return details.substring(atIndex + 4).trim().split(" ");
+    }
+
+    private static String getDescriptionPortion(String details, int atIndex) {
+        return details.substring(0, atIndex).trim();
+    }
+
+    private static int getAtIndex(String details) {
+        return details.indexOf("/at ");
+    }
+
+    private static String getTimeString(String s) {
+        return LocalTime.parse(s.trim(), DateTimeFormatter.ofPattern("HHmm"))
+                .format(DateTimeFormatter.ofPattern("hh:mm a"));
+    }
+
+    private static String getDateString(String s) {
+        return LocalDate.parse(s.trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     /**
