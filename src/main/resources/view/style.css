@@ -47,15 +47,14 @@
     -fx-font-family: fantasy;
     -fx-font-weight: bold;
 }
-
+/* table view styles adapted from https://edencoding.com/style-tableview-javafx/ */
 .table-view .table-cell {
     -fx-border-color: transparent;
     -fx-padding: 2px 5px 5px 2px;
 }
 
 .table-row-cell:hover {
-    /*-fx-background-color: #93f9b911;*/
-    -fx-text-background-color: rgba(228, 210, 228, 1);
+    -fx-text-background-color: rgba(155, 89, 182, 1);
 }
 .table-row-cell:odd {
     -fx-background-color: rgba(228, 210, 228, 0.3);
