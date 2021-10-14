@@ -1,0 +1,31 @@
+list
+done
+done 1
+todo read book
+list
+deadline
+deadline /by
+deadline /by 2021-12-12 2359
+deadline homework /by 2021-12-12 2359
+list
+event
+event /at
+event /at 1999-01-01 1530
+event /at 1999-01-01 15:30
+event party /at 1999-01-01 15:30
+event party /at 1999-01-01 1530
+list
+done 1
+list
+done 2
+done 2
+done 5
+deadline read notes /by 2020-10-10 1230
+find
+find read
+find reading
+list
+delete 1
+delete
+unknown command
+bye
