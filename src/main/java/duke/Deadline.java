@@ -1,6 +1,9 @@
 package duke;
 
-class Deadline extends Task { //Need to be done by deadline
+/**
+ * Task with a deadline.
+ */
+class Deadline extends Task {
 
     protected String by;
 

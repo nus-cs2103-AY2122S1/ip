@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 import javafx.application.Platform;
 
+/**
+ * Parses user input.
+ */
 class Parser {
     private Ui ui;
     private Storage storage;
@@ -34,7 +37,8 @@ class Parser {
     }
 
     /**
-     * Calls appropriate UI functions based on input
+     * Calls appropriate UI functions based on input.
+     *
      * @param input String passed by user
      * @return String with output for user
      */

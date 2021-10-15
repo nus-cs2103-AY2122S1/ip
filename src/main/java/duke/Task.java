@@ -1,11 +1,15 @@
 package duke;
 
+/**
+ * Parent class of all other tasks.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Instantiates the parent class Task
+     * Instantiates the parent class Task.
+     *
      * @param description
      */
     public Task(String description) {
@@ -14,7 +18,8 @@ public class Task {
     }
 
     /**
-     * Outputs a X if task is completed
+     * Outputs a X if task is completed.
+     *
      * @return String X or space
      */
     public String getStatusIcon() {
@@ -22,7 +27,7 @@ public class Task {
     }
 
     /**
-     * Marks a task as completed
+     * Marks a task as completed.
      */
     public void markAsDone() {
         this.isDone = true;

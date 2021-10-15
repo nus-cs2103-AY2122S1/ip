@@ -1,6 +1,8 @@
 package duke;
 
-//Has no deadline
+/**
+ * Task with a todo.
+ */
 public class ToDo extends Task {
 
 

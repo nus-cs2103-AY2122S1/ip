@@ -8,6 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Methods relating to reading and writing data are kept here.
+ */
 class Storage {
 
     public static TaskList tasklist;
@@ -21,8 +24,8 @@ class Storage {
     }
 
     /**
-     * Gets called when user inputs bye.Saves tasks to hard disk in
-     * DukeData.txt file
+     * Saves tasks to DukeData.txt file.
+     *
      * @param tasks TaskList containing tasks
      */
     void saveTasks(TaskList tasks) {
@@ -47,7 +50,8 @@ class Storage {
     }
 
     /**
-     * Called when chatbot starts to load up TaskList
+     * Loads TaskList from hard disk.
+     *
      * @param filePath FilePath where data is stored
      */
     static void readFile(String filePath) throws FileNotFoundException {

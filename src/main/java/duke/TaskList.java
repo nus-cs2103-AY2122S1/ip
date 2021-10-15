@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * List wrapping all pending tasks.
+ */
 public class TaskList {
     private ArrayList<Task> list;
 
@@ -19,7 +22,8 @@ public class TaskList {
     }
 
     /**
-     *Deletes task from {@code list} based on index given
+     * Deletes task from {@code list} based on index given.
+     *
      * @param index
      */
     public void removeTask(int index) {
@@ -28,7 +32,8 @@ public class TaskList {
     }
 
     /**
-     * Searches for task in the {@code list} based on input String
+     * Searches for task in the {@code list} based on input String.
+     *
      * @param input
      * @return {@code TaskList} containing task found
      */
@@ -44,7 +49,8 @@ public class TaskList {
     }
 
     /**
-     * Finds total number of tasks stored
+     * Finds total number of tasks stored.
+     *
      * @return Size of {@code TaskList}
      */
     public int size() {
@@ -52,7 +58,8 @@ public class TaskList {
     }
 
     /**
-     * Retrieves a specific task based on index provided
+     * Retrieves a specific task based on index provided.
+     *
      * @param index
      * @return Task at specific index
      */
@@ -61,7 +68,8 @@ public class TaskList {
     }
 
     /**
-     * Retrieves entire list of tasks
+     * Retrieves entire list of tasks.
+     *
      * @return all tasks
      */
     public ArrayList<Task> getList() {
@@ -69,7 +77,8 @@ public class TaskList {
     }
 
     /**
-     * Called to provide statistics for number of tasks of each type left to do
+     * Provides statistics for number of tasks of each type left to do.
+     *
      * @return a list of integer
      */
     public List<Integer> taskDistribution() {
@@ -90,7 +99,8 @@ public class TaskList {
     }
 
     /**
-     * Calculates number of task done divided by total tasks stored in the list
+     * Calculates number of task done divided by total tasks stored in the list.
+     *
      * @return String percentage
      */
     public String taskCompetedPercentage() {

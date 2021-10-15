@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Messages in the form of Strings are kept here.
+ */
 public class Ui {
     private String line = "---------------------------------------------";
 
@@ -24,7 +27,7 @@ public class Ui {
     }
 
     /**
-     * Prints welcome message when bot is first started
+     * Prints welcome message when bot is first started.
      */
     public static void welcomeUser() {
         String logo = " ____        _        \n"
@@ -36,7 +39,8 @@ public class Ui {
     }
 
     /**
-     * Generates statistics for user to see about different kind of tasks stored
+     * Generates statistics for user to see about different kind of tasks stored.
+     *
      * @param item
      * @return String with task breakdown
      */
@@ -52,7 +56,7 @@ public class Ui {
     }
 
     /**
-     * Marks item as done on the list
+     * Marks item as done on the list.
      *
      * @param item User input to complete item from list
      */
@@ -79,7 +83,7 @@ public class Ui {
     }
 
     /**
-     * Removes task from TaskList and updates user with number of tasks left to do
+     * Removes task from TaskList and updates user with number of tasks left to do.
      *
      * @param item User input to delete item from list
      */
@@ -101,7 +105,8 @@ public class Ui {
     }
 
     /**
-     * Generates standard response to user input bye
+     * Generates standard response to user input bye.
+     *
      * @return String
      */
     public String byeResponse() {
@@ -114,7 +119,8 @@ public class Ui {
     }
 
     /**
-     * Called when uses the list command and generates a list of items stored in the {@code taskList}
+     * Generates a list of items stored in the {@code taskList}.
+     *
      * @return String with responses
      */
     public String listResponse() {
@@ -131,7 +137,8 @@ public class Ui {
     }
 
     /**
-     *Response generated when user adds a todo item to the list
+     * Generates response when user adds a todo item to the list.
+     *
      * @param input
      * @return String message for user
      */
@@ -159,7 +166,8 @@ public class Ui {
     }
 
     /**
-     *Response generated when user adds a deadline item to the list
+     * Generates response when user adds a deadline item to the list.
+     *
      * @param input
      * @return String message for user
      */
@@ -194,7 +202,8 @@ public class Ui {
     }
 
     /**
-     *Response generated when user adds a event item to the list
+     * Generates response when user adds a event item to the list.
+     *
      * @param input
      * @return String message for user
      */
@@ -228,7 +237,8 @@ public class Ui {
         return output;
     }
     /**
-     *Response generated when user searches for an item in the list
+     * Generates response when user searches for an item in the list.
+     *
      * @param input the item being looked for
      * @return String message for user
      */
@@ -245,7 +255,8 @@ public class Ui {
     }
 
     /**
-     * Output generated when user types an invalid command
+     * Generates response when user types an invalid command.
+     *
      * @return a String with standard response
      */
     public String invalidInput() {

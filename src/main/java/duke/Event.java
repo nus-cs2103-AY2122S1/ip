@@ -1,11 +1,15 @@
 package duke;
 
+/**
+ * Task with an Event.
+ */
 public class Event extends Task { //Starts and ends by a certain time
 
     protected String by; //Range of timing
 
     /**
-     * Constructor that instantiates a Event class
+     * Instantiates an Event class.
+     *
      * @param description
      * @param by
      */
