@@ -23,7 +23,7 @@ public class Storage {
     }
 
     /**
-     * This method loads the currently existing taskList memory to Duke. If the file
+     * Loads the currently existing taskList memory to Duke. If the file
      * does not exist, then it will be created.
      *
      * @return Returns the taskList for the TaskList class to be initialized.
@@ -44,23 +44,7 @@ public class Storage {
             String line = s.nextLine();
             assert !line.equals("") : "line should not be an empty string";
             String[] segments = line.split(" \\| ");
-            Task t;
-            switch (segments[0]) {
-                case "T":
-                    t = new Todo("todo " + segments[2]);
-                    break;
-                case "D":
-                    t = new Deadline(segments[2], LocalDate.parse(segments[3]));
-                    break;
-                case "E":
-                    t = new Event(segments[2], LocalDate.parse(segments[3]));
-                    break;
-                case "F":
-                    t = new FixedTask(segments[2], segments[3]);
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + segments[0]);
-            }
+            Task t = retrieveTask(segments);
             if (segments[1].equals("1")) {
                 t.markAsDone();
             }
@@ -70,7 +54,28 @@ public class Storage {
     }
 
     /**
-     * This method stores the current taskList from Duke to the device.
+     * Creates a task with an appropriate type based on the input.
+     *
+     * @return Returns the task with a correct type.
+     * @throws IOException Error control for potential IOException.
+     */
+    private Task retrieveTask(String[] segments) {
+        switch (segments[0]) {
+            case "T":
+                return new Todo("todo " + segments[2]);
+            case "D":
+                return new Deadline(segments[2], LocalDate.parse(segments[3]));
+            case "E":
+                return new Event(segments[2], LocalDate.parse(segments[3]));
+            case "F":
+                return new FixedTask(segments[2], segments[3]);
+            default:
+                throw new IllegalStateException("Unexpected value: " + segments[0]);
+        }
+    }
+
+    /**
+     * Stores the current taskList from Duke to the device.
      *
      * @throws IOException Error control for potential IOException.
      */

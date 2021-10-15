@@ -87,7 +87,7 @@ public class Ui extends Application {
     }
 
     /**
-     * This method will wrap any message within a formatted box.
+     * Wraps any message within a formatted box.
      *
      * @param content The message to be shown to the user.
      */

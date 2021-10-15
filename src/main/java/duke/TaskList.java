@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     /**
-     * Method to add a task to the taskList.
+     * Add a task to the taskList.
      *
      * @param t The taks being added.
      */
@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Method to delete a task from the taskList.
+     * Delete a task from the taskList.
      *
      * @param index Index of the task to remove from the taskList.
      * @return The task being deleted.
@@ -39,7 +39,7 @@ public class TaskList {
     }
 
     /**
-     * Method to mark a task as completed from the taskList.
+     * Marks a task as completed from the taskList.
      *
      * @param index Index of the task to select from the taskList.
      * @return The task being marked as completed.
@@ -51,7 +51,7 @@ public class TaskList {
     }
 
     /**
-     * Method to list the currently existing tasks.
+     * Lists the currently existing tasks.
      *
      * @return The String form that will be passed to Ui to be shown to the user.
      */
@@ -66,7 +66,7 @@ public class TaskList {
     }
 
     /**
-     * Method to return the size of the current taskList.
+     * Returns the size of the current taskList.
      *
      * @return The size of the current taskList.
      */
