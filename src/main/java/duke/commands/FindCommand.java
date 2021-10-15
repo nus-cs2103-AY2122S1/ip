@@ -13,7 +13,9 @@ public class FindCommand extends Command {
     public FindCommand(String input) {
         keyword = input.split("find ")[1];
     }
-
+    /**
+     * Finds a list of tasks that matches the keyword and return it up to duke to be printed in the GUI
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {

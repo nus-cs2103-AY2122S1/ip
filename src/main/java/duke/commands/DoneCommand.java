@@ -6,7 +6,7 @@ import duke.utils.TaskList;
 
 
 /**
- * Represent an Done action to be executed.
+ * Represent a Done action to be executed.
  */
 public class DoneCommand extends Command {
     Integer index;

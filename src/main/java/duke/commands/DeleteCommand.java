@@ -5,7 +5,7 @@ import duke.utils.TaskList;
 
 
 /**
- * Represent an deletion action to be executed.
+ * Represent a deletion action to be executed.
  */
 public class DeleteCommand extends Command{
     Integer index;

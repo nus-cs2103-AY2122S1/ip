@@ -19,6 +19,9 @@ public class AddCommand extends Command {
     Type type;
     String input;
 
+    /**
+     * Initializes an add command with the right task type based on the input
+     */
     public AddCommand(String input) {
         this.input = input;
         if (input.startsWith("todo")) {
