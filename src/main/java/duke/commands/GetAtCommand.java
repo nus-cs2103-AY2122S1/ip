@@ -4,7 +4,6 @@ import duke.tasks.Task;
 import duke.tasks.TaskWithDate;
 import duke.utils.DukeException;
 import duke.utils.Storage;
-import duke.utils.Ui;
 import duke.utils.TaskList;
 
 import java.time.LocalDate;
@@ -28,11 +27,10 @@ public class GetAtCommand extends Command{
      * prints out the tasks at with a specific deadline/timing
      *
      * @param tasks    the tasklist
-     * @param ui    the user-interface
      * @param storage Persistent storage for data
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage){
+    public String execute(TaskList tasks,Storage storage){
         ArrayList<Task> userInputs = tasks.getTasks();
         String tasksToPrint = "";
         assert (tasksToPrint == "");

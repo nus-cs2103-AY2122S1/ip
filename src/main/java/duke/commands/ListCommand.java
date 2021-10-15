@@ -1,7 +1,6 @@
 package duke.commands;
 import duke.tasks.Task;
 import duke.utils.Storage;
-import duke.utils.Ui;
 import duke.utils.TaskList;
 
 import java.util.ArrayList;
@@ -15,11 +14,10 @@ public class ListCommand extends Command {
      * prints out all tasks in memory.
      *
      * @param tasks    the tasklist
-     * @param ui    the user-interface
      * @param storage Persistent storage for data
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         ArrayList<Task> userInputs = tasks.getTasks();
         String tasksToPrint = "";
         assert (tasksToPrint == "");

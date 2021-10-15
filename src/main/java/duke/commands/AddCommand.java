@@ -5,7 +5,6 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 import duke.utils.DukeException;
 import duke.utils.Storage;
-import duke.utils.Ui;
 import duke.utils.TaskList;
 
 /**
@@ -37,11 +36,10 @@ public class AddCommand extends Command {
      * Adds a task of interest from both short-term and long-term memory.
      *
      * @param tasks    the tasklist
-     * @param ui    the user-interface
      * @param storage Persistent storage for data
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         String description;
         String time;
         Task task;

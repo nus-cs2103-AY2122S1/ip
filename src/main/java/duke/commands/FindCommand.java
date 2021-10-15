@@ -1,7 +1,6 @@
 package duke.commands;
 import duke.tasks.Task;
 import duke.utils.Storage;
-import duke.utils.Ui;
 import duke.utils.TaskList;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class FindCommand extends Command {
      * Finds a list of tasks that matches the keyword and return it up to duke to be printed in the GUI
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             String tasksToPrint = "";
             assert (tasksToPrint == "");

@@ -1,6 +1,5 @@
 package duke.commands;
 import duke.utils.Storage;
-import duke.utils.Ui;
 import duke.utils.TaskList;
 
 
@@ -11,7 +10,7 @@ public abstract class Command {
     /**
      * executes a given command. Differs from command to command
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Storage storage);
     /**
      * Allows duke to pick up an exit command
      */

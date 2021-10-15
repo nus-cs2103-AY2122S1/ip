@@ -3,7 +3,6 @@ package duke.app;
 import duke.commands.Command;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
 import duke.utils.DukeException;
 import duke.utils.Parser;
 
@@ -13,10 +12,9 @@ import duke.utils.Parser;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
-     * Constructor. Initializes the ui, database and tasklists
+     * Constructor. Initializes the database and tasklists
      *
      * @param filePath  takes in filepath to for the database(.txt)
      */
@@ -25,7 +23,6 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -36,7 +33,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
