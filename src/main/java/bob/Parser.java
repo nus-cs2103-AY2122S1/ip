@@ -4,13 +4,6 @@ import java.util.Objects;
 
 import bob.exception.BobException;
 import bob.exception.InvalidDateException;
-import bob.exception.InvalidInputException;
-import bob.exception.NoDeadlineException;
-import bob.exception.NoEventTimingException;
-import bob.exception.NoKeywordException;
-import bob.exception.NoTaskAndDateException;
-import bob.exception.NoTaskException;
-import bob.exception.NotFoundException;
 import bob.gui.Ui;
 import bob.task.Deadline;
 import bob.task.Event;
@@ -62,7 +55,9 @@ public class Parser {
     public String getResponse(String input, Ui ui, TaskList tasks, Storage storage) {
         try {
             setCommandType(input);
-            checkInput(input, tasks);
+            ValidInputChecker checker = new ValidInputChecker(isListCommand, isHelpCommand, isDoneCommand,
+                    isDeleteCommand, isTodoCommand, isDeadlineCommand, isEventCommand, isSearchCommand, input, tasks);
+            checker.checkInput();
 
             return getValidResponse(input, ui, tasks, storage);
 
@@ -175,143 +170,5 @@ public class Parser {
             newTask = new Task("");
         }
         return newTask;
-    }
-
-    /**
-     * Checks the validity of the user input to determine if any exception needs to be thrown.
-     *
-     * @param response The user input.
-     * @param tasklist Current list of tasks.
-     * @throws InvalidInputException If the user input is not one of the supported commands.
-     * @throws NoDeadlineException If the user does not specify the deadline of their Deadline task.
-     * @throws NoEventTimingException If the user does not specify the timing of their Event task.
-     * @throws NoKeywordException If the user does not specify the keyword in their task search.
-     * @throws NoTaskAndDateException If the user does not specify both the task description and deadline or timing.
-     * @throws NoTaskException If the user does not specify the task description.
-     * @throws NotFoundException If the user tries to mark as completed or remove a task not inside the task list.
-     */
-    private void checkInput(String response, TaskList tasklist) throws InvalidInputException, NoTaskException,
-            NoDeadlineException, NoEventTimingException, NotFoundException, NoKeywordException,
-            NoTaskAndDateException {
-        if (isListCommand || isHelpCommand) {
-            // Correct input, do nothing
-        } else if (isDoneCommand || isDeleteCommand) {
-            checkDoneOrDelete(response, tasklist);
-        } else if (isTodoCommand) {
-            checkTodoCommand(response);
-        } else if (isDeadlineCommand) {
-            checkDeadlineCommand(response);
-        } else if (isEventCommand) {
-            checkEventCommand(response);
-        } else if (isSearchCommand) {
-            checkSearchCommand(response);
-        } else {
-            throw new InvalidInputException();
-        }
-    }
-
-    /**
-     * Checks the validity of the user Done or Delete command to determine if any exception needs to be thrown.
-     *
-     * @param response The user input.
-     * @param tasklist Current list of tasks.
-     * @throws NotFoundException If the user tries to mark as completed or remove a task not inside the task list.
-     */
-    private void checkDoneOrDelete(String response, TaskList tasklist) throws NotFoundException {
-        String[] splitResponse = response.split(" ", 2);
-        boolean isIndexLessThanOrEqualToZero = Integer.parseInt(splitResponse[1]) <= 0;
-        boolean isIndexGreaterThanListLength = Integer.parseInt(splitResponse[1])
-                > Integer.parseInt(tasklist.getNoOfTasks());
-        if (isIndexLessThanOrEqualToZero || isIndexGreaterThanListLength) {
-            throw new NotFoundException();
-        }
-    }
-
-    /**
-     * Checks the validity of the user Todo command to determine if any exception needs to be thrown.
-     *
-     * @param response The user input.
-     * @throws NoTaskException If the user does not specify the task description.
-     */
-    private void checkTodoCommand(String response) throws NoTaskException {
-        String[] splitResponse = response.split(" ", 2);
-        boolean hasNoTaskDescription = splitResponse.length == 1;
-        if (hasNoTaskDescription) {
-            throw new NoTaskException();
-        }
-    }
-
-    /**
-     * Checks the validity of the user Deadline command to determine if any exception needs to be thrown.
-     *
-     * @param response The user input.
-     * @throws NoTaskAndDateException If the user does not specify both the task description and deadline or timing.
-     * @throws NoTaskException If the user does not specify the task description.
-     * @throws NoDeadlineException If the user does not specify the deadline of their Deadline task.
-     */
-    private void checkDeadlineCommand(String response) throws NoTaskAndDateException, NoTaskException,
-            NoDeadlineException {
-        String[] splitResponse = response.split(" ", 2);
-        boolean hasNoTaskDescription = splitResponse.length == 1;
-        boolean hasNoDate = !response.contains("/by");
-        if (!hasNoDate && !hasNoTaskDescription) {
-            hasNoTaskDescription = response.split("/by", 2)[0].split(" ", 0).length == 1;
-        }
-        if (!hasNoDate) {
-            hasNoDate = response.split("/by", 0).length == 1;
-        }
-        boolean hasNoTaskAndDate = hasNoTaskDescription && hasNoDate;
-
-        if (hasNoTaskAndDate) {
-            throw new NoTaskAndDateException();
-        } else if (hasNoTaskDescription) {
-            throw new NoTaskException();
-        } else if (hasNoDate) {
-            throw new NoDeadlineException();
-        }
-    }
-
-    /**
-     * Checks the validity of the user Event command to determine if any exception needs to be thrown.
-     *
-     * @param response The user input.
-     * @throws NoTaskAndDateException If the user does not specify both the task description and deadline or timing.
-     * @throws NoTaskException If the user does not specify the task description.
-     * @throws NoEventTimingException If the user does not specify the timing of their Event task.
-     */
-    private void checkEventCommand(String response) throws NoTaskAndDateException, NoTaskException,
-            NoEventTimingException {
-        String[] splitResponse = response.split(" ", 2);
-        boolean hasNoTaskDescription = splitResponse.length == 1;
-        boolean hasNoDate = !response.contains("/at");
-        if (!hasNoDate && !hasNoTaskDescription) {
-            hasNoTaskDescription = response.split("/at", 2)[0].split(" ", 0).length == 1;
-        }
-        if (!hasNoDate) {
-            hasNoDate = response.split("/at", 0).length == 1;
-        }
-        boolean hasNoTaskAndDate = hasNoTaskDescription && hasNoDate;
-
-        if (hasNoTaskAndDate) {
-            throw new NoTaskAndDateException();
-        } else if (hasNoTaskDescription) {
-            throw new NoTaskException();
-        } else if (hasNoDate) {
-            throw new NoEventTimingException();
-        }
-    }
-
-    /**
-     * Checks the validity of the user Search command to determine if any exception needs to be thrown.
-     *
-     * @param response The user input.
-     * @throws NoKeywordException If the user does not specify the keyword in their task search.
-     */
-    private void checkSearchCommand(String response) throws NoKeywordException {
-        String[] splitResponse = response.split(" ", 2);
-        boolean hasNoSearchKeyword = splitResponse.length == 1;
-        if (hasNoSearchKeyword) {
-            throw new NoKeywordException();
-        }
     }
 }
