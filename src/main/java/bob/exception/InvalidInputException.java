@@ -10,4 +10,14 @@ public class InvalidInputException extends BobException {
     public InvalidInputException() {
         super();
     }
+
+    /**
+     * Gets error message for when the user input is not one of the supported commands.
+     *
+     * @return Error message.
+     */
+    @Override
+    public String getMessage() {
+        return "That doesn't make any sense! >:(\n";
+    }
 }

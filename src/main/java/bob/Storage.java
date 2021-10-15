@@ -93,23 +93,20 @@ public class Storage {
     private void addTaskToTasklist(ArrayList<Task> tasks, Scanner s) throws InvalidDateException {
         String curr = s.nextLine();
         Task newTask;
-        boolean isComplete;
+        boolean isComplete = curr.contains("[X]");
         if (curr.matches("\\[T](.*)")) {
             String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
             newTask = new Todo(splitCurr[1]);
-            isComplete = curr.contains("[X]");
         } else if (curr.matches("\\[D](.*)")) {
             String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
             String[] splitRight = splitCurr[1].split(" \\(by: ", 2);
             String deadline = splitRight[1].substring(0, splitRight[1].length() - 1);
             newTask = new Deadline(splitRight[0], formatDate(deadline));
-            isComplete = curr.contains("[X]");
         } else if (curr.matches("\\[E](.*)")) {
             String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
             String[] splitRight = splitCurr[1].split(" \\(at: ", 2);
             String timing = splitRight[1].substring(0, splitRight[1].length() - 1);
             newTask = new Event(splitRight[0], formatDate(timing));
-            isComplete = curr.contains("[X]");
         } else { // Should never reach this branch.
             newTask = new Task("");
             isComplete = false;

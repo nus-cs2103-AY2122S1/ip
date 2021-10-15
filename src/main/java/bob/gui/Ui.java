@@ -1,6 +1,7 @@
 package bob.gui;
 
 import bob.TaskList;
+import bob.exception.BobException;
 import bob.exception.NoSearchResultException;
 import bob.task.Task;
 
@@ -111,60 +112,8 @@ public class Ui {
         }
     }
 
-    /**
-     * Returns message for when the user does not input a valid date for their deadline or event timing.
-     */
-    public String getInvalidDateExceptionMessage() {
-        return "What kind of date is that >:(\n";
-    }
-
-    /**
-     * Returns message for when the user input is not one of the supported commands.
-     */
-    public String getInvalidInputExceptionMessage() {
-        return "That doesn't make any sense! >:(\n";
-    }
-
-    /**
-     * Returns message for when the user does not specify the task description.
-     */
-    public String getNoTaskExceptionMessage() {
-        return "You didn't specify your task! >:(\n";
-    }
-
-    /**
-     * Returns message for when the user does not specify the task description and date of event or deadline.
-     */
-    public String getNoTaskAndDateExceptionMessage() {
-        return "You didn't specify your task OR its date! >:(\n";
-    }
-
-    /**
-     * Returns message for when the user does not specify the deadline of their Deadline task.
-     */
-    public String getNoDeadlineExceptionMessage() {
-        return "When is the deadline? >:(\nPlease specify the date with the format\n/by YYYY-MM-DD";
-    }
-
-    /**
-     * Returns message for when the user does not specify the timing of their Event task.
-     */
-    public String getNoEventTimingExceptionMessage() {
-        return "When is the event? >:(\nPlease specify the date with the format\n/at YYYY-MM-DD";
-    }
-
-    /**
-     * Returns message for when the user does not specify any keyword for their search.
-     */
-    public String getNoKeywordExceptionMessage() {
-        return "What are you even looking for >:(\n";
-    }
-
-    /**
-     * Returns message for when the user tries to mark as completed or remove a task that is not inside the task list.
-     */
-    public String getOutOfBoundsExceptionMessage() {
-        return "Huh what task is that :/\n";
+    public String getErrorMessage(BobException bobException) {
+        return bobException.getMessage();
     }
 
     /**

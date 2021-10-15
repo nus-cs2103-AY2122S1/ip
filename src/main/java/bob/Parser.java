@@ -2,6 +2,7 @@ package bob;
 
 import java.util.Objects;
 
+import bob.exception.BobException;
 import bob.exception.InvalidDateException;
 import bob.exception.InvalidInputException;
 import bob.exception.NoDeadlineException;
@@ -9,7 +10,7 @@ import bob.exception.NoEventTimingException;
 import bob.exception.NoKeywordException;
 import bob.exception.NoTaskAndDateException;
 import bob.exception.NoTaskException;
-import bob.exception.OutOfBoundsException;
+import bob.exception.NotFoundException;
 import bob.gui.Ui;
 import bob.task.Deadline;
 import bob.task.Event;
@@ -20,49 +21,15 @@ import bob.task.Todo;
  * Represents an object that deals with making sense of the user commands.
  */
 public class Parser {
-    /**
-     * True if and only if the user command is a List command.
-     */
     private boolean isListCommand;
-
-    /**
-     * True if and only if the user command is a Help command.
-     */
     private boolean isHelpCommand;
-
-    /**
-     * True if and only if the user command is a Done command.
-     */
     private boolean isDoneCommand;
-
-    /**
-     * True if and only if the user command is a Delete command.
-     */
     private boolean isDeleteCommand;
-
-    /**
-     * True if and only if the user command is a Todo command.
-     */
     private boolean isTodoCommand;
-
-    /**
-     * True if and only if the user command is a Deadline command.
-     */
     private boolean isDeadlineCommand;
-
-    /**
-     * True if and only if the user command is an Event command.
-     */
     private boolean isEventCommand;
-
-    /**
-     * True if and only if the user command is a Search command.
-     */
     private boolean isSearchCommand;
 
-    /**
-     * Constructor for creating a new Parser instance.
-     */
     public Parser() {}
 
     /**
@@ -99,22 +66,8 @@ public class Parser {
 
             return getValidResponse(input, ui, tasks, storage);
 
-        } catch (InvalidDateException e) {
-            return ui.getInvalidDateExceptionMessage();
-        } catch (InvalidInputException e) {
-            return ui.getInvalidInputExceptionMessage();
-        } catch (NoDeadlineException e) {
-            return ui.getNoDeadlineExceptionMessage();
-        } catch (NoEventTimingException e) {
-            return ui.getNoEventTimingExceptionMessage();
-        } catch (NoKeywordException e) {
-            return ui.getNoKeywordExceptionMessage();
-        } catch (NoTaskAndDateException e) {
-            return ui.getNoTaskAndDateExceptionMessage();
-        } catch (NoTaskException e) {
-            return ui.getNoTaskExceptionMessage();
-        } catch (OutOfBoundsException e) {
-            return ui.getOutOfBoundsExceptionMessage();
+        } catch (BobException e) {
+            return ui.getErrorMessage(e);
         }
     }
 
@@ -235,10 +188,10 @@ public class Parser {
      * @throws NoKeywordException If the user does not specify the keyword in their task search.
      * @throws NoTaskAndDateException If the user does not specify both the task description and deadline or timing.
      * @throws NoTaskException If the user does not specify the task description.
-     * @throws OutOfBoundsException If the user tries to mark as completed or remove a task not inside the task list.
+     * @throws NotFoundException If the user tries to mark as completed or remove a task not inside the task list.
      */
     private void checkInput(String response, TaskList tasklist) throws InvalidInputException, NoTaskException,
-            NoDeadlineException, NoEventTimingException, OutOfBoundsException, NoKeywordException,
+            NoDeadlineException, NoEventTimingException, NotFoundException, NoKeywordException,
             NoTaskAndDateException {
         if (isListCommand || isHelpCommand) {
             // Correct input, do nothing
@@ -262,15 +215,15 @@ public class Parser {
      *
      * @param response The user input.
      * @param tasklist Current list of tasks.
-     * @throws OutOfBoundsException If the user tries to mark as completed or remove a task not inside the task list.
+     * @throws NotFoundException If the user tries to mark as completed or remove a task not inside the task list.
      */
-    private void checkDoneOrDelete(String response, TaskList tasklist) throws OutOfBoundsException {
+    private void checkDoneOrDelete(String response, TaskList tasklist) throws NotFoundException {
         String[] splitResponse = response.split(" ", 2);
         boolean isIndexLessThanOrEqualToZero = Integer.parseInt(splitResponse[1]) <= 0;
         boolean isIndexGreaterThanListLength = Integer.parseInt(splitResponse[1])
                 > Integer.parseInt(tasklist.getNoOfTasks());
         if (isIndexLessThanOrEqualToZero || isIndexGreaterThanListLength) {
-            throw new OutOfBoundsException();
+            throw new NotFoundException();
         }
     }
 
