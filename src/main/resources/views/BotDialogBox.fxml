@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" type="javafx.scene.layout.HBox"
+         style="
+         -fx-padding: 15;
+         -fx-pref-width: 590;"
+         xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox alignment="BOTTOM_CENTER">
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+    </HBox>
+    <Label fx:id="dialog" text="Label" minHeight="-Infinity"
+           style="
+           -fx-font-family: 'Arial';
+           -fx-wrap-text: true;
+           -fx-background-color: #58ffff;
+           -fx-background-radius: 15 15 15 0;
+           -fx-border-radius: 12 12 14 0;
+           -fx-border-color: #646464;
+           -fx-border-width: 2;
+           -fx-padding: 15;
+           -fx-min-width: 490;"/>
+</fx:root>
