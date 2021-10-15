@@ -23,9 +23,9 @@ import duke.task.ToDo;
  * Parses string inputs from user.
  */
 public class Parser {
-    private static final int COMMAND_EVENT_LENGTH = 6;
-    private static final int COMMAND_DEADLINE_LENGTH = 9;
-    private static final int COMMAND_TODO_LENGTH = 5;
+    private static final int COMMAND_EVENT_LENGTH = 5;
+    private static final int COMMAND_DEADLINE_LENGTH = 8;
+    private static final int COMMAND_TODO_LENGTH = 4;
 
     /**
      * Parses string inputs from user into a Command.
@@ -49,6 +49,13 @@ public class Parser {
             return new ListCommand();
         case "done":
             try {
+                if (input.contains("|")) {
+                    throw new DukeException("character | is not allowed as input");
+                }
+                if (inputArray.length < 2) {
+                    throw new DukeException("A valid index must be provided");
+                }
+
                 selectedTask = Integer.parseInt(inputArray[1]) - 1;
                 return new DoneCommand(selectedTask);
             } catch (NumberFormatException e) {
@@ -56,6 +63,13 @@ public class Parser {
             }
         case "delete":
             try {
+                if (input.contains("|")) {
+                    throw new DukeException("character | is not allowed as input");
+                }
+                if (inputArray.length < 2) {
+                    throw new DukeException("A valid index must be provided");
+                }
+
                 selectedTask = Integer.parseInt(inputArray[1]) - 1;
                 return new DeleteCommand(selectedTask);
             } catch (NumberFormatException e) {
@@ -68,6 +82,9 @@ public class Parser {
         case "deadline":
             return parseDeadline(input);
         case "todo":
+            if (input.contains("|")) {
+                throw new DukeException("character | is not allowed as input");
+            }
             return parseTodo(input);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -85,21 +102,17 @@ public class Parser {
         params = input.split("/at");
 
         if (params.length < 2) {
-            throw new DukeException("Invalid input: missing /at");
+            throw new DukeException("Invalid input: missing /at date");
         }
 
-        if (params[0].length() < (COMMAND_EVENT_LENGTH + 2)) {
+        if (params[0].trim().length() < (COMMAND_EVENT_LENGTH)) {
             throw new DukeException("Invalid input: description must not be empty");
         }
 
         params[0] = params[0].substring(COMMAND_EVENT_LENGTH,
                 params[0].length() - 1).trim();
-        params[1] = params[1].substring(1).trim();
+        params[1] = params[1].trim();
         LocalDate date = LocalDate.parse(params[1]);
-
-        if (params[0].equals("")) {
-            throw new DukeException("Invalid input: description must not be empty");
-        }
 
         return new AddCommand(new Event(params[0], date));
     }
@@ -115,21 +128,17 @@ public class Parser {
         params = input.split("/by");
 
         if (params.length < 2) {
-            throw new DukeException("Invalid input: missing /by");
+            throw new DukeException("Invalid input: missing /by date");
         }
 
-        if (params[0].length() < (COMMAND_DEADLINE_LENGTH + 2)) {
+        if (params[0].trim().length() < COMMAND_DEADLINE_LENGTH) {
             throw new DukeException("Invalid input: description must not be empty");
         }
 
         params[0] = params[0].substring(COMMAND_DEADLINE_LENGTH,
                 params[0].length() - 1);
-        params[1] = params[1].substring(1);
+        params[1] = params[1].trim();
         LocalDate date = LocalDate.parse(params[1]);
-
-        if (params[0].equals("")) {
-            throw new DukeException("Invalid input: description must not be empty");
-        }
 
         return new AddCommand(new Deadline(params[0], date));
     }

@@ -27,6 +27,11 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        if (index < 0 || index >= tasks.getSize()) {
+            ui.showError("Index error: please select the correct index");
+            return;
+        }
+
         tasks.getIndex(index).setDone();
         ui.showMessage(getMessage(tasks));
     }

@@ -29,6 +29,7 @@ public class ListCommand extends Command {
     @Override
     public String getMessage(TaskList tasks) {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Your tasks:\n");
         for (int i = 0; i < tasks.getSize(); i++) {
             stringBuilder.append(String.format("%d. %s\n",
                     i + 1,

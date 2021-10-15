@@ -83,8 +83,11 @@ public class Duke extends Application {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException | DateTimeException e) {
+            } catch (DukeException e) {
+                System.out.println("duke error");
                 ui.showError(e.getMessage());
+            } catch (DateTimeException e) {
+                ui.showError("Invalid date: date must be in YYYY-MM-DD");
             }
             ui.showLine();
         }
@@ -202,8 +205,10 @@ public class Duke extends Application {
         try {
             Command parsedCommand = Parser.parse(stringInput);
             parsedCommand.execute(tasks, ui, storage);
-        } catch (DukeException | DateTimeException e) {
+        } catch (DukeException e) {
             ui.showError(e.getMessage());
+        } catch (DateTimeException e) {
+            ui.showError("Invalid date: date must be in YYYY-MM-DD");
         }
         userInput.clear();
     }
