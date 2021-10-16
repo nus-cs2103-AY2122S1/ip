@@ -1,5 +1,6 @@
-package bob;
+package bob.parser;
 
+import bob.TaskList;
 import bob.exception.InvalidInputException;
 import bob.exception.NoDeadlineException;
 import bob.exception.NoEventTimingException;

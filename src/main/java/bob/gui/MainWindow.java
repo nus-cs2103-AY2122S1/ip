@@ -6,9 +6,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Objects;
 
-import bob.Parser;
 import bob.Storage;
 import bob.TaskList;
+import bob.parser.Parser;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.scene.control.Button;

@@ -6,6 +6,7 @@ import bob.exception.DirectoryNotFoundException;
 import bob.exception.FileNotFoundException;
 import bob.gui.MainWindow;
 import bob.gui.Ui;
+import bob.parser.Parser;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

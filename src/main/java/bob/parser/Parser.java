@@ -1,7 +1,9 @@
-package bob;
+package bob.parser;
 
 import java.util.Objects;
 
+import bob.Storage;
+import bob.TaskList;
 import bob.exception.BobException;
 import bob.exception.InvalidDateException;
 import bob.gui.Ui;
