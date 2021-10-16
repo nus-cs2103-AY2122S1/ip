@@ -25,11 +25,11 @@ public class Todo extends Task {
      * @return String representing this event in database format.
      */
     public String toDatabaseFormat() {
-        return String.format("T | %d | %s ", super.done ? 1 : 0, super.desc);
+        return String.format("T | %d | %s ", super.isDone ? 1 : 0, super.desc);
     }
 
     @Override
     public String toString() {
-        return "[T]" + (done ? "[X] " : "[ ] ") + desc;
+        return "[T]" + (isDone ? "[X] " : "[ ] ") + desc;
     }
 }

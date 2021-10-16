@@ -23,7 +23,7 @@ public class Deadline extends Task {
                 throw new DukeException("Error reading DB");
             }
             super.desc = args[0];
-            super.done = done;
+            super.isDone = done;
             super.dateTime = DukeDateTime.parse(args[1]);
             if (args.length == 3) {
                 super.details = args[2];
@@ -60,7 +60,7 @@ public class Deadline extends Task {
      * @return String representing this deadline in database format.
      */
     public String toDatabaseFormat() {
-        return String.format("D | %d | %s | %s | %s", super.done ? 1 : 0, super.desc,
+        return String.format("D | %d | %s | %s | %s", super.isDone ? 1 : 0, super.desc,
                 dateTime.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.PRINT_TIME), details);
     }
 

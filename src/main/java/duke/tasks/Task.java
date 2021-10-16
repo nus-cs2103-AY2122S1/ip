@@ -6,7 +6,7 @@ import duke.utils.DukeException;
 public abstract class Task {
     public final static DukeException FORMAT_EXCEPTION = new DukeException("I don't understand this entry, enter " + 
             "help (cmd) for assistance.");
-    protected boolean done;
+    protected boolean isDone;
     protected String desc = "";
     protected String details = "";
     protected DukeDateTime dateTime = new DukeDateTime();
@@ -26,7 +26,7 @@ public abstract class Task {
      */
     public Task(String desc, boolean isDone) {
         this.desc = desc;
-        this.done = isDone;
+        this.isDone = isDone;
     }
 
     /**
@@ -42,7 +42,7 @@ public abstract class Task {
      * Marks this task as complete.
      */
     public void markComplete() {
-        done = true;
+        isDone = true;
     }
 
     abstract void addTime(String time) throws DukeException;
@@ -65,7 +65,7 @@ public abstract class Task {
         }
         if (obj instanceof Task) {
             Task that = (Task) obj;
-            return (desc.equals(that.desc) && done == that.done && details.equals((that.details)) && dateTime.equals(that.dateTime));
+            return (desc.equals(that.desc) && isDone == that.isDone && details.equals((that.details)) && dateTime.equals(that.dateTime));
         } else {
             return false;
         }
@@ -73,7 +73,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return (done ? "[X] " : "[ ] ") + desc;
+        return (isDone ? "[X] " : "[ ] ") + desc;
     }
 
 }
