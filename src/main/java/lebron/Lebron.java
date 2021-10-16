@@ -194,8 +194,7 @@ public class Lebron {
             previousStates.push(newTaskList);
             storage.saveToFile(getLatestState());
             return ui.replyMarkDone(task);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new LebronException("    :( OOPS! Make sure you input a valid number!");
         }
     }
