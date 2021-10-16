@@ -21,3 +21,4 @@ T _ 0 _ groceries
 T _ 0 _ groceries
 D _ 0 _ homework _ 2021-09-17 _ 16:00
 E _ 0 _ wedding dinner _ 2021-11-24 _ 18:00
+T _ 0 _ grocery

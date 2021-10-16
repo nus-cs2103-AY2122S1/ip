@@ -39,25 +39,10 @@ public class Storage {
             Scanner reader = new Scanner(f);
             while (reader.hasNext()) {
                 String dataFromStorage = reader.nextLine();
-                String type = Parser.parseData(dataFromStorage, "type");
                 String progress = Parser.parseData(dataFromStorage, "progress");
                 Task t;
 
-                switch (type) {
-                case "T":
-                    String description = Parser.parseData(dataFromStorage, "description");
-                    t = new Todo(description);
-                    break;
-                case "D":
-                    t = createNewDeadline(dataFromStorage);
-                    break;
-                case "E":
-                    t = createNewEvent(dataFromStorage);
-                    break;
-                default:
-                    System.out.println("task failed to load");
-                    continue;
-                }
+                t = processTask(dataFromStorage);
 
                 if (isDone(progress)) {
                     t.markDone();
@@ -68,6 +53,32 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("Error");
         }
+    }
+
+    /**
+     * Processes data from storage into new Tasks
+     * @param dataFromStorage data loaded from file
+     * @return Task created
+     * @throws DukeException if data cannot be parsed
+     */
+    public Task processTask(String dataFromStorage) throws DukeException {
+        String type = Parser.parseData(dataFromStorage, "type");
+        Task t;
+        switch (type) {
+        case "T":
+            String description = Parser.parseData(dataFromStorage, "description");
+            t = new Todo(description);
+            break;
+        case "D":
+            t = createNewDeadline(dataFromStorage);
+            break;
+        case "E":
+            t = createNewEvent(dataFromStorage);
+            break;
+        default:
+            throw new DukeException("Task failed to load");
+        }
+        return t;
     }
 
     /**
