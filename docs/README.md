@@ -231,7 +231,7 @@ Gotcha my dear! I have restored the previous version.
 
 <br/>
 
-### `bye` - Show Welfare Message
+### `bye` - Show Farewell Message
 
 Show Farewell Message.\
 The program window will remain open and the program will continue running. 
