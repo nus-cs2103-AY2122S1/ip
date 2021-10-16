@@ -20,7 +20,7 @@ Bot Commands:
 
 ## View items in your task list
 ```list```
-*Displays list of tasks stored
+Displays list of tasks stored
 ## Add TODO/EVENT/DEADLINE tasks
 ```
 todo <Taskname>
@@ -32,15 +32,15 @@ event <Taskname> </Time>
 *Removes a task from the list
 ## Complete tasks
 ```done <Tasknumber>```
-*Marks a specific task as completed
+Marks a specific task as completed
 ## Search for tasks
 ```find <Taskname>```
 ## View statistics of your tasks
 ```stats```
-*Gives breakdown of different type of tasks pending
+Gives breakdown of different type of tasks pending
 ## Bye to exit
 ```todo <Taskname>```
-*Writes data to loal hard disk
-*Exits the bot
+Writes data to loal hard disk
+Exits the bot
 
 
