@@ -34,7 +34,9 @@ public class MainWindow extends AnchorPane {
 
         // initial greeting
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello, I'm JarVIS – Just A Rather Very Intelligent System!\n\nHow may I assist you?", dukeImage)
+                DialogBox.getDukeDialog(
+                        "Hello, I'm JarVIS – Just A Rather Very Intelligent System!\n\n" +
+                                "How may I assist you? [Type \'JarVIS?\' for more!]", dukeImage)
         );
     }
 

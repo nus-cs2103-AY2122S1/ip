@@ -10,8 +10,9 @@ import duke.tasks.Event;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-import duke.ui.Ui;
-import java.io.IOException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 /**
  *
@@ -22,6 +23,7 @@ import java.io.IOException;
  * @version CS2103 AY21/22 Semester 1
  */
 public class Brain {
+    public final String INVALID_DATE_MESSAGE = "You've given me an invalid date. Learn to read a calendar ...";
     public Brain() {}
 
     /**
@@ -53,12 +55,15 @@ public class Brain {
     public String processDate(String date) {
         date = date.strip();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime datetime = LocalDateTime.parse(date, formatter);
         DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
-        String finalTime = datetime.format(newFormatter);
-        System.out.println(finalTime);
-        
-        return finalTime;
+
+        try {
+            LocalDateTime datetime = LocalDateTime.parse(date, formatter);
+            String finalTime = datetime.format(newFormatter);
+            return finalTime;
+        } catch (Exception e) {
+            return INVALID_DATE_MESSAGE;
+        }
     }
 
     /**
@@ -70,7 +75,7 @@ public class Brain {
      * @return the final result for the given query.
      */
     public String createTodo(String input, DataStore dataStore) {
-        String query = input.split(" ", 2)[1].strip();
+        String query = input.strip().split(" ", 2)[1].strip();
         ToDo todo = new ToDo(query);
         int prevNumTasks = dataStore.length();
         dataStore.add(todo);
@@ -97,10 +102,15 @@ public class Brain {
      * @return the final result for the given query.
      */
     public String createDeadline(String input, DataStore dataStore) {
-        input = input.split(" ", 2)[1].strip();
+        input = input.strip().split(" ", 2)[1].strip();
         String query = input.split("/by")[0];
         String limit = input.split("/by")[1];
         String procLimit = processDate(limit);
+
+        if (procLimit.equals(INVALID_DATE_MESSAGE)) {
+            return "You've given me an invalid date.\nLearn to read a calendar ...";
+        }
+
         int prevNumTasks = dataStore.length();
 
         Deadline deadlineTask = new Deadline(query, procLimit);
@@ -128,11 +138,15 @@ public class Brain {
      * @return the final result for the given query.
      */
     public String createEvent(String input, DataStore dataStore) {
-        input = input.split(" ", 2)[1].strip();
+        input = input.strip().split(" ", 2)[1].strip();
         String query = input.split("/at")[0];
         String datetime = input.split("/at")[1];
         String procDate = processDate(datetime);
         int prevNumTasks = dataStore.length();
+
+        if (procDate.equals(INVALID_DATE_MESSAGE)) {
+            return "You've given me an invalid date.\nLearn to read a calendar ...";
+        }
 
         Event eventTask = new Event(query, procDate);
         dataStore.add(eventTask);
@@ -145,7 +159,8 @@ public class Brain {
 
         int newNumTasks = dataStore.length();
 
-        assert newNumTasks - prevNumTasks == 1 : "Data Store task count is not functioning as expected; Task increment not observed.";
+        assert newNumTasks - prevNumTasks == 1 :
+                "Data Store task count is not functioning as expected; Task increment not observed.";
 
         return builder.toString();
     }
@@ -156,25 +171,28 @@ public class Brain {
      *
      * @param input the user's input with the ID of the task in the list.
      * @param dataStore the list containing the up-to-date task records.
-     * @param warning the exact warning to be thrown when valid index range is exceeded.
      * @return the final result for the given query.
      * @throws BotException throws a bot-specific exception when an error is encountered.
      */
-    public String completeTask(String input, DataStore dataStore, String warning) throws BotException {
-        int idx = Integer.parseInt(input.split(" ")[1]);
-
+    public String completeTask(String input, DataStore dataStore) {
         StringBuilder builder = new StringBuilder();
+        String[] breakdown = input.split(" ");
 
-        // check if index is within appropriate range
-        if (idx < 0 || idx > dataStore.length()) {
-            throw new BotException(warning);
+        if (breakdown.length <= 1) { // only "done" is provided
+            builder.append("I need an index with that, my friend ...");
         } else {
-            Task task = dataStore.get(idx-1);
-            task.setDone();
-            assert task.getStatus().equals(true) : "Task has not actually been set to true. Task still false;";
+            int idx = Integer.parseInt(breakdown[1]);
 
-            String message = "Nice! I've marked this task as done: \n" + "\t" + task + "\n";
-            builder.append(message);
+            if (1 <= idx && idx <= dataStore.length()) {
+                Task task = dataStore.get(idx-1);
+                task.setDone();
+                assert task.getStatus().equals(true) : "Task has not actually been set to true. Task still false;";
+
+                String message = "Nice! I've marked this task as done: \n" + "\t" + task + "\n";
+                builder.append(message);
+            } else {
+                builder.append("You've given me an invalid index, I'm afraid.");
+            }
         }
 
         return builder.toString();
@@ -191,15 +209,15 @@ public class Brain {
     public String shutdownBot(DataStore dataStore, MemoryBuffer memBuff) {
         // save current task log
         StringBuilder builder = new StringBuilder();
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Shutdown JarVIS?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
 
-        try {
-            memBuff.writeFile(dataStore);
-        } catch (IOException e) {
-            builder.append("OOPS!!! There was a problem saving your tasks. \n");
+        if (alert.getResult() == ButtonType.YES) {
+            builder.append("Goodbye! As always, a pleasure working with you.\n");
+            System.exit(0);
+        } else if (alert.getResult() == ButtonType.NO) {
+            builder.append("Oh, welcome back, by the way.");
         }
-
-        builder.append("Goodbye! As always, a pleasure working with you.\n");
-        System.exit(0);
 
         return builder.toString();
     }
@@ -213,21 +231,36 @@ public class Brain {
      * @return the final result for the given query.
      */
     public String deleteTask(String input, DataStore dataStore) {
-        int idx = Integer.parseInt(input.split(" ")[1]);
-        Task task = dataStore.get(idx-1);
-        int prevNumTasks = dataStore.length();
-
         StringBuilder builder = new StringBuilder();
+        String[] breakdown = input.split(" ");
 
-        String message = "Understood. I've removed, \n" + "\t" + task.toString() + "\n";
-        builder.append(message);
+        if (breakdown.length <= 1) {
+            builder.append("I need an index with that, my friend ...");
+        } else {
+            int idx = Integer.parseInt(breakdown[1]);
+            try {
+                Task task = dataStore.get(idx - 1);
+                int prevNumTasks = dataStore.length();
 
-        dataStore.remove(idx-1); // actual deletion
-        int newNumTasks = dataStore.length();
+                // check if index is within appropriate range
+                if (1 <= idx && idx <= dataStore.length()) {
+                    String message = "Understood. I've removed, \n" + "\t" + task.toString() + "\n";
+                    builder.append(message);
 
-        assert prevNumTasks - newNumTasks == 1 : "Data Store task count is not functioning as expected; Task increment not observed.";
+                    dataStore.remove(idx - 1); // actual deletion
+                    int newNumTasks = dataStore.length();
 
-        builder.append(String.format("You now have %d tasks to totally ignore.\n", dataStore.length()));
+                    assert prevNumTasks - newNumTasks == 1 :
+                            "Data Store task count is not functioning as expected; Task increment not observed.";
+
+                    builder.append(String.format("You now have %d tasks to totally ignore.\n", dataStore.length()));
+                } else {
+                    builder.append("You've given me an invalid index, I'm afraid.");
+                }
+            } catch (Exception e) {
+                builder.append("You've given me an invalid index, I'm afraid.");
+            }
+        }
 
         return builder.toString();
     }
@@ -249,7 +282,7 @@ public class Brain {
             String message = record.toString();
 
             if (record.getDescription().contains(query)) {
-                String text = (i+1) + ". " + message + "\n";
+                String text = (i + 1) + ". " + message + "\n";
                 builder.append(text);
             }
         }
@@ -271,8 +304,8 @@ public class Brain {
         String[] commands = new String[]{
                 "list",
                 "todo <task_name>",
-                "deadline <task_name> \\by yyyy-MM-dd HH:mm",
-                "event  <task_name> \\at yyyy-MM-dd HH:mm",
+                "deadline <task_name> /by yyyy-MM-dd HH:mm",
+                "event  <task_name> /at yyyy-MM-dd HH:mm",
                 "delete <task_idx>",
                 "done <task_idx>",
                 "find <keyword>"
@@ -291,7 +324,7 @@ public class Brain {
         for (int i = 0; i < commands.length; i++) {
             String cmd = commands[i];
             String info = cmdInfo[i];
-            String desc = String.format("%d. %s\n\t%s\n\n", i+1, cmd, info);
+            String desc = String.format("%d. %s\n\t%s\n\n", i + 1, cmd, info);
             builder.append(desc);
         }
 
