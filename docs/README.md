@@ -14,9 +14,9 @@ A ToDo is a task without any date/time attached to it _e.g., visit new theme par
 Format: `todo TASK_DESCRIPTION`
 
 ### Adding a "Deadline" task: `deadline`
-A Deadline is a task that needs to be done before a specific date/time _e.g., submit CS2103T iP before tutorial_
+A Deadline is a task that needs to be done before a specific date/time _e.g., submit CS2103T iP before 10 Oct 10pm_
 
-Format: `deadline TASK_DESCRIPTION /by DEADLINE`
+Format: `deadline TASK_DESCRIPTION /by DEADLINE`, where `DEADLINE` must follow the syntax `YYYY-MM-DD TIME`
 
 ### Adding an "Event" task: `event`
 An Event is a task that start at a specific time and ends at a specific time _e.g., team meeting on 11/09/2021 9-10pm_
@@ -60,7 +60,7 @@ Jo's data are saved as a txt file `data/duke.txt`. Advanced users are welcome to
 Action | Format, Examples
 -------|------------------
 Add ToDo | `todo TASK_DESCRIPTION`<br/> e.g.,`todo work`
-Add Deadline |  `deadline TASK_DESCRIPTION /by DEADLINE`<br/> e.g.,`deadline submit CS2103T /by tutorial`
+Add Deadline |  `deadline TASK_DESCRIPTION /by DEADLINE`<br/> e.g.,`deadline submit CS2103T /by 2021-09-12 10pm`
 Add Event | `event TASK_DESCRIPTION /at DATE_AND_TIME`<br/> e.g.,`event team meeting /at 11/09/2021 9-10pm`
 List | `list`
 Done | `done TASK_INDEX` <br/> e.g., `done 2`

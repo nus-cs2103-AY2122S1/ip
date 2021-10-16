@@ -8,12 +8,10 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private final File data;
-    private final TaskList tasks;
+    private static final File data = new File("./src/main/data/duke.txt");
+    private static final TaskList tasks = new TaskList();
 
-    public Storage(String filePath) {
-        this.data = new File(filePath);
-        this.tasks = new TaskList();
+    public Storage() {
     }
 
     /**
@@ -21,9 +19,9 @@ public class Storage {
      * @return the saved task list
      * @throws DukeException If the file is not found
      */
-    public TaskList load() throws DukeException {
+    public static TaskList load() throws DukeException {
         try {
-            Scanner scanner = new Scanner(this.data);
+            Scanner scanner = new Scanner(data);
             while (scanner.hasNextLine()) {
                 tasks.readData(scanner.nextLine());
             }
@@ -31,17 +29,17 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("ERROR: File not found! :(");
         }
-        return this.tasks;
+        return tasks;
     }
 
     /**
      * Saves the user's final task list into a file in hard disk.
      */
-    public void save() {
+    public static void save() {
         try {
-            FileWriter myFile = new FileWriter(this.data);
-            for (int i = 0; i < this.tasks.size(); i++) {
-                Task task = this.tasks.get(i);
+            FileWriter myFile = new FileWriter(data);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
                 myFile.write(task.print() + "\n");
             }
             myFile.close();

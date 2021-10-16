@@ -8,78 +8,46 @@ import java.util.ArrayList;
  */
 public class Duke {
 
-    private Storage storage = new Storage("./src/main/data/duke.txt");
-    private TaskList tasks = new TaskList();;
-    private Ui ui = new Ui();
+    private TaskList tasks;
 
     public Duke() {
-        ui.greeting();
+        Ui.greeting();
         try {
-            tasks = storage.load();
+            tasks = Storage.load();
         } catch (DukeException e) {
-            ui.showLoadingError();
+            Ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    /**
-     * Starts an instance of Duke/Jo.
-     */
-//    public void run() {
-//        boolean isExit = false;
-//
-//        while (!isExit) {
-//            try {
-//                String input = ui.readCommand();
-//                if (input.equals("bye")) {
-//                    isExit = true;
-//                } else {
-//                    ui.showLine();
-//                    String[] commands = Parser.parse(input);
-//                    this.getResponse(commands);
-//                }
-//            } catch (DukeException e) {
-//                ui.showError(e.getMessage());
-//            } finally {
-//                ui.showLine();
-//            }
-//        }
-//        ui.goodbye();
-//        storage.save();
-//    }
-
     public String getResponse(String[] args) {
         switch (args[0]) {
         case "list":
-            return ui.showListMessage(tasks);
+            return Ui.showListMessage(tasks);
         case "done":
             int index = Integer.parseInt(args[1]) - 1;
             this.tasks.markDone(index);
-            return ui.showDoneMessage(tasks, index);
+            return Ui.showDoneMessage(tasks, index);
         case "delete":
             int idx = Integer.parseInt(args[1]) - 1;
             String description = tasks.get(idx).toString();
             this.tasks.delete(idx);
-            return ui.showDeleteMessage(tasks, description);
+            return Ui.showDeleteMessage(tasks, description);
         case "find":
             ArrayList<Integer> matches = this.tasks.findTask(args[1]);
-            return ui.showFindMessage(tasks, matches);
+            return Ui.showFindMessage(tasks, matches);
         case "todo":
             tasks.add(new ToDo(args[1]));
-            return ui.addTaskMessage(tasks);
+            return Ui.addTaskMessage(tasks);
         case "event":
             tasks.add(new Event(args[1], args[2]));
-            return ui.addTaskMessage(tasks);
+            return Ui.addTaskMessage(tasks);
         case "deadline":
             LocalDate date = LocalDate.parse(args[2]);
             tasks.add(new Deadline(args[1], date, args[3]));
-            return ui.addTaskMessage(tasks);
+            return Ui.addTaskMessage(tasks);
         default:
             return "Jo does not recognise non-frog speak!";
         }
     }
-
-//    public static void main(String[] args) {
-//        new Duke().run();
-//    }
 }

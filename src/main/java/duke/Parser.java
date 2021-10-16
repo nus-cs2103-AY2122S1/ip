@@ -9,22 +9,33 @@ public class Parser {
      *
      * @return a string array representing the user's input
      */
-    public static String[] parse(String input) {
+    public static void parse(String input) {
+        try {
+            DukeException.checkInput(input);
+        } catch (DukeException e) {
+            Ui.showError(e.getMessage());
+        }
+    }
+
+    public static String[] parseCommand(String input) {
         String[] str = input.split(" ", 2);
         switch (str[0]) {
-            case "t":
-                str[0] = "todo";
-                break;
-            case "d":
-                str[0] = "deadline";
-                break;
-            case "e":
-                str[0] = "event";
-                break;
+        case "t":
+            str[0] = "todo";
+            break;
+        case "d":
+            str[0] = "deadline";
+            break;
+        case "e":
+            str[0] = "event";
+            break;
         }
         String arg = str[0];
 
         switch (arg) {
+        case "bye":
+            Storage.save();
+            System.exit(0);
         case "done":
             return new String[]{ "done", str[1] };
         case "delete":
