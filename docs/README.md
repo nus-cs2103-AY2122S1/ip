@@ -29,7 +29,7 @@ event <Taskname> </Time>
 ```
 ## Delete tasks
 ```delete <Tasknumber>```
-*Removes a task from the list
+Removes a task from the list
 ## Complete tasks
 ```done <Tasknumber>```
 Marks a specific task as completed
@@ -39,7 +39,7 @@ Marks a specific task as completed
 ```stats```
 Gives breakdown of different type of tasks pending
 ## Bye to exit
-```todo <Taskname>```
+```bye```
 Writes data to loal hard disk
 Exits the bot
 
