@@ -1,6 +1,7 @@
 package duke.commands;
 import duke.utils.Storage;
 import duke.utils.TaskList;
+import java.io.IOException;
 
 
 /**
@@ -27,9 +28,10 @@ public class DeleteCommand extends Command{
             tasks.deleteTask(index);
             Storage.removeLine(index);
             return "Deleted!";
-        } catch (Exception e){
-            System.out.println(e);
-            return e.getMessage();
+        } catch (IndexOutOfBoundsException e) {
+            return "Hey it does not exists!";
+        } catch (IOException e) {
+            return "Hey it does not exists!";
         }
     }
     

@@ -34,12 +34,7 @@ public class TaskList {
      * @return Specific task of interest
      */
     public Task getTask(Integer input) {
-        try {
-            return userInputs.get(input);
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
-        }
+        return userInputs.get(input);
     }
 
     /**
@@ -68,15 +63,8 @@ public class TaskList {
      * @param input  the index of task of interest
      */
     public void deleteTask(Integer input) {
-        try {
-            System.out.println("Noted. I've removed this task: ");
-            Task task = userInputs.get(input);
-            userInputs.remove(input);
-            System.out.println(" " + task);
-            task = null;
-            System.out.println("Now you have " + userInputs.size() + " tasks in the list.");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        Task task = userInputs.get(input);
+        userInputs.remove(input);
+        task = null;
     }
 }

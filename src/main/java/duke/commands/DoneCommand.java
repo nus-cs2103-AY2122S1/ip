@@ -2,6 +2,7 @@ package duke.commands;
 import duke.tasks.Task;
 import duke.utils.Storage;
 import duke.utils.TaskList;
+import java.io.IOException;
 
 
 /**
@@ -30,8 +31,10 @@ public class DoneCommand extends Command {
             task.markAsDone();
             Storage.updateLine(index);
             return "Nice! I've marked this task as done: " + task;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return e.getMessage();
+        } catch (IndexOutOfBoundsException e) {
+            return "Hey it does not exists!";
         }
     }
 

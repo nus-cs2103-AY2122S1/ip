@@ -6,6 +6,7 @@ import duke.tasks.Todo;
 import duke.utils.DukeException;
 import duke.utils.Storage;
 import duke.utils.TaskList;
+import java.io.IOException;
 
 /**
  * Represent an addition action to be executed.
@@ -71,8 +72,12 @@ public class AddCommand extends Command {
             }
             tasks.addTask(task);
             return "Heard ya! Saved your task!";
-        } catch (Exception e) {
+        } catch (DukeException e) {
             return e.getMessage();
+        } catch (IOException e) {
+            return e.getMessage();
+        } catch (IndexOutOfBoundsException e) {
+            return "Hey this command is invalid! Check out the proper format please!";
         }
     }
 
