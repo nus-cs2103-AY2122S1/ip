@@ -53,7 +53,7 @@ public class Deadline extends Task {
     @Override
     public void log(FileWriter writer) {
         try {
-            writer.write(String.format("D|%d|%s|%s\n", this.isDone ? 1 : 0, this.description, this.by));
+            writer.write(String.format("D☺%d☺%s☺%s\n", this.isDone ? 1 : 0, this.description, this.by));
         } catch (IOException e) {
             e.printStackTrace();
         }

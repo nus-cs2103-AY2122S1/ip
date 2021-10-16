@@ -76,7 +76,7 @@ public class Parser {
      * @return task that is parsed from line
      */
     public static Task parseData(String data) {
-        String[] dataArr = data.split("[|]");
+        String[] dataArr = data.split("☺");
         assert dataArr.length != 0 : "dataArr cannot be length 0";
         switch (dataArr[0]) {
         case "T":

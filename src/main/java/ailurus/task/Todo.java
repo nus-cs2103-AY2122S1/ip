@@ -32,7 +32,7 @@ public class Todo extends Task {
     @Override
     public void log(FileWriter writer) {
         try {
-            writer.write(String.format("T|%d|%s\n", this.isDone ? 1 : 0, this.description.trim()));
+            writer.write(String.format("T☺%d☺%s\n", this.isDone ? 1 : 0, this.description.trim()));
         } catch (IOException e) {
             e.printStackTrace();
         }

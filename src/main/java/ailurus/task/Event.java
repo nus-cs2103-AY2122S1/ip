@@ -52,7 +52,7 @@ public class Event extends Task {
     @Override
     public void log(FileWriter writer) throws AilurusException {
         try {
-            writer.write(String.format("E|%d|%s|%s\n", this.isDone ? 1 : 0, this.description, this.at));
+            writer.write(String.format("E☺%d☺%s☺%s\n", this.isDone ? 1 : 0, this.description, this.at));
         } catch (IOException e) {
             throw new AilurusException(AilurusException.Error.LOAD);
         }

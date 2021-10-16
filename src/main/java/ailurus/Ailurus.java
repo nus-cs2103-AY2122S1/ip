@@ -32,7 +32,7 @@ public class Ailurus {
     }
 
     /**
-     * Exit JavaFX program
+     * Sets program exiting boolean to true and exits JavaFX program
      *
      */
     public static void exit() {
@@ -40,7 +40,7 @@ public class Ailurus {
     }
 
     /**
-     * Unload storage to save file
+     * Calls unload method of storage to save stored data into file
      *
      */
     public static void unloadStorage() {
@@ -56,7 +56,7 @@ public class Ailurus {
     }
 
     /**
-     * Get message and handle response
+     * Returns a response based on the message passed in as argument
      *
      * @param message message to be parsed
      * @return response to message
