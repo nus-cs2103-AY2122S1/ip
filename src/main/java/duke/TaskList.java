@@ -14,9 +14,7 @@ public class TaskList {
     private Storage storage;
 
     /**
-     * Creates empty task list.
-     * If loadFromStorage == true, initializes database and loads any stored tasks.
-     *
+     * Creates empty task list at default location.
      * @param loadFromStorage Inform the TaskList whether to load tasks from storage.
      * @throws DukeException
      */
@@ -25,7 +23,14 @@ public class TaskList {
             this.storage = new Storage(this);
         }
     }
-    
+
+    /**
+     * Creates empty task list, to be stored at a particular location.
+     * If loadFromStorage == true, initializes database and loads any stored tasks.
+     * @param loadFromStorage
+     * @param fileName
+     * @throws DukeException
+     */
     public TaskList(boolean loadFromStorage, String fileName) throws DukeException {
         if (loadFromStorage) {
             this.storage = new Storage(this, fileName);
@@ -118,6 +123,12 @@ public class TaskList {
         return database;
     }
 
+    /**
+     * Finds the word in the TaskList.
+     * @param word word to filter tasks by.
+     * @return filtered TaskList.
+     * @throws DukeException
+     */
     public TaskList find(String word) throws DukeException {
         TaskList filtered = new TaskList(false);
         filtered.database = database.stream().filter(x -> x.matchWord(word)).collect(Collectors.toList());

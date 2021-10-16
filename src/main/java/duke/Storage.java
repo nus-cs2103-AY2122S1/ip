@@ -21,10 +21,21 @@ public class Storage {
     private final RandomAccessFile raf;
     private final File txt;
 
+    /**
+     * Constructor for storage with given TaskList at default location "duke.txt".
+     * @param db TaskList database.
+     * @throws DukeException
+     */
     public Storage(TaskList db) throws DukeException {
-        this(db, "duke2.txt");
+        this(db, "duke.txt");
     }
-    
+
+    /**
+     * Constructor for storage with given TaskList and location.
+     * @param db TaskList database.
+     * @param filename database location.
+     * @throws DukeException
+     */
     public Storage(TaskList db, String filename) throws DukeException {
         try {
             txt = new File(filename);
@@ -42,6 +53,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts database line to a command in Duke.
+     * @param line database line.
+     * @return command in Duke.
+     * @throws DukeException
+     */
     public Task parse(String line) throws DukeException {
         try {
             String[] args = line.split("( \\| )", 3);
@@ -64,6 +81,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the database by overwriting the database with the current tasks in TaskList.
+     * @param database TaskList database.
+     * @throws DukeException
+     */
     public void update(TaskList database) throws DukeException {
         try {
             raf.seek(0);
@@ -78,6 +100,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the database by adding to the database this task.
+     * @param task task to add.
+     * @throws DukeException
+     */
     public void update(Task task) throws DukeException {
         try {
             raf.writeBytes(task.toDatabaseFormat());
@@ -96,6 +123,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Clears the database.
+     * @throws DukeException
+     */
     public void purge() throws DukeException {
         try {
             raf.setLength(0);
@@ -115,7 +146,7 @@ public class Storage {
             }
             return sb.toString();
         } catch (FileNotFoundException e) {
-            return "Error: duke2.txt not found";
+            return "Error: duke.txt not found";
         }
     }
 }

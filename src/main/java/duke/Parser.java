@@ -77,10 +77,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Helper function to generate the message for the number of tasks.
+     * @return message with number of tasks.
+     */
     private String getSizeMsg() {
         return "\n Now you have " + database.size() + String.format(" task%sin the list.", database.size() != 1 ? "s " : " ");
     }
 
+    /**
+     * Greeter function.
+     * @param args not used.
+     * @return greeting.
+     */
     private Record greet(String args) {
         String logo = "____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -92,11 +101,22 @@ public class Parser {
                 "\n (Tip: type help [COMMAND] to get help with my functions!)");
     }
 
+    /**
+     * Exiting function.
+     * @param args not used.
+     * @return goodbye.
+     * @throws DukeException
+     */
     private Record bye(String args) throws DukeException {
         database.close();
         return new Record("Bye. Hope to see you again soon!", true);
     }
 
+    /**
+     * Lists all tasks.
+     * @param args not used.
+     * @return message with string of database.
+     */
     private Record list(String args) {
         if (database.size() == 0) {
             return new Record("You have no tasks!");
@@ -104,6 +124,12 @@ public class Parser {
         return new Record("Here are the tasks in your list:\n" + database.toString());
     }
 
+    /**
+     * Marks task as done.
+     * @param args index of the target task.
+     * @return confirmation message.
+     * @throws DukeException
+     */
     private Record done(String args) throws DukeException {
         if (database.size() == 0) {
             throw new DukeException("You have no tasks.");
@@ -116,6 +142,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Deletes a task.
+     * @param args index of target task.
+     * @return confirmation message.
+     * @throws DukeException
+     */
     private Record delete(String args) throws DukeException {
         try {
             Task t = database.delete(Integer.parseInt(args) - 1);
@@ -128,6 +160,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates a to-do task based on the description in the query.
+     * @param args query with description.
+     * @return confirmation message.
+     * @throws DukeException
+     */
     private Record todo(String args) throws DukeException {
         if (args.length() == 0) {
             throw new DukeException("The description of a todo cannot be empty.");
@@ -137,6 +175,12 @@ public class Parser {
         return new Record("Got it. I've added this task:\n" + t + getSizeMsg());
     }
 
+    /**
+     * Creates a deadline task based on the description and time in the query.
+     * @param raw query with description.
+     * @return confirmation message.
+     * @throws DukeException
+     */
     private Record deadline(String raw) throws DukeException {
         String[] args = raw.split("( /by )");
         Deadline t = new Deadline();
@@ -153,6 +197,12 @@ public class Parser {
         return new Record("Got it. I've added this task:\n" + t + getSizeMsg());
     }
 
+    /**
+     * Creates an event task based on the description and time in the query.
+     * @param raw query with description.
+     * @return confirmation message.
+     * @throws DukeException
+     */
     private Record event(String raw) throws DukeException {
         String[] args = raw.split("( /at )");
         Event t = new Event();
@@ -169,6 +219,12 @@ public class Parser {
         return new Record("Got it. I've added this task:\n" + t + getSizeMsg());
     }
 
+    /**
+     * Prints the help message (located in Ui).
+     * @param raw particular command to search for.
+     * @return relevant help message.
+     * @throws DukeException
+     */
     private Record help(String raw) throws DukeException {
         if (raw.equals(new String())) {
             return new Record(Ui.help());
@@ -179,11 +235,23 @@ public class Parser {
         }
     }
 
+    /**
+     * Clears the database.
+     * @param raw not used.
+     * @return confirmation message.
+     * @throws DukeException
+     */
     private Record clear(String raw) throws DukeException {
         database.clear();
         return new Record("Task list was cleared.");
     }
 
+    /**
+     * Finds the relevant string in the tasks.
+     * @param raw string query.
+     * @return listing of relevant tasks.
+     * @throws DukeException
+     */
     private Record find(String raw) throws DukeException {
         TaskList filtered = database.find(raw);
         if (filtered.size() == 0) {

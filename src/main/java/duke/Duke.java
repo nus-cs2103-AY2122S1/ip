@@ -12,7 +12,11 @@ public class Duke {
     public Duke() {
         this("");
     }
-    
+
+    /**
+     * Constructor for Duke with given filename as database.
+     * @param dbFileName database file name.
+     */
     public Duke(String dbFileName) {
         try {
             sc = new Scanner(System.in);
@@ -23,7 +27,11 @@ public class Duke {
             Ui.reply(e.getMessage());
         }
     }
-    
+
+    /**
+     * Gets the next query from stdin via the Scanner.
+     * @return the next query string.
+     */
     public String getQuery() {
         if (sc.hasNext()) {
             return sc.nextLine();
@@ -31,7 +39,12 @@ public class Duke {
             return new String();
         }
     }
-    
+
+    /**
+     * Gets Duke's response to the query input.
+     * @param input query.
+     * @return Duke's response.
+     */
     public Record getResponse(String input) {
         try {
             Record r = inputH.query(input);
@@ -40,7 +53,10 @@ public class Duke {
             return new Record(e.getMessage());
         }
     }
-    
+
+    /**
+     * The main loop of Duke for CLI.
+     */
     public void mainLoop() {
         while (true) {
             String input = getQuery();
