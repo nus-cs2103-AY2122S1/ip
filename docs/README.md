@@ -5,7 +5,7 @@ DukePro frees your mind of having to remember things you need to do. It's,
 - text-based
 - easy to learn
 - ~~FAST~~ *SUPER* FAST to use
-
+- auto-sorted tasks based on priority: task > deadline > event 😉
 ## Features and Usages
 *Note: Type commands into the text box in GUI.
 Please replace content inside`[ ]` with your input. 
@@ -13,8 +13,8 @@ Follow the date/time format given.*
 
 ### Add Task
 - add a new **todo** task : `todo [task name]`
-- add a new **deadline** task : `deadline [task name] /by [yyyy-MM-dd HH-mm]`
-- add a new **event** task : `event [task name] /at [yyyy-MM-dd HH-mm]`
+- add a new **deadline** task : `deadline [task name] /by [yyyy-MM-dd HH:mm]`
+- add a new **event** task : `event [task name] /at [yyyy-MM-dd HH:mm]`
 
 Sample input format:
 ```
@@ -42,9 +42,9 @@ Expected output format:
 ```
 Here are the tasks in your list:
 1.[T][] todo1
-2.[D][] deadline1 (by:Feb-11-2022 13:21)
-3.[E][X] event1 (at:Feb-12-2012 12:12)
-4.[E][] event2 (at:Jan-14-2032 13:23)
+2.[D][] deadline1 [by] Feb-11-2022 13:21
+3.[E][X] event1 [at] Feb-12-2012 12:12
+4.[E][] event2 [at] Jan-14-2032 13:23
 ``` 
 ---
 ### Mark Task as Done
@@ -60,7 +60,7 @@ done 2
 Expected output format:
 ```
 Nice! I've marked this task as done:
-[D][X] deadline1 (by:Feb-11-2022 13:21)
+[D][X] deadline1 [by] Feb-11-2022 13:21
 ```
 ---
 ### Delete Task
@@ -93,19 +93,19 @@ Expected output format:
 ```
 Here are the tasks found by your keyword in you list:
 1.[T][] buy shampoo
-2.[E][] throw away shampoo (at:Feb-11-2024 12:13)
+2.[E][] throw away shampoo [at] Feb-11-2024 12:13
 ```
 ---
 ### Say Bye to Duke
-- say bye to Duke: `bye`
+- say bye to Duke and close the app: `bye`
 
 Sample input format:
 ```
 bye
 ```
-Expected output format:
+Expected outcome:
 ```
-Duke out! Wake me up when ya need me again:)
+*App closes*
 ```
 ---
 ### Invalid Input Handling
@@ -117,5 +117,41 @@ Are you single?
 ```
 Expected output format:
 ```
-OOPS!!! I'm sorry but I don't know what that means :-(
+The input command prefix is not supported. See User Guide for supported command prefix.
 ```
+
+Sample input format:
+```
+todo
+```
+
+Expected output format:
+```
+The description of the task is empty.
+```
+
+Sample input format:
+```
+deadline hahah /when
+```
+
+Expected output format:
+```
+OOPS!!! Missing separator '/by' for deadline input.
+```
+
+Sample input format:
+```
+event ooowah /at Feb-2022 25:90
+```
+
+Expected output format:
+```
+Incorrect date-time format/range. Use yyyy-MM-dd HH:mm.
+```
+
+
+
+
+
+

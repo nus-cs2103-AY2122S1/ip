@@ -2,7 +2,7 @@ package duke.controller;
 
 import duke.exception.DukeException;
 import duke.operation.Command;
-import duke.operation.TaskList;
+import duke.tool.TaskList;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -10,13 +10,15 @@ import duke.ui.Ui;
 import java.util.Scanner;
 
 public class CliController {
-	private final Storage storage = new Storage();
-	private final TaskList taskList = new TaskList();
+	private Storage storage;
+	private TaskList taskList;
 	private final Ui ui = new Ui();
 	private final Parser parser = new Parser();
+	private final LogicController logicController = new LogicController();
 
-	public void getCliOutput() {
-		storage.createFile();
+	public void getCliOutput(Storage st, TaskList tl) {
+		storage = st;
+		taskList = tl;
 		ui.showWelcomeMessage();
 		Scanner in = new Scanner(System.in);
 		String nextLine = in.nextLine();
@@ -27,19 +29,19 @@ public class CliController {
 					ui.showByeMessage();
 					break;
 				} else if (nextCliCommand == Command.FIND) {
-					taskList.findTask(nextLine).printFilteredList();
+					logicController.findTask(nextLine, tl);
 				} else if (nextCliCommand == Command.TODO) {
-					taskList.addTask(nextCliCommand, nextLine);
+					logicController.addTask(nextCliCommand, nextLine, tl, st);
 				} else if (nextCliCommand == Command.DEADLINE) {
-					taskList.addTask(nextCliCommand, nextLine);
+					logicController.addTask(nextCliCommand, nextLine, tl, st);
 				} else if (nextCliCommand == Command.EVENT) {
-					taskList.addTask(nextCliCommand, nextLine);
+					logicController.addTask(nextCliCommand, nextLine, tl, st);
 				} else if (nextCliCommand == Command.LIST) {
-					taskList.printList();
+					logicController.listTask();
 				} else if (nextCliCommand == Command.DONE) {
-					taskList.finishTask(nextLine);
+					logicController.finishTask(nextLine, tl, st);
 				} else if (nextCliCommand == Command.DELETE) {
-					taskList.deleteTask(nextLine);
+					logicController.deleteTask(nextLine, tl, st);
 				} else {
 					parser.invalidTask();
 				}
@@ -48,7 +50,6 @@ public class CliController {
 			}
 			nextLine = in.nextLine();
 			nextCliCommand = Command.getCommandWordFromString(nextLine);
-			storage.updateFile(taskList);
 		}
 		in.close();
 	}

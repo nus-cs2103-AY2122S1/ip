@@ -1,3 +1,0 @@
-[T][X] buy shampoo
-[D][ ] midterm  (by: Dec-12-2021 12:12)
-[E][ ] sleep  (at: Dec-11-2021 12:23)

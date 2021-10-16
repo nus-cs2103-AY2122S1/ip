@@ -12,14 +12,16 @@ public class Task implements Comparable<Task> {
 		return taskType;
 	}
 
-	;
+	public String getDescription() {
+		return description;
+	}
 
 	/**
 	 * Constructor for Task objects.
 	 *
 	 * @param description input string
 	 */
-	public Task(String description) {
+	public Task(String description, boolean isDone) {
 		this.description = description;
 		this.isDone = false;
 	}
