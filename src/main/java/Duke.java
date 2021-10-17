@@ -10,7 +10,7 @@ import javafx.application.Application;
 public class Duke {
 
     /**
-     * Our main method. This executes the Duke program.
+     * Executes the Duke program.
      *
      * @param args The command line arguments.
      */

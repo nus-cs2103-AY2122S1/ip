@@ -18,9 +18,9 @@ public class Task {
     }
 
     /**
-     * Method to represent the task status.
+     * Represents the task status.
      *
-     * @return Returns X for completed, and blank for non-completed task.
+     * @return Shows X for completed, and blank for non-completed task.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
