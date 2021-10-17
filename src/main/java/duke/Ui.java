@@ -34,7 +34,7 @@ public class Ui {
      */
     void displayByeMessage() {
         printLines();
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. I have saved your tasks. Hope to see you again soon!");
         printLines();
     }
 
@@ -45,7 +45,7 @@ public class Ui {
     String showByeMessage() {
         StringBuilder str = new StringBuilder();
         str.append(LINES + "\n");
-        str.append("Bye. Hope to see you again soon!\n");
+        str.append("Bye. I have saved your tasks. Hope to see you again soon!\n");
         str.append(LINES + "\n");
         return str.toString();
     }
@@ -137,85 +137,171 @@ public class Ui {
      */
     String executeCommand(String command, String description) throws DukeException {
         try {
-            if (command.equals("list")) {
-                return showDukeList();
-            } else if (command.equals("done")) {
-                Task toBeCompleted = getTaskFromIndex(description);
-                toBeCompleted.completeTask();
-                return showTaskCompletion(toBeCompleted);
-            } else {
-                StringBuilder str = new StringBuilder();
-                if (command.equals("deadline")) {
-                    Deadline newDeadline = addDeadline(description);
-                    Tasklist.dukeList.add(newDeadline);
-                    str.append(displayAddMessage(newDeadline));
-                } else if (command.equals("event")) {
-                    Event newEvent = addEvent(description);
-                    Tasklist.dukeList.add(newEvent);
-                    str.append(displayAddMessage(newEvent));
-                } else if (command.equals("todo")) {
-                    if (description.trim().equals("")) {
-                        throw new DukeEmptyTodoDescriptionException();
-                    }
-                    ToDo newTodo = new ToDo(description.substring(1));
-                    Tasklist.add(newTodo);
-                    str.append(displayAddMessage(newTodo));
-                } else if (command.equals("delete")) {
-                    int taskIndex = Integer.parseInt(description.substring(1)) - 1;
-                    assert taskIndex < Tasklist.dukeList.size() : "Index cannot be greater than the size of list";
-                    Task taskToBeDeleted = Tasklist.dukeList.get(taskIndex);
-                    str.append(displayDeleteMessage(taskToBeDeleted));
-                    deleteTask(taskIndex);
-                } else if (command.equals("find")) {
-                    String keyword = description.substring(1);
-                    ArrayList<Task> foundTasks = Tasklist.find(keyword);
-                    return showFoundDukeList(foundTasks);
-                } else if (command.equals("update")) {
-                    boolean hasNewDescription = description.contains("d/");
-                    boolean hasNewTime = description.contains("t/");
-                    int taskIndex = Integer.parseInt(description.substring(1, 2)) - 1;
-
-                    if (hasNewDescription) {
-                        String newDescription = Parser.getNewUpdatedDescription(description);
-                        Tasklist.updateDescription(taskIndex, newDescription);
-                    }
-                    if (hasNewTime) {
-                        String newTime = Parser.getNewUpdatedTime(description);
-                        Tasklist.updateTime(taskIndex, newTime);
-                    }
-                    Task updatedTask = Tasklist.dukeList.get(taskIndex);
-                    str.append(displayUpdateMessage(updatedTask));
-                } else {
+            switch(command) {
+                case "list":
+                    return showDukeList();
+                case "done":
+                    return showTaskCompletion1(description);
+                case "deadline":
+                    return showDeadlineAddition(description);
+                case "event":
+                    return showEventAddition(description);
+                case "todo":
+                    return showTodoAddition(description);
+                case "delete":
+                    return showTaskDeletion(description);
+                case "find":
+                    return showFindResult(description);
+                case "update":
+                    return showUpdateResult(description);
+                default:
                     throw new DukeUnknownCommandException();
-                }
 
-                if (!command.equals("find") && !command.equals("update")) {
-                    str.append("Now you have " + Tasklist.dukeList.size() + " tasks in the list.\n");
-                    str.append(LINES + "\n");
-                }
-                return str.toString();
             }
         } catch (DukeEmptyTodoDescriptionException | DukeUnknownCommandException | DukeTodoTimeException e) {
-            StringBuilder str = new StringBuilder();
-            str.append(LINES + "\n");
-            str.append(e.getMessage() + "\n");
-            str.append(LINES + "\n");
-            return str.toString();
+            return showErrorMessage(e.getMessage());
         }
+    }
+
+    /**
+     * Shows the error message during execution
+     *
+     * @param message the error message to be shown
+     * @return
+     */
+
+    String showErrorMessage(String message) {
+        StringBuilder str = new StringBuilder();
+        str.append(LINES + "\n");
+        str.append(message + "\n");
+        str.append(LINES + "\n");
+        return str.toString();
     }
 
     /**
      * Shows the completion message for the Task marked done.
      *
-     * @param toBeCompleted the Task which is to be marked done
+     * @param index The index of the task to be completed
      */
-    String showTaskCompletion(Task toBeCompleted) {
+    String showTaskCompletion1(String index) {
+        Task toBeCompleted = getTaskFromIndex(index);
+        toBeCompleted.completeTask();
         assert toBeCompleted != null : "Task to be completed should not be null";
         StringBuilder str = new StringBuilder();
         str.append(LINES + "\n");
         str.append("Nice! I've marked this task as done:\n");
         str.append(toBeCompleted + "\n");
         str.append(LINES + "\n");
+        return str.toString();
+    }
+
+    /**
+     * Shows the addition message for the deadline created.
+     *
+     * @param description the description of the deadline
+     * @return
+     */
+
+    String showDeadlineAddition(String description) {
+        StringBuilder str = new StringBuilder();
+        Deadline newDeadline = addDeadline(description);
+        Tasklist.dukeList.add(newDeadline);
+        str.append(displayAddMessage(newDeadline));
+        str.append("Now you have " + Tasklist.dukeList.size() + " tasks in the list.\n");
+        str.append(LINES + "\n");
+        return str.toString();
+    }
+
+    /**
+     * Shows the addition message for the event created.
+     *
+     * @param description the description of the event
+     * @return
+     */
+
+    String showEventAddition(String description) {
+        StringBuilder str = new StringBuilder();
+        Event newEvent = addEvent(description);
+        Tasklist.dukeList.add(newEvent);
+        str.append(displayAddMessage(newEvent));
+        str.append("Now you have " + Tasklist.dukeList.size() + " tasks in the list.\n");
+        str.append(LINES + "\n");
+        return str.toString();
+    }
+
+    /**
+     * Shows the addition message for the todo created.
+     *
+     * @param description the description of the todo
+     * @return
+     */
+
+    String showTodoAddition(String description) throws DukeEmptyTodoDescriptionException {
+        if (description.trim().equals("")) {
+            throw new DukeEmptyTodoDescriptionException();
+        }
+        StringBuilder str = new StringBuilder();
+        ToDo newTodo = new ToDo(description.substring(1));
+        Tasklist.dukeList.add(newTodo);
+        str.append(displayAddMessage(newTodo));
+        str.append("Now you have " + Tasklist.dukeList.size() + " tasks in the list.\n");
+        str.append(LINES + "\n");
+        return str.toString();
+    }
+
+    /**
+     * Shows the deletion message for the task.
+     *
+     * @param index the index of the task to be deleted
+     * @return
+     */
+    String showTaskDeletion(String index) {
+        StringBuilder str = new StringBuilder();
+        int taskIndex = Integer.parseInt(index.substring(1)) - 1;
+        assert taskIndex < Tasklist.dukeList.size() : "Index cannot be greater than the size of list";
+        Task taskToBeDeleted = Tasklist.dukeList.get(taskIndex);
+        deleteTask(taskIndex);
+        str.append(displayDeleteMessage(taskToBeDeleted));
+        str.append("Now you have " + Tasklist.dukeList.size() + " tasks in the list.\n");
+        str.append(LINES + "\n");
+        return str.toString();
+    }
+
+    /**
+     * Shows the result af the find command
+     *
+     * @param input the input by the user for keyword
+     * @return
+     */
+
+    String showFindResult(String input) {
+        String keyword = input.substring(1);
+        ArrayList<Task> foundTasks = Tasklist.find(keyword);
+        return showFoundDukeList(foundTasks);
+    }
+
+    /**
+     * Shows the result af the update command
+     *
+     * @param input the input by the user for keyword
+     * @return
+     */
+    String showUpdateResult(String input) throws DukeTodoTimeException {
+        StringBuilder str = new StringBuilder();
+        boolean hasNewDescription = input.contains("d/");
+        boolean hasNewTime = input.contains("t/");
+        int taskIndex = Integer.parseInt(input.substring(1, 2)) - 1;
+
+        if (hasNewDescription) {
+            String newDescription = Parser.getNewUpdatedDescription(input);
+            Tasklist.updateDescription(taskIndex, newDescription);
+        }
+        if (hasNewTime) {
+            String newTime = Parser.getNewUpdatedTime(input);
+            Tasklist.updateTime(taskIndex, newTime);
+        }
+        Task updatedTask = Tasklist.dukeList.get(taskIndex);
+        str.append(displayUpdateMessage(updatedTask));
         return str.toString();
     }
 
