@@ -107,27 +107,15 @@ public class Parser {
         }
         separators[0] = date.indexOf(separator);
         separators[1] = date.indexOf(separator, separators[0] + 1);
-        String y = date.substring(separators[1] + 1);
-        String m = date.substring(separators[0] + 1, separators[1]);
-        String d = date.substring(0, separators[0]);
-        int year = Integer.parseInt(y);
-        int month = Integer.parseInt(m);
-        int day = Integer.parseInt(d);
+        int year = Integer.parseInt(date.substring(separators[1] + 1));
+        int month = Integer.parseInt(date.substring(
+                separators[0] + 1, separators[1]));
+        int day = Integer.parseInt(date.substring(0, separators[0]));
 
-        String hr = time.substring(0, 2);
-        String min = time.substring(2, 4);
-        String sec = time.length() == 6
-            ? time.substring(4, 6) : "00";
-        int hour = Integer.parseInt(hr);
-        int minute = Integer.parseInt(min);
-        int second = Integer.parseInt(sec);
-
-        assert year > 0;
-        assert month > 0;
-        assert day > 0;
-        assert hour > 0;
-        assert minute > 0;
-        assert second > 0;
+        int hour = Integer.parseInt(time.substring(0, 2));
+        int minute = Integer.parseInt(time.substring(2, 4));
+        int second = Integer.parseInt(time.length() == 6
+                ? time.substring(4, 6) : "00");
 
         return LocalDateTime.of(year, month, day, hour, minute, second);
     }
