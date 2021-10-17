@@ -44,7 +44,7 @@ Find tasks whose description contain the given keyword
 Format: `find KEYWORD`
 
 ### Exiting the program: `bye`
-Exits the program by saying bye to Jo
+Exits the program by saying bye to Jo. This saves the task list.
 
 Format: `bye`
 
@@ -53,7 +53,7 @@ Jo's data are saved in the hard disk automatically after the program has exited.
 There is no need to save manually.
 
 ### Editing the data file
-Jo's data are saved as a txt file `data/duke.txt`. Advanced users are welcome to update data directly by editing that data file.
+Jo's data are saved as a txt file `duke.txt`. Advanced users are welcome to update data directly by editing that data file.
 
 ## Command Summary
 

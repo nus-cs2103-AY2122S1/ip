@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private static final File data = new File("./src/main/data/duke.txt");
+    private static final File data = new File("./duke.txt");
     private static final TaskList tasks = new TaskList();
 
     public Storage() {
