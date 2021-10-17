@@ -32,9 +32,11 @@ public class MarkCommand extends Command {
         return Message.COMMAND_MARK.getMessage() + "\t   " + task;
     }
 
-    // TODO: Add method description
+    /**
+     * Marks the specified task as done.
+     */
     public void run(int ... indexes) {
-        for (int i : indexes){
+        for (int i : indexes) {
             new MarkCommand(i).run();
         }
     }

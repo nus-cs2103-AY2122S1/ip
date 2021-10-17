@@ -50,20 +50,35 @@ public class Parser {
             descIdx = action.length() + 3;
             return new NoteCommand(Integer.parseInt(parse[1]) - 1, userInput.substring(descIdx));
         case "todo":
-            descIdx = action.length() + 1;
-            return new ToDoCommand(userInput.substring(descIdx));
+            try {
+                descIdx = action.length() + 1;
+                return new ToDoCommand(userInput.substring(descIdx));
+            } catch (Exception e) {
+                throw new BloomUnknownCommandException(
+                        Message.EXCEPTION_WRONG_FORMAT_TODO_COMMAND.getMessage());
+            }
         case "deadline":
-            descIdx = action.length() + 1;
-            dateIdx = userInput.indexOf("/");
-            return new DeadlineCommand(
-                    userInput.substring(descIdx, dateIdx - 1),
-                    new Parser().parseDate(userInput.substring(dateIdx + 4)));
+            try {
+                descIdx = action.length() + 1;
+                dateIdx = userInput.indexOf("/");
+                return new DeadlineCommand(
+                        userInput.substring(descIdx, dateIdx - 1),
+                        new Parser().parseDate(userInput.substring(dateIdx + 4)));
+            } catch (Exception e) {
+                throw new BloomUnknownCommandException(
+                        Message.EXCEPTION_WRONG_FORMAT_DEADLINE_COMMAND.getMessage());
+            }
         case "event":
-            descIdx = action.length() + 1;
-            dateIdx = userInput.indexOf("/");
-            return new EventCommand(
-                    userInput.substring(descIdx, dateIdx - 1),
-                    new Parser().parseDate(userInput.substring(dateIdx + 4)));
+            try {
+                descIdx = action.length() + 1;
+                dateIdx = userInput.indexOf("/");
+                return new EventCommand(
+                        userInput.substring(descIdx, dateIdx - 1),
+                        new Parser().parseDate(userInput.substring(dateIdx + 4)));
+            } catch (Exception e) {
+                throw new BloomUnknownCommandException(
+                        Message.EXCEPTION_WRONG_FORMAT_EVENT_COMMAND.getMessage());
+            }
         default:
             throw new BloomUnknownCommandException(
                     Message.EXCEPTION_UNKNOWN_COMMAND.getMessage());
@@ -76,8 +91,10 @@ public class Parser {
      * @param dateInput the date input
      * @return          the respective object containing date and time as inputted
      */
-    public LocalDateTime parseDate(String dateInput) {
+    public LocalDateTime parseDate (String dateInput) throws BloomUnknownCommandException {
+
         String[] parse = dateInput.split(" ");
+
         String date = parse[0];
         String time = parse[1];
 

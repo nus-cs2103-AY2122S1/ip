@@ -4,12 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import bloom.task.Deadline;
-import bloom.task.Event;
 import bloom.task.Task;
-import bloom.task.ToDo;
 
 
 /**

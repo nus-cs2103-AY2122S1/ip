@@ -7,11 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
 
 /**
  * Represents the task manager-bot Bloom.
@@ -82,8 +82,8 @@ public class Bloom extends Application {
         });
 
         // Scroll down to the end every time dialogContainer's height changes
-        dialogContainer.heightProperty().addListener(
-                (observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.heightProperty()
+                .addListener((observable) -> scrollPane.setVvalue(1.0));
 
         // Add functionality to handle user input
         sendButton.setOnMouseClicked((event) -> handleUserInput());

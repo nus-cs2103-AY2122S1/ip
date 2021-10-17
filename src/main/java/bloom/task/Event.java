@@ -58,7 +58,7 @@ public class Event extends Task {
         int d = at.getDayOfMonth();
 
         String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
         String month = months[m - 1];
 
         return month + " " + d + " " + y + " " + at.getHour() + ":" + at.getMinute();

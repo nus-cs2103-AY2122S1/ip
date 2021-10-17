@@ -22,7 +22,7 @@ public class DeadlineTest {
     public void toStringTest() {
         LocalDateTime datetime = LocalDateTime.of(2021, 1, 1, 12, 0, 0);
         Deadline d = new Deadline("sample", datetime);
-        assertEquals("[D][ ] sample (by: 2021-01-01T12:00)", d.toString());
+        assertEquals("[D][ ] sample (by: Jan 1 2021 12:0)", d.toString());
     }
 
     @Test

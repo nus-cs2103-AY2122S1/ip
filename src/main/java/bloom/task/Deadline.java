@@ -57,7 +57,7 @@ public class Deadline extends Task {
         int d = by.getDayOfMonth();
 
         String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
         String month = months[m - 1];
 
         return month + " " + d + " " + y + " " + by.getHour() + ":" + by.getMinute();

@@ -2,7 +2,6 @@ package bloom.app;
 
 import java.util.Scanner;
 
-import bloom.constant.Drawing;
 import bloom.exception.command.BloomUnknownCommandException;
 
 /**

@@ -15,7 +15,20 @@ public enum Message {
     COMMAND_NOTE("\t Noted. I've added a note to this task:\n"),
 
     EXCEPTION_IO("\t Something is wrong with Bloom memory :(\n"),
-    EXCEPTION_UNKNOWN_COMMAND("\t This command is not supported.\n");
+    EXCEPTION_UNKNOWN_COMMAND("\t This command is not supported.\n"
+            + "\t Available commands include:\n\t todo, deadline, event,\n"
+            + "\t list, done, delete, find, note"),
+    EXCEPTION_WRONG_FORMAT_TODO_COMMAND("\t Todo command format should be:\n"
+            + "\t   todo [task description]"
+            + "\t E.g., `todo read book`"),
+    EXCEPTION_WRONG_FORMAT_DEADLINE_COMMAND("\t Deadline command format should be:\n"
+            + "\t   deadline [task description] /by [task date]\n"
+            + "\t   [task date] could be yyyy/mm/dd\n\t or yyyy-mm-dd\n"
+            + "\t E.g., `deadline iP /by 17-09-2021 2359`"),
+    EXCEPTION_WRONG_FORMAT_EVENT_COMMAND("\t Event command format should be:\n"
+            + "\t   event [task description] /at [task date]\n"
+            + "\t   [task date] could be yyyy/mm/dd\n\t or yyyy-mm-dd\n"
+            + "\t E.g., `event meeting /by 23-09-2021 2200`");
 
     /** The message. */
     private final String message;

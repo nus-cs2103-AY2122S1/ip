@@ -15,6 +15,7 @@ public class ExitCommand extends Command {
     @Override
     public String run() {
         new Ui().stop();
+        System.exit(0);
         return Message.COMMAND_EXIT.getMessage();
     }
 }

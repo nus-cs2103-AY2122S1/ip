@@ -22,13 +22,13 @@ public class EventTest {
     public void toStringTest() {
         LocalDateTime datetime = LocalDateTime.of(2021, 1, 1, 12, 0, 0);
         Event d = new Event("sample", datetime);
-        assertEquals("[E][ ] sample (at: Jan 1 2021 12:00)", d.toString());
+        assertEquals("[E][ ] sample (at: Jan 1 2021 12:0)", d.toString());
     }
 
     @Test
     public void toDbTest() {
         LocalDateTime datetime = LocalDateTime.of(2021, 1, 1, 12, 0, 0);
         Event d = new Event("sample", datetime);
-        assertEquals("E | 0 | sample | Jan 1 2021 12:00", d.toDb());
+        assertEquals("E | 0 | sample | 2021-01-01T12:00", d.toDb());
     }
 }
