@@ -33,10 +33,10 @@ public class Duke extends Application {
     private Parser parser;
 
     public Duke() {
-        taskList = new TaskList();
         ui = new Ui();
         storage = new Storage();
         parser = new Parser();
+        taskList = new TaskList(storage, parser);
     }
 
     @Override

@@ -1,23 +1,17 @@
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.LocalDate;
-import java.util.Locale;
-import java.util.Objects;
-
 /**
  * Class that handles commands
  */
 public class TaskList {
     public Task[] taskList = new Task[100];
     public int i = 0;
+    Storage storage;
 
 
     /**
      * Constructor for a TaskList instance
      */
-    TaskList() {
-
+    TaskList(Storage storage, Parser parser) {
+        storage.checkStorage(parser, this);
     }
 
     /**
@@ -87,6 +81,22 @@ public class TaskList {
         return deletedTaskMessage(type, status, task, taskNo);
     }
 
+    public String findCommand(String keyword) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int j = 0; j < i; j++) {
+            Task task = taskList[j];
+            if (task.getDescription().contains(keyword)) {
+                String text = (j + 1) + ". " + "[" + taskList[j].getTask() + "]"
+                        + "[" + taskList[j].getStatusIcon() + "] "
+                        + taskList[j].getDescription() + "\n";
+                stringBuilder.append(text);
+            }
+        }
+        System.out.println(stringBuilder.toString());
+        return stringBuilder.toString();
+    }
+
     /**
      * Checks the number of items in the tasklist
      * @return count of items in tasklist
@@ -119,7 +129,7 @@ public class TaskList {
                         + taskList[j].getDate() + "\n";
             }
         }
-        return "Here are the tasks in your list: \n" + output;
+        return "Here are the tasks in your list: " + output;
     }
 
     private String toDoAddedMessage() {

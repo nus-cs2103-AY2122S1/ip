@@ -18,7 +18,7 @@ public class Parser {
                 try {
                     inData.substring(0, 6);
                     if (Objects.equals(inData.substring(0, 5), "todo ")) {
-                        taskList.todoCommand(inData.substring(5, inDataLength));
+                        return taskList.todoCommand(inData.substring(5, inDataLength));
                     }
                 } catch (Exception e) {
                     return errorEmptyMessage("todo");
@@ -31,7 +31,7 @@ public class Parser {
                     int segmentedLength = segments[0].length();
                     String description = segments[0].substring(9, segmentedLength);
                     try {
-                        taskList.deadlineCommand(description, date);
+                        return taskList.deadlineCommand(description, date);
                     } catch (Exception e) {
                         return "Please enter date in this format: yyyy-mm-dd (e.g., 2019-10-15)";
                     }
@@ -44,7 +44,7 @@ public class Parser {
                     int segmentedLength = segments[0].length();
                     String description = segments[0].substring(6, segmentedLength);
                     try {
-                        taskList.eventCommand(description, date);
+                        return taskList.eventCommand(description, date);
                     } catch (Exception e) {
                         return "Please enter date in this format: yyyy-mm-dd (e.g., 2019-10-15)";
                     }
@@ -53,7 +53,7 @@ public class Parser {
                 if (isNumeric(inData.substring(5, inDataLength))) {
                     int taskNo = Integer.parseInt(inData.substring(5, inDataLength));
                     if (taskNo <= 100 && taskNo <= taskList.getCount()) {
-                        taskList.doneCommand(taskNo);
+                        return taskList.doneCommand(taskNo);
                     } else {
                         return errorInvalidTaskNo();
                     }
@@ -63,8 +63,17 @@ public class Parser {
                     if (isNumeric(inData.substring(7, inDataLength))) {
                         int taskNo = Integer.parseInt(inData.substring(7, inDataLength));
                         if (taskNo <= 100 && taskNo <= taskList.getCount()) {
-                            taskList.deleteCommand(taskNo);
+                            return taskList.deleteCommand(taskNo);
                         }
+                    }
+                }
+            } else if (inData.contains("find ")) {
+                if (Objects.equals(inData.substring(0, 5), "find ")) {
+                    try {
+                        String[] segments = inData.split(" ");
+                        return taskList.findCommand(segments[1]);
+                    } catch (Exception e) {
+                        return "Find went wrong";
                     }
                 }
             } else {
