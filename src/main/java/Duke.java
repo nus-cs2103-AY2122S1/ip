@@ -27,10 +27,16 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private TaskManager taskManager;
+    private TaskList taskList;
+    public Ui ui;
+    private Storage storage;
+    private Parser parser;
 
     public Duke() {
-        taskManager = new TaskManager();
+        taskList = new TaskList();
+        ui = new Ui();
+        storage = new Storage();
+        parser = new Parser();
     }
 
     @Override
@@ -100,20 +106,20 @@ public class Duke extends Application {
     }
 
     public String getResponse(String args) {
-        return taskManager.executeCommand(args);
+        return parser.parse(args, taskList, storage);
     }
 
-    public static void main(String[] args) {
-        String inData = "yo";
-
-        TaskManager taskManager = new TaskManager();
-
-        Scanner scan = new Scanner(System.in);
-        while (!Objects.equals(inData, "bye")) {
-            inData = scan.nextLine();
-            taskManager.executeCommand(inData);
-        }
-    }
+//    public static void main(String[] args) {
+//        String inData = "yo";
+//
+//        Storage storage = new Storage();
+//
+//        Scanner scan = new Scanner(System.in);
+//        while (!Objects.equals(inData, "bye")) {
+//            inData = scan.nextLine();
+//            storage.checkStorage(inData);
+//        }
+//    }
 
 
     public static String introMessage() {
