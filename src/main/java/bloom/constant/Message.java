@@ -23,11 +23,11 @@ public enum Message {
             + "\t E.g., `todo read book`"),
     EXCEPTION_WRONG_FORMAT_DEADLINE_COMMAND("\t Deadline command format should be:\n"
             + "\t   deadline [task description] /by [task date]\n"
-            + "\t   [task date] could be yyyy/mm/dd\n\t or yyyy-mm-dd\n"
+            + "\t   [task date] could be dd/mm/yyyy\n\t or dd-mm-yyyy\n"
             + "\t E.g., `deadline iP /by 17-09-2021 2359`"),
     EXCEPTION_WRONG_FORMAT_EVENT_COMMAND("\t Event command format should be:\n"
             + "\t   event [task description] /at [task date]\n"
-            + "\t   [task date] could be yyyy/mm/dd\n\t or yyyy-mm-dd\n"
+            + "\t   [task date] could be dd/mm/yyyy\n\t or dd-mm-yyyy\n"
             + "\t E.g., `event meeting /by 23-09-2021 2200`");
 
     /** The message. */
