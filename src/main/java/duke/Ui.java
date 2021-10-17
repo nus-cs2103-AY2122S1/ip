@@ -138,24 +138,24 @@ public class Ui {
     String executeCommand(String command, String description) throws DukeException {
         try {
             switch(command) {
-                case "list":
-                    return showDukeList();
-                case "done":
-                    return showTaskCompletion1(description);
-                case "deadline":
-                    return showDeadlineAddition(description);
-                case "event":
-                    return showEventAddition(description);
-                case "todo":
-                    return showTodoAddition(description);
-                case "delete":
-                    return showTaskDeletion(description);
-                case "find":
-                    return showFindResult(description);
-                case "update":
-                    return showUpdateResult(description);
-                default:
-                    throw new DukeUnknownCommandException();
+            case "list":
+                return showDukeList();
+            case "done":
+                return showTaskCompletion1(description);
+            case "deadline":
+                return showDeadlineAddition(description);
+            case "event":
+                return showEventAddition(description);
+            case "todo":
+                return showTodoAddition(description);
+            case "delete":
+                return showTaskDeletion(description);
+            case "find":
+                return showFindResult(description);
+            case "update":
+                return showUpdateResult(description);
+            default:
+                throw new DukeUnknownCommandException();
 
             }
         } catch (DukeEmptyTodoDescriptionException | DukeUnknownCommandException | DukeTodoTimeException e) {
