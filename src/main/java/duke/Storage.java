@@ -91,7 +91,7 @@ public class Storage {
             taskDetails.put("type", type);
             taskDetails.put("value", currTask.getValue());
             taskDetails.put("time", currTask.getTime() == null ? "" : currTask.getTime().toString());
-            taskDetails.put("done", currTask.isDone());
+            taskDetails.put("isDone", currTask.isDone());
 
             JSONObject taskObj = new JSONObject();
             taskObj.put("task", taskDetails);
@@ -156,7 +156,7 @@ public class Storage {
         JSONObject taskObject = (JSONObject) task.get("task");
 
         String value = (String) taskObject.get("value");
-        boolean done = (boolean) taskObject.get("done");
+        boolean isDone = (boolean) taskObject.get("isDone");
         String time = (String) taskObject.get("time");
         String type = (String) taskObject.get("type");
         type = type.toUpperCase();
@@ -170,7 +170,7 @@ public class Storage {
             newTask = new Event(value, LocalDate.parse(time));
         }
 
-        if (done) {
+        if (isDone) {
             newTask.markDone();
         }
         return newTask;

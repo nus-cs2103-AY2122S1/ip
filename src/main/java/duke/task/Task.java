@@ -9,7 +9,7 @@ import duke.CommandList;
  */
 public abstract class Task {
     private String value = null;
-    private boolean done = false;
+    private boolean isDone = false;
     private LocalDate time = null;
 
     /**
@@ -19,7 +19,7 @@ public abstract class Task {
      */
     public Task(String value) {
         this.value = value;
-        this.done = false;
+        this.isDone = false;
     }
 
     public abstract LocalDate getTime();
@@ -27,7 +27,7 @@ public abstract class Task {
     public abstract CommandList getType();
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     /**
@@ -43,14 +43,14 @@ public abstract class Task {
      * Mark task as done.
      */
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Mark task as undone.
      */
     public void markUnDone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -59,7 +59,7 @@ public abstract class Task {
      * @return A string representing the state of the task.
      */
     public String getStatusIcon() {
-        return this.done ? "X" : " ";
+        return this.isDone ? "X" : " ";
     }
 
     @Override
