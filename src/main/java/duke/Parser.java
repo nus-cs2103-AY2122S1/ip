@@ -114,6 +114,9 @@ public class Parser {
      *
      * @param command used to classify the query type from the user.
      * @param input contains the overall user input.
+     * @throws IndexOutOfBoundsException used to check if input specifies description
+     * of the task to be created.
+     * @throws UnknownCommandError used to check if the command is unknown to Duke.
      */
     public String create(String command, String input)
             throws IndexOutOfBoundsException, UnknownCommandError {
