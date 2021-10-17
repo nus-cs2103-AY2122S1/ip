@@ -1,0 +1,21 @@
+deadline buy bread /by 2021-08-12
+event eat bread /at 2021-03-01
+list
+done 1
+list
+todo
+todo bake bread
+list
+blah
+done 4
+deadline
+deadline buy more bread
+done 4
+event
+event have fun /at 2021-04-12
+event have fun
+list
+delete 4
+list
+delete 4
+bye
