@@ -11,12 +11,20 @@ public class Duke {
     private TaskList tasks;
 
     public Duke() {
-        Ui.greeting();
         try {
             tasks = Storage.load();
         } catch (DukeException e) {
             Ui.showLoadingError();
             tasks = new TaskList();
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Parser.parse(input);
+            return getResponse(Parser.parseCommand(input));
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 

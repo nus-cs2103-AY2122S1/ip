@@ -15,12 +15,14 @@ public class DukeException extends Exception {
     public static void checkInput(String str) throws DukeException {
         if (str.startsWith("todo") || str.startsWith("deadline") || str.startsWith("event")
             || str.startsWith("list") || str.startsWith("bye") || str.startsWith("done")
-                || str.startsWith("delete") || str.startsWith("find")) {
-            if (str.equals("todo") || str.equals("deadline") || str.equals("event") || str.equals("delete")) {
+                || str.startsWith("delete") || str.startsWith("find") || str.equals("t")
+                || str.equals("d") || str.equals("e")) {
+            if (str.equals("todo") || str.equals("deadline") || str.equals("event") || str.equals("delete")
+                || str.equals("t") || str.equals("d") || str.equals("e")) {
                 throw new DukeException("Jo needs to know what type of fly it is! :(");
             }
         } else {
-            throw new DukeException("Jo does not understand not-frog speak! :(");
+            throw new DukeException("Jo does not understand non-frog speak! :(");
         }
     }
 }

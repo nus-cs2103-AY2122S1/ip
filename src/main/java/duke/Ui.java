@@ -23,15 +23,6 @@ public class Ui {
     }
 
     /**
-     * Prefix for error messages.
-     *
-     * @param msg The error message
-     */
-    public static String showError(String msg) {
-        return "ERROR: " + msg;
-    }
-
-    /**
      * Message signalling completion of task by user.
      *
      * @param tasks The TaskList to be affected

@@ -9,12 +9,8 @@ public class Parser {
      *
      * @return a string array representing the user's input
      */
-    public static void parse(String input) {
-        try {
-            DukeException.checkInput(input);
-        } catch (DukeException e) {
-            Ui.showError(e.getMessage());
-        }
+    public static void parse(String input) throws DukeException {
+        DukeException.checkInput(input);
     }
 
     public static String[] parseCommand(String input) {

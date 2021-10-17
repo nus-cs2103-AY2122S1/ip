@@ -2,3 +2,5 @@ T,1,read book
 D,0,return book,2019-10-15 1800
 E,1,project meeting,Aug 6th 2-4pm
 D,0,cs2103t,2021-08-23 1800
+T,0,work
+D,0,submit CS2103T ,2021-09-12 10pm
