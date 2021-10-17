@@ -65,7 +65,13 @@ public class Parser {
                 String keyword = input.substring(5);
                 return tasks.find(keyword);
             default:
-                return create(command, input.trim());
+                try {
+                    return create(command, input.trim());
+                } catch (UnknownCommandError e) {
+                    return e.getMessage();
+                } catch (IndexOutOfBoundsException e) {
+                    return new EmptyDescriptionError(command).getMessage();
+                }
         }
     }
 
@@ -109,47 +115,26 @@ public class Parser {
      * @param command used to classify the query type from the user.
      * @param input contains the overall user input.
      */
-    public String create(String command, String input) {
+    public String create(String command, String input)
+            throws IndexOutOfBoundsException, UnknownCommandError {
+        Task t;
         switch (command) {
             case "todo":
-                try {
-                    Task t = new Todo(input);
-                    tasks.add(t);
-                    return add(t, tasks.getSize());
-                } catch (IndexOutOfBoundsException e) {
-                    return new EmptyDescriptionError("todo").getMessage();
-                }
+                t = new Todo(input);
+                break;
             case "event":
-                try {
-                    Task t = new Event(input);
-                    tasks.add(t);
-                    return add(t, tasks.getSize());
-                } catch (IndexOutOfBoundsException e) {
-                    return new EmptyDescriptionError("event").getMessage();
-                }
+                t = new Event(input);
+                break;
             case "deadline":
-                try {
-                    Task t = new Deadline(input);
-                    tasks.add(t);
-                    return add(t, tasks.getSize());
-                } catch (IndexOutOfBoundsException e) {
-                    return new EmptyDescriptionError("event").getMessage();
-                }
+                t = new Deadline(input);
+                break;
             case "fixed":
-                try {
-                    Task t = new FixedTask(input);
-                    tasks.add(t);
-                    return add(t, tasks.getSize());
-                } catch (IndexOutOfBoundsException e) {
-                    return new EmptyDescriptionError("fixed task").getMessage();
-                }
+                t = new FixedTask(input);
+                break;
             default:
-                try {
-                    throw new UnknownCommandError("");
-                } catch (UnknownCommandError e) {
-                    return e.getMessage();
-                }
+                throw new UnknownCommandError("");
         }
+        tasks.add(t);
+        return add(t, tasks.getSize());
     }
-
 }
