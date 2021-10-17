@@ -252,7 +252,7 @@ public class MainWindow extends AnchorPane {
     public void handleHelp(Label userText, String response) {
         Hyperlink dukeText = new Hyperlink(response);
         dukeText.setVisited(true); // Set the hyperlink as visited so that the text is black.
-        dukeText.setOnAction(e -> {
+        dukeText.setOnAction(e -> new Thread(() -> {
             try {
                 Desktop.getDesktop().browse(new URI("https://feliciaivane.github.io/ip/"));
             } catch (IOException ex) {
@@ -260,7 +260,7 @@ public class MainWindow extends AnchorPane {
             } catch (URISyntaxException ex) {
                 ex.printStackTrace();
             }
-        });
+        }).start());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 new HelpDialogBox(dukeText, new ImageView(bob))
