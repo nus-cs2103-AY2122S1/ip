@@ -1,29 +1,108 @@
 # User Guide
 
-## Features 
+Duke the Frog will be your best todo task manager in your entire life!
 
-### Feature-ABC
 
-Description of the feature.
+# Features
 
-### Feature-XYZ
+1. Todo
+2. Event
+3. Deadline
+4. Done
+5. Find
+6. Delete
+7. List
+8. Bye
 
-Description of the feature.
+Pro tip: Commands are not case sensitive!
 
-## Usage
+##  Todo
 
-### `Keyword` - Describe action
+Add a Todo task in the manager.
 
-Describe the action and its outcome.
+Format: ```Todo Task Description here```
 
-Example of usage: 
+Examples:
+- `todo Read book`
 
-`keyword (optional arguments)`
+- `TODO return book`
 
-Expected outcome:
 
-Description of the outcome.
+##  Event
 
-```
-expected output
-```
+Add a Event task in the manager.
+
+Format: ```Event Task Description here /at yyyy-mm-dd```
+
+Examples:
+- `Event lecture1 /at 2021-09-15`
+
+- `EVENT lecture2 /at 2021-09-16`
+
+##  Deadline
+
+Add a task with a deadline in the manager.
+
+Format: ```Deadline Task Description here /by yyyy-mm-dd```
+
+Examples:
+- `Deadline Assignment1 /by 2021-09-15`
+
+- `DEADLINE Assignment2 /by 2021-09-16`
+
+##  Done
+
+Mark a task done / completed.
+
+Format: ```done index```
+
+Examples:
+- `done 1`
+
+- `done 2`
+
+##  Find
+
+Find the task that matches the search string.
+
+Format: ```find search keyword```
+
+Examples:
+- `find book`
+
+- `find happy meal`
+
+##  Delete
+
+Delete a task.
+
+Format: ```delete index```
+
+Examples:
+- `delete 1`
+
+- `delete 2`
+
+##  List
+
+List all tasks.
+
+Format: ```list```
+
+Examples:
+- `list`
+
+##  Bye
+
+Exits the program.
+
+Format: ```bye```
+
+Examples:
+- `bye`
+
+## FAQ
+
+Q: Will I become productive when I use it?
+
+A: Yes! Of course young child.

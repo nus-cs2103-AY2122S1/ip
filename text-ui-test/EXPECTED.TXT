@@ -5,3 +5,29 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+Invalid command!
+Try TODO, DEADLINE or EVENT follow by task description.
+Looks like there isn't any task!
+Got it. I've added this task.
+[T][ ] read book
+Now you have 1 tasks in the list.
+Got it. I've added this task.
+[D][ ] return book  (by: sunday)
+Now you have 2 tasks in the list.
+Got it. I've added this task.
+[E][ ] lecture  (at: 2pm today)
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1[T][ ] read book
+2[D][ ] return book  (by: sunday)
+3[E][ ] lecture  (at: 2pm today)
+
+Nice! I've marked this task as done:
+	[D][X] return book  (by: sunday)
+Here are the tasks in your list:
+1[T][ ] read book
+2[D][X] return book  (by: sunday)
+3[E][ ] lecture  (at: 2pm today)
+
+Bye. Hope to see you again soon!
