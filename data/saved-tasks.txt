@@ -1,7 +1,7 @@
 T | 1 | join sports club
-D | 0 | return book by | Oct 09 2019
 E | 1 | dance tonight at | Oct 10 2019
 T | 1 | dance tonight
 T | 1 | find
 T | 0 | dance tonight
 E | 0 | guitar lesson  | Oct 09 2019
+T | 0 | checkupdate
