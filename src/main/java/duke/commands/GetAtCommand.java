@@ -8,7 +8,7 @@ import duke.utils.TaskList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+import java.time.DateTimeException;
 
 /**
  * Represent a retrieval action to be executed.
@@ -16,12 +16,18 @@ import java.util.ArrayList;
 public class GetAtCommand extends Command{
     LocalDate date;
 
-    public GetAtCommand(String datestring) throws DukeException{
-        datestring = datestring.split("getat ")[1];
-        if (!datestring.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            throw new DukeException("☹ Yo bro pls give the time in yyyy-mm-dd format thx.");
+    public GetAtCommand(String datestring) throws DukeException {
+        try {
+            datestring = datestring.split("getat ")[1];
+            if (!datestring.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new DukeException("☹ Yo bro pls give the time in yyyy-mm-dd format thx.");
+            }
+            date = LocalDate.parse(datestring);
+        }  catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Hey this command is invalid! Check out the proper format please!");
+        } catch (DateTimeException e) {
+            throw new DukeException("Invalid date!!");
         }
-        date = LocalDate.parse(datestring);
     }
     /**
      * prints out the tasks at with a specific deadline/timing

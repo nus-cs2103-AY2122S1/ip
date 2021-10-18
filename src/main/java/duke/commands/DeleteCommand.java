@@ -1,4 +1,5 @@
 package duke.commands;
+import duke.utils.DukeException;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import java.io.IOException;
@@ -10,10 +11,13 @@ import java.io.IOException;
 public class DeleteCommand extends Command{
     Integer index;
 
-    public DeleteCommand(String input){
-        Integer parsedIndex = Integer.parseInt(input.replaceAll("[^0-9]", ""));
-        index = parsedIndex-1;
-        assert(index>=0);
+    public DeleteCommand(String input) throws DukeException {
+        try {
+            Integer integerIndex = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+            index = integerIndex-1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Hey please check that your input has a valid format!");
+        }
     }
 
     /**
@@ -31,7 +35,10 @@ public class DeleteCommand extends Command{
         } catch (IndexOutOfBoundsException e) {
             return "Hey it does not exists!";
         } catch (IOException e) {
-            return "Hey it does not exists!";
+            return "hey it does not exists!";
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return "Please make sure you're inputing the correct format!";
         }
     }
     

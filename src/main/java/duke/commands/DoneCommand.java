@@ -3,6 +3,7 @@ import duke.tasks.Task;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import java.io.IOException;
+import duke.utils.DukeException;
 
 
 /**
@@ -12,10 +13,13 @@ public class DoneCommand extends Command {
     Integer index;
 
 
-    public DoneCommand(String input) {
-        Integer parsedIndex = Integer.parseInt(input.replaceAll("[^0-9]", ""));
-        index = parsedIndex-1;
-        assert(index>=0);
+    public DoneCommand(String input) throws DukeException {
+        try {
+            Integer parsedIndex = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+            index = parsedIndex-1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Hey please check that your input has a valid format!");
+        }
     }
 
     /**
