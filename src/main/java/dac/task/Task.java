@@ -10,7 +10,7 @@ public abstract class Task implements Comparable<Task> {
     public static final String COMPLETED_SYMBOL = "X";
     private final char label;
     private final String details;
-    private boolean amCompleted;
+    private boolean isCompleted;
 
     /**
      * Constructor.
@@ -21,14 +21,14 @@ public abstract class Task implements Comparable<Task> {
     public Task(char label, String details) {
         this.label = label;
         this.details = details;
-        amCompleted = false;
+        isCompleted = false;
     }
 
     /**
      * Completes task.
      */
     public void complete() {
-        amCompleted = true;
+        isCompleted = true;
     }
 
     /**
@@ -36,8 +36,8 @@ public abstract class Task implements Comparable<Task> {
      *
      * @return True if completed; false otherwise.
      */
-    public boolean isCompleted() {
-        return amCompleted;
+    public boolean isTaskCompleted() {
+        return isCompleted;
     }
 
     /**
@@ -71,7 +71,7 @@ public abstract class Task implements Comparable<Task> {
      */
     @Override
     public String toString() {
-        String status = amCompleted
+        String status = isCompleted
                 ? "[" + COMPLETED_SYMBOL + "]"
                 : "[ ]";
         return status
@@ -91,10 +91,10 @@ public abstract class Task implements Comparable<Task> {
      */
     @Override
     public int compareTo(Task task) {
-        if (!(this.isCompleted() && task.isCompleted())) {
-            if (this.isCompleted()) {
+        if (!(this.isTaskCompleted() && task.isTaskCompleted())) {
+            if (this.isTaskCompleted()) {
                 return -1;
-            } else if (task.isCompleted()) {
+            } else if (task.isTaskCompleted()) {
                 return 1;
             }
         }

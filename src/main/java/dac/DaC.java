@@ -72,7 +72,7 @@ public class DaC {
                     || taskClass == Event.class : taskClass.toString() + "  is not a recognized task.";
             String type = "" + task.getLabel();
             String details = task.getDetails();
-            String done = task.isCompleted()
+            String done = task.isTaskCompleted()
                     ? "done"
                     : "not-done";
             if (taskClass == ToDo.class) {
