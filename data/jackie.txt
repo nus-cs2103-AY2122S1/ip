@@ -1,0 +1,5 @@
+T | 1 | i added a todo test
+D | 0 | i added a deadline test | 2021-09-01
+E | 0 | i added an event test | 1998-03-28
+E | 1 | i added another event test | 2021-09-01
+D | 1 | CS2103T ip submission | 2021-09-17
