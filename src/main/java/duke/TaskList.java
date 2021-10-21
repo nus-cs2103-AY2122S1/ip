@@ -227,7 +227,7 @@ public class TaskList {
     }
 
     private void setTaskAtIndex(int index, Task task) {
-        this.tasks.add(index, task);
+        this.tasks.set(index, task);
     }
 
     /**
