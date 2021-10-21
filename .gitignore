@@ -13,5 +13,12 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Test text files
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/sources_raw.txt
+
+# Data files (user dependent)
+dukedata.txt
+/text-ui-test/in/
+/text-ui-test/out/

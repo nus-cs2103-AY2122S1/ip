@@ -1,24 +1,48 @@
-# Duke project template
+# Duke
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> The key is not to prioritize what’s on your schedule, but to schedule your priorities. > ~ Stephen Covey
 
-## Setting up in Intellij
+Duke is an awesome way to keep track of all your daily tasks.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Forgot what is coming up in your schedule? **Duke it**  
+Hard to remember all your appointments? **Duke it**  
+Find it difficult to manage your todo list? **Duke it**
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Duke is:
+1. `Text-based`  with GUI enabled :tada:
+2. Easy-to-learn
+3. _Blazing_ fast :fire:
+4. **Free** :no_entry_sign::dollar:
+
+## Setting up
+
+Prerequisites: JDK 11, download [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
+
+1. Download the Duke jar file [here](https://github.com/chunweii/ip/releases) (latest release is v0.2 as of 6 September 2021)
+2. Open a terminal/command prompt and navigate to the directory of the jar file.
+3. Run `java -jar ip.jar`
+4. Add your tasks!
+## Future features
+- Reminders??
+- Continuous Integration
+- More to come!!
+
+Do support us! If you are a Java programmer, consider improving the program and submitting a pull request! Here is our main method for the command line interface (old but usable):
+```java  
+public static void main(String[] args) {  
+ // new Duke(<file path>, <limit>).run(); 
+ new Duke("./dukedata.txt", 100).run();}  
+```
+**New**: Use the Launcher class:
+```java
+package duke;
+
+import duke.ui.Main;  
+import javafx.application.Application;
+
+public class Launcher {  
+    public static void main(String[] args) {  
+        Application.launch(Main.class, args);  
+    }  
+}
+```

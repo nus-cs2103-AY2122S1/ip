@@ -1,0 +1,36 @@
+Duke
+todo Buy Milk
+delete 1
+delete 1
+event Townhall /at 27/10/2021 15:00
+todo Wash laundry
+deadline CS2103T Project /by 19/8/2021
+list
+do this thing
+todo
+deadline Art Project
+deadline /by 20
+event Concert /by 19/2/2022
+deadline hello
+event Job Interview /at 15:00
+deadline Write resume /by 2/11/2021 14:20
+deadline Prepare presentation /by 21:30
+event Mum's birthday /at 2/11/2021, 14:20
+todo Get a life
+todo Get a wife
+todo Get 6 packs
+event Sleep /at 2:00
+deadline CS2100 homework /by 25/8/2021
+todo Learn to do homework
+todo Renew passport
+upcoming
+done 2
+done 2
+done 13
+done
+delete
+list
+help help
+help something
+find HOmework
+bye

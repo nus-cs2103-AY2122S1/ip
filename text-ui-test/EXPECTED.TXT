@@ -1,7 +1,139 @@
-Hello from
+Hello, I am
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Please enter your name:
+Duke, that is a nice name. What can I do for you today?
+----------------------------
+Got it, Duke. I have added this task:
+    [T][ ] Buy Milk
+Now you have 1 task in the list
+----------------------------
+Noted. I've removed this task:
+    [T][ ] Buy Milk
+Now you have 0 task in the list
+----------------------------
+:'( OOPS!!! There are no tasks so far
+----------------------------
+Got it, Duke. I have added this task:
+    [E][ ] Townhall (at: 2021-10-27, 15:00)
+Now you have 1 task in the list
+----------------------------
+Got it, Duke. I have added this task:
+    [T][ ] Wash laundry
+Now you have 2 tasks in the list
+----------------------------
+Got it, Duke. I have added this task:
+    [D][ ] CS2103T Project (by: 2021-08-19, 23:59)
+Now you have 3 tasks in the list
+----------------------------
+1: [E][ ] Townhall (at: 2021-10-27, 15:00)
+2: [T][ ] Wash laundry
+3: [D][ ] CS2103T Project (by: 2021-08-19, 23:59)
+----------------------------
+:'( OOPS!!! Invalid input. Type "help" for more information.
+----------------------------
+:'( OOPS!!! Too little arguments. Type "help" followed by the command for more information.
+----------------------------
+:'( OOPS!!! There should be a description followed by "/by" and then the date and time of the deadline.
+----------------------------
+:'( OOPS!!! There should be a description followed by "/by" and then the date and time of the deadline.
+----------------------------
+:'( OOPS!!! There should be a description followed by "/at" and then the date and time of the event.
+----------------------------
+:'( OOPS!!! There should be a description followed by "/by" and then the date and time of the deadline.
+----------------------------
+Got it, Duke. I have added this task:
+    [E][ ] Job Interview (at: 2021-08-25, 15:00)
+Now you have 4 tasks in the list
+----------------------------
+:'( OOPS!!! There should be a description followed by "/by" and then the date and time of the deadline.
+----------------------------
+Got it, Duke. I have added this task:
+    [D][ ] Prepare presentation (by: 2021-08-25, 21:30)
+Now you have 5 tasks in the list
+----------------------------
+Got it, Duke. I have added this task:
+    [E][ ] Mum's birthday (at: 2021-11-24, 20:00)
+Now you have 6 tasks in the list
+----------------------------
+Got it, Duke. I have added this task:
+    [T][ ] Get a life
+Now you have 7 tasks in the list
+----------------------------
+Got it, Duke. I have added this task:
+    [T][ ] Get a wife
+Now you have 8 tasks in the list
+----------------------------
+Got it, Duke. I have added this task:
+    [T][ ] Get 6 packs
+Now you have 9 tasks in the list
+----------------------------
+Got it, Duke. I have added this task:
+    [E][ ] Sleep (at: 2021-08-25, 02:00)
+Now you have 10 tasks in the list
+----------------------------
+Got it, Duke. I have added this task:
+    [D][ ] CS2100 homework (by: 2021-08-25, 23:59)
+Now you have 11 tasks in the list
+----------------------------
+Got it, Duke. I have added this task:
+    [T][ ] Learn to bake
+Now you have 12 tasks in the list
+----------------------------
+Got it, Duke. I have added this task:
+    [T][ ] Renew passport
+Now you have 13 tasks in the list
+----------------------------
+10: [E][ ] Sleep (at: 2021-08-25, 02:00)
+ 4: [E][ ] Job Interview (at: 2021-08-25, 15:00)
+ 5: [D][ ] Prepare presentation (by: 2021-08-25, 21:30)
+11: [D][ ] CS2100 homework (by: 2021-08-25, 23:59)
+ 1: [E][ ] Townhall (at: 2021-10-27, 15:00)
+ 6: [E][ ] Mum's birthday (at: 2021-11-24, 20:00)
+ 2: [T][ ] Wash laundry
+ 7: [T][ ] Get a life
+ 8: [T][ ] Get a wife
+ 9: [T][ ] Get 6 packs
+12: [T][ ] Learn to bake
+13: [T][ ] Renew passport
+----------------------------
+Nice! I've marked this task as done: 
+    [T][X] Wash laundry
+----------------------------
+:'( OOPS!!! You have already marked this task ([T][X] Wash laundry) as done
+----------------------------
+Nice! I've marked this task as done: 
+    [T][X] Get a life
+----------------------------
+:'( OOPS!!! Too little arguments. Type "help" followed by the command for more information.
+----------------------------
+:'( OOPS!!! Too little arguments. Type "help" followed by the command for more information.
+----------------------------
+ 1: [E][ ] Townhall (at: 2021-10-27, 15:00)
+ 2: [T][X] Wash laundry
+ 3: [D][ ] CS2103T Project (by: 2021-08-19, 23:59)
+ 4: [E][ ] Job Interview (at: 2021-08-25, 15:00)
+ 5: [D][ ] Prepare presentation (by: 2021-08-25, 21:30)
+ 6: [E][ ] Mum's birthday (at: 2021-11-24, 20:00)
+ 7: [T][X] Get a life
+ 8: [T][ ] Get a wife
+ 9: [T][ ] Get 6 packs
+10: [E][ ] Sleep (at: 2021-08-25, 02:00)
+11: [D][ ] CS2100 homework (by: 2021-08-25, 23:59)
+12: [T][ ] Learn to bake
+13: [T][ ] Renew passport
+----------------------------
+Usage: help [command]
+For example: help
+This will display the help messages for every command. Alternatively,
+             help list
+This will display the help message for the list command.
+----------------------------
+:'( OOPS!!! Invalid input. Type "help" for more information.
+----------------------------
+Bye, Duke! Hope to see you again soon.
+----------------------------
