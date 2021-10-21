@@ -1,0 +1,15 @@
+deadline do homework /by no idea :-p
+todo borrow book
+event project meeting /at Mon 2-4pm
+deadline return book /by Sunday
+list
+done 2
+list
+delete 1
+list
+deadline buy books
+done
+delete 0
+event yoga /at
+event yoga /at Home
+bye

@@ -1,24 +1,82 @@
-# Duke project template
+# DukePro
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> Made with a project template for a greenfield Java project. It's named after the Java mascot _Duke_. 
 
-## Setting up in Intellij
+### What can DukePro do?
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+DukePro is your companion to free your mind of having to remember things you need to do! It's:
+- Text-Based
+- Easy to learn and use
+- **_VERY_** efficient and handy!
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+
+### How to set up DukePro?
+Follow these steps to get your own DukePro:
+1. Download it from [here](https://github.com/janjanchen/ip). 
+2. Run it. 
+3. Add your tasks. 
+4. ~~Manage~~ **Let _DukePro_ manage** your tasks for you! :wink:
+
+
+**Features**
+
+- [X] Manages Todo Lists
+- [X] Manages Deadlines
+- [X] Manages Events
+- [X] Save, Delete, Filters and many more!
+- [ ] More features to be added
+
+## Code SneakPeaks
+This is the code in DukePro that can be found in its `Task` class:
+```java
+/**
+ * A Parent class for the different types of input to the Task List.
+ */
+public class Task {
+   protected String description;
+   protected boolean isDone;
+
+   /**
+    * A public constructor to create a task.
+    * @param description The description of the task.
+    */
+   public Task(String description) {
+      this.description = description;
+      this.isDone = false;
+   }
+
+   /**
+    * Returns the string representation of the task's status.
+    * @return the string representation of the task's status.
+    */
+   public String getStatusIcon() {
+      return (isDone ? "[X] " : "[ ] "); // mark done task with X
+   }
+
+   /**
+    * Marks the task as completed.
+    */
+   public void markAsDone() {
+      this.isDone = true;
+   }
+
+   /**
+    * Returns the string representation of the task.
+    * @return the string representation of the task.
+    */
+   @Override
+   public String toString() {
+      return this.getStatusIcon() + this.description;
+   }
+
+   /**
+    * Returns the string representation of the task
+    * to be saved into the file.
+    * @return the string representation of the task
+    * to be saved into the file.
+    */
+   public String toStore() {
+      return this.getStatusIcon() + this.description;
+   }
+}
+```
