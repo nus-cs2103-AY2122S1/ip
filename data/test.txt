@@ -1,0 +1,4 @@
+T & 0 &  1 & buy milk
+E & 0 &  1 & meeting & 21/10/2021 1200
+T & 0 &  1 & buy apples
+T & 0 &  1 & buy apples
