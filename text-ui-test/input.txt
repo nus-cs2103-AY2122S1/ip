@@ -1,0 +1,29 @@
+todo borrow book
+todo
+deadline return book /by Sunday
+deadline
+deadline return book by Sunday
+event project meeting /at Mon 2-4pm
+event
+event project meeting at Mon 2-4pm
+list
+done return book
+done 4
+done -1
+done 1
+delete return book
+delete 4
+delete -1
+delete 1
+bye
+
+//
+
+deadline passed deadline /by 2021-09-05
+deadline test-1 /by 2021-09-09
+deadline test0 /by 2021-09-10
+deadline test1 /by 2021-09-11
+deadline test2 /by 2021-09-12
+deadline test3 /by 2021-09-13
+deadline test4 /by 2021-09-14
+done 4
