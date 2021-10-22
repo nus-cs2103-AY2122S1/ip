@@ -15,3 +15,11 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+*.class
+text-ui-test/EXPECTED.TXT
+text-ui-test/input.txt
+text-ui-test/sources.txt
+text-ui-test/runtest.sh
+text-ui-test/runtest.bat
+data/Virushade.txt
+src/main/java/META-INF/MANIFEST.MF

@@ -1,7 +1,115 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+__      __ ( )                ____
+\ \    / /  _   ____  _   _  / __/
+ \ \  / /  | | | ,__|| | | | \ \
+  \ \/ /   | | | |   | |_| | _) \
+   \__/    |_| |_|    \__,_||___/
+What can <<Virushade>> do for you?
+
+_____________________________________________________
+
+OOPS!!! I'm sorry, but I don't know what that means :-(
+_____________________________________________________
+
+OOPS!!! The description of a todo task cannot be empty.
+_____________________________________________________
+
+OOPS!!! The description of an event task cannot be empty.
+_____________________________________________________
+
+OOPS!!! The description of a deadline task cannot be empty.
+_____________________________________________________
+
+Added: Test add todo task
+Now you have 1 tasks in the list.
+_____________________________________________________
+
+Added: Test add deadline task
+Now you have 2 tasks in the list.
+_____________________________________________________
+
+Added: Test add event task
+Now you have 3 tasks in the list.
+_____________________________________________________
+
+Added: Test slashPartition without space
+Now you have 4 tasks in the list.
+_____________________________________________________
+
+Here are the tasks in your list:
+1.[T][ ] Test add todo task
+2.[D][ ] Test add deadline task /by: 11 Dec 2012 11:59PM
+3.[E][ ] Test add event task /at 2021-25-08
+4.[D][ ] Test slashPartition without space /by: now
+_____________________________________________________
+
+OOPS!!! Please enter an integer after 'done'.
+_____________________________________________________
+
+Please enter an integer after 'done ' instead.
+_____________________________________________________
+
+Please enter an integer after 'done ' instead.
+_____________________________________________________
+
+Nice! I have marked this task as done: 
+[D][x] Test add deadline task /by: 11 Dec 2012 11:59PM
+_____________________________________________________
+
+Nice! I have marked this task as done: 
+[E][x] Test add event task /at 2021-25-08
+_____________________________________________________
+
+Nice! I have marked this task as done: 
+[D][x] Test slashPartition without space /by: now
+_____________________________________________________
+
+Please check that you have entered the correct number!
+_____________________________________________________
+
+Please enter an integer greater than 0.
+_____________________________________________________
+
+OOPS!!! Please enter an integer after 'delete'.
+_____________________________________________________
+
+Please enter an integer after 'done ' instead.
+java.lang.NumberFormatException: For input string: "LOL THIS AIN'T NO INTEGER"
+_____________________________________________________
+
+Please enter an integer after 'done ' instead.
+java.lang.NumberFormatException: For input string: "1.5"
+_____________________________________________________
+
+Please enter an integer greater than 0.
+_____________________________________________________
+
+Noted. I've removed this task: 
+[D][x] Test add deadline task /by: 11 Dec 2012 11:59PM
+You have 3 tasks in the list.
+_____________________________________________________
+
+Please check that you have entered the correct number!
+_____________________________________________________
+
+Noted. I've removed this task: 
+[E][x] Test add event task /at 2021-25-08
+You have 2 tasks in the list.
+_____________________________________________________
+
+Noted. I've removed this task: 
+[T][ ] Test add todo task
+You have 1 tasks in the list.
+_____________________________________________________
+
+Noted. I've removed this task: 
+[T][ ] Test add todo task
+You have 0 tasks in the list.
+_____________________________________________________
+
+Nothing in the list as of now.
+_____________________________________________________
+
+Bye. Hope to see you again soon!
+_____________________________________________________
 

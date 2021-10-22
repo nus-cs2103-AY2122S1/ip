@@ -1,0 +1,29 @@
+Test Check if none of keywords added.
+todo
+event
+deadline
+todo Test add todo task
+deadline Test add deadline task /by 2012-12-11 2359
+event Test add event task /at 2021-25-08
+deadline Test slashPartition without space/by now
+list
+done
+done 0.5
+done LOL THIS AIN'T NO INTEGER
+done 2
+done 3
+done 4
+done 10
+done -1
+delete
+delete LOL THIS AIN'T NO INTEGER
+delete 1.5
+delete -10
+delete 2
+delete 10
+delete 3
+delete 1
+delete 1
+list
+bye
+Check if already Exit.
