@@ -1,0 +1,4 @@
+[T][X] borrow book
+[T][ ] read book
+[D][ ] return book  (by: 02 Sep 2021, 12:00)
+[E][ ] team meeting  (at: 03 Sep 2021)
