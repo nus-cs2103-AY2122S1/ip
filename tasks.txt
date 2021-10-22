@@ -1,0 +1,5 @@
+E|true|CS2101 Presentation|2021-09-15T08:00
+T|false|Finish CS2103T iP NOW!|null
+D|false|Finish CS2103T tP|2021-09-17T00:00
+T|false|Read Some Good Books|null
+T|false|read book|null
