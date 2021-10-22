@@ -45,6 +45,6 @@ public class ParserTest {
         DukeException exception = assertThrows(DukeException.class, () -> {
             Parser.parseDocument("W,0,read books");
         });
-        assertEquals("OOPS!!! Error in saved tasks document", exception.getMessage());
+        assertEquals("OOPS!!! Error in saved tasks document: W,0,read books", exception.getMessage());
     }
 }

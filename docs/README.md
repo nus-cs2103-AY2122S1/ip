@@ -164,9 +164,11 @@ Got it. Here is the updated task:
 Find the tasks whose description contains the query key word provided by the user.
 
 __Example of usage:__
+
 `find books`
 
 __Expected outcome:__
+
 All the tasks whose description contains `books`.
 ```
 Here are the matching tasks in your list:
@@ -179,9 +181,11 @@ Here are the matching tasks in your list:
 Clone the task specified by the index shown in task list.
 
 __Example of usage:__
+
 `clone 2`
 
 __Expected outcome:__
+
 Clone the task specified by the index shown in task list, and add it to the tail of the list.
 ```
 Got it. I've added this task:
@@ -193,9 +197,11 @@ Now you have 6 tasks in the list.
 Exit the program
 
 __Example of usage:__
+
 `bye`
 
 __Expected outcome:__
+
 Say goodbye exit the program.
 ```
 Bye. Hope to see you again soon!
