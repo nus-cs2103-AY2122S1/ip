@@ -1,7 +1,71 @@
-Hello from
+No past saved data!
+____________________________________________________________
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you?
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+here
+Got it. I've added this task: 
+  [T][ ] borrow book
+Now you have 1 tasks in the list.
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+Here are the tasks in your list: 
+1.[T][ ] borrow book
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+Got it. I've added this task: 
+  [D][ ] return book  (by: 2 Dec 2019, 12:00 AM)
+Now you have 2 tasks in the list.
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+Got it. I've added this task: 
+  [E][ ] project meeting  (at: 5 Aug 2021, 06:00 PM)
+Now you have 3 tasks in the list.
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+Nice! I've marked this task as done: 
+  [D][X] return book  (by: 2 Dec 2019, 12:00 AM)
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+Here are the tasks in your list: 
+1.[T][ ] borrow book
+2.[D][X] return book  (by: 2 Dec 2019, 12:00 AM)
+3.[E][ ] project meeting  (at: 5 Aug 2021, 06:00 PM)
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+here
+Got it. I've added this task: 
+  [T][ ] eat
+Now you have 4 tasks in the list.
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+Noted! I've removed this task: 
+  [T][ ] borrow book
+Now you have 3 tasks in the list.
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+Here are the tasks in your list: 
+1.[D][X] return book  (by: 2 Dec 2019, 12:00 AM)
+2.[E][ ] project meeting  (at: 5 Aug 2021, 06:00 PM)
+3.[T][ ] eat
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
