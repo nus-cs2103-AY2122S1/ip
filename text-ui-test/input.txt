@@ -1,0 +1,25 @@
+apple
+
+todo borrow book
+todo
+deadline finish CS2103T IP /by 2/12/2019 1800
+deadline /by 2/12/2019 1800
+deadline apple
+deadline
+event exam /at 2/12/2019 1800
+event /at 2/12/2019
+event pear123
+event
+deadline finish assignment /by 2/12/2019 1800
+event lecture /at 2/12/2019 1800
+done 1
+done 7
+done orange
+done
+list
+delete 2
+delete 9
+delete apple
+delete
+list
+bye
