@@ -1,0 +1,10 @@
+todo Complete CS2100 Week 2 Individual Project
+done 1
+list
+deadline CS2100 Individual Project /by Week 6
+list
+event Winter break /at Home
+list
+todo Rest for the day
+done 4
+list
