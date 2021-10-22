@@ -1,0 +1,8 @@
+duke.tasks.Tasks one
+todo duke.tasks.Tasks two
+done 2
+event duke.tasks.Tasks three /at 11pm
+done 3
+deadline duke.tasks.Tasks four /by 2359
+list
+bye
