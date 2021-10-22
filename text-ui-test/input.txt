@@ -1,0 +1,12 @@
+list
+A task
+todo Individual Project
+deadline IP /by tonight 2359
+event lecture /at tomorrow 9am
+list
+done 1
+done 4
+list
+done 5
+done 2
+list
