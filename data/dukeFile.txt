@@ -1,0 +1,3 @@
+T | 0 | food | buy bread | 
+E | 1 | food | lunch | 2021-09-18
+D | 0 |   | return book | 2021-09-15
