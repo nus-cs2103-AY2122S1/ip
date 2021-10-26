@@ -1,0 +1,3 @@
+T | 1 | homework
+E | 0 | meet Tim | 2021-09-17
+T | 0 | assignment for CS2100
