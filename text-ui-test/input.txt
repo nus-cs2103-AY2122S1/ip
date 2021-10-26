@@ -1,0 +1,17 @@
+todo borrow book
+list
+deadline return book /by 2019-12-12 1800
+list
+done 2
+list
+done 1
+list
+event tear book /at 2019-12-12
+list
+done 3
+list
+todo
+blah
+delete 2
+list
+bye
