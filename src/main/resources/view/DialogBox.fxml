@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="155.0" prefWidth="490.0" style="-fx-background-color: #222222; -fx-border-radius: 50px;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <Pane>
+         <children>
+            <Rectangle fx:id="container" arcHeight="20.0" arcWidth="20.0" fill="#3f3f3f" height="120.0" layoutY="2.0" opacity="0.84" stroke="TRANSPARENT" strokeType="INSIDE" width="363.0" />
+              <Label fx:id="dialog" alignment="TOP_LEFT" layoutX="8.0" layoutY="8.0" maxHeight="1.7976931348623157E308" maxWidth="280.0" minHeight="120.0" text="Label" textFill="WHITE" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="120.0" prefWidth="115.0">
+         <children>
+              <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" layoutX="8.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>
