@@ -1,0 +1,6 @@
+../src/main/java/iris/Iris.java
+../src/main/java/iris/IrisException.java
+../src/main/java/iris/Parser.java
+../src/main/java/iris/Storage.java
+../src/main/java/iris/TaskList.java
+../src/main/java/iris/Ui.java
