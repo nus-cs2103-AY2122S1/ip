@@ -345,7 +345,7 @@ where
 The `Last Met` attribute refers to the last date the user (typically a financial advisor) have met the client.
 
 | <img src=images/info_icon.png width="50"> | • `Last Met` can take on any date, including dates which are in the future to provide users the flexiblity in tailoring their address book to their liking. |
-|-|-|
+| --- | --- |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -461,6 +461,7 @@ Deletes an existing client from the address book using their client id.
 ### 5.5 List all contacts : `list`
 
 Shows the full list of all clients in the address book.
+
 | Format | `list` |
 | --- | :--|
 | <img src=images/info_icon.png width="50"> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work |
@@ -515,6 +516,7 @@ Clears all entries from the address book.
 ### 5.11 Exiting the program : `exit`
 
 Exits LeadsForce.
+
 | Format | `exit` |
 | --- | :-- |
 | <img src=images/info_icon.png width="50"> | • As long as the first word in the command is `exit`, the command will still work regardless of the additional inputs. <br> eg. the command `exit asdknkjsaf` will still work |
@@ -624,6 +626,7 @@ However, if you do happen to encounter any bugs while using LeadsForce, please g
 This section details all commands in using the features in LeadsForce.
 
 ### 10.1 Client Management Commands
+
 Action | Format | Examples
 --------|---------|---------
 **Create** | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
