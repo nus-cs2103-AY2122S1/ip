@@ -202,7 +202,7 @@ title: User Guide
 
 <h1 align="center"> LeadsForce User Guide </h1>
 <p align="center">
-<img  src=images/LeadsForceLogo.jpg alt="alt text" width="125"> 
+<img src="images/LeadsForceLogo.jpg" alt="alt text" width="125"> 
 </p>
 <p align="center">
 Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions to the features in LeadsForce, scroll down the table of contents below to get started ☺️
