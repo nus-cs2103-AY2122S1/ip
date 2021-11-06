@@ -364,6 +364,7 @@ The command view is where you will be able to input commands into LeadsForce. Th
    • File bar where users can exit the app <br>
    • Address Book bar which allows users to switch between address books <br>
    • Themes bar which allows users to switch between different themes <br>
+   
 2. **Command Box** <br>
    • This is where users can input their commands into LeadsForce <br>
 
