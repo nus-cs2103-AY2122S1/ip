@@ -345,7 +345,6 @@ where
 The `Last Met` attribute refers to the last date the user (typically a financial advisor) have met the client.
 
 | <img src=images/info_icon.png width="50"> | • `Last Met` can take on any date, including dates which are in the future to provide users the flexiblity in tailoring their address book to their liking. |
-| --- | --- |
 
 --------------------------------------------------------------------------------------------------------------------
 
