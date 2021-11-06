@@ -262,9 +262,9 @@ When reading our User Guide, here are some important information to take note of
 
 | **Icon** | **Meaning of icons** |
 | :-: | --- |
-| <img src=docs/images/info_icon.png width="50"> | Notes are specific conditions or behaviours of a feature. |
-| <img src=docs/images/tip_icon.png width="50"> | tips are suggestions that can help LeadsForce run faster. |
-| <img src=docs/images/warn_icon.png width="50"> | warnings are important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files. |
+| <img src="images/info_icon.png" width="50"> | Notes are specific conditions or behaviours of a feature. |
+| <img src="images/tip_icon.png" width="50"> | tips are suggestions that can help LeadsForce run faster. |
+| <img src="images/warn_icon.png" width="50"> | warnings are important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files. |
 
 ## 2. Quick start
 
