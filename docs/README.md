@@ -317,7 +317,7 @@ A client is considered to be the same as another client if they share the same *
 LeadsForce has checks that prevent users from creating duplicated contacts.
 
 <div markdown="block" class="alert alert-info">
- <p><img src=images/info_icon.png width="30"/><b>Notes about having the same client information for various attributes:</b></p>
+ <p><img src="images/info_icon.png" width="30"/><b>Notes about having the same client information for various attributes:</b></p>
 
 * Users have the flexibility to give the same name, email, phone number or any other attributes to multiple users, as long as
   2 separate clients do not end up with the same name and email.
@@ -338,23 +338,23 @@ where
 
 | example | `m/25-12-2021 (00:00~23:59), Santa's Workshop`|
 | :-: | :-- |
-| <img src=images/info_icon.png width="50"> | • `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
+| <img src="images/info_icon.png" width="50"> | • `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
 
 ### 3.3 Last Met Attribute
 
 The `Last Met` attribute refers to the last date the user (typically a financial advisor) have met the client.
 
-| <img src=images/info_icon.png width="50"> | • `Last Met` can take on any date, including dates which are in the future to provide users the flexiblity in tailoring their address book to their liking. |
+| <img src="images/info_icon.png" width="50"> | • `Last Met` can take on any date, including dates which are in the future to provide users the flexiblity in tailoring their address book to their liking. |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Navigating LeadsForce
 This section details the various components of LeadsForce's interface and how you could go about navigating our application. An overview of LeadsForce's interface is shown below.
-<img src=images/NavigatingLeadsForce.png />
+<img src="images/NavigatingLeadsForce.png" />
 
 ### 4.1 Command View
 <p align="center">
-<img src=images/CommandViewInterface.png width="500"/>
+<img src="images/CommandViewInterface.png" width="500"/>
 </p>
 <br> 
 The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br> 
@@ -375,7 +375,7 @@ The command view is where you will be able to input commands into LeadsForce. Th
 
 ### 4.2 Client List View
 <p align="center">
-<img src=images/ClientListView.png width="500"/>
+<img src="images/ClientListView.png" width="500"/>
 </p>
 The client list view consist of the list of clients from the user's address book,and provides an overview of their clients' infomation.
 
@@ -384,7 +384,7 @@ The client list view consist of the list of clients from the user's address book
 
 ### 4.3 Client Info View
 <p align="center">
-<img src=images/ClientInfoView.png width="500"/>
+<img src="images/ClientInfoView.png" width="500"/>
 </p>
 
 The client information view provides in-depth information about the client's attributes. Using the [`View`](#52-retrieve-particular-contact--view) command, users can view the client information in the client info view.
@@ -397,7 +397,7 @@ The meeting schedule view showcases the upcoming meetings that the client has, a
 This section details the various features available in a single address book in LeadsForce. These features are generally used in the management of client information and client meetings.
 
 <div markdown="block" class="alert alert-info">
- <p><img src=images/info_icon.png width="30"/><b>Notes about the command format:</b></p>
+ <p><img src="images/info_icon.png" width="30"/><b>Notes about the command format:</b></p>
 
 * When `<attribute>` is given, it means that the any *attribute tag* can be used, with the exception of *client id* in some cases
 * In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key in
@@ -419,7 +419,7 @@ Adds a new client to the address book.
 | Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`|
 | :-: | :-- |
 | **example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 r/4`|
-| <img src=images/info_icon.png width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional, except for Client ID as client ID cannot be given to the client.  <br> • Tags that can be added are as seen in the client information in the Client Info Section |
+| <img src="images/info_icon.png" width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional, except for Client ID as client ID cannot be given to the client.  <br> • Tags that can be added are as seen in the client information in the Client Info Section |
 
 ### 5.2 Retrieve Particular Contact : `view`
 
@@ -431,7 +431,7 @@ View client's information in detail.
 
 **Expected Outcome:** <br>
 For instance, if `Alex Yeoh` is the client with client ID 1, the following will be shown in the client info view of LeadsForce. <br>
-<img src=images/ClientInfoView.png width="300"/>
+<img src="images/ClientInfoView.png" width="300"/>
 
 
 ### 5.3 Update Existing Contact : `edit`
@@ -444,8 +444,8 @@ Update the attributes of existing users using the tag of the client’s attribut
 | Format | `edit CLIENT'S ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...`|
 | :-: | :-- |
 | **example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), Mcdonalds` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at Mcdonalds |
-| <img src=images/info_icon.png width="50"> | • Client Id cannot be changed. |
-| <img src=images/tip_icon.png width="50"> | • multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several different clients, you could simply use this feature to do so. |
+| <img src="images/info_icon.png" width="50"> | • Client Id cannot be changed. |
+| <img src="images/tip_icon.png" width="50"> | • multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several different clients, you could simply use this feature to do so. |
 
 ### 5.4 Delete particular contact : `delete`
 
@@ -454,8 +454,8 @@ Deletes an existing client from the address book using their client id.
 | Format | `delete CLIENT_ID...`|
 | :-: | :-- |
 | **example** | • `delete 7` will deletes client with client id 7 <br> • `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8 |
-| <img src=images/info_icon.png width="50"> | • Multiple clients can be deleted with one `delete` command |
-| <img src=images/warn_icon.png width="50"> | • This action is irreversible. Once you have deleted a client, the client and his/her corresponding information will be removed from the storage file. |
+| <img src="images/info_icon.png" width="50"> | • Multiple clients can be deleted with one `delete` command |
+| <img src="images/warn_icon.png" width="50"> | • This action is irreversible. Once you have deleted a client, the client and his/her corresponding information will be removed from the storage file. |
 
 ### 5.5 List all contacts : `list`
 
@@ -463,7 +463,7 @@ Shows the full list of all clients in the address book.
 
 | Format | `list` |
 | --- | :--|
-| <img src=images/info_icon.png width="50"> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work |
+| <img src="images/info_icon.png" width="50"> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work |
 
 ### 5.6 Sort Contacts : `sort`
 
@@ -472,7 +472,7 @@ Sorts clients in order based on the inputted attribute. Clients can be sorted as
 | Format | `sort <attribute>/{SORT DIRECTION}...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
 | :-: | :-- |
 | **examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
-| <img src=images/info_icon.png width="50"> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
+| <img src="images/info_icon.png" width="50"> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
 ### 5.7 Find meeting schedule : `schedule`
 
@@ -481,7 +481,7 @@ Finds the meeting schedule on a specified date.
 | Format | `schedule [DATE]`|
 | :-: | :-- |
 | **examples** | • `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021. <br>  • `schedule` displays all meetings|
-| <img src=images/info_icon.png width="50"> | • `DATE` has to be in the format of dd-MM-yyyy. <br> • if the `DATE` is not specified, all meetings will be displayed.|
+| <img src="images/info_icon.png" width="50"> | • `DATE` has to be in the format of dd-MM-yyyy. <br> • if the `DATE` is not specified, all meetings will be displayed.|
 
 ### 5.8 Locating clients by keywords : `search`
 
@@ -490,7 +490,7 @@ Finds clients whose contacts match with the given keywords.
 | Format | `search KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :-: | :-- |
 | **examples** | • `search John` returns *john* and *John Doe* <br> • `search alex david` returns *Alex Yeoh*, *David Li* |
-| <img src=images/info_icon.png width="50"> | • If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
+| <img src="images/info_icon.png" width="50"> | • If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
 
 ### 5.9 Filter current list by keywords : `filter`
 
@@ -500,8 +500,8 @@ Filters the current list by the given keywords.
 | Format | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :-: | :-- |
 | **examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
-| <img src=images/info_icon.png width="50"> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
-| <img src=images/tip_icon.png width="50"> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src=images/FilterTagCommand.png width="300">|
+| <img src="images/info_icon.png" width="50"> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
+| <img src="images/tip_icon.png" width="50"> | • Use the tags found under the command box to quickly filter clients by their tags. Simply click on a tag and press enter to filter clients with the specific tag. <br> eg. Pressing the `classmate` button allows you to filter clients with the `classmate` tag. <br> <img src=images/FilterTagCommand.png width="300">|
 
 ### 5.10 Clearing all entries : `clear`
 
@@ -509,8 +509,8 @@ Clears all entries from the address book.
 
 | Format | `clear`|
 | :-: | :-- |
-| <img src=images/info_icon.png width="50"> | • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work. <br> • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br>    • `yes`: to confirm and proceed with the clear command. <br>    •`no`: to cancel the clear command.|
-| <img src=images/warn_icon.png width="50"> | •  This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
+| <img src="images/info_icon.png" width="50"> | • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work. <br> • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br>    • `yes`: to confirm and proceed with the clear command. <br>    •`no`: to cancel the clear command.|
+| <img src="images/warn_icon.png" width="50"> | •  This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
 ### 5.11 Exiting the program : `exit`
 
@@ -518,7 +518,7 @@ Exits LeadsForce.
 
 | Format | `exit` |
 | --- | :-- |
-| <img src=images/info_icon.png width="50"> | • As long as the first word in the command is `exit`, the command will still work regardless of the additional inputs. <br> eg. the command `exit asdknkjsaf` will still work |
+| <img src="images/info_icon.png" width="50"> | • As long as the first word in the command is `exit`, the command will still work regardless of the additional inputs. <br> eg. the command `exit asdknkjsaf` will still work |
 
 ### 5.12 Saving the data
 
@@ -528,7 +528,7 @@ LeadsForce's data are saved in the hard disk automatically after any command tha
 
 LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-| <img src=images/warn_icon.png width="50"> | If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run. |
+| <img src="images/warn_icon.png" width="50"> | If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run. |
 
 ## 6. Multiple Address Books Feature
 This section details the multiple address book feature in LeadsForce. Seperate your clients into different address books to better manage your clients!
@@ -540,7 +540,7 @@ Create a new address book by the name provided and switches to it.
 | Format | `ab create ADDRESSBOOK_NAME` <br> <br> • `ADDRESSBOOK_NAME` refers to the name to be given to the new address book.|
 | :-: | :-- |
 | Example | `ab create vip clients` will create a new address book named `vip clients` |
-| <img src=images/info_icon.png width="50"> | • The name of the addressbook cannot be the same as an existing address book.|
+| <img src="images/info_icon.png" width="50"> | • The name of the addressbook cannot be the same as an existing address book.|
 
 ### 6.2 Delete existing address book: ab delete : `ab delete`
 
@@ -549,7 +549,7 @@ Delete an address book that currently exists.
 | Format | `ab delete ADDRESSBOOK_NAME`<br> <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to be deleted.|
 | :-: | :-- |
 | Example | `ab delete test` will delete the address book named `test` |
-| <img src=images/info_icon.png width="50"> | • The current address book cannot be deleted, switch to another address book first before deleting the address book.|
+| <img src="images/info_icon.png" width="50"> | • The current address book cannot be deleted, switch to another address book first before deleting the address book.|
 
 ### 6.3 Switch to different address book : `ab switch`
 
@@ -558,7 +558,7 @@ Switch to a different address book that currently exists.
 | Format | `ab switch ADDRESSBOOK_NAME` <br> <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to switched to .|
 | :-: | :-- |
 | Example | `ab switch other` will switch over to the address book named `other` |
-| <img src=images/tip_icon.png width="50"> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src=images/MultipleAddressBookTab.jpg width="300"> |
+| <img src="images/tip_icon.png" width="50"> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src=images/MultipleAddressBookTab.jpg width="300"> |
 
 
 ### 6.4 List all address book : `ab list`
