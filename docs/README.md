@@ -259,6 +259,7 @@ Managing your leads has never been easier.
 When reading our User Guide, here are some important information to take note of.
 
 ### 1.1.1 Icons and its meaning
+
 | **Icon** | **Meaning of icons** |
 | :-: | --- |
 | <img src=images/info_icon.png width="50"> | Notes are specific conditions or behaviours of a feature. |
@@ -344,7 +345,7 @@ where
 The `Last Met` attribute refers to the last date the user (typically a financial advisor) have met the client.
 
 | <img src=images/info_icon.png width="50"> | • `Last Met` can take on any date, including dates which are in the future to provide users the flexiblity in tailoring their address book to their liking. |
-| :-: | :-- |
+|-|-|
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -415,6 +416,7 @@ This section details the various features available in a single address book in 
 ### 5.1 Create New Contact : `add`
 
 Adds a new client to the address book.
+
 | Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`|
 | :-: | :-- |
 | **example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 r/4`|
@@ -525,7 +527,7 @@ LeadsForce's data are saved in the hard disk automatically after any command tha
 
 LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-| <img src=images/warn_icon.png width="50"> | If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.  |
+| <img src=images/warn_icon.png width="50"> | If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run. |
 | --- | :-- |
 
 ## 6. Multiple Address Books Feature
