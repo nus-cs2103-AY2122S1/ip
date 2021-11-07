@@ -1,0 +1,9 @@
+[T][ ] borrow book
+[D][ ] return book (by: Tomorrow)
+[E][ ] project meeting (at: Mon 2-4pm)
+[E][ ] project meeting (at: Mon 2-4pm)
+[D][ ] do homework (by: no idea :-p)
+[T][ ] borrow book
+[D][ ] return book (by: Tomorrow)
+[E][ ] project meeting (at: Mon 2-4pm)
+[D][ ] do homework (by: no idea :-p)
