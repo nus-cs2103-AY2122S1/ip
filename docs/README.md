@@ -202,9 +202,7 @@ title: User Guide
 
 <h1 align="center"> LeadsForce User Guide </h1>
 <p align="center">
-
-<img src="images/LeadsForceLogo.jpg" alt="logo" width="125" /> 
-
+<img src="images/LeadsForceLogo.jpg" alt="logo" width="125" />
 </p>
 <p align="center">
 Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions to the features in LeadsForce, scroll down the table of contents below to get started ☺️
@@ -261,7 +259,6 @@ Managing your leads has never been easier.
 When reading our User Guide, here are some important information to take note.
 
 ### 1.1.1 Icons and its meaning
-
 
 **Icon** | **Meaning of icons**
 :---: | :---
@@ -339,11 +336,9 @@ where
 * *startTime* and *endTime* are in `hh:mm` (24 hour format)
 * *location* is a non-empty string
 
-
 | Example | `m/25-12-2021 (00:00~23:59), Santa's Workshop`|
 | :---: | --- |
 | <img src="images/info_icon.png" width="50"/> | • `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
-
 
 ### 3.3 Last Met Attribute
 
@@ -361,7 +356,6 @@ This section details the various components of LeadsForce's interface and how yo
 <p align="center">
 <img src="images/NavigatingLeadsForce.png" />
 </p>
-
 
 ### 4.1 Command View
 <p align="center">
@@ -431,7 +425,6 @@ This section details the various features available in a single address book in 
 
 Adds a new client to the address book.
 
-
 | Format | `add n/{CLIENT_NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES}...`|
 | :---: | --- |
 | **Example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 d/10000 r/4`|
@@ -441,7 +434,7 @@ Adds a new client to the address book.
 For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` was used, a new client will be recorded in the client list view with the corresponding attributes. <br>
 <p align="center" >
 <img src="images/ExpectedAddCommand.png" width="400"/>
-</p> 
+</p>
 
 ### 5.2 Retrieve Particular Contact : `view`
 
@@ -457,13 +450,13 @@ For instance, if `Alex Yeoh` is the client with client ID 1, the following will 
 <img src="images/ClientInfoView.png" width="500"/>
 </p> 
 
+
 ### 5.3 Update Existing Contact : `edit`
 
 Update the attributes of existing users using the tag of the client’s attribute, and set/edit meetings with clients.
 
 * Multiple attributes could be changed with one command.
 * Multiple clients can be edited at the same time with the provided attributes by indicating their ids separated by a space.
-
 
 | Format | `edit CLIENT_ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...`|
 | :---: | :--- |
@@ -475,15 +468,13 @@ Update the attributes of existing users using the tag of the client’s attribut
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
 <p align="center" >
 <img src="images/ExpectedEditCommand.png" width="500"/>
-</p> 
-
+</p>
 
 ### 5.4 Delete particular contact : `delete`
 
 Deletes an existing client from the address book using their client id.
 
 | Format | `delete CLIENT_ID...`|
-
 | :---: | :--- |
 | **Example** | • `delete 7` will deletes client with client id 7 <br> • `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8 |
 | <img src="images/info_icon.png" width="50"/> | • Multiple clients can be deleted with one `delete` command |
@@ -521,6 +512,7 @@ On the other hand, using the command `sort r/dsc` will sort users by their risk 
    <img src="images/ExpectedSortCommand_DSC.png" width="600"/>
 </p><br>
 
+
 ### 5.7 Find meeting schedule : `schedule`
 
 Finds the meeting schedule on a specified date.
@@ -535,6 +527,7 @@ For instance, using `schedule 30-11-2021` will produce the following result. <br
 | Before | After |
 | --- | --- |
 | <img src="images/ExpectedScheduleCommand.png" width="500"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="500"/> |
+
 
 ### 5.8 Locating clients by keywords : `search`
 
@@ -558,7 +551,6 @@ For instance, using `search Alex` will produce the following result. <br>
 Filters the current list by the given keywords.
 
 | Format | `filter KEYWORD... <attribute>/{ATTRIBUTE_KEYWORD}...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.|
-
 | :---: | :--- |
 | **Examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
 | <img src="images/info_icon.png" width="50"/> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
@@ -569,6 +561,7 @@ For instance, using `filter t/colleagues` will produce the following result.
 | Before | After |
 | --- | --- |
 | <img src="images/ExpectedFilterCommand.png" width="500"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="500"/> |
+
 
 ### 5.10 Clearing all entries : `clear`
 
@@ -617,6 +610,7 @@ This section details the multiple address book feature in LeadsForce. Seperate y
 Create a new address book by the name provided and switches to it.
 
 | Format | `ab create ADDRESSBOOK_NAME` <br> <br> • `ADDRESSBOOK_NAME` refers to the name to be given to the new address book.|
+
 | :---: | :--- |
 | **Example** | `ab create vip clients` will create a new address book named `vip clients` |
 | <img src="images/info_icon.png" width="50"/> | • The name of the addressbook cannot be the same as an existing address book.|
@@ -624,7 +618,6 @@ Create a new address book by the name provided and switches to it.
 **Expected Outcome:** <br>
 The command `ab create newAddressBook` creates a new address book as shown.
 <img src="images/ExpectedCreateAddressBook.png" width="600"/>
-
 
 ### 6.2 Delete existing address book: ab delete : `ab delete`
 
@@ -634,7 +627,6 @@ Delete an address book that currently exists.
 | :---: | :--- |
 | **Example** | `ab delete test` will delete the address book named `test` |
 | <img src="images/info_icon.png" width="50"/> | • The current address book cannot be deleted, switch to another address book first before deleting the address book.|
-
 
 ### 6.3 Switch to different address book : `ab switch`
 
@@ -652,19 +644,17 @@ For instance, using `ab switch youngadults` when on the `newAddressBook` address
 | --- | --- |
 | <img src="images/ExpectedSwitchAbCommand.png" width="500"/> | <img src="images/ExpectedSwitchAbCommand_AFTER.png" width="500"/> |
 
-
 ### 6.4 List all address book : `ab list`
 
 List all the name of all the existing address books.
 
 | Format | `ab list` |
-| ------ | --------- |
 
 **Expected Outcome:** <br>
 If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the output from the command result view.
 <p align="center"> 
 <img src="images/ExpectedAbListCommand.png" width="500"/>
-</p><br> 
+</p><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
