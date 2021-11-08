@@ -101,3 +101,5 @@ Example of usage:
 Example of usage:
 
 `showNote project meeting`
+
+<img src="/images/Ui.png">
