@@ -102,4 +102,4 @@ Example of usage:
 
 `showNote project meeting`
 
-<img src="docs/images/Ui.png">
+<img src="/images/Ui.png">
