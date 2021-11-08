@@ -1,3 +1,4 @@
+![Ui](Ui.png)
 # User Guide
 
 Duke is a personal bot assistant to help you keep track of all the things you need to do! 
