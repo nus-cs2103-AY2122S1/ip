@@ -1,0 +1,21 @@
+todo farming leylines
+deadline clip toenails /by 2021-09-01
+deadline code /by tmr
+deadline code /by 2021-08-29
+event lecture /at 2021-09-01
+todo brush teeth
+list
+done 2
+list
+done 5
+done 1
+deadline cook dinner
+event meeting
+deadline
+todo
+sugonma
+delete 1
+list
+delete 3
+list
+bye

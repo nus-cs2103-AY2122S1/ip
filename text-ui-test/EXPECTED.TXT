@@ -1,7 +1,101 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+______________________
+ Hello! I'm Ligma, Ligma Balls.
+ What can I do for you?
+______________________
+______________________
+ Successfully added:
+ [T][ ] farming leylines
+ You now have 1 task(s).
+______________________
+______________________
+ Successfully added:
+ [D][ ] clip toenails (by: Sep 1 2021)
+ You now have 2 task(s).
+______________________
+______________________
+ Time must be in yyyy-mm-dd format.
+______________________
+______________________
+ Successfully added:
+ [D][ ] code (by: Aug 29 2021)
+ You now have 3 task(s).
+______________________
+______________________
+ Successfully added:
+ [E][ ] lecture (at: Sep 1 2021)
+ You now have 4 task(s).
+______________________
+______________________
+ Successfully added:
+ [T][ ] brush teeth
+ You now have 5 task(s).
+______________________
+______________________
+ 1. [T][ ] farming leylines
+ 2. [D][ ] clip toenails (by: Sep 1 2021)
+ 3. [D][ ] code (by: Aug 29 2021)
+ 4. [E][ ] lecture (at: Sep 1 2021)
+ 5. [T][ ] brush teeth
+______________________
+______________________
+ Successfully marked as done:
+ [D][X] clip toenails (by: Sep 1 2021)
+______________________
+______________________
+ 1. [T][ ] farming leylines
+ 2. [D][X] clip toenails (by: Sep 1 2021)
+ 3. [D][ ] code (by: Aug 29 2021)
+ 4. [E][ ] lecture (at: Sep 1 2021)
+ 5. [T][ ] brush teeth
+______________________
+______________________
+ Successfully marked as done:
+ [T][X] brush teeth
+______________________
+______________________
+ Successfully marked as done:
+ [T][X] farming leylines
+______________________
+______________________
+ Time must be stipulated for deadlines using '/by'.
+______________________
+______________________
+ Time must be stipulated for events using '/at'.
+______________________
+______________________
+ The description of DEADLINE cannot be empty.
+______________________
+______________________
+ The description of TODO cannot be empty.
+______________________
+______________________
+ Sorry, command does not exist.
+______________________
+______________________
+ Successfully deleted:
+ [T][X] farming leylines
+ You now have 4 task(s).
+______________________
+______________________
+ 1. [D][X] clip toenails (by: Sep 1 2021)
+ 2. [D][ ] code (by: Aug 29 2021)
+ 3. [E][ ] lecture (at: Sep 1 2021)
+ 4. [T][X] brush teeth
+______________________
+______________________
+ Successfully deleted:
+ [E][ ] lecture (at: Sep 1 2021)
+ You now have 3 task(s).
+______________________
+______________________
+ 1. [D][X] clip toenails (by: Sep 1 2021)
+ 2. [D][ ] code (by: Aug 29 2021)
+ 3. [T][X] brush teeth
+______________________
+______________________
+ Bye. I love Imagine Dragons...
 
+
+
+ Imagine Dragon Deez Nuts Cross Your Face.
+______________________
