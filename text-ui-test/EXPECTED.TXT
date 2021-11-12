@@ -5,3 +5,63 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you today?
+Here are your tasks summoner. Please do complete them as fast as possible. I havebeen waiting for so many others for countless of centuries. Perhaps I am just an npc
+1. [T][X] one 
+2. [T][X] two 
+3. [T][X] three 
+Ohhhh myyyy. I have been waiting for this quest to complete for ages.
+Ohhhh myyyy. I have been waiting for this quest to complete for ages.
+Ohhhh myyyy. I have been waiting for this quest to complete for ages.
+Here are your tasks summoner. Please do complete them as fast as possible. I havebeen waiting for so many others for countless of centuries. Perhaps I am just an npc
+1. [T][✓] one 
+2. [T][✓] two 
+3. [T][✓] three 
+Here are your tasks summoner. Please do complete them as fast as possible. I havebeen waiting for so many others for countless of centuries. Perhaps I am just an npc
+1. [T][✓] one 
+2. [T][✓] two 
+3. [T][✓] three 
+4. [D][X] deadlineone (by: Sunday)
+5. [D][X] deadlinetwo (by: Monday)
+6. [D][X] deadlinethree (by: Tuesday)
+Ohhhh myyyy. I have been waiting for this quest to complete for ages.
+Ohhhh myyyy. I have been waiting for this quest to complete for ages.
+Ohhhh myyyy. I have been waiting for this quest to complete for ages.
+Here are your tasks summoner. Please do complete them as fast as possible. I havebeen waiting for so many others for countless of centuries. Perhaps I am just an npc
+1. [T][✓] one 
+2. [T][✓] two 
+3. [T][✓] three 
+4. [D][✓] deadlineone (by: Sunday)
+5. [D][✓] deadlinetwo (by: Monday)
+6. [D][✓] deadlinethree (by: Tuesday)
+Here are your tasks summoner. Please do complete them as fast as possible. I havebeen waiting for so many others for countless of centuries. Perhaps I am just an npc
+1. [T][✓] one 
+2. [T][✓] two 
+3. [T][✓] three 
+4. [D][✓] deadlineone (by: Sunday)
+5. [D][✓] deadlinetwo (by: Monday)
+6. [D][✓] deadlinethree (by: Tuesday)
+7. [E][X] one (at: Mon 2-4pm)
+8. [E][X] two (at: Tues 2-4pm)
+9. [E][X] three (at: Wed 2-4pm)
+Ohhhh myyyy. I have been waiting for this quest to complete for ages.
+Ohhhh myyyy. I have been waiting for this quest to complete for ages.
+Ohhhh myyyy. I have been waiting for this quest to complete for ages.
+Here are your tasks summoner. Please do complete them as fast as possible. I havebeen waiting for so many others for countless of centuries. Perhaps I am just an npc
+1. [T][✓] one 
+2. [T][✓] two 
+3. [T][✓] three 
+4. [D][✓] deadlineone (by: Sunday)
+5. [D][✓] deadlinetwo (by: Monday)
+6. [D][✓] deadlinethree (by: Tuesday)
+7. [E][✓] one (at: Mon 2-4pm)
+8. [E][✓] two (at: Tues 2-4pm)
+9. [E][✓] three (at: Wed 2-4pm)
+Invalid command input. Please enter another input
+Here are your tasks summoner. Please do complete them as fast as possible. I havebeen waiting for so many others for countless of centuries. Perhaps I am just an npc
+1. [T][✓] one 
+2. [T][✓] two 
+3. [T][✓] three 
+4. [D][✓] deadlineone (by: Sunday)
+5. [D][✓] deadlinetwo (by: Monday)
+6. [D][✓] deadlinethree (by: Tuesday)
