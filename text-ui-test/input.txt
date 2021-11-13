@@ -1,0 +1,10 @@
+todo read book |
+read book
+todo
+deadline
+event
+deadline watch video
+deadline watch video /by
+event read book
+event read book /at
+bye

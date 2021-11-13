@@ -5,3 +5,45 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+    ____________________________________________________________
+    Hello! I'm Duke
+    What can I do for you?
+    ____________________________________________________________
+    ____________________________________________________________
+    OOPS!!! Duke cannot identify the symbol "|". Please do not include it within your input :)
+    ____________________________________________________________
+    ____________________________________________________________
+    OOPS!!! I'm sorry, but I don't know what that means :-(
+    ____________________________________________________________
+    ____________________________________________________________
+    OOPS!!! The description of a todo cannot be empty.
+    ____________________________________________________________
+    ____________________________________________________________
+    OOPS!!! The description of a deadline cannot be empty.
+    ____________________________________________________________
+    ____________________________________________________________
+    OOPS!!! The description of an event cannot be empty.
+    ____________________________________________________________
+    ____________________________________________________________
+    OOPS!!! Wrong Deadline format. Correct format is:
+    deadline {task description} /by {due time}
+    Example: deadline return book /by Sunday
+    ____________________________________________________________
+    ____________________________________________________________
+    OOPS!!! Wrong Deadline format. Correct format is:
+    deadline {task description} /by {due time}
+    Example: deadline return book /by Sunday
+    ____________________________________________________________
+    ____________________________________________________________
+    OOPS!!! Wrong Event format. Correct format is:
+    event {task description} /at {time period}
+    Example: event project meeting /at Mon 2-4pm
+    ____________________________________________________________
+    ____________________________________________________________
+    OOPS!!! Wrong Event format. Correct format is:
+    event {task description} /at {time period}
+    Example: event project meeting /at Mon 2-4pm
+    ____________________________________________________________
+    ____________________________________________________________
+    Bye. Hope to see you again soon!
+    ____________________________________________________________
