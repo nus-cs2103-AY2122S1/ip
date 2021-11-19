@@ -1,0 +1,20 @@
+todo eat breakfast with Jason Mamoa
+todo "quotations"
+deadline cs2100 assignment /by 21/07/2021 1800
+deadline cs2103T /by 08/01/1999 1900
+deadline cs2105 /by 1234567
+deadline cs2105 12345
+deadline cs2105
+event party /at home
+event partyy /att home
+event party
+event  /at
+done 1
+done 11
+done -1
+done 0
+list
+delete 1
+todo homework
+list
+bye
