@@ -1,5 +1,7 @@
-# User Guide
-Nyx is a **desktop app for managing tasks**. 
+# Nyx
+Nyx is a **desktop app for managing tasks, events and deadlines**. 
+
+![Ui](docs/Ui.png)
 
 ## Features
 ### List all tasks
@@ -35,7 +37,7 @@ Example of usage:
 
 Expected outcome:
 
-![List output](./outputs/list.png)
+![List output](docs/outputs/list.png)
 
 ### `todo` - Adds a ToDo task
 Adds a ToDo task to Nyx.
@@ -48,7 +50,7 @@ Example of usage:
 
 Expected outcome:
 
-![todo output](./outputs/todo.png)
+![todo output](docs/outputs/todo.png)
 
 ### `deadline` - Adds a DeadLine task
 Adds a DeadLine task to Nyx.
@@ -61,7 +63,7 @@ Example of usage:
 
 Expected outcome:
 
-![deadline output](./outputs/deadline.png)
+![deadline output](docs/outputs/deadline.png)
 
 ### `event` - Adds an Event task
 Adds an Event task to Nyx.
@@ -74,7 +76,7 @@ Example of usage:
 
 Expected outcome:
 
-![event output](./outputs/event.png)
+![event output](docs/outputs/event.png)
 
 ### `done` - Mark a specific task as done
 Sets the task at the specified index as completed.
@@ -87,7 +89,7 @@ Example of usage:
 
 Expected outcome:
 
-![done output](./outputs/done.png)
+![done output](docs/outputs/done.png)
 
 ### `delete` - Deletes a specific task
 Removes the task at the specified index from Nyx.
@@ -100,7 +102,7 @@ Example of usage:
 
 Expected outcome:
 
-![delete output](./outputs/delete.png)
+![delete output](docs/outputs/delete.png)
 
 ### `update` - Updates a specific task
 Edits the task at the specified index.
@@ -116,7 +118,7 @@ Example of usage:
 
 Expected outcome:
 
-![update output](./outputs/update.png)
+![update output](docs/outputs/update.png)
 
 ### `find` - Search for a task
 Search for a task using the specified keywords
@@ -129,7 +131,7 @@ Example of usage:
 
 Expected outcome:
 
-![find output](./outputs/find.png)
+![find output](docs/outputs/find.png)
 
 ### `bye` - Exits the program
 Shuts down the app immediately.
