@@ -1,0 +1,4 @@
+D | 0 | CS2103T assignment  | 2021-09-17 23:59
+T | 0 | grocery
+E | 0 | CCA meeting  | 2021-09-20 09:00-11:00
+T | 1 | walk dog
