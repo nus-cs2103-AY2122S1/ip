@@ -1,0 +1,20 @@
+todo
+deadline Return The Da Vinci Code
+deadline /by 25/08/2000 2359
+deadline /by
+deadline Return The Da Vinci Code /by Tomorrow
+deadline
+event Abhishek's Wedding
+event /at 01/09/2000 1800
+event /at
+event Abhishek's Wedding /at Sunday
+event
+list all
+done 12345678
+done 1/
+done
+delete 2345678
+delete 1/
+delete
+bye 34567
+bye

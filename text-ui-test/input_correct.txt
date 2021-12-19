@@ -1,0 +1,13 @@
+todo Go to the Bookstore
+todo Rent The Da Vinci Code
+deadline Return The Da Vinci Code /by 25/08/2000 2359
+event Abhishek's Wedding /at 01/09/2000 1800
+list
+done 1
+done 2
+list
+delete 1
+delete 1
+delete 1
+delete 1
+bye

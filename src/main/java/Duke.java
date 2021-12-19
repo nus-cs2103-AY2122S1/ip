@@ -1,10 +1,33 @@
+import duke.Command;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+
+/**
+ * Duke Class to read input commands and accordingly create a list of task.
+ */
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    private final TaskList tasks;
+    private final Storage storage;
+    private final Parser parser;
+
+    /**
+     * Constructor for the Duke class
+     */
+    public Duke() {
+        storage = new Storage("data/duke.txt");
+        tasks = new TaskList(storage.load());
+        parser = new Parser();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = parser.parse(input);
+            return command.execute(tasks, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
