@@ -1,0 +1,6 @@
+todo CS2103 iP Assignment
+deadline CS2103 iP /by Thurs, 19 August
+event CS2103 iP lecture /at 4-6pm Friday
+done 1
+list
+exit

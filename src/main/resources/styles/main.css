@@ -1,0 +1,45 @@
+.window-pane {
+    -fx-background-color: #242422;
+}
+
+.scroll-pane {
+    -fx-background-image: url(/images/Background.png);
+    -fx-background-size: 100%;
+    -fx-background-position: center center;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.root {
+    -fx-background: transparent;
+    -fx-window-color: #1a1730;
+}
+
+.dialog-container {
+   -fx-background-size: 100%;
+   -fx-background-position: bottom;
+}
+
+.abyss-dialog {
+    -fx-background-radius: 12;
+    -fx-background-color: #494845;
+}
+
+.user-dialog {
+    -fx-background-radius: 12;
+    -fx-background-color: #8e7700;
+}
+
+.user-input {
+    -fx-background-color: transparent;
+    -fx-border-radius: 15;
+    -fx-border-color: white;
+    -fx-border-width: 0.3;
+    -fx-text-fill: white;
+}
+
+.send-button {
+    -fx-background-color: transparent;
+}
