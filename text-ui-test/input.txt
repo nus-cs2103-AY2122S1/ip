@@ -1,0 +1,10 @@
+todo buy apple
+deadline eat apple /by sunday 2pm
+event apple parade /at Japan 2-7th September!
+list
+done 1
+done 3
+list
+todo throw apples away
+list
+bye
