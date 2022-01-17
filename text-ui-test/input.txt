@@ -1,0 +1,30 @@
+first task
+second task
+todo borrow book
+list
+deadline return book /by Sunday
+deadline return book /by 2021-12-25 0000
+event project meeting /at 2021-12-31 1234
+deadline do homework /by 2021-12-31 2359
+list
+done 2
+done 5
+done 1000
+done 0
+done 100
+list
+done
+todo
+todo
+deadline
+event
+
+list
+blah
+delete 1
+list
+find o
+find return
+find zmbowuinb123#@%
+find
+bye
