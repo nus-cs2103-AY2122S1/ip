@@ -1,7 +1,111 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hi there! Start chatting with your new 
+ _____       _                    _        
+|  ___|  __  _  ___   _,____     | |       
+| |_  |/  _|| |/ _ \ |  __  |____| |       
+| __| | /   | |  __/ | / \  |  __  |       
+|_|   |_|   |_|\____ |_|  |_|______|       
 
+(*^_^*) Friend says: 
+What would you like to do today?
+(*^_^*) Friend says: 
+These are your existing tasks!
+
+(*^_^*) Friend says: 
+added: [T][ ] read book to your to-do list!
+Now you have 1 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+added: [D][ ] do groceries (by: Saturday 3pm) to your to-do list!
+Now you have 2 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+Your to-do list has the following tasks: 
+
+1.[T][ ] read book
+2.[D][ ] do groceries (by: Saturday 3pm)
+
+(*^_^*) Friend says: 
+Your to-do list has the following tasks: 
+
+1.[T][ ] read book
+2.[D][ ] do groceries (by: Saturday 3pm)
+
+(*^_^*) Friend says: 
+added: [E][ ] Barbeque (at: Friday 8pm) to your to-do list!
+Now you have 3 tasks in the list.
+Saving file
+Saving file
+(*^_^*) Friend says: 
+Hooray! You've completed task 
+[X] read book
+Saving file
+(*^_^*) Friend says: 
+Hooray! You've completed task 
+[X] do groceries
+Oops :( Please key in a valid description!
+Oops :( Please key in a valid description!
+Oops :( Please key in a valid description!
+Oops :( Friend does not recognise this command! Did you spell your command correctly?
+Oops :( Friend does not recognise this command! Did you spell your command correctly?
+Oops :( Please key in a valid description!
+Oops :( Friend does not recognise this command! Did you spell your command correctly?
+Oops :( Please key in a valid time to proceed
+Oops :( Please key in a valid description!
+Oops :( Friend does not recognise this command! Did you spell your command correctly?
+Oops :( Please key in a valid description!
+(*^_^*) Friend says: 
+added: [E][ ] flight (at: 3.45pm) to your to-do list!
+Now you have 4 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+added: [D][ ] assignment (by: 1pm tomorrow) to your to-do list!
+Now you have 5 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+added: [D][ ] project (by: noon) to your to-do list!
+Now you have 6 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+added: [E][ ] exam (at: 9.30am in 6 days) to your to-do list!
+Now you have 7 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+added: [E][ ] booksale (at: Aug 8 2021) to your to-do list!
+Now you have 8 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+added: [D][ ] presentation (by: Aug 2 2021) to your to-do list!
+Now you have 9 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+Here are the matching tasks in your list:
+1.[D][ ] presentation (by: Aug 2 2021)
+(*^_^*) Friend says: 
+There are no tasks that match your search.
+Oops :( Please key in a valid search to proceed!
+Sorry, I am not sure what the task number is :(
+Sorry, this task number cannot be found :(
+Sorry, I am not sure what the task number is :(
+Sorry, this task number cannot be found :(
+(*^_^*) Friend says: 
+removed the following task from your to-do list: 
+[T][X] read book
+Now you have 8 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+removed the following task from your to-do list: 
+[D][X] do groceries (by: Saturday 3pm)
+Now you have 7 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+removed the following task from your to-do list: 
+[E][ ] flight (at: 3.45pm)
+Now you have 6 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+removed the following task from your to-do list: 
+[E][ ] Barbeque (at: Friday 8pm)
+Now you have 5 tasks in the list.
+Saving file
+(*^_^*) Friend says: 
+See you again, my friend!

@@ -1,0 +1,5 @@
+D | 1 | CS2103T Quiz | [important] | Friday 4pm
+E | 1 | CS2101 OP1 | [graded] | Sep 13 2021
+T | 1 | assignment | []
+D | 0 | read notes | [] | Sep 30 2021
+E | 0 | presentation | [productivity] | 9.30am tomorrow
