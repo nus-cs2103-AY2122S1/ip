@@ -1,0 +1,16 @@
+deadline CS2103T iP increments /by Thursday
+todo buy groceries
+list
+event attend research meeting /at Friday 3 - 4pm
+done 2
+todo cook dinner
+list
+done 1
+deadline CS2100 Lab 1 /by Monday (12pm)
+list
+event meet friend! /at Friday (7pm)
+list
+done 4
+done 5
+bye
+
