@@ -75,6 +75,18 @@ public class Duke {
                 } catch(ArrayIndexOutOfBoundsException invalidEventSyntax) {
                     dukeException.invalidEventSyntax();
                 }
+            } else if(command.startsWith("delete")) {
+                try {
+                    int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
+                    Task removedTask = taskList.remove(value - 1);
+                    System.out.println(" Noted. I've removed this task: ");
+                    System.out.println(removedTask);
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                } catch(NumberFormatException noTaskNumber) {
+                    dukeException.noTaskNumber();
+                } catch(IndexOutOfBoundsException invalidTaskNumber) {
+                    dukeException.invalidTaskNumber();
+                }
             } else {
                 dukeException.noSuchTaskException();
             }
