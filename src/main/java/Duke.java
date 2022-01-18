@@ -11,19 +11,23 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         System.out.println("Hello! I'm Duke\r\nWhat can I do for you?");
+        ArrayList<String> commandList = new ArrayList<>(); // init arraylist outside infinite loop.
         while(true) {
             Scanner scanner = new Scanner(System.in);
-            String command = scanner.next(); // Can also convert result to lower-case to handle cases.
+            String command = scanner.nextLine(); // Can also convert result to lower-case to handle cases.
             switch(command) {
                 case "list":
-                case "blah":
-                    System.out.println(command);
+                    for(int i = 0; i < commandList.size(); i++) {
+                        System.out.println((i+1) + ". re" + commandList.get(i));
+                    }
                     break;
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
                 default:
-                    System.out.println("Command don't exist. To exit, type the command 'bye'");
+                    commandList.add(command);
+                    System.out.println("Added: " + command);
+
             }
             if(command.equals("bye")) {
                 break;
