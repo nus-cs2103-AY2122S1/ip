@@ -11,9 +11,11 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke\r\nWhat can I do for you?");
         ArrayList<Task> taskList = new ArrayList<>(); // init arraylist outside infinite loop.
+        DukeException dukeException = new DukeException();
         while(true) {
             Scanner scanner = new Scanner(System.in);
-            String command = scanner.nextLine(); // Can also convert result to lower-case to handle cases.
+            String command = scanner.nextLine().trim(); // Can also convert result to lower-case to handle cases.
+
             if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
@@ -42,29 +44,39 @@ public class Duke {
                     System.out.println("Task is invalid, please select a valid task number.");
                 }
             } else if(command.startsWith("todo")) {
-                Todo todoTask = new Todo(command.substring(5));
-                taskList.add(todoTask);
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(todoTask);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                try {
+                    Todo todoTask = new Todo(command.substring(5));
+                    taskList.add(todoTask);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(todoTask);
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                } catch (StringIndexOutOfBoundsException noDescription) {
+                    dukeException.noDescriptionException();
+                }
             } else if(command.startsWith("deadline")) {
-                String[] taskText = command.split(" /by");
-                Deadline deadlineTask = new Deadline(taskText[0],taskText[1]);
-                taskList.add(deadlineTask);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(deadlineTask);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                try {
+                    String[] taskText = command.split(" /by");
+                    Deadline deadlineTask = new Deadline(taskText[0], taskText[1]);
+                    taskList.add(deadlineTask);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(deadlineTask);
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                } catch(ArrayIndexOutOfBoundsException invalidDeadlineSyntax) {
+                    dukeException.invalidDeadlineSyntax();
+                }
             } else if(command.startsWith("event")) {
-                String[] taskText = command.split(" /at");
-                Event eventTask = new Event(taskText[0],taskText[1]);
-                taskList.add(eventTask);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(eventTask);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                try {
+                    String[] taskText = command.split(" /at");
+                    Event eventTask = new Event(taskText[0], taskText[1]);
+                    taskList.add(eventTask);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(eventTask);
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                } catch(ArrayIndexOutOfBoundsException invalidEventSyntax) {
+                    dukeException.invalidEventSyntax();
+                }
             } else {
-                Task newTask = new Task(command);
-                taskList.add(newTask);
-                System.out.println("Added: " + command);
+                dukeException.noSuchTaskException();
             }
         }
     }
