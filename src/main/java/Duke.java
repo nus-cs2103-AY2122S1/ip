@@ -90,6 +90,8 @@ public class Duke {
             } else {
                 dukeException.noSuchTaskException();
             }
+            scanner.close();
         }
+
     }
 }
