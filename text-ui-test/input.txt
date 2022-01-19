@@ -1,0 +1,14 @@
+todo Read lecture notes
+deadline Return book /by Monday
+event Dinner with friends /at Tue, 7pm
+list
+done 1
+list
+done 3
+list
+repo
+deadline /at tomorrow
+event /by 10pm
+delete 2
+delete 2
+bye
