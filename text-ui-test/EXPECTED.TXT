@@ -5,3 +5,81 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello, What Can I do for you ?
+ -------------------------------
+Enter Input Here: 
+Duke: Added Task event Go to meeting /at SOC Com-1
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][ ] Go to meeting (at:  SOC Com-1)
+
+ ----------------------------------
+Enter Input Here: 
+Nice! I've marked this task as done: 
+[E][X] Go to meeting (at:  SOC Com-1)
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][X] Go to meeting (at:  SOC Com-1)
+
+ ----------------------------------
+Enter Input Here: 
+Duke: Added Task deadline Assignment /by 23 January 2021
+
+ ----------------------------------
+Enter Input Here: 
+Duke: Added Task todo individual project
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][X] Go to meeting (at:  SOC Com-1)
+2. [D][ ] Assignment (by:  23 January 2021)
+3. [T][ ]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+Nice! I've marked this task as done: 
+[T][X]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][X] Go to meeting (at:  SOC Com-1)
+2. [D][ ] Assignment (by:  23 January 2021)
+3. [T][X]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+deadline needs to have dates !
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][X] Go to meeting (at:  SOC Com-1)
+2. [D][ ] Assignment (by:  23 January 2021)
+3. [T][X]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+Duke: Added Task deadline Assignment 1231 /by 20 August
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][X] Go to meeting (at:  SOC Com-1)
+2. [D][ ] Assignment (by:  23 January 2021)
+3. [T][X]  individual project
+4. [D][ ] Assignment 1231 (by:  20 August)
+
+ ----------------------------------
+Enter Input Here: 
+Successfully removed task : [E][X] Go to meeting (at:  SOC Com-1)
+Enter Input Here: 
+Successfully removed task : [T][X]  individual project
+Enter Input Here: 
+1. [E][X] Go to meeting (at:  SOC Com-1)
+2. [T][X]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+Index 4 out of bounds for length 2
+Enter Input Here: 
+Duke : Bye, Hope to see you again soon !
