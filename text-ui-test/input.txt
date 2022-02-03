@@ -1,0 +1,24 @@
+todo New todo task
+todo
+deadline New deadline /by deadline time
+deadline /by deadline time
+deadline New deadline /by
+deadline New deadline
+event New event /at event time
+event /at event time
+event New event /at
+event New event
+list
+list everything
+done 2
+done 3
+done 5
+done
+list
+delete
+delete 10
+delete nonsense
+delete 3
+list
+bye bye
+bye

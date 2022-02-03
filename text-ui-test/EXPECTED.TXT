@@ -5,3 +5,47 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Nukem
+What can I do for you?
+Got it. I've added this task:
+  [T][ ] New todo task
+Now you have 1 task in the list.
+Please enter a task name!
+Got it. I've added this task:
+  [D][ ] New deadline (by: deadline time)
+Now you have 2 tasks in the list.
+Please follow format: 'deadline [task name] /by [time]'
+Please follow format: 'deadline [task name] /by [time]'
+Please follow format: 'deadline [task name] /by [time]'
+Got it. I've added this task:
+  [E][ ] New event (at: event time)
+Now you have 3 tasks in the list.
+Please follow format: 'event [task name] /at [time]'
+Please follow format: 'event [task name] /at [time]'
+Please follow format: 'event [task name] /at [time]'
+Here are the tasks in your list:
+1.[T][ ] New todo task
+2.[D][ ] New deadline (by: deadline time)
+3.[E][ ] New event (at: event time)
+Command 'list' should not take any input!
+Nice! I've marked this task as done:
+  [D][X] New deadline (by: deadline time)
+Nice! I've marked this task as done:
+  [E][X] New event (at: event time)
+Invalid task number!
+Please follow command 'done' with an integer!
+Here are the tasks in your list:
+1.[T][ ] New todo task
+2.[D][X] New deadline (by: deadline time)
+3.[E][X] New event (at: event time)
+Please follow command 'delete' with an integer!
+Invalid task number!
+Please follow command 'delete' with an integer!
+Noted. I've removed this task:
+  [E][X] New event (at: event time)
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1.[T][ ] New todo task
+2.[D][X] New deadline (by: deadline time)
+Command not recognised!
+Bye. Hope to see you again soon!
