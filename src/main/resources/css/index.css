@@ -1,0 +1,23 @@
+.wallpaper {
+    -fx-background-color: #111921;
+}
+
+.dialog {
+    -fx-background-color: #235067;
+    -fx-background-radius: 10.0;
+    -fx-padding: 8;
+    -fx-text-fill: #fff;
+}
+
+.send-btn {
+    -fx-background-color: #48525b;
+    -fx-background-radius: 0;
+    -fx-text-fill: #fff;
+    -fx-cursor: hand;
+}
+
+.input-text-field {
+    -fx-background-color: #162127;
+    -fx-background-radius: 0;
+    -fx-text-fill: #fff;
+}

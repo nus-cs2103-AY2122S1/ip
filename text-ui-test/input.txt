@@ -1,0 +1,18 @@
+deadline return laptop /by 2021-08-03
+todo buy battery
+event interview meeting /at 2021-08-07 2100
+list
+todo do tutorial
+done 1
+done 3
+done 100
+going for a run
+list
+deadline assignment /by 2021-08-10
+deadline project presentation /by 2021-09-20
+list
+delete 1
+list
+delete 2
+list
+bye
