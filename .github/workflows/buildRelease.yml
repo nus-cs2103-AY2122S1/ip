@@ -1,0 +1,48 @@
+name: "Release Fat JAR"
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@master
+        with:
+          ref: master
+
+      - name: Merge to master
+        run: git checkout --progress --force ${{ github.sha }}
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Setup JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          java-package: jdk+fx
+
+      - name: Build and check with Gradle
+        run: ./gradlew check
+
+      - name: Run shadowJar step
+        run: ./gradlew shadowJar
+
+
+      - name: "Show directories & files"
+        run: |
+          tree
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          files: |
+            ./build/libs/duke.jar
