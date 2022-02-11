@@ -1,7 +1,47 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello I'm duke.Duke
+What can I do for you?
+	Got it. I've added this duke.task.ToDo:
+	  [T][ ] borrow book
+	Now you have 1 tasks in the list.
+	Got it. I've added this duke.task.ToDo:
+	  [T][ ] read book
+	Now you have 2 tasks in the list.
+	Got it. I've added this duke.task.ToDo:
+	  [T][ ] buy food
+	Now you have 3 tasks in the list.
+	Got it. I've added this duke.task.Deadline:
+	  [D][ ] do homework (by: Monday)
+	Now you have 4 tasks in the list.
+	Got it. I've added this duke.task.Event:
+	  [E][ ] birthday party (at: Tuesday 2pm)
+	Now you have 5 tasks in the list.
+	Here are the tasks in your list:
+	1. [T][ ] borrow book
+	2. [T][ ] read book
+	3. [T][ ] buy food
+	4. [D][ ] do homework (by: Monday)
+	5. [E][ ] birthday party (at: Tuesday 2pm)
+	Nice! I've marked this task as done:
+	  [T][X] borrow book
+	Nice! I've marked this task as done:
+	  [T][X] read book
+	Here are the tasks in your list:
+	1. [T][X] borrow book
+	2. [T][X] read book
+	3. [T][ ] buy food
+	4. [D][ ] do homework (by: Monday)
+	5. [E][ ] birthday party (at: Tuesday 2pm)
+	Noted. I've removed this task:
+	  [T][X] borrow book
+	Now you have 4 tasks in the list.
+	Noted. I've removed this task:
+	  [T][X] read book
+	Now you have 3 tasks in the list.
+	Here are the tasks in your list:
+	1. [T][ ] buy food
+	2. [D][ ] do homework (by: Monday)
+	3. [E][ ] birthday party (at: Tuesday 2pm)
+	☹ OOPS!!! You have entered an invalid command, please try again.
+	☹ OOPS!!! Please specify the task number for the task you want to complete.
+	☹ OOPS!!! This is not a valid task number.
+	Bye. Hope to see you again soon!
