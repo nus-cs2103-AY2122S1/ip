@@ -1,0 +1,9 @@
+hello
+deadline homework /by July the first
+todo brush my teeth
+list
+delete 2
+event brushing of teeth /at 8 am
+list
+done 2
+bye
