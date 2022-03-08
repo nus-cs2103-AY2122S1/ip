@@ -1,0 +1,21 @@
+todo borrow book
+   deadline   return book   /by   03/09/2021
+event project meeting /at 06/10/2021
+list
+done 1
+done 3
+list
+done 0
+done 4
+done hello
+todo
+deadline /by 04/09/2021
+event meet friends /at
+deadline
+event concert /at 2021/09/04
+blah
+delete 1
+delete -5
+delete
+list
+bye
