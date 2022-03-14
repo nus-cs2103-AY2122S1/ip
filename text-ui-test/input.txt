@@ -1,0 +1,8 @@
+todo say hello
+deadline project /by sunday
+event splashdown /at nus
+done 1
+done 2
+delete 3
+list
+bye
