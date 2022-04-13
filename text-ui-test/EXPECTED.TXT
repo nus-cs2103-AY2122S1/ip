@@ -1,7 +1,181 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+	+-------------------------------+
+	| *                 *         * |
+	|   ('<       augury     *      |
+	| __/_)_______________________  |
+	|   ||                      *   |
+	|   ||   a task manager         |
+	|      *             *          |
+	|             *         v1.3.0  |
+	+-------------------------------+
+	_________________________________
+	 Hello! How may I help you?
+	_________________________________
+	_________________________________
+	 I've added your todo:
+		[T][ ] item one
+	 1 tasks in total.
+	_________________________________
+	_________________________________
+	 A task matching this description already exists! Task was not created.
+	_________________________________
+	_________________________________
+	 Please use the YYYY-MM-DD HHMM format to specify time!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Here are your tasks:
+	 1. [T][ ] item one
+	_________________________________
+	_________________________________
+	 Please use the YYYY-MM-DD HHMM format to specify time!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Here are your tasks:
+	 1. [T][ ] item one
+	_________________________________
+	_________________________________
+	 Description of todo cannot be empty!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Task 500 does not exist.
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Description of deadline cannot be empty!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Description of deadline cannot be empty!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Event task must include time! (use /at YYYY-MM-DD HHMM)
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Description of event cannot be empty!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Event task must include time! (use /at YYYY-MM-DD HHMM)
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Please use the YYYY-MM-DD HHMM format to specify time!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Please use the YYYY-MM-DD HHMM format to specify time!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 I've added your event:
+		[E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	 2 tasks in total.
+	_________________________________
+	_________________________________
+	 Task 3 does not exist.
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Here are your tasks:
+	 1. [T][ ] item one
+	 2. [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	_________________________________
+	_________________________________
+	 I've added your todo:
+		[T][ ] five
+	 3 tasks in total.
+	_________________________________
+	_________________________________
+	 I've added your todo:
+		[T][ ] six
+	 4 tasks in total.
+	_________________________________
+	_________________________________
+	 I've added your todo:
+		[T][ ] seven
+	 5 tasks in total.
+	_________________________________
+	_________________________________
+	 I've added your todo:
+		[T][ ] eight
+	 6 tasks in total.
+	_________________________________
+	_________________________________
+	 Please enter an argument!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Your search matched these tasks:
+	  [T][ ] item one
+	  [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	  [T][ ] five
+	  [T][ ] six
+	  [T][ ] eight
+	_________________________________
+	_________________________________
+	 Your search matched these tasks:
+	  [T][ ] item one
+	  [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	  [T][ ] five
+	  [T][ ] six
+	  [T][ ] seven
+	  [T][ ] eight
+	_________________________________
+	_________________________________
+	 Your search didn't match any tasks.
+	_________________________________
+	_________________________________
+	 Your search didn't match any tasks.
+	_________________________________
+	_________________________________
+	 Your search matched these tasks:
+	  [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	_________________________________
+	_________________________________
+	 I've sorted your list with method <Task time (descending)>
 
+	Here are your tasks:
+	 1. [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	 2. [T][ ] item one
+	 3. [T][ ] five
+	 4. [T][ ] six
+	 5. [T][ ] seven
+	 6. [T][ ] eight
+	_________________________________
+	_________________________________
+	 Task 9 does not exist.
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Task 9 does not exist.
+	 Please try again.
+	_________________________________
+	_________________________________
+	 I've removed these tasks: 
+		[T][ ] seven
+		[T][ ] item one
+	 4 tasks remain.
+	_________________________________
+	_________________________________
+	 I've sorted your list with method <Lexicographic (ascending)>
+
+	Here are your tasks:
+	 1. [T][ ] eight
+	 2. [T][ ] five
+	 3. [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	 4. [T][ ] six
+	_________________________________
+	_________________________________
+	 Here are your tasks:
+	 1. [T][ ] eight
+	 2. [T][ ] five
+	 3. [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	 4. [T][ ] six
+	_________________________________
+	_________________________________
+	 The readiness is all.
+	_________________________________

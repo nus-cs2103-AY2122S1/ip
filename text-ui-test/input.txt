@@ -1,0 +1,35 @@
+todo item one
+todo item one
+event item two /at 2021-2-22 2100
+list
+deadline item three /by 2021-4-19 0900
+list
+todo
+done 500
+deadline 
+deadline x
+event item four
+event /at xyz
+event item four /by tomorrow
+event item four /at tomorrow
+event item four /at 2021-05-22 2999
+event item four /at 2021-05-22 2359
+done 2,3
+list
+todo five
+todo six
+todo seven
+todo eight
+find  
+find i
+find []
+find [x] e
+find 2021-05-22 [d]
+find 2021-05-22 [e]
+sort 6
+delete 9
+delete 1,9,1
+delete 5,2
+sort
+list
+bye

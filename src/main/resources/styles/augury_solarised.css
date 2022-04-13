@@ -1,0 +1,14 @@
+.root {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    fg-text: #002b36;
+    fg-accent: #cb4b16;
+    fg-low: derive(#6c71c4, 40%);
+    fg-high: derive(fg-accent, 40%);
+    -fx-text-base-color: fg-text;
+
+    -fx-base: derive(#eee8d5, 0%);
+    -fx-control-inner-background: derive(-fx-base, 35%);
+    -fx-control-inner-background-alt: -fx-control-inner-background;
+    -fx-default-button: #fdf6e3;
+}

@@ -1,0 +1,12 @@
+.root {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    fg-text: #ffffff;
+    fg-accent: #e47464;
+    fg-low: #322e33;
+    fg-high: fg-accent;
+    -fx-text-base-color: fg-text;
+
+    -fx-base: #201e21;
+    -fx-default-button: #66606b;
+}

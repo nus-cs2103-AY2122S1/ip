@@ -1,0 +1,16 @@
+/* gleaned from https://stackoverflow.com/questions/49159286/make-a-dark-mode-with-javafx/58441758 */
+
+.root {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    fg-text: #c2c2c3;
+    fg-accent: #e45649;
+    fg-low: #3e4452;
+    fg-high: fg-accent;
+    -fx-text-base-color: fg-text;
+
+    -fx-base: #181a1f;
+    -fx-control-inner-background: derive(-fx-base, 35%);
+    -fx-control-inner-background-alt: -fx-control-inner-background;
+    -fx-default-button: #282c34;
+}

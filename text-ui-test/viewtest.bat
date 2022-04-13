@@ -1,10 +1,6 @@
 @ECHO OFF
 
-REM create bin directory if it doesn't exist
-if not exist ..\bin mkdir ..\bin
-
-REM delete output from previous run
-if exist ACTUAL.TXT del ACTUAL.TXT
+if exist EXPECTED_2.TXT del EXPECTED_2.TXT
 if exist data\tasks.txt del data\tasks.txt
 
 REM compile the code into the bin folder
@@ -16,7 +12,6 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin duke.Launcher -mode console < input.txt > ACTUAL.TXT
+java -classpath ..\bin duke.Launcher -mode console < input.txt > EXPECTED_2.TXT
 
-REM compare the output to the expected output
-FC ACTUAL.TXT EXPECTED.TXT
+FC EXPECTED.TXT EXPECTED_2.TXT
