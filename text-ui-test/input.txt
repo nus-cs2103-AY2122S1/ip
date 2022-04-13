@@ -1,0 +1,15 @@
+deadline test1 /by test2
+todo test 3
+event test 4 /at test 5
+done 3
+done 5
+done 0
+done 1
+list
+delete 5
+delete 1
+list
+delete 1
+list
+delete 1
+list
