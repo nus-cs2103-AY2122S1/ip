@@ -1,0 +1,22 @@
+.send-button {
+    -fx-background-color: #61c1ed;
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+}
+
+/* Textfield design inspired and adapted from @erisjacey */
+.user-input {
+    -fx-background-color: #fcfafa;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+    -fx-background-insets: 5px;
+}
+
+.dialog-container {
+    -fx-background-image: url("/images/faker-background.png");
+    -fx-background-size: 500 700;
+    -fx-background-repeat: stretch;
+    -fx-background-position: center top;
+}
+
