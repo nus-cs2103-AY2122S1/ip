@@ -1,0 +1,27 @@
+list
+todo read book
+todo cut hair
+deadline finish homework /by 14/08/2021 08:00
+deadline /by today 5pm
+deadline bio exam /by 14/08/2021
+todo
+event KTV
+event KTV /at Mon 2-4 pm
+event KTV /at 27/08/2021 2-4pm
+list
+done 2
+done 3
+done 1
+done 7
+done0
+deadline math lecture /at 27/08/2021
+deadline math lecture /by 27/08/2021 16:00
+list
+deleteee
+delete 3
+delete 90
+dletre
+todo read another book
+list
+get 27/08/2021
+bye
