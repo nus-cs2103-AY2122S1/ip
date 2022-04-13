@@ -15,3 +15,7 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Data storage file
+data/duke.txt
+src/main/java/META-INF/MANIFEST.MF
