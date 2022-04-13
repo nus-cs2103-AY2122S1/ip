@@ -1,7 +1,35 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Duke
+What can I do for you?
+You have 1 tasks in the list
+[T][ ] task 1 time 1
+You have 2 tasks in the list
+[D][ ] task 2 (by: time 2)
+You have 3 tasks in the list
+[E][ ] task 3 (at: time 3)
+0: [T][ ] task 1 time 1
+1: [D][ ] task 2 (by: time 2)
+2: [E][ ] task 3 (at: time 3)
+0: [T][X] task 1 time 1
+1: [D][ ] task 2 (by: time 2)
+2: [E][ ] task 3 (at: time 3)
+0: [T][X] task 1 time 1
+1: [D][ ] task 2 (by: time 2)
+2: [E][ ] task 3 (at: time 3)
+removed Task 1
+0: [T][X] task 1 time 1
+1: [E][ ] task 3 (at: time 3)
+DukeException: Please specify name
+DukeException: Please specify time
+DukeException: Please specify time
+DukeException: Please specify time
+DukeException: too many argument
+DukeException: Please specify name
+DukeException: Please specify time
+DukeException: Please specify time
+DukeException: Please specify time
+DukeException: too many argument
+DukeException: Please specify name
+command not found
+DukeException: no such task
+DukeException: no such task
+Bye. Hope to see you again soon!
