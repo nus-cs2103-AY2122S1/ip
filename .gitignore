@@ -1,4 +1,6 @@
 # IDEA files
+/src/.idea/
+/src/main/.idea/
 /.idea/
 /out/
 /*.iml
@@ -15,3 +17,11 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+#Build output files
+/src/out/test
+/src/out/production
+
+#duke task files
+/duke.txt
+/src/duke.txt
