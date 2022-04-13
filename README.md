@@ -1,24 +1,108 @@
-# Duke project template
+# Duke
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+![Screenshot of Duke](./docs/Ui.png)
 
-## Setting up in Intellij
+A command-based todo list made using JavaFX.  
+You can add tasks, deadlines, events, and even timed tasks.  
+  
+You can download it [here](https://github.com/yourally2/ip/releases/tag/v1.0).
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Features
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+- A nice GUI
+- Add Tasks (Deadlines, Events, Todos, and Timed Todos)
+- Delete Tasks
+- View Tasks
+- Complete Tasks
+- Find Tasks
+- List all your Tasks
+
+## Overview
+
+### `todo` - Adds a Todo
+
+Adds a task to the todolist
+
+`todo eat breakfast`
+
+Output:
+```
+Got it. I've added this task:
+[T][ ] eat breakfast
+Now you have x tasks in the list.
+```
+### `todo ... /for` (Overloaded) - Adds a timed todo
+
+Adds a timed todo to the todolist
+
+`todo eat breakfast /for 30 mins`
+
+Output:
+```
+Got it. I've added this task:
+[F][ ] eat breakfast (for: 30 mins)
+Now you have x tasks in the list.
+```
+### `deadline` - Adds a deadline with an end date
+
+Adds a deadline to the todolist
+
+`event go to 2103 lecture /at 2021-09-17 1600`
+
+Output:
+```
+Got it. I've added this task:
+[E][ ] go to 2103 lecture (at: Sep 17 2021 04.00 PM)
+Now you have x tasks in the list.
+```
+### `delete <number>` - Deletes a Task
+
+Deletes a task from the todolist according to its index, starting from 1
+
+`delete 1`
+
+Output:
+```
+Noted. I've removed this task:
+[T][ ] eat breakfast
+Now you have x tasks in the list.
+```
+
+### `done <number>` - Completes a Task
+
+Completes a task from the todolist according to its index, starting from 1
+
+`done 1`
+
+Output:
+```
+Nice! I've marked this task as done:
+[T][ ] eat breakfast
+Now you have x tasks in the list.
+```
+
+### `find <text>` - Finds a Task
+
+Finds a task that matches the given string
+
+`find breakfast`
+
+Output:
+```
+Here are the matching tasks in your list:
+1. [T][ ] eat breakfast
+```
+
+
+### `list` - Lists all available Tasks
+
+Lists all available Tasks in the current TaskList.
+
+`list`
+
+Output:
+```
+Here are the tasks in your list:
+1. [T][ ] eat breakfast
+2. [T][ ] eat lunch
+```
