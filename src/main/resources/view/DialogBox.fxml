@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root alignment="CENTER_RIGHT" maxWidth="500.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="500.0" spacing="25.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox maxWidth="300.0" spacing="25.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: rgb(32, 164, 243);">
+            <children>
+                <VBox fx:id="chatVBox" alignment="TOP_RIGHT" fillWidth="false" maxWidth="500.0" spacing="10.0">
+                    <children>
+                        <Label fx:id="userName" contentDisplay="BOTTOM" text="User" textFill="#ddfff7" wrapText="true">
+                            <font>
+                                <Font name="Copperplate Gothic Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="dialog" fill="#ddfff7" smooth="false" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="eqe3e2hriu3effwefwefoiwejfiowjefiojwofjowefjiwewfwifhjwofpjoejgoprejgopg34toi3jtioj3iot43itio3jtht3" textAlignment="RIGHT" textOrigin="TOP" wrappingWidth="275.0">
+                            <font>
+                                <Font name="Consolas" size="12.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </VBox>
+                <Circle fx:id="displayPicture" fill="#1f93ff00" radius="30.0" stroke="#ddfff7" strokeType="INSIDE" />
+            </children>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+            </padding>
+        </HBox>
+    </children>
+</fx:root>

@@ -1,0 +1,34 @@
+
+todo think wisely
+event playgames /at 2021-11-21 14:34
+deadline make bro happy /by 2024-01-01 00:00
+list
+done 1
+done 2
+done 3
+done 1
+done 2
+done 3
+list
+lol
+todo
+done
+done bob
+done 2 bob
+done 2 /at paringan
+event terina
+event terina /at
+event /at 2020
+event terina /at 2020
+deadline
+deadline terina
+deadline terina /by
+deadline /by 2020
+deadline terina /by 2020
+list 34
+done 265
+delete 3
+delete 2
+delete 1
+bye
+
