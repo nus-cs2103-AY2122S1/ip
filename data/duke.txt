@@ -1,0 +1,8 @@
+[T][X] 1
+[T][X] 3
+[E][ ] pool (at: 2010-10-12)
+[T][X] 6
+[T][ ] ice
+[T][ ] ice cube
+[T][ ] icicle
+[T][ ] ice pops
