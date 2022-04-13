@@ -1,0 +1,18 @@
+todo borrow book
+event Funfair /at Monday 6pm
+list
+deadline CS quiz /by Fri
+todo run
+list
+done 2
+list
+deadline
+deadline task
+deadline /by tmr
+todo
+event
+event task
+event /at tmr
+delete 2
+delete 4
+bye

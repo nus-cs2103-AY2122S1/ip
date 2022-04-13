@@ -1,0 +1,29 @@
+.root {
+  -fx-background-color: #d4b0b0
+}
+
+.box {
+    -fx-font-size: 15px;
+    -fx-font-family: sans-serif;
+    -fx-background-color: #e3e3e3;
+}
+
+.dialogBox {
+    -fx-background-color: #e3e3e3;
+    -fx-max-width: 120;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-width:2;
+    -fx-border-color: #cf8491;
+}
+
+.button {
+  -fx-background-image: url('../images/Picture3.png');
+  -fx-background-size: 40px 40px;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
+
+.text {
+  -fx-font-size: 18px
+}
