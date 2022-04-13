@@ -1,0 +1,8 @@
+T&&InProgress&&submit iP 
+D&&InProgress&&cs2100assignment&&2021-09-15
+E&&InProgress&&cs4243 quiz&&2021-09-16
+D&&Done&&cs1231assignment&&2021-09-15
+E&&InProgress&&start of recess week&&2021-09-18
+T&&InProgress&&make a call to friend
+E&&Done&&table tennis game&&2021-10-02
+D&&InProgress&&project&&2021-11-11
