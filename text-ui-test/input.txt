@@ -1,0 +1,22 @@
+test test
+test
+list
+todo
+deadline
+event
+todo test1
+deadline test2
+deadline test2 / by time
+deadline test2 /at time
+deadline test2 /by time
+event test3 / at time
+event test3 /by time
+event test3 /at time
+list
+done test1
+list
+done test2
+list
+done test3
+list
+bye
