@@ -1,0 +1,14 @@
+hello
+todo swimming
+event basketball /at noon
+deadline homework /by 4pm
+list
+done 2
+list
+done 2
+done 4
+event fly kite /at 2345
+list
+done 4
+list
+bye
