@@ -1,0 +1,19 @@
+first
+potato
+todo fight
+deadline fightmaster /by 2024-8-3 10:30
+event fight club /at 2030-10-12 9:30
+list
+done 3
+list
+todo
+blah
+event fighting /at
+event /at
+deadline grandmaster /by
+deadline /by
+delete
+delete -1
+delete 2
+list
+bye
