@@ -5,3 +5,92 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+------------------------------------------------------------
+Hello. My name is Necro.
+What can I do for you on this horrible day?
+------------------------------------------------------------
+
+todo one
+      ------------------------------------------------------------
+      Fine. I've added this sorry task to your list: 
+       --> [T][ ] one
+      Satisfied now? You have 1 items in your list.
+      ------------------------------------------------------------
+todo two
+      ------------------------------------------------------------
+      Fine. I've added this sorry task to your list: 
+       --> [T][ ] two
+      Satisfied now? You have 2 items in your list.
+      ------------------------------------------------------------
+deadline three /by Friday
+      ------------------------------------------------------------
+      Fine. I've added this sorry task to your list: 
+       --> [D][ ] three  (by: Friday)
+      Satisfied now? You have 3 items in your list.
+      ------------------------------------------------------------
+deadline four /by Saturday
+      ------------------------------------------------------------
+      Fine. I've added this sorry task to your list: 
+       --> [D][ ] four  (by: Saturday)
+      Satisfied now? You have 4 items in your list.
+      ------------------------------------------------------------
+event five /at Monday 3-5pm
+      ------------------------------------------------------------
+      Fine. I've added this sorry task to your list: 
+       --> [E][ ] five (at: Monday 3-5pm)
+      Satisfied now? You have 5 items in your list.
+      ------------------------------------------------------------
+event six /at Tuesday 1-2am
+      ------------------------------------------------------------
+      Fine. I've added this sorry task to your list: 
+       --> [E][ ] six (at: Tuesday 1-2am)
+      Satisfied now? You have 6 items in your list.
+      ------------------------------------------------------------
+list
+      ------------------------------------------------------------
+      Here are the tasks in your list:
+       1. [T][ ] one
+       2. [T][ ] two
+       3. [D][ ] three  (by: Friday)
+       4. [D][ ] four  (by: Saturday)
+       5. [E][ ] five (at: Monday 3-5pm)
+       6. [E][ ] six (at: Tuesday 1-2am)
+      ------------------------------------------------------------
+done 1
+      Wow. Congratulations. You have completed the following task:
+       [T][X] one
+      Are you happy now?
+done 2
+      Wow. Congratulations. You have completed the following task:
+       [T][X] two
+      Are you happy now?
+done 3
+      Wow. Congratulations. You have completed the following task:
+       [D][X] three  (by: Friday)
+      Are you happy now?
+done 4
+      Wow. Congratulations. You have completed the following task:
+       [D][X] four  (by: Saturday)
+      Are you happy now?
+done 5
+      Wow. Congratulations. You have completed the following task:
+       [E][X] five (at: Monday 3-5pm)
+      Are you happy now?
+done 6
+      Wow. Congratulations. You have completed the following task:
+       [E][X] six (at: Tuesday 1-2am)
+      Are you happy now?
+list
+      ------------------------------------------------------------
+      Here are the tasks in your list:
+       1. [T][X] one
+       2. [T][X] two
+       3. [D][X] three  (by: Friday)
+       4. [D][X] four  (by: Saturday)
+       5. [E][X] five (at: Monday 3-5pm)
+       6. [E][X] six (at: Tuesday 1-2am)
+      ------------------------------------------------------------
+bye
+      ------------------------------------------------------------
+       Farewell, may we never meet again.
+      ------------------------------------------------------------
