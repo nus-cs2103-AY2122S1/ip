@@ -1,0 +1,8 @@
+T | 0 | here are some sample tasks!
+E | 0 | event with start and end | 2021-02-04 16:20 | 18:00 | 2021-02-04 16:20 | 18:01 | help me
+E | 0 | event with start | 2021-02-04 16:20 | 18:09 | lol
+E | 0 | event without extra desc | 2021-02-04 16:20 | 18:09
+D | 0 | test deadline | 2021-12-12 12:12 | ok
+D | 0 | deadline without extra desc | 2021-12-12 12:12
+T | 1 | marked todo
+
