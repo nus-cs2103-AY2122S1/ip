@@ -1,0 +1,40 @@
+hi
+todo
+todo
+todo todo #1
+list
+list
+todo todo #2
+list
+deadline
+deadline
+deadline deadline #1
+deadline deadline #1 /by
+deadline deadline #1 /by
+deadline deadline #1 /at
+deadline deadline #1 /by 1234
+list
+event event #1
+event event #1 /at
+event event #1 /at
+event event #1 /by
+event event #1 /at 4321
+list
+done 1
+list
+done 2
+list
+delete 1
+list
+todo todo #3
+list
+done 3
+done 4
+list
+done
+done
+delete
+delete
+delete 1
+list
+bye

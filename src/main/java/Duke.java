@@ -1,10 +1,20 @@
+import javafx.application.Application;
+
+import bot.Bot;
+
+/**
+ * A class that represents the main Duke bot.
+ * The main method, once run, will start the bot.
+ */
 public class Duke {
+
+    /**
+     * Starts the main Duke bot.
+     *
+     * @param args The list of arguments given to the main method.
+     */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Bot bot = new Bot();
+        Application.launch(Bot.class, args);
     }
 }
