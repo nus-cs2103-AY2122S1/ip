@@ -1,0 +1,10 @@
+todo
+todo wrwreg
+deadline
+deadline tomorrow /by tomorrow
+event sleep /at never
+list
+done 1
+delete 1
+list
+bye
