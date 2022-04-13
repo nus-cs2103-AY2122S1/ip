@@ -1,0 +1,2 @@
+[E]|[]|buy food|1999-01-01
+[D]|[]|submit assignment|1999-01-01

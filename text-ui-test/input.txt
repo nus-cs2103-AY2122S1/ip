@@ -1,0 +1,15 @@
+items
+event buy food /at 1999-01-01
+todo get home
+deadline submit assignment /by 1999-01-01
+items
+completed 2
+items
+event
+deadline
+delete 2
+items
+todo
+event get food
+deadline buy food
+bye
