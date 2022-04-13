@@ -1,0 +1,13 @@
+todo drop CS2103T
+event mcdonald's interview /at Aug 20 2021 14:00:00
+deadline fail test /by Aug 20 2021 14:00:00
+list
+todo dropout university
+done 2
+done 1
+list
+find mc
+delete 1
+event prof ben leong's lecture /at Aug 20 2021 13:00:00
+schedule 2021-08-20
+bye
