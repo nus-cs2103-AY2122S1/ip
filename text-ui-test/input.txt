@@ -1,0 +1,18 @@
+list
+todo gym workout 
+deadline CS2103 Quiz /by 2020-04-12 15:33
+good morning
+list
+done 1
+event class party /at 2021-08-19 08:24
+list
+delete 1
+list
+done 2
+list
+delete 2 
+list
+done 7
+done 1
+list
+bye
