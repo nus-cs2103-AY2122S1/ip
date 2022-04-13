@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_LEFT" maxHeight="Infinity" maxWidth="Infinity" prefWidth="225.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Circle fx:id="profilePicture" fill="DODGERBLUE" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
+        <Label fx:id="dialog" alignment="CENTER" text="Label" textFill="#ffb7c5" translateX="8.0" translateY="20.0" wrapText="true">
+            <font>
+                <Font name="Helvetica Neue" size="21.0" />
+            </font>
+            <effect>
+                <Glow level="0.6" />
+            </effect></Label>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>

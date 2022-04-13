@@ -1,0 +1,43 @@
+deadline go for a jog /by 2/12/2021 1800
+deadline go for a jog /by 2/12/2021 1900
+event go for a jog /at 2/12/2021 1800 2100
+event go for a jog /at 2/12/2021 1900 2100
+find go
+find for
+find a 
+find jog
+date 2/12/2021
+delete 1 
+delete 2
+done 1
+done 2
+date 2/12/2021
+delete 1
+delete 1
+date 2/12/2021
+deadline go for a jog /by 8pm today
+todo listening to music 
+todo use a computer 
+deadline
+event
+done 1
+done 2
+done 3
+done 4
+list
+TODO LET'S GO TO THE BEACH! 
+DEADLINE LET'S FINISH WATCHING THIS SHOW 2/12/2021 1800
+EVENT FINISH WATCHING MOVIE /at 2/12/2021 1800 2100
+DEADLINE LET'S FINISH WATCHING THIS SHOW /at 2/12/2021 1800 2100
+EVENT FINISH WATCHING MOVIE /by 2/12/2021 1900 2100
+deadline go for a run /by 21/12/2021 2100
+deadline go for a run /by 21/22/2021 2100
+deadline go for a run /by 21/12/2021 8900
+deadline go for a run /by 21/12/2021 2100
+deadline go for a run 21/12/2021 2100
+deadline go for a run /by 2100
+deadline go for a run /by 21/12/2021 
+deadline go for a run /by 1/12/2021 2100
+deadline go for a run /by 21/2/2021 2100
+deadline go for a run /by 21/12/2021 21:00
+bye
