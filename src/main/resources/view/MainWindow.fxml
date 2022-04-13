@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<!--        "http://javafx.com/javafx/8.0.171"-->
+
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dino.MainWindow">
+    <TextField fx:id="userInput" layoutX="10.0" layoutY="562.0" onAction="#handleUserInput" prefHeight="34.0" prefWidth="299.0" style="-fx-background-radius: 20;" AnchorPane.bottomAnchor="4.0" />
+    <Button fx:id="sendButton" layoutX="322.0" layoutY="564.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="28.0" prefWidth="69.0" style="-fx-background-color: dodgerblue;" text="Send" textFill="WHITE">
+      <font>
+         <Font name="Eras Bold ITC" size="12.0" />
+      </font></Button>
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+        <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" style="-fx-background-color:linear-gradient(to right, rgba(128,233,241,1), rgba(236,153,209,1));" />
+    </ScrollPane>
+</AnchorPane>
