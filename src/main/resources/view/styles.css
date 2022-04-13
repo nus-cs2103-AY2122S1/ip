@@ -1,0 +1,37 @@
+.root {
+  -fx-font-family: "Courier New";
+  -fx-font-weight: bold;
+  -fx-font-size: 13;
+}
+
+#dialog {
+  -fx-background-color: rgb(113,223,167); 
+  -fx-padding: 15; 
+  -fx-background-radius: 10 0 10 10;
+  -fx-text-fill: "white";
+  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 2, 0, 0, 0);
+}
+
+#userInput {
+    -fx-background-color: "rgb(242, 244, 251)";
+}
+
+#displayPicture {
+   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 2, 0, 0, 0);
+}
+
+#sendButton {
+   -fx-background-color: "#6d2de0"; 
+   -fx-cursor: HAND;
+   -fx-text-fill: "white";
+   -fx-font-size: 20;
+}
+
+#sendButton:hover {
+    -fx-background-color: "rgb(244,244,244)";
+    -fx-border-color: "#6d2de0"; 
+    -fx-border-radius: 5;
+    -fx-border-width: 3;
+    -fx-text-fill: "black";
+    -fx-font-size: 20;
+}
