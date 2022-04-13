@@ -1,0 +1,58 @@
+done 0
+done zero
+list
+deadline iP due /by 2021-08-19
+deadline iP due by 2021-08-19
+deadline iP due /at 2021-08-19
+todo buy financial calculator
+todo recap cs2100 lecture
+event lazpitch /at 2021-08-30
+event lazpitch at 2021-08-19
+event lazpitch /by 2021-08-19
+event
+deadline
+todo
+123456
+done 2
+list
+done
+done one
+done one by one
+done 1
+done 2
+done 3
+done 4
+done 5
+done 10
+done 100
+done 0
+done -1
+done -100
+list
+read book
+delete 1
+delete 1
+delete
+delete one
+delete one by one
+delete 1
+delete 1
+delete 1
+todo add book
+todo read book
+todo take book
+todo throw book
+todo return book
+delete 5
+list
+delete 4
+list
+delete 3
+list
+delete 2
+list
+delete 1
+list
+delete 0
+list
+bye
