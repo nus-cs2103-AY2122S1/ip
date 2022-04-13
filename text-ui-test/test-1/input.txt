@@ -1,0 +1,17 @@
+t borrow book
+d return book /by 2021-08-24
+e project meeting /at 2021-08-25
+list
+done 1
+done 3
+list
+invalidcommand
+t
+d
+e
+t bookmark pages
+list
+find book
+delete 2
+list
+bye
