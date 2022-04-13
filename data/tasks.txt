@@ -1,0 +1,6 @@
+T | 0 | cs2100 assignment | 
+T | 0 | cs2103t assignment | 
+T | 1 | cry | 
+T | 0 | one | 
+T | 0 | two | 
+T | 0 | three | 

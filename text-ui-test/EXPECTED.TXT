@@ -1,7 +1,50 @@
-Hello from
+____________________________________________________________
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm shybot.ShyBot
+What can I do for you?
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this shybot.task:
+  [T][ ]  borrow book
+Now you have 1 shybot.task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this shybot.task:
+  [D][ ]  return book (by:Sunday)
+Now you have 2 shybot.task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this shybot.task:
+  [E][ ]  project meeting (at:Mon 2-4pm)
+Now you have 3 shybot.task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! Seems like you have entered a wrong format for a deadline shybot.task. Try this instead: deadline <description> /by <date>
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! Seems like you have entered a wrong format for an event shybot.task. Try this instead: event <description> /at <date>
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this shybot.task as done:
+  [D][X]  return book (by:Sunday)
+____________________________________________________________
+____________________________________________________________
+OOPS!!! I'm sorry, index is out of range! Please try with a number from 1 to 3
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this shybot.task:
+  [T][ ]  borrow book
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! I'm sorry, index is out of range! Please try with a number from 1 to 2
+____________________________________________________________
+____________________________________________________________
+1. [D][X]  return book (by:Sunday)
+2. [E][ ]  project meeting (at:Mon 2-4pm)
+____________________________________________________________
