@@ -1,29 +1,66 @@
-# User Guide
+# User Guide for Duke
 
-## Features 
+> Duke helps you manage your tasks and live a more efficient life :).
 
-### Feature-ABC
+Duke has the following functions:
+* Record tasks
+* Mark a task as done
+* Remove tasks from the list
+* Find tasks with a keyword
+* list all tasks
 
-Description of the feature.
+Duke supports finve versions of tasks:
+* **Todo** is a task without any time.
+* **Event** is a task that starts at a time and end at a time.
+* **Deadline** is a task to be done before a certain time.
+* **Doafter** is a task to be done after a certain time.
 
-### Feature-XYZ
+To use Duke, you simply need to type commands in the following command list.
+If you want to exit duke, you may click on the cross button on the right corner. 
 
-Description of the feature.
+## Commad List
+You may tell duke what to do for you using the following commands:
 
-## Usage
+**Formats Supported**
+* `start_date` and `end_date` are in `yyyy-mm-dd` format
+* `start_time` and `end_time` are in `hhmm` 24h format
+* `time_string` supports any input
+* `index` should be integer
 
-### `Keyword` - Describe action
+**For General Bot Execution**
 
-Describe the action and its outcome.
+* `list`
+  list current tasks in the list
+* `delete index`
+  remove the task of the corresponding `index` from the list
+* `find keyword`
+  find tasks with `keyword` in its name
+* `done index`
+  mark the task of corresponding index as done
 
-Example of usage: 
+**For Adding Todo**
 
-`keyword (optional arguments)`
+* `todo task_name`
 
-Expected outcome:
+**For Adding Event**
 
-Description of the outcome.
+* `event task_name /at start_date`
+* `event task_name /at start_date start_time`
+* `event task_name /at start_date /to end_date`
+* `event task_name /at start_date start_time /to end_date end_time`
+* `event task_name /at time_string`
 
-```
-expected output
-```
+**For Adding Deadline**
+
+* `deadline task_name /by end_date`
+* `deadline taek_name /by end_date end_time`
+* `deadline task_name /by time_string`
+
+**For Adding Doafter**
+
+* `doafter task_name /after start_date`
+* `doafter task_name /after start_date start_time`
+* `doafter task_name /after time_string`
+
+## Reminders
+Please follow the above command format strictly, including the spaces, for duke to understand you.
