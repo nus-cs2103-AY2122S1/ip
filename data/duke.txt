@@ -1,0 +1,4 @@
+T | 1 | read book
+D | 0 | return book | Sep 30 2021
+E | 0 | project meeting | Aug 6th 2-4pm
+DA | 0 | borrow book | return book
