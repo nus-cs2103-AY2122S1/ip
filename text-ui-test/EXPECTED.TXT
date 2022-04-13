@@ -5,3 +5,47 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+hello name is duke
+how is help today; （´・｀ ）♡
+is added.
+[T][ ] mumu a
+now is have 1 tasks.
+is added.
+[D][ ] mumu (by: a)
+now is have 2 tasks.
+is added.
+[E][ ] mumu (at: a)
+now is have 3 tasks.
+1.[T][ ] mumu a.
+2.[D][ ] mumu (by: a).
+3.[E][ ] mumu (at: a).
+is done!
+[D][X] mumu (by: a)
+is done!
+[D][X] mumu (by: a)
+1.[T][ ] mumu a.
+2.[D][X] mumu (by: a).
+3.[E][ ] mumu (at: a).
+is added.
+[D][ ] mush (by: )
+now is have 4 tasks.
+is added.
+[E][ ] mush (at: )
+now is have 5 tasks.
+is done!
+[E][X] mush (at: )
+1.[T][ ] mumu a.
+2.[D][X] mumu (by: a).
+3.[E][ ] mumu (at: a).
+4.[D][ ] mush (by: ).
+5.[E][X] mush (at: ).
+we is dont have that many tasks yet.
+what kind of number is (||❛︵❛.)
+im sorry I is no understand.
+im sorry I is no understand.
+1.[T][ ] mumu a.
+2.[D][X] mumu (by: a).
+3.[E][ ] mumu (at: a).
+4.[D][ ] mush (by: ).
+5.[E][X] mush (at: ).
+okay is bye!!
