@@ -1,0 +1,12 @@
+todo wash the dishes
+fake todo command
+event project meeting /at 3-5pm
+event project meeting /at /at
+list
+done 1
+deadline submit proposal /by Sun
+deadline
+done 3
+list
+done 2
+bye
