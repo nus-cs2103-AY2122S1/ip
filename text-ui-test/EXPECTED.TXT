@@ -1,7 +1,60 @@
-Hello from
+----------------------------------------
  ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+|  _ \  ___ | | _____ 
+| | | |/ _ \| |/ / _ \
+| |_| | |_| |   < __/
+|____/ \___/|_|\_\___|
 
+Hello! I'm Doke
+What do you want??
+----------------------------------------
+----------------------------------------
+Task added successfully: 
+[T][ ] visit library
+Number of tasks in list: 1
+----------------------------------------
+----------------------------------------
+Task added successfully: 
+[T][ ] borrow books
+Number of tasks in list: 2
+----------------------------------------
+----------------------------------------
+Task added successfully: 
+[D][ ] return books  (by: Sunday)
+Number of tasks in list: 3
+----------------------------------------
+----------------------------------------
+Task added successfully: 
+[E][ ] team meeting  (on: 21 Jul 4-6PM)
+Number of tasks in list: 4
+----------------------------------------
+----------------------------------------
+Task added successfully: 
+[T][ ] study for exams
+Number of tasks in list: 5
+----------------------------------------
+----------------------------------------
+1. [T][ ] visit library
+2. [T][ ] borrow books
+3. [D][ ] return books  (by: Sunday)
+4. [E][ ] team meeting  (on: 21 Jul 4-6PM)
+5. [T][ ] study for exams
+----------------------------------------
+----------------------------------------
+Alright, I have marked the task as done:
+[D][X] return books  (by: Sunday)
+----------------------------------------
+----------------------------------------
+Alright, I have marked the task as done:
+[T][X] visit library
+----------------------------------------
+----------------------------------------
+1. [T][X] visit library
+2. [T][ ] borrow books
+3. [D][X] return books  (by: Sunday)
+4. [E][ ] team meeting  (on: 21 Jul 4-6PM)
+5. [T][ ] study for exams
+----------------------------------------
+----------------------------------------
+    Bye. Hope to see you again!
+----------------------------------------
