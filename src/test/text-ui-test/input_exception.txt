@@ -1,0 +1,23 @@
+junk
+
+done 2
+delete 1
+list
+todo create errors
+done 4
+done -3
+event test /at 22-10-2019 4321
+event test /at 42-10-2019 1234
+event
+event /at
+event test /at
+event /at run
+deadline
+deadline /by
+deadline test /by
+deadline /by 4
+todo make more
+delete -3
+delete 10
+list
+bye

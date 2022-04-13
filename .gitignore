@@ -6,12 +6,18 @@
 # Gradle build files
 /.gradle/
 /build/
-src/main/resources/docs/
+/src/main/resources/docs/
 
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
-bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+# Text ui tests
+/src/test/text-ui-test/data/
+/src/test/text-ui-test/ACTUAL.txt
+/src/test/text-ui-test/ACTUAL_EXCEPTION.txt
+/src/test/text-ui-test/EXPECTED-UNIX.TXT
+
+# saved data
+/bin/
+/data/
