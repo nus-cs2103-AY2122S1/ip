@@ -1,7 +1,40 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+  ---------------------------------------------
+    Hello! I'm Duke
+    What can I do for you?
+  ---------------------------------------------
+  ---------------------------------------------
+    Sure! I've added this task:
+      [T][ ] borrow book
+    Now you have 1 task in the list.
+  ---------------------------------------------
+  ---------------------------------------------
+    Sure! I've added this task:
+      [D][ ] return book  (by: Friday)
+    Now you have 2 tasks in the list.
+  ---------------------------------------------
+  ---------------------------------------------
+    Here are the tasks in your list:
+      1. [T][ ] borrow book
+      2. [D][ ] return book  (by: Friday)
+    Now you have 2 tasks in the list.
+  ---------------------------------------------
+  ---------------------------------------------
+    Sure! I've added this task:
+      [E][ ] family celebration  (at: Sunday 2pm)
+    Now you have 3 tasks in the list.
+  ---------------------------------------------
+  ---------------------------------------------
+    Sure! I've added this task:
+      [T][ ] read book
+    Now you have 4 tasks in the list.
+  ---------------------------------------------
+  ---------------------------------------------
+    YAY good job for completing the task :)
+    I've marked it as done:
+      [T][X] borrow book
+  ---------------------------------------------
+  ---------------------------------------------
+    YAY good job for completing the task :)
+    I've marked it as done:
+      [E][X] family celebration  (at: Sunday 2pm)
+  ---------------------------------------------
