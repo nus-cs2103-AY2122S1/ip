@@ -1,0 +1,19 @@
+#sendButton {
+    -fx-background-color: #0275d8;
+    -fx-text-fill: white;
+}
+
+#sendButton:hover{
+    -fx-background-color: #0058a3;
+    -fx-cursor: hand;
+}
+
+#copyButton {
+    -fx-background-color: #DCDCDC;
+    -fx-text-fill: black;
+}
+
+#copyButton:hover{
+    -fx-background-color: #BEBEBE;
+    -fx-cursor: hand;
+}

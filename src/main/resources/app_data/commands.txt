@@ -1,0 +1,10 @@
+list | show your task list
+todo <TASK_DESCRIPTION> | add a todo task
+event <TASK_DESCRIPTION> /at <TIME> | add an event task which occurs at some time
+deadline <TASK_DESCRIPTION> /by <DATE_TIME> | add task with a deadline to do by some date and time
+done <TASK_NUMBER> | mark a task as done
+delete <TASK_NUMBER> | delete a task
+find <KEY_WORD> | find a task with a key word
+bye | exits program
+help | show available commands
+:help | opens up user documentation window
