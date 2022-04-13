@@ -1,0 +1,29 @@
+list
+read book
+todo read book
+deadline return book /by 2021-06-06 23:59
+event project meeting /at 2021-08-06 14:00
+todo join sports club
+todo borrow book
+done 1
+done 2
+done 4
+done 6
+done 0
+done -1
+done s12
+list
+delete 3
+list
+todo
+blah
+event /at infinity
+deadline hello
+list asdfahjk
+deadline do homework /by no idea :-p
+delete s32
+delete 6
+delete 0
+delete -1
+list
+bye
