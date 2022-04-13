@@ -1,24 +1,25 @@
-# Duke project template
+# Summary - Project Yoyo
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is an application that lets user track his or her tasks built with Java 11 and javaFX.
 
-## Setting up in Intellij
+# Commands
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+The following is a list of commands for Yoyo.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Command | Action
+------------ | -------------
+list | show all tasks in your current task list
+bye | save the updated task list and exit the app
+done <Int: task_number> | mark the specified task as done
+delete <Int: task_number> | delete the specified task 
+todo <String: task_name> | add a task of "TODO" type
+event <String: task_name> | add a task of "EVENT" type
+deadline <String: task_name> | add a task of "DEADLINE" type
+find <String: matching_string> | finds all task whose name contains the matching_string
+tag <Int: task_number> <String: tag_name> | tag the specified task with the tag_name
+
+# UI 
+
+The user interface of this program is made with JavaFX.
+
+![Ui](https://user-images.githubusercontent.com/59001819/132991250-1a3fc567-e2c0-4c4d-91a5-15b3317973b6.png)
