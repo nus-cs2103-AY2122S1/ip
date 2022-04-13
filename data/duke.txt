@@ -1,0 +1,4 @@
+T | 0 | get book
+E | 0 | read book | 2pm
+D | 0 | return book | 2019-06-06
+T | 0 | analyse book
