@@ -1,24 +1,48 @@
-# Duke project template
+# InferiorDuke
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Welcome, ***stalker***, to my *personal* rendition of ~~Duke~~ aka InferiorDuke, where I try to follow requirements for my iP in hopes of passing this module!
 
-## Setting up in Intellij
+> "If it ain't broke, don't fix it" - Thomas Bertram Lance ([Source](https://digital.hagley.org/Nationbiz_197705#page/30/mode/2up))
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+# Features
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+As this is a work in progress, most of the features currently available are still being worked upon with many more planned for the future!
+
+## Available Features ✔️
+
+* Able to add 3 different types of tasks (Event, Deadline and ToDo)
+* View your Task list with the list command, with your tasks stored locally on your computer
+* Mark tasks as done or undone with the done and undo commands
+* Delete tasks from the Task list
+
+## Upcoming Key Features 📝
+
+1. Implement Graphical User Interface (GUI) 
+2. Implement Gradle
+3. Add JavaDocs to all public methods availble
+
+## Additional Optionals
+
+- [X] Add JavaDocs to all public methods
+- [ ] All code 100% CheckStyle
+- [ ] Make cute logo for InferiorDuke
+
+# Code Quality
+
+Hopefully, my code is in accordance to the quality acceptable by our tutors and professors. An sample would be as follows:
+
+```java
+public static void main(String[] args) {
+    new Duke("data/duke.txt").run();
+}
+```
+
+## Errors
+
+One thing you might notice about my code is that I chose to create my errors as DukeErrors as seen below:
+
+```java
+    public class DukeException extends Exception
+```
+
+I used to use DukeErrors as an enumeration but I decided that making it extend the Exception class would make the flow of logic cleaner.
