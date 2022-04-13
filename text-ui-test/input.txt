@@ -1,0 +1,14 @@
+something
+todo eat cake
+deadline watch movie /by 12-04-2020 1500
+event eat icecream /at everyday
+list
+done 1
+list
+todo read book
+done 3
+list
+done 20
+deadline do homework /by 12-03-2020 0900
+list
+bye

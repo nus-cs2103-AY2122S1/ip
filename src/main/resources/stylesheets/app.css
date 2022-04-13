@@ -1,0 +1,49 @@
+.root{
+    -fx-font-size: 12;
+    -fx-font-family: "Helvetica", "Arial";
+    -fx-background: #FFFFFF;
+}
+
+.scroll-bar:vertical {
+  -fx-background-color: transparent;
+}
+
+.scroll-bar .increment-button {
+    -fx-opacity: 0;
+}
+
+.scroll-bar:vertical .track-background {
+    -fx-opacity: 0;
+}
+
+.scroll-bar .decrement-button {
+    -fx-opacity: 0;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+#inputBar{
+    -fx-background-color: transparent;
+}
+
+#userInput{
+    -fx-text-box-border: transparent;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 8 16 8 16;
+}
+
+#sendButton{
+    -fx-background-color: linear-gradient(to bottom right, #7500AC, #BE1499);
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 20;
+    -float: right;
+}
+
+#dialog{
+    -fx-background-radius: 20;
+    -fx-padding: 8 16 8 16;
+}
