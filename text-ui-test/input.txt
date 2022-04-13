@@ -1,0 +1,34 @@
+todo borrow book
+event read book /at 2020-09-09
+deadline return book /by 2020-01-01
+list
+done 2
+list
+delete 2
+list
+todo
+todo
+event
+event
+event /at
+event  /at
+event a /at
+event   /at a
+event a/at  a
+event a /ata
+deadline
+deadline
+deadline /by
+deadline  /by
+deadline a /by
+deadline   /by a
+deadline a/by  a
+deadline a /bya
+done
+done e
+done 5
+delete
+delete e
+delete 5
+hello
+bye
