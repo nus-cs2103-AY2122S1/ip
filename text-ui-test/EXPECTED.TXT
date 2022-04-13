@@ -5,3 +5,50 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you today?
+Got it, I've added this task:
+ [T][ ] borrow book
+Now you have 1 tasks in your list.
+Got it, I've added this task:
+ [D][ ] return book (by: 28 August 2021)
+Now you have 2 tasks in your list.
+Got it, I've added this task:
+ [E][ ] project meeting (at: 1 September 2021)
+Now you have 3 tasks in your list.
+Task does not exist!
+I've marked this task as done:
+[E][X] project meeting (at: 1 September 2021)
+1. [T][ ] borrow book
+2. [D][ ] return book (by: 28 August 2021)
+3. [E][X] project meeting (at: 1 September 2021)
+I've marked this task as done:
+[D][X] return book (by: 28 August 2021)
+Got it, I've added this task:
+ [E][ ] volunteer work (at: 2 September 2021)
+Now you have 4 tasks in your list.
+1. [T][ ] borrow book
+2. [D][X] return book (by: 28 August 2021)
+3. [E][X] project meeting (at: 1 September 2021)
+4. [E][ ] volunteer work (at: 2 September 2021)
+I've marked this task as done:
+[T][X] borrow book
+1. [T][X] borrow book
+2. [D][X] return book (by: 28 August 2021)
+3. [E][X] project meeting (at: 1 September 2021)
+4. [E][ ] volunteer work (at: 2 September 2021)
+Incorrect format for command.
+The description of a Task cannot be empty.
+I've removed this task:
+[T][X] borrow book
+Now you have 3 tasks in your list.
+I've removed this task:
+[E][X] project meeting (at: 1 September 2021)
+Now you have 2 tasks in your list.
+1. [D][X] return book (by: 28 August 2021)
+2. [E][ ] volunteer work (at: 2 September 2021)
+Please enter a number after the command.
+Please enter a number after the command.
+1. [D][X] return book (by: 28 August 2021)
+2. [E][ ] volunteer work (at: 2 September 2021)
+Sorry I do not understand this directive.
+Bye.

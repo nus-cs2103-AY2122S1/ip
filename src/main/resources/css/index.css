@@ -1,0 +1,14 @@
+.send-btn {
+ -fx-background-color: #2695d1;
+ -fx-border-radius: 12px;
+}
+
+.dialog {
+ -fx-padding: 10px;
+ -fx-background-radius: 16px;
+ -fx-background-color: #20c0fa;
+}
+
+.background {
+ -fx-background-color: lightgrey;
+}
