@@ -1,0 +1,6 @@
+/*
+Solution below adapted from https://stackoverflow.com/questions/36677164/grey-scroll-pane-background-image-in-javafx
+*/
+.scroll-pane .viewport {
+    -fx-background-image: url("/images/CastleBackground.jpg")
+}
