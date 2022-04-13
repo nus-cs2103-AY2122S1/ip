@@ -30,9 +30,12 @@ dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 diff ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]
 then
-    echo "Test result: PASSED"
+    #ANSI color code 31m for red text, 32m for green text
+    GREEN='\033[0;42m'
+    echo -e "Test result: ${GREEN}PASSED"
     exit 0
 else
-    echo "Test result: FAILED"
+    RED='\033[0;41m'
+    echo -e "Test result: ${RED}FAILED"
     exit 1
 fi
