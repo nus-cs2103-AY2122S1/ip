@@ -1,24 +1,29 @@
-# Duke project template
+### Hyddd Chatbot
+> *“You can do anything, but not everything.” – David Allen* [(source)](https://dansilvestre.com/productivity-quotes/)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Hyddd Chatbot frees you from worry of taking care of everything. You can ask hyddd to help you remember things. It's
+* Text-based!
+* Easy to understand!
+* Super Fast to use! :grin:
 
-## Setting up in Intellij
+All you need is: :wink:
+   1. Click this [link](https://github.com/HangZelin/ip) to **download**!
+   2. Double-click to open it.
+   3. Tell hyddd tasks to add.
+   4. Let hyddd manage your tasks for you!
+  
+It is **FREE** to use!!!
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Features:
+- [x] Managing tasks: deadline, event, todo. 
+- [x] Marking finished tasks.
+- [x] Deleting certain tasks.
+- [x] Searching certain tasks by keyword of time or taskInfo.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+****
+If you Java programmer, you can use it to practice Java too. Here's the `main` method:
+```java
+    public static void main(String[] args) {
+        new hyddd("data/tasks.txt").run();
+    }
+```
