@@ -13,5 +13,12 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Class files
+/src/main/java/*.class
+
+# Data files
+tasks.txt
+
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+src/main/java/META-INF/MANIFEST.MF
