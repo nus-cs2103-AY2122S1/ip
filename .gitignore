@@ -2,6 +2,9 @@
 /.idea/
 /out/
 /*.iml
+*.log
+.classpath
+.project
 
 # Gradle build files
 /.gradle/
@@ -15,3 +18,4 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+*.class
