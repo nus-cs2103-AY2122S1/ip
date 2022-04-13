@@ -1,0 +1,6 @@
+#dialogContainer {
+  -fx-background-image: url("../images/blueFlowerBackground.jpg"); 
+  -fx-background-size: 1000 1000;
+  -fx-background-position: center center;
+  -fx-background-repeat: repeat;
+}

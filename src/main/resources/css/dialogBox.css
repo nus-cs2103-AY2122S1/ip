@@ -1,0 +1,10 @@
+#dialog {
+    border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-padding: 10 10;
+    -fx-text-fill: "black";
+    -fx-font-size: 14px;
+    -fx-font-family: "sans-serif";
+    -fx-border-top: 30px;   
+}
+
