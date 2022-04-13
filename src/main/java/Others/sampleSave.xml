@@ -1,0 +1,25 @@
+<saveFile>
+	<taskList>
+		<taskAsset id="0">
+			<taskType>T</taskType>
+			<taskData>Todo Task 1</taskData>
+			<taskExtraInfo></taskExtraInfo>
+			<taskCompleted>true</taskCompleted>
+		</taskAsset>
+		<taskAsset id="1">
+			<taskType>D</taskType>
+			<taskData>Deadline Task 2 </taskData>
+			<taskExtraInfo>Tomorrow</taskExtraInfo>
+			<taskCompleted>false</taskCompleted>
+		</taskAsset>
+		<taskAsset id="2">
+			<taskType>E</taskType>
+			<taskData>Event Task 3 </taskData>
+			<taskExtraInfo>In School</taskExtraInfo>
+			<taskCompleted>true</taskCompleted>
+		</taskAsset>
+	</taskList>
+</saveFile>
+
+
+
