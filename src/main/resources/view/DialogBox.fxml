@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="490.0" minHeight="100.0" minWidth="490.0" style="-fx-alignment: Bottom_RIGHT;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <Label fx:id="dialog" alignment="CENTER" maxHeight="1.7976931348623157E308" minHeight="75.0" minWidth="370.0" style="-fx-font-family: Arial; -fx-font-size: 12;" text="Long ass text woooooooooohoooooooooooooooooooooooooooLong ass text woooooooooohoooooooooooooooooooooooooooLong ass text woooooooooohooooooooooooooooooooooooooo" textFill="#000000" wrapText="true">
+         <font>
+            <Font name="Comic Sans MS Italic" size="10.0" />
+         </font>
+        </Label>
+        <ImageView fx:id="displayPicture" fitHeight="101.0" fitWidth="120.0" pickOnBounds="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@../images/dog.jpg" />
+         </image>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </ImageView>
+    </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</fx:root>
