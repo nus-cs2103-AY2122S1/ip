@@ -1,0 +1,6 @@
+[T][X] run
+[T][X] sleep
+[T][X] chiro
+[T][ ] movie
+[T][ ] drama
+[E][ ] do iP (at: Aug 24 2020)
