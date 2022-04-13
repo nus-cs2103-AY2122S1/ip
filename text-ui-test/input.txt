@@ -1,0 +1,8 @@
+done 1
+todo cry
+deadline die /by tdy
+event live /at tmr
+done 2
+list
+delete 1
+bye

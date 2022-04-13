@@ -1,0 +1,7 @@
+.dialogBox {
+    -fx-background-color:  #363636;
+}
+
+.dialogBox:hover {
+    -fx-background-color:  #4a4a4a;
+}
