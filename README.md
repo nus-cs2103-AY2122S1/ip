@@ -1,24 +1,50 @@
-# Duke project template
+# Brobot :punch:
+> Your very own brother from another computer to help you manage your tasks!
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features
+* User-Friendly: Brobot communicates purely through the CLI with very simple commands. Brobot will also always be your bro!
+* Fast: Brobot knows how important time is to you, so he does things __FAST__
+* Local save: Brobot will still remember your tasks even after you quit the application. _What a bro move_ :punch:
 
-## Setting up in Intellij
+## Installation
+1. Download the latest release from [here](https://github.com/markuslim24/ip/releases).
+2. Double click the jar file to run it.(Alternatively, run java -jar [application].jar from CLI)
+3. Start typing away!
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Implementation list:
+- [x] Basic task creation
+   * Todo
+   * Events
+   * Deadline
+- [x] Mark done & delete task function
+- [x] Task list local save
+- [ ] More commands
+- [ ] Better UI(A GUI)
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+***
+
+If you Java programmer, you can use it to practice Java too. Here's the `main` method:
+```Java
+public class Brobot {
+    public static void main(String[] args) {
+
+            Storage brobot.storage = new Storage("./data/list1.txt");
+            TaskList list = brobot.storage.readList();
+            BroParser parser = new BroParser(list, brobot.storage);
+
+            UI.printGreeting();
+            String input = UI.getUserInput();
+
+            while (!input.equals("bye")) {
+                try {
+                    parser.parse(input);
+                } catch (BroException e) {
+                    UI.printError(e);
+                } finally {
+                    input = UI.getUserInput();
+                }
+            }
+            UI.printBye();
+    }
+}
+```

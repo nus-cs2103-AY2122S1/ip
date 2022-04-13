@@ -1,0 +1,16 @@
+hello
+todo read book
+todo sleep
+deadline eat lunch /by 12/05/2021 1700
+done 2
+deadline sleep /by 02/07/2021 2300
+event complete ip /at 15/08/2021 2359
+event sleep /at 19/08/2021 0000
+done 3
+list
+done 5
+done 7
+delete 3
+delete 1
+list
+bye
