@@ -2,6 +2,7 @@
 /.idea/
 /out/
 /*.iml
+/lib
 
 # Gradle build files
 /.gradle/
@@ -12,6 +13,11 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+*.jar
+*.json
+*.class
+*.txt
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
