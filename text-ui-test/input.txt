@@ -1,0 +1,68 @@
+list
+todo xyz
+list
+delete 0
+list
+delete 1
+list
+deadline x /by z
+list
+event y /at z
+list
+todo 111
+list
+delete 3
+list
+delete 1
+list
+delete 1
+list
+test adding a task
+list
+deadline test adding a deadline /by 2021-19-22
+list
+event test adding an event /at 11.15am monday 16/08/21
+list
+todo test adding a todo
+list
+done 1
+list
+done 4
+list
+done 2
+done 3
+list
+todo
+blah
+done 1234
+done 0
+done 1
+done xyz1
+event
+deadline
+event 1
+deadline 1
+event /at 123
+event 1 /at 2
+deadline 1 /by 2021-12-12
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+list
+todo h
+deadline hehe /by 2020-12-12
+event hello /at home
+list
+find h
+find heh
+find he
+find lo
+delete 1
+delete 1
+delete 1
+list
+find
+bye

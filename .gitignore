@@ -13,5 +13,11 @@ src/main/resources/docs/
 *.iml
 bin/
 
+src/main/java/META-INF/
+
+/data
+
+/text-ui-test/data
+/text-ui-test/sources.txt
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
