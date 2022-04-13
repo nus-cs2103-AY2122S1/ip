@@ -1,5 +1,6 @@
 # IDEA files
 /.idea/
+data/
 /out/
 /*.iml
 

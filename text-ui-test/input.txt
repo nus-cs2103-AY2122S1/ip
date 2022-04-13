@@ -1,0 +1,23 @@
+randominputstring
+list
+todo buy milk
+event go buy milk /at 3.30pm Sunday
+deadline project due /by 2.40pm Saturday
+list
+done 1
+done 2
+done 3
+event go buy milk /at some day
+list
+todo
+event
+deadline
+done 4
+list
+delete 100
+list
+delete 1
+list
+deadline project is really due
+event the sun goes down
+bye

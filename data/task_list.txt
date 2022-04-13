@@ -1,0 +1,19 @@
+T | 1 | fasdfs
+T | 0 | fsdafasd
+T | 0 | fasdfasd
+E | 1 | dfasdf | Dec 12 1234
+E | 1 | dfasdf | asdfs
+E | 0 | fsdfasd | Dec 12 1234
+T | 0 | fdsafsd
+T | 0 | dfasdf
+D | 0 | fasdf | asdfasd
+T | 0 | asdfasdf
+E | 0 | sdafsadf | fsdaf
+T | 0 | kill joshen
+T | 0 | buy roses
+E | 0 | buy rose | evening
+E | 0 | do homework | evening
+T | 0 | buy milk
+E | 0 | buy milk | Sunday
+D | 1 | buy milk | Sunday
+T | 0 | sadfasf
