@@ -1,0 +1,9 @@
+todo 234
+event dinner /by now
+done 3
+deadline supper /by 10pm
+event the rapture /very soon
+event global warming /yesterday, all my troubles seemed so far away
+done 4
+delete 1
+delete 1
