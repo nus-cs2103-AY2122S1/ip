@@ -1,0 +1,12 @@
+list
+todo test
+deadline test2 /by 01/01/2001 0000
+Event test3 /at today
+list
+done 2
+list
+delete 1
+list
+clear
+list
+bye
