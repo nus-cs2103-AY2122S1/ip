@@ -1,7 +1,51 @@
-Hello from
- ____        _        
+[36m ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-
+[0m
+🤖: Initializing Duke...
+🤖: You have no tasks in your list.
+🤖: Hi, im Duke!
+🤖: What can i do for you?
+🤖: You have no tasks in your list.
+🤖: [91mInvalid arguments! Please use the command in the following format: "todo [task]"[0m
+🤖: [91mInvalid arguments! Please use the command in the following format: "deadline [task] /by [YYYY-MM-DD]"[0m
+🤖: [91mInvalid arguments! Please use the command in the following format: "event [task] /at [time period]"[0m
+🤖: Got it. I've added this task:
+	[T] [ ] buy milk
+🤖: You now have 1 task in the list.
+🤖: [91mInvalid task selected![0m
+🤖: [91mInvalid arguments! Please use the command in the following format: "deadline [task] /by [YYYY-MM-DD]"[0m
+🤖: Got it. I've added this task:
+	[D] [ ] return book (by: Aug 24 2021)
+🤖: You now have 2 tasks in the list.
+🤖: [91mInvalid arguments! Please use the command in the following format: "event [task] /at [time period]"[0m
+🤖: Got it. I've added this task:
+	[E] [ ] project meeting (at: Aug 6th 2-4pm)
+🤖: You now have 3 tasks in the list.
+🤖: Here are the matching tasks in your list:
+	1. [D] [ ] return book (by: Aug 24 2021)
+🤖: Here are the tasks in your list:
+	1. [T] [ ] buy milk
+	2. [D] [ ] return book (by: Aug 24 2021)
+	3. [E] [ ] project meeting (at: Aug 6th 2-4pm)
+🤖: Nice! I've marked this task as done:
+	[T] [X] buy milk
+🤖: Here are the tasks in your list:
+	1. [T] [X] buy milk
+	2. [D] [ ] return book (by: Aug 24 2021)
+	3. [E] [ ] project meeting (at: Aug 6th 2-4pm)
+🤖: [91mUnknown command![0m
+🤖: [91mInvalid task selected![0m
+🤖: Noted. I've removed this task:
+	[T] [X] buy milk
+🤖: You now have 2 tasks in the list.
+🤖: Noted. I've removed this task:
+	[D] [ ] return book (by: Aug 24 2021)
+🤖: You now have 1 task in the list.
+🤖: Noted. I've removed this task:
+	[E] [ ] project meeting (at: Aug 6th 2-4pm)
+🤖: You now have 0 tasks in the list.
+🤖: [91mInvalid task selected![0m
+🤖: Bye. Hope to see you again soon!

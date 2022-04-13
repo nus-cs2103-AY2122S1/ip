@@ -1,0 +1,21 @@
+list
+todo
+deadline
+event
+todo buy milk
+done 2
+deadline return book
+deadline return book /by 2021-08-24
+event project meeting
+event project meeting /at Aug 6th 2-4pm
+find return book
+list
+done 1
+list
+unknowncommand
+delete 4
+delete 1
+delete 1
+delete 1
+delete 1
+bye
