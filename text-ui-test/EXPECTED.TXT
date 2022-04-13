@@ -4,4 +4,23 @@ Hello from
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-
+What can I do for you? :)
+Got it. I've added this deadline:
+[D][ ] sleep  (by: no idea)
+Now you have 1 tasks in the list.
+Got it. I've added this event:
+[E][ ] eat  (at: 2PM)
+Now you have 2 tasks in the list.
+Got it. I've added this todo:
+[T][ ] wakeup
+Now you have 3 tasks in the list.
+here are the tasks in your list:
+1. [D][ ] sleep  (by: no idea)
+2. [E][ ] eat  (at: 2PM)
+3. [T][ ] wakeup
+Nice! I've marked this task as done:
+[E][X] eat  (at: 2PM)
+here are the tasks in your list:
+1. [D][ ] sleep  (by: no idea)
+2. [E][X] eat  (at: 2PM)
+3. [T][ ] wakeup
