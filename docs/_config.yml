@@ -1,0 +1,8 @@
+title: "Duke"
+
+theme: jekyll-theme-minimal
+
+markdown: kramdown
+
+plugins:
+  - jemoji
