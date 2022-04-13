@@ -4,49 +4,47 @@ What can I do for you?
 ____________________________________________________________
 
 ____________________________________________________________
-Here are the tasks in your list:
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 
 ____________________________________________________________
-Got it. I've added this task:
-  [T][ ] borrow book
-Now you have 1 tasks in the list.
+☹ OOPS!!! The description of a todo cannot be empty.
 ____________________________________________________________
 
 ____________________________________________________________
-Got it. I've added this task:
-  [D][ ] return book  (by:  Sunday)
-Now you have 2 tasks in the list.
+☹ OOPS!!! The description of a deadline cannot be empty.
 ____________________________________________________________
 
 ____________________________________________________________
-Nice! I've marked this task as done:
-  [T][X] borrow book
+☹ OOPS!!! The description of an event cannot be empty.
 ____________________________________________________________
 
 ____________________________________________________________
-Got it. I've added this task:
-  [E][ ] project meeting  (at:  Mon 2-4pm)
-Now you have 3 tasks in the list.
+☹ OOPS!!! The time of a deadline cannot be empty.
 ____________________________________________________________
 
 ____________________________________________________________
-Got it. I've added this task:
-  [D][ ] do homework  (by:  no idea :-p)
-Now you have 4 tasks in the list.
+☹ OOPS!!! The time of an event cannot be empty.
 ____________________________________________________________
 
 ____________________________________________________________
-Nice! I've marked this task as done:
-  [D][X] do homework  (by:  no idea :-p)
+☹ OOPS!!! A deadline cannot occupy multiple time slots.
 ____________________________________________________________
 
 ____________________________________________________________
-Here are the tasks in your list:
-1.[T][X] borrow book
-2.[D][ ] return book  (by:  Sunday)
-3.[E][ ] project meeting  (at:  Mon 2-4pm)
-4.[D][X] do homework  (by:  no idea :-p)
+☹ OOPS!!! An event cannot occupy multiple time slots.
+____________________________________________________________
+
+____________________________________________________________
+☹ OOPS!!! The task number is invalid.
+____________________________________________________________
+
+____________________________________________________________
+☹ OOPS!!! The task number is invalid.
+____________________________________________________________
+
+____________________________________________________________
+☹ OOPS!!! The task number is invalid.
 ____________________________________________________________
 
 ____________________________________________________________
