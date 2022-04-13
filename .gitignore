@@ -3,6 +3,10 @@
 /out/
 /*.iml
 
+# data files
+/data/
+/META-INF/
+
 # Gradle build files
 /.gradle/
 /build/
@@ -13,5 +17,12 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Omit class files
+*.class
+
+/text-ui-test/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+src/main/java/META-INF/MANIFEST.MF
+checkstyle/checkstyle.xml
+checkstyle/suppressions.xml
