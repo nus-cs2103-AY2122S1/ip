@@ -1,0 +1,3 @@
+T|| ||say hello
+E||X||dance performance||at three
+D|| ||cs2106 lab||by next week
