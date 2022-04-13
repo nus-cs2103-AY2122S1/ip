@@ -1,0 +1,21 @@
+todo eat dinner
+TOdo finish laundry
+todo
+list
+done 1
+done 45
+list
+event meet friends /at 2-4 p.m.
+EVent watch movie /at 7-10 p.m.
+event shower /by tonight
+list
+done 2
+done 3
+list
+deadline submit iP /by tonight
+deadLINE form tP teams /by 13 August
+deadline return book /at tomorrow
+list
+done 7
+list
+
