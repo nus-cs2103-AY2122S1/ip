@@ -1,0 +1,23 @@
+todo
+todo 1st task /
+deadline
+deadline 2nd task
+deadline 2nd task /
+deadline 2nd task /by today
+event 3rd task
+event 3rd task /
+event 3rd task /at home
+done
+done -1
+done -X
+done 10000
+done 2
+list
+delete
+delete -1
+delete -X
+delete 10000
+delete 2
+list
+wrong input
+bye
