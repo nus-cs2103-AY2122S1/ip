@@ -1,7 +1,32 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hi! I'm Bern, your trustworthy chatbot.
+What can I do for you?
+Got it. I've added this task:
+[T][ ] Do 2103 project
+Now you have 1 task in the list
+Got it. I've added this task:
+[E][ ] project meeting (at: Jan 15 2020)
+Now you have 2 tasks in the list
+1. [T][ ] Do 2103 project
+2. [E][ ] project meeting (at: Jan 15 2020)
+Got it. I've added this task:
+[D][ ] return book (by: Oct 15 2019)
+Now you have 3 tasks in the list
+1. [T][ ] Do 2103 project
+2. [E][ ] project meeting (at: Jan 15 2020)
+3. [D][ ] return book (by: Oct 15 2019)
+Good job! I've marked this task as done:
+[D][X] return book (by: Oct 15 2019)
+1. [T][ ] Do 2103 project
+2. [E][ ] project meeting (at: Jan 15 2020)
+3. [D][X] return book (by: Oct 15 2019)
+Noted! I've removed this task:
+[E][ ] project meeting (at: Jan 15 2020)
+Now you have 2 tasks in the list
+1. [T][ ] Do 2103 project
+2. [D][X] return book (by: Oct 15 2019)
+done 5: This command is trying to mark/delete uncreated event
+the description of a todo cannot be empty.
+blah is not a command I understand
+Here are the matching tasks in your list:
+1. [T][ ] Do 2103 project
+Bye. Hope to see you soon and hope you found my service useful!

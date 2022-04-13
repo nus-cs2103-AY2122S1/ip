@@ -1,0 +1,14 @@
+todo Do 2103 project
+event project meeting /at 2020-01-15
+list
+deadline return book /by 2019-10-15
+list
+done 3
+list
+delete 2
+list
+done 5
+todo
+blah
+find project
+bye
