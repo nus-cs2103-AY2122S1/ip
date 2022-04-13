@@ -1,0 +1,5 @@
+T|0|task
+D|1|read book|2021-08-29
+E|0|destroy book|2021-08-30
+T|1|bok typo
+T|0|book
