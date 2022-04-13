@@ -1,0 +1,5 @@
+1.[T][X] run
+2.[D][X] homework (by: Aug 09 2020 11:00AM)
+3.[T][X] walk
+4.[T][ ] swim
+5.[E][ ] meeting (at: Dec 31 2021 11:59PM)

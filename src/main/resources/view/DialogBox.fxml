@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1000.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <HBox maxWidth="380.0" minWidth="50.0" opacity="0.74" style="-fx-background-color: #000000; -fx-background-radius: 10; -fx-border-color: #00ffff; -fx-border-radius: 7; -fx-border-width: 2;">
+         <children>
+              <Label fx:id="dialog" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="0.0" text="Label" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Agency FB" size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </HBox>
+        <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" />
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>
