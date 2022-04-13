@@ -1,0 +1,6 @@
+todo create game
+deadline project /by next week
+event project meeting /at Tue 2-4pm
+list
+done 3
+bye
