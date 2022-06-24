@@ -1,4 +1,4 @@
-# CS2106 individual Project <br /> (Duke Chatbot)
+# Duke Chatbot
 
 This project started of as a greenfield java project. It's named after the Java mascot _Duke_. Given below are 
 instructions on how to use it.
