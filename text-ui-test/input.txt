@@ -1,0 +1,37 @@
+list
+todo
+todo Visit new theme park
+list
+deadline
+deadline Submit report
+deadline Submit report /by
+deadline Submit report /by 01/01/21 1500
+list
+event
+event Meeting with boss
+event Meeting with boss /at
+event Meeting with boss /at 12/12/21 1400
+list
+done
+done x
+done 0
+list
+done 1
+list
+done 1
+list
+delete
+list
+delete -1
+list
+delete x
+list
+delete 3
+list
+delete 1
+list
+delete 1
+list
+event CS2103T /at 12 Dec 21 3pm
+deadline CS2106 /by 3/9/21 2pm
+bye

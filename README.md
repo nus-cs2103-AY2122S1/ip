@@ -1,6 +1,11 @@
-# Duke project template
+# Duke Chatbot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This project started of as a greenfield java project. It's named after the Java mascot _Duke_. Given below are 
+instructions on how to use it.
+
+> "My job is not to be easy on people. My job is to make them better." [Source](https://www.treasurequotes.com/quotes/my-job-is-not-to-be-easy-on-people-my-job-is-2)
+
+Duke helps you remember things and keep tracks of things for you.
 
 ## Setting up in Intellij
 
@@ -13,12 +18,41 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. If there are any further prompts, accept the defaults.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
    In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+2. Download and install gluon [here](https://gluonhq.com/products/scene-builder/#download)
+3. After that, locate the `src/main/java/duke/Duke.java` file, right-click it, and choose `Run duke.Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
    ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
+    Good day there! I'm DUKE
+    
+    What can I do for you?
    ```
+### To get Duke working,
+1. Download the [here](https://github.com/marcuspeh/ip/releases/download/A-Jar/A-Jar.jar)
+2. To run the file, type in `java -jar A-Jar.jar` in the command line.
+3. Add your tasks.
+4. Let it manage the task for u.
+  
+## Main advantage of Duke includes
+- Text based
+- Easy to use
+- Minimalistic
+
+## Features:
+- [X] Managing Task
+- [X] Managing datelines
+- [X] Managing Todos
+- [ ] Reminders
+
+### Main _advantage_ of Duke includes
+- Text based
+- Easy to use
+- Minimalistic
+
+### Miscellaneous
+If you Java programmer, you can use it to practice Java too. Here's the main method:
+```java
+public class Main {
+    public static void main(String[] args) {
+        Duke.run();
+    }
+}
+```
