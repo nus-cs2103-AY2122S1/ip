@@ -3,7 +3,7 @@
 Duke is a chat bot that enables you to mange your tasks. It is based on **CommandLine Interface**(CLI) and also has a **Graphical User Interface(GUI)**.
 
 # Quick start
-1. Ensure you have `Java 11` installed in your Computer.
+1. Firstly, ensure you have `Java 11` installed in your Computer.
 2. Download the duke.jar from [here](https://github.com/LuoZhijie-tom/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Double-click the file to start the app. You can also run it in cmd by typing `java -jar <path>`(Replace `<path>` with your duke.jar's path e.g. `D:\duke.jar`.
