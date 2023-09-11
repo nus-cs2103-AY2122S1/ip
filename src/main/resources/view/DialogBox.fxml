@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" prefWidth="295" minHeight="-Infinity" minWidth="-Infinity" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" text="Label" wrapText="true" maxWidth="390">
+         <font>
+            <Font name="Arial" size="13" />
+         </font></Label>
+        <StackPane maxHeight="100.0" maxWidth="100.0"> <!-- use the preferred size for max size constraints -->
+            <padding>
+                <Insets right="5.0" />
+            </padding>
+            <children>
+                <ImageView fx:id="displayPicture" fitHeight="80" fitWidth="80" />
+            </children>
+        </StackPane>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    </padding>
+</fx:root>

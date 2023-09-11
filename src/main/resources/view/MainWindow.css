@@ -1,0 +1,13 @@
+.button{
+    -fx-shape: "M 300 150 C 350 150 400 150 500 150 A 50 50 0 1 1 500 300 L 300 300 A 50 50 0 1 1 300 150 ";
+    -fx-background-color: "#51A0D5";
+}
+
+.text-field{
+    -fx-background-color: "#D3D3D3";
+    -fx-text-fill: "#111111";
+}
+
+.main{
+    -fx-background-color: "#FCFCFC";
+}

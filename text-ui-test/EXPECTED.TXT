@@ -1,7 +1,273 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+
+Hello, I'm Duke
+What can I help you with?
+
+-----------------------------------------------------------
+There are no tasks in your task list.
+-----------------------------------------------------------
+Got it! This task has been added:
+[T][] Borrow book
+You currently have 1 tasks in your list with 1 uncompleted tasks remaining.
+
+Got it! This task has been added:
+[D][] Return book (by: Sunday)
+You currently have 2 tasks in your list with 2 uncompleted tasks remaining.
+
+Got it! This task has been added:
+[E][] Birthday (at: Monday 1400)
+You currently have 3 tasks in your list with 3 uncompleted tasks remaining.
+
+congratulations! This task has been completed:
+[T][X] Borrow book
+You currently have 3 tasks in your list with 2 uncompleted tasks remaining.
+
+congratulations! This task has been completed:
+[E][X] Birthday (at: Monday 1400)
+You currently have 3 tasks in your list with 1 uncompleted tasks remaining.
+
+Got it! This task has been added:
+[E][] birthday (at: 365 days later)
+You currently have 4 tasks in your list with 2 uncompleted tasks remaining.
+
+This task has already been completed.
+
+-----------------------------------------------------------
+Here are the tasks in your list:
+1. [T][X] Borrow book
+2. [D][] Return book (by: Sunday)
+3. [E][X] Birthday (at: Monday 1400)
+4. [E][] birthday (at: 365 days later)
+-----------------------------------------------------------
+This entry does not exist.
+
+This entry does not exist.
+
+Invalid argument to the "done" function.
+
+Invalid argument to the "done" function.
+
+Invalid argument to the "done" function.
+
+Invalid argument to the "done" function.
+
+Invalid argument to the "done" function.
+
+Invalid input. Please try again.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Got it! This task has been added:
+[D][] Hw (by: mon)
+You currently have 5 tasks in your list with 3 uncompleted tasks remaining.
+
+Got it! This task has been added:
+[E][] lunch (at: tmrw)
+You currently have 6 tasks in your list with 4 uncompleted tasks remaining.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
+
+Invalid format. Please enter the todo format as below:
+todo {Todo name}
+
+Got it! This task has been added:
+[T][] Test
+You currently have 7 tasks in your list with 5 uncompleted tasks remaining.
+
+Invalid argument to the "delete" function.
+
+Invalid argument to the "delete" function.
+
+Invalid argument to the "delete" function.
+
+-----------------------------------------------------------
+Here are the tasks in your list:
+1. [T][X] Borrow book
+2. [D][] Return book (by: Sunday)
+3. [E][X] Birthday (at: Monday 1400)
+4. [E][] birthday (at: 365 days later)
+5. [D][] Hw (by: mon)
+6. [E][] lunch (at: tmrw)
+7. [T][] Test
+-----------------------------------------------------------
+This entry does not exist.
+
+Understood. I've removed this task:
+[E][X] Birthday (at: Monday 1400)
+You currently have 6 tasks in your list with 5 uncompleted tasks remaining.
+
+Understood. I've removed this task:
+[D][] Hw (by: mon)
+You currently have 5 tasks in your list with 4 uncompleted tasks remaining.
+
+Understood. I've removed this task:
+[E][] lunch (at: tmrw)
+You currently have 4 tasks in your list with 3 uncompleted tasks remaining.
+
+-----------------------------------------------------------
+Here are the tasks in your list:
+1. [T][X] Borrow book
+2. [D][] Return book (by: Sunday)
+3. [E][] birthday (at: 365 days later)
+4. [T][] Test
+-----------------------------------------------------------
+Understood. I've removed this task:
+[T][] Test
+You currently have 3 tasks in your list with 2 uncompleted tasks remaining.
+
+-----------------------------------------------------------
+Here are the tasks in your list:
+1. [T][X] Borrow book
+2. [D][] Return book (by: Sunday)
+3. [E][] birthday (at: 365 days later)
+-----------------------------------------------------------
+This entry does not exist.
+
+Got it! This task has been added:
+[E][] dinner (at: 19 Aug 2022 1800)
+You currently have 4 tasks in your list with 3 uncompleted tasks remaining.
+
+Got it! This task has been added:
+[E][] lunch (at: 5 Aug 2022)
+You currently have 5 tasks in your list with 4 uncompleted tasks remaining.
+
+Got it! This task has been added:
+[D][] Exercise (by: 19 Aug 2022 1800)
+You currently have 6 tasks in your list with 5 uncompleted tasks remaining.
+
+Got it! This task has been added:
+[D][] Diet (by: 5 Aug 2022)
+You currently have 7 tasks in your list with 6 uncompleted tasks remaining.
+
+Invalid date format entered. Date should be formatted as:
+dd/MM/yyyy or dd/MM/yyyy HHmm
+
+Invalid date format entered. Date should be formatted as:
+dd/MM/yyyy or dd/MM/yyyy HHmm
+
+Invalid date format entered. Date should be formatted as:
+dd/MM/yyyy or dd/MM/yyyy HHmm
+
+-----------------------------------------------------------
+Here are the tasks in your list:
+1. [T][X] Borrow book
+2. [D][] Return book (by: Sunday)
+3. [E][] birthday (at: 365 days later)
+4. [E][] dinner (at: 19 Aug 2022 1800)
+5. [E][] lunch (at: 5 Aug 2022)
+6. [D][] Exercise (by: 19 Aug 2022 1800)
+7. [D][] Diet (by: 5 Aug 2022)
+-----------------------------------------------------------
+-----------------------------------------------------------
+Here are the matching tasks in your list:
+1. [T][X] Borrow book
+2. [D][] Return book (by: Sunday)
+-----------------------------------------------------------
+Sorry I could not find any matching tasks.
+
+Bye!! Hope to see you again!!
