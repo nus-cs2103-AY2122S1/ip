@@ -27,6 +27,10 @@ Features:
 
 <hr>
 
+User Guide at https://zhing22.github.io/ip/
+
+<hr>
+
 If you are programmer Ling Ling, you can use it to practice Java 40 hours a day too. Here's the ```main``` method: 
 
 ```java
